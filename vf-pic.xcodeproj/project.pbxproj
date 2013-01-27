@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		D2915FB416B5F56A0084A612 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2915FB316B5F56A0084A612 /* main.cpp */; };
-		D2915FB616B5F56A0084A612 /* vf_pic.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = D2915FB516B5F56A0084A612 /* vf_pic.1 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -18,7 +17,6 @@
 			dstPath = /usr/share/man/man1/;
 			dstSubfolderSpec = 0;
 			files = (
-				D2915FB616B5F56A0084A612 /* vf_pic.1 in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 1;
 		};
@@ -27,7 +25,6 @@
 /* Begin PBXFileReference section */
 		D2915FAF16B5F56A0084A612 /* vf-pic */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "vf-pic"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2915FB316B5F56A0084A612 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
-		D2915FB516B5F56A0084A612 /* vf_pic.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = vf_pic.1; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,7 +58,6 @@
 			isa = PBXGroup;
 			children = (
 				D2915FB316B5F56A0084A612 /* main.cpp */,
-				D2915FB516B5F56A0084A612 /* vf_pic.1 */,
 			);
 			path = "vf-pic";
 			sourceTree = "<group>";
@@ -210,6 +206,7 @@
 				D2915FBB16B5F56A0084A612 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
