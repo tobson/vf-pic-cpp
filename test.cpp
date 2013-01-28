@@ -8,9 +8,11 @@
 
 #include "config.h"
 #include "global.h"
+#include "scalar-field.h"
 
 #include <iostream>
 #include <libconfig.h++>
+#include <vector>
 
 int main(int argc, const char * argv[])
 {
@@ -33,7 +35,11 @@ int main(int argc, const char * argv[])
     return 1;
   }
   
-  // insert code here...
+  GlobalScalarField<float> a,b;
+  std::vector<LocalScalarFieldView<float>> vec;
+  vec.push_back (LocalScalarFieldView<float> (a,0));
+  vec.push_back (LocalScalarFieldView<float> (b,0));
+  
   std::cout << "Hello, World! My name is " << argv[0] << ".\n";
   return 0;
 }
