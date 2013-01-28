@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D24BC36D16B64B1A006C64A3 /* global.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D28BAEFD16B5FD0200578956 /* global.cpp */; };
+		D24BC36E16B64B1A006C64A3 /* config.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D28BAF0016B5FDDA00578956 /* config.cpp */; };
+		D24BC37016B64B1A006C64A3 /* barrier.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D28BAF1816B60B3800578956 /* barrier.cpp */; };
+		D24BC37216B64B1A006C64A3 /* libconfig++.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D28BAF0316B5FEB500578956 /* libconfig++.a */; };
+		D24BC37A16B64B92006C64A3 /* jacobi.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D24BC37916B64B92006C64A3 /* jacobi.cpp */; };
 		D28BAEFF16B5FD0200578956 /* global.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D28BAEFD16B5FD0200578956 /* global.cpp */; };
 		D28BAF0216B5FDDA00578956 /* config.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D28BAF0016B5FDDA00578956 /* config.cpp */; };
 		D28BAF0416B5FEB500578956 /* libconfig++.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D28BAF0316B5FEB500578956 /* libconfig++.a */; };
@@ -20,6 +25,15 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		D24BC37316B64B1A006C64A3 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
 		D28BAF0E16B604B900578956 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -41,6 +55,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		D24BC37716B64B1A006C64A3 /* jacobi */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = jacobi; sourceTree = BUILT_PRODUCTS_DIR; };
+		D24BC37916B64B92006C64A3 /* jacobi.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = jacobi.cpp; sourceTree = "<group>"; };
 		D28BAEFB16B5FB4500578956 /* param.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = param.h; sourceTree = "<group>"; };
 		D28BAEFD16B5FD0200578956 /* global.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = global.cpp; sourceTree = "<group>"; };
 		D28BAEFE16B5FD0200578956 /* global.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = global.h; sourceTree = "<group>"; };
@@ -61,6 +77,14 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		D24BC37116B64B1A006C64A3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D24BC37216B64B1A006C64A3 /* libconfig++.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D28BAF0C16B604B900578956 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -83,20 +107,21 @@
 		D2915FA416B5F56A0084A612 = {
 			isa = PBXGroup;
 			children = (
-				D28BAF1C16B615A300578956 /* boundaries.h */,
-				D28BAF1816B60B3800578956 /* barrier.cpp */,
-				D28BAF1916B60B3800578956 /* barrier.h */,
-				D28BAF1716B608BC00578956 /* vector-field.h */,
+				D24BC37916B64B92006C64A3 /* jacobi.cpp */,
 				D28BAF0316B5FEB500578956 /* libconfig++.a */,
+				D28BAF1816B60B3800578956 /* barrier.cpp */,
 				D28BAF0016B5FDDA00578956 /* config.cpp */,
 				D28BAEFD16B5FD0200578956 /* global.cpp */,
 				D2915FC816B5F7FE0084A612 /* main.cpp */,
 				D28BAF1416B604F200578956 /* test.cpp */,
+				D28BAF1916B60B3800578956 /* barrier.h */,
+				D28BAF1C16B615A300578956 /* boundaries.h */,
 				D28BAF0116B5FDDA00578956 /* config.h */,
 				D28BAEFE16B5FD0200578956 /* global.h */,
 				D28BAEFB16B5FB4500578956 /* param.h */,
 				D28BAF0616B601AB00578956 /* scalar-field.h */,
 				D28BAF1616B6080A00578956 /* three-vector.h */,
+				D28BAF1716B608BC00578956 /* vector-field.h */,
 				D28BAF0516B600D900578956 /* config.in */,
 				D2915FB016B5F56A0084A612 /* Products */,
 			);
@@ -107,6 +132,7 @@
 			children = (
 				D2915FD116B5F8170084A612 /* vf-pic */,
 				D28BAF1216B604B900578956 /* test */,
+				D24BC37716B64B1A006C64A3 /* jacobi */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -114,6 +140,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		D24BC36B16B64B1A006C64A3 /* jacobi */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D24BC37416B64B1A006C64A3 /* Build configuration list for PBXNativeTarget "jacobi" */;
+			buildPhases = (
+				D24BC36C16B64B1A006C64A3 /* Sources */,
+				D24BC37116B64B1A006C64A3 /* Frameworks */,
+				D24BC37316B64B1A006C64A3 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = jacobi;
+			productName = "vf-pic";
+			productReference = D24BC37716B64B1A006C64A3 /* jacobi */;
+			productType = "com.apple.product-type.tool";
+		};
 		D28BAF0716B604B900578956 /* test */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = D28BAF0F16B604B900578956 /* Build configuration list for PBXNativeTarget "test" */;
@@ -171,11 +214,23 @@
 			targets = (
 				D2915FC916B5F8170084A612 /* vf-pic */,
 				D28BAF0716B604B900578956 /* test */,
+				D24BC36B16B64B1A006C64A3 /* jacobi */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXSourcesBuildPhase section */
+		D24BC36C16B64B1A006C64A3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D24BC36D16B64B1A006C64A3 /* global.cpp in Sources */,
+				D24BC36E16B64B1A006C64A3 /* config.cpp in Sources */,
+				D24BC37016B64B1A006C64A3 /* barrier.cpp in Sources */,
+				D24BC37A16B64B92006C64A3 /* jacobi.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D28BAF0816B604B900578956 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -201,6 +256,28 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
+		D24BC37516B64B1A006C64A3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../../macports/lib\"",
+				);
+				PRODUCT_NAME = jacobi;
+			};
+			name = Debug;
+		};
+		D24BC37616B64B1A006C64A3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../../macports/lib\"",
+				);
+				PRODUCT_NAME = jacobi;
+			};
+			name = Release;
+		};
 		D28BAF1016B604B900578956 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -303,6 +380,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		D24BC37416B64B1A006C64A3 /* Build configuration list for PBXNativeTarget "jacobi" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D24BC37516B64B1A006C64A3 /* Debug */,
+				D24BC37616B64B1A006C64A3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		D28BAF0F16B604B900578956 /* Build configuration list for PBXNativeTarget "test" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
