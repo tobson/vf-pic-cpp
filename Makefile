@@ -3,20 +3,19 @@
 CXXFLAGS += -std=c++11
 CXXFLAGS += -MMD
 
-all: byers jacobi test
+all: vf-pic jacobi test
 
-byers = barrier.o byers.o config.o global.o
-deps := $(deps) $(byers:.o=.d)
-byers: $(byers)
-	$(CXX) $(LDFLAGS) $(byers) $(LDLIBS) -o byers
-
+main = config.o global.o main.o
+deps := $(deps) $(main:.o=.d)
+vf-pic: $(main)
+	$(CXX) $(LDFLAGS) $(main) $(LDLIBS) -o vf-pic
 
 jacobi = barrier.o config.o global.o jacobi.o
 deps := $(deps) $(jacobi:.o=.d)
 jacobi: $(jacobi)
 	$(CXX) $(LDFLAGS) $(jacobi) $(LDLIBS) -o jacobi
 
-test = config.o $(fields) $(particles) test.o
+test = config.o global.o test.o
 deps := $(deps) $(test:.o=.d)
 test: $(test)
 	$(CXX) $(LDFLAGS) $(test) $(LDLIBS) -o test
