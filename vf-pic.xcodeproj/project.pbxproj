@@ -10,10 +10,23 @@
 		D28BAEFF16B5FD0200578956 /* global.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D28BAEFD16B5FD0200578956 /* global.cpp */; };
 		D28BAF0216B5FDDA00578956 /* config.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D28BAF0016B5FDDA00578956 /* config.cpp */; };
 		D28BAF0416B5FEB500578956 /* libconfig++.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D28BAF0316B5FEB500578956 /* libconfig++.a */; };
+		D28BAF0A16B604B900578956 /* global.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D28BAEFD16B5FD0200578956 /* global.cpp */; };
+		D28BAF0B16B604B900578956 /* config.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D28BAF0016B5FDDA00578956 /* config.cpp */; };
+		D28BAF0D16B604B900578956 /* libconfig++.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D28BAF0316B5FEB500578956 /* libconfig++.a */; };
+		D28BAF1516B604F200578956 /* test.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D28BAF1416B604F200578956 /* test.cpp */; };
 		D2915FD316B5F8280084A612 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2915FC816B5F7FE0084A612 /* main.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		D28BAF0E16B604B900578956 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
 		D2915FCD16B5F8170084A612 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -34,11 +47,21 @@
 		D28BAF0316B5FEB500578956 /* libconfig++.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libconfig++.a"; path = "../../macports/lib/libconfig++.a"; sourceTree = "<group>"; };
 		D28BAF0516B600D900578956 /* config.in */ = {isa = PBXFileReference; lastKnownFileType = text; path = config.in; sourceTree = "<group>"; };
 		D28BAF0616B601AB00578956 /* scalar-field.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "scalar-field.h"; sourceTree = "<group>"; };
+		D28BAF1216B604B900578956 /* test */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = test; sourceTree = BUILT_PRODUCTS_DIR; };
+		D28BAF1416B604F200578956 /* test.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = test.cpp; sourceTree = "<group>"; };
 		D2915FC816B5F7FE0084A612 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		D2915FD116B5F8170084A612 /* vf-pic */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "vf-pic"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		D28BAF0C16B604B900578956 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D28BAF0D16B604B900578956 /* libconfig++.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D2915FCC16B5F8170084A612 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -53,6 +76,7 @@
 		D2915FA416B5F56A0084A612 = {
 			isa = PBXGroup;
 			children = (
+				D28BAF1416B604F200578956 /* test.cpp */,
 				D28BAF0616B601AB00578956 /* scalar-field.h */,
 				D28BAF0516B600D900578956 /* config.in */,
 				D28BAF0316B5FEB500578956 /* libconfig++.a */,
@@ -70,6 +94,7 @@
 			isa = PBXGroup;
 			children = (
 				D2915FD116B5F8170084A612 /* vf-pic */,
+				D28BAF1216B604B900578956 /* test */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -77,6 +102,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		D28BAF0716B604B900578956 /* test */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D28BAF0F16B604B900578956 /* Build configuration list for PBXNativeTarget "test" */;
+			buildPhases = (
+				D28BAF0816B604B900578956 /* Sources */,
+				D28BAF0C16B604B900578956 /* Frameworks */,
+				D28BAF0E16B604B900578956 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = test;
+			productName = "vf-pic";
+			productReference = D28BAF1216B604B900578956 /* test */;
+			productType = "com.apple.product-type.tool";
+		};
 		D2915FC916B5F8170084A612 /* vf-pic */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = D2915FCE16B5F8170084A612 /* Build configuration list for PBXNativeTarget "vf-pic" */;
@@ -116,11 +158,22 @@
 			projectRoot = "";
 			targets = (
 				D2915FC916B5F8170084A612 /* vf-pic */,
+				D28BAF0716B604B900578956 /* test */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXSourcesBuildPhase section */
+		D28BAF0816B604B900578956 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D28BAF0A16B604B900578956 /* global.cpp in Sources */,
+				D28BAF0B16B604B900578956 /* config.cpp in Sources */,
+				D28BAF1516B604F200578956 /* test.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D2915FCA16B5F8170084A612 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -134,6 +187,28 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
+		D28BAF1016B604B900578956 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../../macports/lib\"",
+				);
+				PRODUCT_NAME = test;
+			};
+			name = Debug;
+		};
+		D28BAF1116B604B900578956 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../../macports/lib\"",
+				);
+				PRODUCT_NAME = test;
+			};
+			name = Release;
+		};
 		D2915FB716B5F56A0084A612 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -214,6 +289,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		D28BAF0F16B604B900578956 /* Build configuration list for PBXNativeTarget "test" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D28BAF1016B604B900578956 /* Debug */,
+				D28BAF1116B604B900578956 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		D2915FA916B5F56A0084A612 /* Build configuration list for PBXProject "vf-pic" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
