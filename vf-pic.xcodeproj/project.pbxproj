@@ -14,6 +14,8 @@
 		D28BAF0B16B604B900578956 /* config.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D28BAF0016B5FDDA00578956 /* config.cpp */; };
 		D28BAF0D16B604B900578956 /* libconfig++.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D28BAF0316B5FEB500578956 /* libconfig++.a */; };
 		D28BAF1516B604F200578956 /* test.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D28BAF1416B604F200578956 /* test.cpp */; };
+		D28BAF1A16B60B3800578956 /* barrier.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D28BAF1816B60B3800578956 /* barrier.cpp */; };
+		D28BAF1B16B60B3800578956 /* barrier.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D28BAF1816B60B3800578956 /* barrier.cpp */; };
 		D2915FD316B5F8280084A612 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2915FC816B5F7FE0084A612 /* main.cpp */; };
 /* End PBXBuildFile section */
 
@@ -51,6 +53,8 @@
 		D28BAF1416B604F200578956 /* test.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = test.cpp; sourceTree = "<group>"; };
 		D28BAF1616B6080A00578956 /* three-vector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "three-vector.h"; sourceTree = "<group>"; };
 		D28BAF1716B608BC00578956 /* vector-field.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "vector-field.h"; sourceTree = "<group>"; };
+		D28BAF1816B60B3800578956 /* barrier.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = barrier.cpp; sourceTree = "<group>"; };
+		D28BAF1916B60B3800578956 /* barrier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = barrier.h; sourceTree = "<group>"; };
 		D2915FC816B5F7FE0084A612 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		D2915FD116B5F8170084A612 /* vf-pic */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "vf-pic"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -78,6 +82,8 @@
 		D2915FA416B5F56A0084A612 = {
 			isa = PBXGroup;
 			children = (
+				D28BAF1816B60B3800578956 /* barrier.cpp */,
+				D28BAF1916B60B3800578956 /* barrier.h */,
 				D28BAF1716B608BC00578956 /* vector-field.h */,
 				D28BAF0316B5FEB500578956 /* libconfig++.a */,
 				D28BAF0016B5FDDA00578956 /* config.cpp */,
@@ -175,6 +181,7 @@
 				D28BAF0A16B604B900578956 /* global.cpp in Sources */,
 				D28BAF0B16B604B900578956 /* config.cpp in Sources */,
 				D28BAF1516B604F200578956 /* test.cpp in Sources */,
+				D28BAF1B16B60B3800578956 /* barrier.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -185,6 +192,7 @@
 				D2915FD316B5F8280084A612 /* main.cpp in Sources */,
 				D28BAEFF16B5FD0200578956 /* global.cpp in Sources */,
 				D28BAF0216B5FDDA00578956 /* config.cpp in Sources */,
+				D28BAF1A16B60B3800578956 /* barrier.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
