@@ -12,14 +12,14 @@
 #include "scalar-field.h"
 
 template <typename T, int Nz, int Nx>
-void boundaryConditionX (ScalarField<T,Nz,Nx>&);
+void boundaryConditionX (ScalarBase<T,Nz,Nx>&);
 template <typename T, int Nz, int Nx>
-void boundaryConditionZ (ScalarField<T,Nz,Nx>&);
+void boundaryConditionZ (ScalarBase<T,Nz,Nx>&);
 template <typename T, int Nz, int Nx>
-void boundaryCondition (ScalarField<T,Nz,Nx>&);
+void boundaryCondition (ScalarBase<T,Nz,Nx>&);
 
 template <typename T, int Nz, int Nx>
-void boundaryConditionX (ScalarField<T,Nz,Nx>& scalar)
+void boundaryConditionX (ScalarBase<T,Nz,Nx>& scalar)
 {
     for (int iz = 1; iz <= Nz; ++iz)
     {
@@ -29,7 +29,7 @@ void boundaryConditionX (ScalarField<T,Nz,Nx>& scalar)
 }
 
 template <typename T, int Nz, int Nx>
-void boundaryConditionZ (ScalarField<T,Nz,Nx>& scalar)
+void boundaryConditionZ (ScalarBase<T,Nz,Nx>& scalar)
 {
     for (int ix = 0; ix < Nx + 2; ++ix)
     {
@@ -39,7 +39,7 @@ void boundaryConditionZ (ScalarField<T,Nz,Nx>& scalar)
 }
 
 template <typename T, int Nz, int Nx>
-void boundaryCondition (ScalarField<T,Nz,Nx>& scalar)
+void boundaryCondition (ScalarBase<T,Nz,Nx>& scalar)
 {
     boundaryConditionX (scalar);
     boundaryConditionZ (scalar);
