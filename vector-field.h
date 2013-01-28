@@ -19,7 +19,7 @@ template <typename T>
 class LocalVectorField: public ThreeVector<LocalScalarField<T>>
 {
 public:
-  using ThreeVector<LocalScalarField<T>>::operator=;
+    using ThreeVector<LocalScalarField<T>>::operator=;
 };
 
 /* Decleration */
@@ -28,17 +28,17 @@ template <typename T>
 class LocalVectorFieldView: public ThreeVector<LocalScalarFieldView<T>>
 {
 private:
-  typedef LocalScalarFieldView<T> View;
+    typedef LocalScalarFieldView<T> View;
 public:
-  LocalVectorFieldView (GlobalVectorField<T>&, int);
-  using ThreeVector<LocalScalarFieldView<T>>::operator=;
+    LocalVectorFieldView (GlobalVectorField<T>&, int);
+    using ThreeVector<LocalScalarFieldView<T>>::operator=;
 };
 
 /* Implementation */
 
 template <typename T>
 LocalVectorFieldView<T>::LocalVectorFieldView (GlobalVectorField<T>& global, int ithread):
-ThreeVector<View> (View (global.x, ithread), View (global.y, ithread), View (global.z, ithread))
+    ThreeVector<View> (View (global.x, ithread), View (global.y, ithread), View (global.z, ithread))
 {
 }
 

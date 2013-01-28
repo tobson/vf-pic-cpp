@@ -13,15 +13,15 @@
 
 namespace global
 {
-  const int mx = nx;
-  const int mz = nz/nthreads;
-  
-  const int npar = nx*nz*npc;
-  const int mpar = npar/nthreads;
-  
-  extern real dx, dz;
-  
-  void computeVariables ();
+const int mx = nx;
+const int mz = nz/nthreads;
+
+const int npar = nx*nz*npc;
+const int mpar = npar/nthreads;
+
+extern real dx, dz;
+
+void computeVariables ();
 }
 
 #endif /* defined(__vf_pic__global__) */

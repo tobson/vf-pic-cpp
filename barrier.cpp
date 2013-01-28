@@ -12,20 +12,20 @@
 #include <thread>
 
 Barrier::Barrier (const int nthreads):
-nthreads (nthreads), count (nthreads), generation (false)
+    nthreads (nthreads), count (nthreads), generation (false)
 {
 }
 
 bool Barrier::wait ()
 {
-  bool my_generation = generation;
-  if (--count)
-  {
-    while (generation == my_generation) std::this_thread::yield ();
-    return false;
-  }
-  
-  count = nthreads;
-  generation =! generation;
-  return true;
+    bool my_generation = generation;
+    if (--count)
+    {
+        while (generation == my_generation) std::this_thread::yield ();
+        return false;
+    }
+
+    count = nthreads;
+    generation =! generation;
+    return true;
 }

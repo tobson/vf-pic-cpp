@@ -14,12 +14,12 @@
 class Barrier
 {
 public:
-  Barrier (const int);
-  bool wait ();
+    Barrier (const int);
+    bool wait ();
 private:
-  const int nthreads;
-  std::atomic<int> count;
-  std::atomic<bool> generation;
+    const int nthreads;
+    std::atomic<int> count;
+    std::atomic<bool> generation;
 };
 
 #endif /* defined(__vf_pic__barrier__) */
