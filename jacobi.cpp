@@ -6,6 +6,8 @@
 //  Copyright (c) 2013 Tobias Heinemann. All rights reserved.
 //
 
+#include "barrier.h"
+#include "boundaries.h"
 #include "config.h"
 #include "global.h"
 #include "scalar-field.h"

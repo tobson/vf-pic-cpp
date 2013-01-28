@@ -9,22 +9,17 @@
 #ifndef vf_pic_boundaries_h
 #define vf_pic_boundaries_h
 
-template <typename T, int Nz, int Nx>
-boundaryConditionX (ScalarField<T,Nz,Nx>&);
-template <typename T, int Nz, int Nx>
-boundaryConditionZ (ScalarField<T,Nz,Nx>&);
-template <typename T, int Nz, int Nx>
-boundaryCondition (ScalarField<T,Nz,Nx>&);
+#include "scalar-field.h"
 
 template <typename T, int Nz, int Nx>
-boundaryConditionX (VectorField<T,Nz,Nx>&);
+void boundaryConditionX (ScalarField<T,Nz,Nx>&);
 template <typename T, int Nz, int Nx>
-boundaryConditionZ (VectorField<T,Nz,Nx>&);
+void boundaryConditionZ (ScalarField<T,Nz,Nx>&);
 template <typename T, int Nz, int Nx>
-boundaryCondition (VectorField<T,Nz,Nx>&);
+void boundaryCondition (ScalarField<T,Nz,Nx>&);
 
 template <typename T, int Nz, int Nx>
-boundaryConditionX (ScalarField<T,Nz,Nx>& scalar)
+void boundaryConditionX (ScalarField<T,Nz,Nx>& scalar)
 {
   for (int iz = 1; iz <= Nz; ++iz)
   {
@@ -34,7 +29,7 @@ boundaryConditionX (ScalarField<T,Nz,Nx>& scalar)
 }
 
 template <typename T, int Nz, int Nx>
-boundaryConditionZ (ScalarField<T,Nz,Nx>& scalar)
+void boundaryConditionZ (ScalarField<T,Nz,Nx>& scalar)
 {
   for (int ix = 0; ix < Nx + 2; ++ix)
   {
@@ -44,30 +39,39 @@ boundaryConditionZ (ScalarField<T,Nz,Nx>& scalar)
 }
 
 template <typename T, int Nz, int Nx>
-boundaryCondition (ScalarField<T,Nz,Nx>& scalar)
+void boundaryCondition (ScalarField<T,Nz,Nx>& scalar)
 {
   boundaryConditionX (scalar);
   boundaryConditionZ (scalar);
 }
 
-template <typename T, int Nz, int Nx>
-boundaryConditionX (VectorField<T,Nz,Nx>& vector)
+#include "vector-field.h"
+
+template <class S>
+void boundaryConditionX (ThreeVector<S>&);
+template <class S>
+void boundaryConditionZ (ThreeVector<S>&);
+template <class S>
+void boundaryCondition (ThreeVector<S>&);
+
+template <class S>
+void boundaryConditionX (ThreeVector<S>& vector)
 {
   boundaryConditionX (vector.x);
   boundaryConditionX (vector.y);
   boundaryConditionX (vector.z);
 }
 
-template <typename T, int Nz, int Nx>
-boundaryConditionZ (VectorField<T,Nz,Nx>& vector)
+template <class S>
+void boundaryConditionZ (ThreeVector<S>& vector)
 {
   boundaryConditionZ (vector.x);
   boundaryConditionZ (vector.y);
   boundaryConditionZ (vector.z);
 }
 
-template <typename T, int Nz, int Nx>
-boundaryCondition (VectorField<T,Nz,Nx>& vector)
+template <class S>
+void boundaryCondition (ThreeVector<S>& vector)
 {
   boundaryConditionX (vector);
   boundaryConditionZ (vector);

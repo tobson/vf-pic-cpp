@@ -107,11 +107,11 @@
 		D2915FA416B5F56A0084A612 = {
 			isa = PBXGroup;
 			children = (
-				D24BC37916B64B92006C64A3 /* jacobi.cpp */,
 				D28BAF0316B5FEB500578956 /* libconfig++.a */,
 				D28BAF1816B60B3800578956 /* barrier.cpp */,
 				D28BAF0016B5FDDA00578956 /* config.cpp */,
 				D28BAEFD16B5FD0200578956 /* global.cpp */,
+				D24BC37916B64B92006C64A3 /* jacobi.cpp */,
 				D2915FC816B5F7FE0084A612 /* main.cpp */,
 				D28BAF1416B604F200578956 /* test.cpp */,
 				D28BAF1916B60B3800578956 /* barrier.h */,
