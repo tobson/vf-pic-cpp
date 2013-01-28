@@ -76,16 +76,16 @@
 		D2915FA416B5F56A0084A612 = {
 			isa = PBXGroup;
 			children = (
-				D28BAF1416B604F200578956 /* test.cpp */,
-				D28BAF0616B601AB00578956 /* scalar-field.h */,
-				D28BAF0516B600D900578956 /* config.in */,
 				D28BAF0316B5FEB500578956 /* libconfig++.a */,
 				D28BAF0016B5FDDA00578956 /* config.cpp */,
-				D28BAF0116B5FDDA00578956 /* config.h */,
 				D28BAEFD16B5FD0200578956 /* global.cpp */,
+				D2915FC816B5F7FE0084A612 /* main.cpp */,
+				D28BAF1416B604F200578956 /* test.cpp */,
+				D28BAF0116B5FDDA00578956 /* config.h */,
 				D28BAEFE16B5FD0200578956 /* global.h */,
 				D28BAEFB16B5FB4500578956 /* param.h */,
-				D2915FC816B5F7FE0084A612 /* main.cpp */,
+				D28BAF0616B601AB00578956 /* scalar-field.h */,
+				D28BAF0516B600D900578956 /* config.in */,
 				D2915FB016B5F56A0084A612 /* Products */,
 			);
 			sourceTree = "<group>";
