@@ -33,6 +33,7 @@
 		D28BAF0116B5FDDA00578956 /* config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = config.h; sourceTree = "<group>"; };
 		D28BAF0316B5FEB500578956 /* libconfig++.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libconfig++.a"; path = "../../macports/lib/libconfig++.a"; sourceTree = "<group>"; };
 		D28BAF0516B600D900578956 /* config.in */ = {isa = PBXFileReference; lastKnownFileType = text; path = config.in; sourceTree = "<group>"; };
+		D28BAF0616B601AB00578956 /* scalar-field.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "scalar-field.h"; sourceTree = "<group>"; };
 		D2915FC816B5F7FE0084A612 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		D2915FD116B5F8170084A612 /* vf-pic */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "vf-pic"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -52,6 +53,7 @@
 		D2915FA416B5F56A0084A612 = {
 			isa = PBXGroup;
 			children = (
+				D28BAF0616B601AB00578956 /* scalar-field.h */,
 				D28BAF0516B600D900578956 /* config.in */,
 				D28BAF0316B5FEB500578956 /* libconfig++.a */,
 				D28BAF0016B5FDDA00578956 /* config.cpp */,

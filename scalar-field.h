@@ -1,0 +1,162 @@
+//
+//  scalar-field.h
+//  vf-pic
+//
+//  Created by Tobias Heinemann on 1/27/13.
+//  Copyright (c) 2013 Tobias Heinemann. All rights reserved.
+//
+
+#ifndef vf_pic_scalar_field_h
+#define vf_pic_scalar_field_h
+
+/* Declerations */
+
+template <typename T, int N1, int N2>
+class ScalarBase
+{
+protected:
+  ScalarBase (T*);
+  ScalarBase (const ScalarBase&);
+  ScalarBase& operator= (const ScalarBase&);
+  ScalarBase (ScalarBase&& other) noexcept;
+  ScalarBase& operator= (ScalarBase&&) = delete;
+  virtual ~ScalarBase () noexcept;
+  T *data;
+public:
+  inline T& operator() (int i1, int i2)
+  {
+    return data[i1*(N2 + 2) + i2];
+  }
+  inline const T& operator() (int i1, int i2) const
+  {
+    return data[i1*(N2 + 2) + i2];
+  }
+  static const int n1 = N1;
+  static const int n2 = N2;
+};
+
+template <typename T, int N1, int N2>
+class ScalarFieldNew: public ScalarBase<T,N1,N2>
+{
+public:
+  ScalarFieldNew ();
+  ScalarFieldNew (const ScalarFieldNew&);
+  ScalarFieldNew& operator= (const ScalarFieldNew&);
+  ScalarFieldNew (ScalarFieldNew&&) noexcept;
+  ScalarFieldNew& operator= (ScalarFieldNew&&) = delete;
+  virtual ~ScalarFieldNew () noexcept;
+  using ScalarBase<T,N1,N2>::operator=;
+};
+
+template <typename T>
+using GlobalScalarFieldNew = ScalarFieldNew<T,param::nz,param::nx>;
+
+template <typename T>
+using LocalScalarFieldNew = ScalarFieldNew<T,global::mz,global::mx>;
+
+template <typename T>
+class LocalScalarFieldView: public ScalarBase<T,global::mz,global::mx>
+{
+public:
+  LocalScalarFieldView (GlobalScalarFieldNew<T>&, int);
+  using ScalarBase<T,global::mz,global::mx>::operator=;
+};
+
+/* Implementation of ScalarBase */
+
+template <typename T, int N1, int N2>
+ScalarBase<T,N1,N2>::ScalarBase (T *ptr):
+data (ptr)
+{
+  std::cout << "ScalarBase (" << this << "): Pointer ctor\n";
+}
+
+template <typename T, int N1, int N2>
+ScalarBase<T,N1,N2>::ScalarBase (const ScalarBase& other):
+data (other.data)
+{
+  std::cout << "ScalarBase (" << this << "): Copy ctor\n";
+}
+
+template <typename T, int N1, int N2>
+ScalarBase<T,N1,N2>& ScalarBase<T,N1,N2>::operator= (const ScalarBase& other)
+{
+  std::cout << "ScalarBase (" << this << "): Copy assign\n";
+  if (this != &other)
+  {
+    for (int i1 = 1; i1 <= N1; ++i1)
+      for (int i2 = 1; i2 <= N2; ++i2)
+      {
+        (*this)(i1,i2) = other(i1,i2);
+      }
+  }
+  return *this;
+}
+
+template <typename T, int N1, int N2>
+ScalarBase<T,N1,N2>::ScalarBase (ScalarBase&& other) noexcept:
+data (other.data)
+{
+  std::cout << "ScalarBase (" << &other << ", " << this << "): Move ctor\n";
+  other.data = nullptr;
+}
+
+template <typename T, int N1, int N2>
+ScalarBase<T,N1,N2>::~ScalarBase () noexcept
+{
+  std::cout << "ScalarBase (" << this << "): Destructor\n";
+  data = nullptr;
+}
+
+/* Implementation of ScalarField */
+
+template <typename T, int N1, int N2>
+ScalarFieldNew<T,N1,N2>::ScalarFieldNew ():
+ScalarBase<T,N1,N2> (new T[(N1 + 2)*(N2 + 2)])
+{
+  std::cout << "ScalarFieldNew (" << this << "): Default ctor (Allocated memory)\n";
+}
+
+template <typename T, int N1, int N2>
+ScalarFieldNew<T,N1,N2>::ScalarFieldNew (const ScalarFieldNew& other):
+ScalarBase<T,N1,N2> (new T[(N1 + 2)*(N2 + 2)])
+{
+  std::cout << "ScalarFieldNew (" << this << "): Copy ctor (Allocated memory)\n";
+  ScalarBase<T,N1,N2>::operator= (other);
+}
+
+template <typename T, int N1, int N2>
+ScalarFieldNew<T,N1,N2>& ScalarFieldNew<T,N1,N2>::operator= (const ScalarFieldNew& other)
+{
+  std::cout << "ScalarFieldNew (" << this << "): Copy assign\n";
+  ScalarBase<T,N1,N2>::operator= (other);
+}
+
+template <typename T, int N1, int N2>
+ScalarFieldNew<T,N1,N2>::ScalarFieldNew (ScalarFieldNew&& other) noexcept:
+ScalarBase<T,N1,N2> (std::move (other))
+{
+  std::cout << "ScalarFieldNew (" << this << "): Move ctor\n";
+}
+
+template <typename T, int N1, int N2>
+ScalarFieldNew<T,N1,N2>::~ScalarFieldNew () noexcept
+{
+  std::cout << "ScalarFieldNew (" << this << "): Destructor";
+  if (this->data != nullptr)
+  {
+    std::cout << " (Deallocating memory...)";
+  }
+  std::cout << std::endl;
+}
+
+/* Implementation of LocalScalarFieldView */
+
+template <typename T>
+LocalScalarFieldView<T>::LocalScalarFieldView
+(GlobalScalarFieldNew<T>& global, int ithread):
+ScalarBase<T,global::mz,global::mx> (&global(ithread*global::mz,0))
+{
+}
+
+#endif
