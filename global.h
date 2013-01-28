@@ -11,6 +11,10 @@
 
 #include "param.h"
 
+#include <cmath>
+
+const real pi = 4.0*atan (1.0);
+
 namespace global
 {
 const int mx = nx;

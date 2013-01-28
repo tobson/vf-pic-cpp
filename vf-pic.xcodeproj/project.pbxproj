@@ -74,6 +74,8 @@
 		D28BAF1C16B615A300578956 /* boundaries.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = boundaries.h; sourceTree = "<group>"; };
 		D2915FC816B5F7FE0084A612 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		D2915FD116B5F8170084A612 /* vf-pic */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "vf-pic"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D2F90E4816B734C700ABDA86 /* jacobi.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = jacobi.py; sourceTree = "<group>"; };
+		D2F90E4A16B7375900ABDA86 /* vfpic.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = vfpic.py; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -123,6 +125,8 @@
 				D28BAF1616B6080A00578956 /* three-vector.h */,
 				D28BAF1716B608BC00578956 /* vector-field.h */,
 				D28BAF0516B600D900578956 /* config.in */,
+				D2F90E4816B734C700ABDA86 /* jacobi.py */,
+				D2F90E4A16B7375900ABDA86 /* vfpic.py */,
 				D2915FB016B5F56A0084A612 /* Products */,
 			);
 			sourceTree = "<group>";

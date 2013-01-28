@@ -203,6 +203,10 @@ void readVariable (const char *name, std::string& value)
 void write (const std::string& filename)
 {
     /* Append parameters */
+    {
+        const int precision = sizeof (real);
+        output.getRoot ().add ("precision", Setting::TypeInt) = precision;
+    }
     output.getRoot ().add ("nx", Setting::TypeInt) = global::nx;
     output.getRoot ().add ("nz", Setting::TypeInt) = global::nz;
     output.getRoot ().add ("npc", Setting::TypeInt) = global::npc;

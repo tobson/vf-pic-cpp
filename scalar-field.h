@@ -25,6 +25,7 @@ protected:
     ScalarBase (ScalarBase&& other) noexcept;
     ScalarBase& operator= (ScalarBase&&) = delete;
     virtual ~ScalarBase () noexcept;
+    ScalarBase& operator= (const T&);
     T *data;
 public:
     inline T& operator() (int i1, int i2)
@@ -34,6 +35,12 @@ public:
     inline const T& operator() (int i1, int i2) const
     {
         return data[i1*(N2 + 2) + i2];
+    }
+    inline friend std::ostream& operator<< (std::ostream& os, const ScalarBase& scalar)
+    {
+        const auto buffer = reinterpret_cast<char *> (scalar.data);
+        os.write (buffer, (N1 + 2)*(N2 + 2)*sizeof (T));
+        return os;
     }
     static const int n1 = N1;
     static const int n2 = N2;
@@ -110,6 +117,18 @@ ScalarBase<T,N1,N2>::~ScalarBase () noexcept
 {
     std::cout << "ScalarBase (" << this << "): Destructor\n";
     data = nullptr;
+}
+
+template <typename T, int N1, int N2>
+ScalarBase<T,N1,N2>& ScalarBase<T,N1,N2>::operator= (const T& value)
+{
+    std::cout << "ScalarBase (" << this << "): Copy assign\n";
+    for (int i1 = 1; i1 <= N1; ++i1)
+    for (int i2 = 1; i2 <= N2; ++i2)
+    {
+        (*this)(i1,i2) = value;
+    }
+    return *this;
 }
 
 /* Implementation of ScalarField */

@@ -17,18 +17,19 @@ class ThreeVector
 public:
     ThreeVector ();
     template <class U>
-    ThreeVector& operator= (ThreeVector<U>& other)
-    {
-        std::cout << "ThreeVector (" << this << "): Copy assign\n";
-        x = other.x;
-        y = other.y;
-        z = other.z;
-        return *this;
-    }
+    ThreeVector& operator= (ThreeVector<U>&);
     ThreeVector (const S&, const S&, const S&);
     ThreeVector (S&&, S&&, S&&);
     S& operator[] (int);
     const S& operator[] (int) const;
+    inline friend std::ostream& operator<< (std::ostream& os, const ThreeVector& vector)
+    {
+        os << vector.x;
+        os << vector.y;
+        os << vector.z;
+        return os;
+    }
+
     S x, y, z;
 };
 
@@ -39,6 +40,18 @@ ThreeVector<S>::ThreeVector ():
     x (), y (), z ()
 {
 }
+        
+template <class S>
+template <class U>
+ThreeVector<S>& ThreeVector<S>::operator= (ThreeVector<U>& other)
+{
+    std::cout << "ThreeVector (" << this << "): Copy assign\n";
+    x = other.x;
+    y = other.y;
+    z = other.z;
+    return *this;
+}
+
 
 template <class S>
 ThreeVector<S>::ThreeVector (const S& a, const S& b, const S& c):
