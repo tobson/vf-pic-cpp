@@ -7,11 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		D2915FB416B5F56A0084A612 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2915FB316B5F56A0084A612 /* main.cpp */; };
+		D2915FD316B5F8280084A612 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2915FC816B5F7FE0084A612 /* main.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		D2915FAD16B5F56A0084A612 /* CopyFiles */ = {
+		D2915FCD16B5F8170084A612 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = /usr/share/man/man1/;
@@ -23,12 +23,12 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		D2915FAF16B5F56A0084A612 /* vf-pic */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "vf-pic"; sourceTree = BUILT_PRODUCTS_DIR; };
-		D2915FB316B5F56A0084A612 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		D2915FC816B5F7FE0084A612 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		D2915FD116B5F8170084A612 /* vf-pic */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "vf-pic"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		D2915FAC16B5F56A0084A612 /* Frameworks */ = {
+		D2915FCC16B5F8170084A612 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -41,7 +41,7 @@
 		D2915FA416B5F56A0084A612 = {
 			isa = PBXGroup;
 			children = (
-				D2915FB216B5F56A0084A612 /* vf-pic */,
+				D2915FC816B5F7FE0084A612 /* main.cpp */,
 				D2915FB016B5F56A0084A612 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -49,29 +49,21 @@
 		D2915FB016B5F56A0084A612 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				D2915FAF16B5F56A0084A612 /* vf-pic */,
+				D2915FD116B5F8170084A612 /* vf-pic */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		D2915FB216B5F56A0084A612 /* vf-pic */ = {
-			isa = PBXGroup;
-			children = (
-				D2915FB316B5F56A0084A612 /* main.cpp */,
-			);
-			path = "vf-pic";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		D2915FAE16B5F56A0084A612 /* vf-pic */ = {
+		D2915FC916B5F8170084A612 /* vf-pic */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D2915FB916B5F56A0084A612 /* Build configuration list for PBXNativeTarget "vf-pic" */;
+			buildConfigurationList = D2915FCE16B5F8170084A612 /* Build configuration list for PBXNativeTarget "vf-pic" */;
 			buildPhases = (
-				D2915FAB16B5F56A0084A612 /* Sources */,
-				D2915FAC16B5F56A0084A612 /* Frameworks */,
-				D2915FAD16B5F56A0084A612 /* CopyFiles */,
+				D2915FCA16B5F8170084A612 /* Sources */,
+				D2915FCC16B5F8170084A612 /* Frameworks */,
+				D2915FCD16B5F8170084A612 /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -79,7 +71,7 @@
 			);
 			name = "vf-pic";
 			productName = "vf-pic";
-			productReference = D2915FAF16B5F56A0084A612 /* vf-pic */;
+			productReference = D2915FD116B5F8170084A612 /* vf-pic */;
 			productType = "com.apple.product-type.tool";
 		};
 /* End PBXNativeTarget section */
@@ -103,17 +95,17 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				D2915FAE16B5F56A0084A612 /* vf-pic */,
+				D2915FC916B5F8170084A612 /* vf-pic */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXSourcesBuildPhase section */
-		D2915FAB16B5F56A0084A612 /* Sources */ = {
+		D2915FCA16B5F8170084A612 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D2915FB416B5F56A0084A612 /* main.cpp in Sources */,
+				D2915FD316B5F8280084A612 /* main.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -173,17 +165,17 @@
 			};
 			name = Release;
 		};
-		D2915FBA16B5F56A0084A612 /* Debug */ = {
+		D2915FCF16B5F8170084A612 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "vf-pic";
 			};
 			name = Debug;
 		};
-		D2915FBB16B5F56A0084A612 /* Release */ = {
+		D2915FD016B5F8170084A612 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "vf-pic";
 			};
 			name = Release;
 		};
@@ -199,11 +191,11 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D2915FB916B5F56A0084A612 /* Build configuration list for PBXNativeTarget "vf-pic" */ = {
+		D2915FCE16B5F8170084A612 /* Build configuration list for PBXNativeTarget "vf-pic" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				D2915FBA16B5F56A0084A612 /* Debug */,
-				D2915FBB16B5F56A0084A612 /* Release */,
+				D2915FCF16B5F8170084A612 /* Debug */,
+				D2915FD016B5F8170084A612 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
