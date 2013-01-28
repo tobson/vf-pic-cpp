@@ -76,6 +76,8 @@
 		D2915FD116B5F8170084A612 /* vf-pic */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "vf-pic"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2F90E4816B734C700ABDA86 /* jacobi.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = jacobi.py; sourceTree = "<group>"; };
 		D2F90E4A16B7375900ABDA86 /* vfpic.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = vfpic.py; sourceTree = "<group>"; };
+		D2F90E4B16B73ED400ABDA86 /* Makefile */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
+		D2F90E4C16B73FE300ABDA86 /* local.mk */ = {isa = PBXFileReference; lastKnownFileType = text; path = local.mk; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,6 +111,8 @@
 		D2915FA416B5F56A0084A612 = {
 			isa = PBXGroup;
 			children = (
+				D2F90E4C16B73FE300ABDA86 /* local.mk */,
+				D2F90E4B16B73ED400ABDA86 /* Makefile */,
 				D28BAF0316B5FEB500578956 /* libconfig++.a */,
 				D28BAF1816B60B3800578956 /* barrier.cpp */,
 				D28BAF0016B5FDDA00578956 /* config.cpp */,
