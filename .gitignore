@@ -1,4 +1,5 @@
 config.in
+config.out
 param.h
 vf-pic.xcodeproj/project.xcworkspace
 vf-pic.xcodeproj/xcuserdata
