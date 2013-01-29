@@ -171,6 +171,7 @@ ScalarField<T,N1,N2>::~ScalarField () noexcept
         std::cout << " (Deallocating memory...)";
     }
     std::cout << std::endl;
+    delete[] this->data;
 }
 
 /* Implementation of LocalScalarFieldView */
