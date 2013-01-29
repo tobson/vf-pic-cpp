@@ -22,7 +22,7 @@ protected:
     ScalarBase (T*);
     ScalarBase (const ScalarBase&) = delete;
     ScalarBase& operator= (const ScalarBase&);
-    ScalarBase (ScalarBase&& other) noexcept;
+    ScalarBase (ScalarBase&&) noexcept;
     ScalarBase& operator= (ScalarBase&&) = delete;
     virtual ~ScalarBase () noexcept;
     ScalarBase& operator= (const T&);
