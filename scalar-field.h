@@ -47,6 +47,7 @@ protected:
 public:
     static const int n1 = N1;
     static const int n2 = N2;
+    typedef T value_type;
 };
 
 template <typename T, int N1, int N2>
