@@ -112,8 +112,6 @@
 		D2915FA416B5F56A0084A612 = {
 			isa = PBXGroup;
 			children = (
-				D2F90E5216B748E900ABDA86 /* particles.h */,
-				D2F90E4C16B73FE300ABDA86 /* local.mk */,
 				D2F90E4B16B73ED400ABDA86 /* Makefile */,
 				D28BAF0316B5FEB500578956 /* libconfig++.a */,
 				D28BAF1816B60B3800578956 /* barrier.cpp */,
@@ -127,10 +125,12 @@
 				D28BAF0116B5FDDA00578956 /* config.h */,
 				D28BAEFE16B5FD0200578956 /* global.h */,
 				D28BAEFB16B5FB4500578956 /* param.h */,
+				D2F90E5216B748E900ABDA86 /* particles.h */,
 				D28BAF0616B601AB00578956 /* scalar-field.h */,
 				D28BAF1616B6080A00578956 /* three-vector.h */,
 				D28BAF1716B608BC00578956 /* vector-field.h */,
 				D28BAF0516B600D900578956 /* config.in */,
+				D2F90E4C16B73FE300ABDA86 /* local.mk */,
 				D2F90E4816B734C700ABDA86 /* jacobi.py */,
 				D2F90E4A16B7375900ABDA86 /* vfpic.py */,
 				D2915FB016B5F56A0084A612 /* Products */,

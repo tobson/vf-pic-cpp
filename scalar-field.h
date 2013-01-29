@@ -38,11 +38,12 @@ public:
     inline friend std::ostream& operator<< (std::ostream& os, const ScalarBase& scalar)
     {
         const auto buffer = reinterpret_cast<char *> (scalar.data);
-        os.write (buffer, (N1 + 2)*(N2 + 2)*sizeof (T));
+        os.write (buffer, size*sizeof (T));
         return os;
     }
 protected:
     T *data;
+    static const int size = (N1 + 2)*(N2 + 2);
 public:
     static const int n1 = N1;
     static const int n2 = N2;
@@ -59,6 +60,8 @@ public:
     ScalarField& operator= (ScalarField&&) = delete;
     virtual ~ScalarField () noexcept;
     using ScalarBase<T,N1,N2>::operator=;
+    using ScalarBase<T,N1,N2>::data;
+    using ScalarBase<T,N1,N2>::size;
 };
 
 template <typename T>
@@ -78,8 +81,7 @@ public:
 /* Implementation of ScalarBase */
 
 template <typename T, int N1, int N2>
-ScalarBase<T,N1,N2>::ScalarBase (T *ptr):
-    data (ptr)
+ScalarBase<T,N1,N2>::ScalarBase (T *ptr): data (ptr)
 {
     std::cout << "ScalarBase (" << this << "): Pointer ctor\n";
 }
@@ -100,8 +102,7 @@ ScalarBase<T,N1,N2>& ScalarBase<T,N1,N2>::operator= (const ScalarBase& other)
 }
 
 template <typename T, int N1, int N2>
-ScalarBase<T,N1,N2>::ScalarBase (ScalarBase&& other) noexcept:
-data (other.data)
+ScalarBase<T,N1,N2>::ScalarBase (ScalarBase&& other) noexcept: data (other.data)
 {
     std::cout << "ScalarBase (" << &other << ", " << this << "): Move ctor\n";
     other.data = nullptr;
@@ -129,15 +130,13 @@ ScalarBase<T,N1,N2>& ScalarBase<T,N1,N2>::operator= (const T& value)
 /* Implementation of ScalarField */
 
 template <typename T, int N1, int N2>
-ScalarField<T,N1,N2>::ScalarField ():
-    ScalarBase<T,N1,N2> (new T[(N1 + 2)*(N2 + 2)])
+ScalarField<T,N1,N2>::ScalarField (): ScalarBase<T,N1,N2> (new T[size])
 {
     std::cout << "ScalarField (" << this << "): Default ctor (Allocated memory)\n";
 }
 
 template <typename T, int N1, int N2>
-ScalarField<T,N1,N2>::ScalarField (const ScalarField& other):
-    ScalarBase<T,N1,N2> (new T[(N1 + 2)*(N2 + 2)])
+ScalarField<T,N1,N2>::ScalarField (const ScalarField& other): ScalarBase<T,N1,N2> (new T[size])
 {
     std::cout << "ScalarField (" << this << "): Copy ctor (Allocated memory)\n";
     ScalarBase<T,N1,N2>::operator= (other);
@@ -151,8 +150,7 @@ ScalarField<T,N1,N2>& ScalarField<T,N1,N2>::operator= (const ScalarField& other)
 }
 
 template <typename T, int N1, int N2>
-ScalarField<T,N1,N2>::ScalarField (ScalarField&& other) noexcept:
-ScalarBase<T,N1,N2> (std::move (other))
+ScalarField<T,N1,N2>::ScalarField (ScalarField&& other) noexcept: ScalarBase<T,N1,N2> (std::move (other))
 {
     std::cout << "ScalarField (" << this << "): Move ctor\n";
 }
@@ -161,20 +159,19 @@ template <typename T, int N1, int N2>
 ScalarField<T,N1,N2>::~ScalarField () noexcept
 {
     std::cout << "ScalarField (" << this << "): Destructor";
-    if (this->data != nullptr)
+    if (data != nullptr)
     {
         std::cout << " (Deallocating memory...)";
     }
     std::cout << std::endl;
-    delete[] this->data;
+    delete[] data;
 }
 
 /* Implementation of LocalScalarFieldView */
 
 template <typename T>
 LocalScalarFieldView<T>::LocalScalarFieldView
-(GlobalScalarField<T>& global, int ithread):
-    ScalarBase<T,global::mz,global::mx> (&global(ithread*global::mz,0))
+(GlobalScalarField<T>& global, int ithread): ScalarBase<T,global::mz,global::mx> (&global(ithread*global::mz,0))
 {
     std::cout << "LocalScalarFieldView (" << this << "): Global ctor\n";
 }
