@@ -181,6 +181,7 @@ LocalScalarFieldView<T>::LocalScalarFieldView
 (GlobalScalarField<T>& global, int ithread):
     ScalarBase<T,global::mz,global::mx> (&global(ithread*global::mz,0))
 {
+    std::cout << "LocalScalarFieldView (" << this << "): Global ctor\n";
 }
 
 #endif
