@@ -3,6 +3,8 @@ config.out
 jacobi
 local.mk
 param.h
+test
+vf-pic
 vf-pic.xcodeproj/project.xcworkspace
 vf-pic.xcodeproj/xcuserdata
 
