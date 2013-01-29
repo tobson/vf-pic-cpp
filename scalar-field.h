@@ -21,13 +21,12 @@ class ScalarBase
 protected:
     ScalarBase (T*);
     ScalarBase (const ScalarBase&) = delete;
-    ScalarBase& operator= (const ScalarBase&);
     ScalarBase (ScalarBase&&) noexcept;
     ScalarBase& operator= (ScalarBase&&) = delete;
     virtual ~ScalarBase () noexcept;
-    ScalarBase& operator= (const T&);
-    T *data;
 public:
+    ScalarBase& operator= (const ScalarBase&);
+    ScalarBase& operator= (const T&);
     inline T& operator() (int i1, int i2)
     {
         return data[i1*(N2 + 2) + i2];
@@ -42,6 +41,9 @@ public:
         os.write (buffer, (N1 + 2)*(N2 + 2)*sizeof (T));
         return os;
     }
+protected:
+    T *data;
+public:
     static const int n1 = N1;
     static const int n2 = N2;
 };
