@@ -8,6 +8,7 @@
 
 #include "config.h"
 #include "global.h"
+#include "particles.h"
 #include "scalar-field.h"
 #include "vector-field.h"
 
@@ -48,6 +49,13 @@ int main(int argc, const char * argv[])
         std::vector<LocalVectorFieldView<float>> vec;
         vec.push_back (LocalVectorFieldView<float> (a,0));
         vec.push_back (LocalVectorFieldView<float> (b,0));
+    }
+
+    {
+        GlobalParticleArray<float> a,b;
+        std::vector<LocalParticleArrayView<float>> vec;
+        vec.push_back (LocalParticleArrayView<float> (a,0));
+        vec.push_back (LocalParticleArrayView<float> (b,0));
     }
 
     std::cout << "Hello, World! My name is " << argv[0] << ".\n";
