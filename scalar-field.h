@@ -20,7 +20,7 @@ class ScalarBase
 {
 protected:
     ScalarBase (T*);
-    ScalarBase (const ScalarBase&);
+    ScalarBase (const ScalarBase&) = delete;
     ScalarBase& operator= (const ScalarBase&);
     ScalarBase (ScalarBase&& other) noexcept;
     ScalarBase& operator= (ScalarBase&&) = delete;
@@ -80,13 +80,6 @@ ScalarBase<T,N1,N2>::ScalarBase (T *ptr):
     data (ptr)
 {
     std::cout << "ScalarBase (" << this << "): Pointer ctor\n";
-}
-
-template <typename T, int N1, int N2>
-ScalarBase<T,N1,N2>::ScalarBase (const ScalarBase& other):
-    data (other.data)
-{
-    std::cout << "ScalarBase (" << this << "): Copy ctor\n";
 }
 
 template <typename T, int N1, int N2>
