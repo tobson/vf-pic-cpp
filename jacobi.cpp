@@ -47,24 +47,28 @@ struct Fields
         const GlobalScalarField<real> &x = grid.x;
         const GlobalScalarField<real> &z = grid.z;
                 
-        for (int k = 0; k < global::nz + 2; ++k)
-        for (int i = 0; i < global::nx + 2; ++i)
+        for (int k = 1; k <= global::nz; ++k)
+        for (int i = 1; i <= global::nx; ++i)
         {
             rho(k,i) = sin(two_pi*ikx*x(k,i))*cos(two_pi*ikz*z(k,i));
         }
+        boundaryCondition(rho);
+
         phi = 0.0;
         phi0 = 0.0;
         
         for (int j = 0; j < 3; ++j)
         {
-            for (int k = 0; k < global::nz + 2; ++k)
-            for (int i = 0; i < global::nx + 2; ++i)
+            for (int k = 1; k <= global::nz; ++k)
+            for (int i = 1; i <= global::nx; ++i)
             {
                 J[j](k,i) = (j + 2)*sin(two_pi*ikx*x(k,i))*cos(two_pi*ikz*z(k,i));
             }
+
             A[j] = 0.0;
             A0[j] = 0.0;
         }
+        boundaryCondition(J);
     }
     GlobalScalarField<real> rho, phi, phi0;
     GlobalVectorField<real> J, A, A0;
@@ -88,6 +92,9 @@ void iteration (Fields &fields, const int niter)
 
     for (int dummy = 0; dummy < niter; ++dummy)
     {
+        boundaryCondition (phi);
+        boundaryCondition (A);
+
         for (int k = 1; k <= global::nz; ++k)
         for (int i = 1; i <= global::nx; ++i)
         {
@@ -106,7 +113,7 @@ void iteration (Fields &fields, const int niter)
 
         boundaryCondition (phi0);
         boundaryCondition (A0);
-        
+
         for (int k = 1; k <= global::nz; ++k)
         for (int i = 1; i <= global::nx; ++i)
         {
@@ -122,9 +129,6 @@ void iteration (Fields &fields, const int niter)
                                  dz12*(A0[j](k-1,i  ) + A0[j](k+1,i  )) + J[j](k,i));
             }
         }
-
-        boundaryCondition (phi);
-        boundaryCondition (A);
     }
 }
 
@@ -146,6 +150,17 @@ void iterationThread (Fields &fields, const int niter, const int ithread, Barrie
 
     for (int dummy = 0; dummy < niter; ++dummy)
     {
+        boundaryConditionX (phi);
+        boundaryConditionX (A);
+
+        if (barrier.wait ())
+        {
+            boundaryConditionZ (fields.phi);
+            boundaryConditionZ (fields.A);
+        }
+
+        barrier.wait ();
+
         for (int k = 1; k <= global::mz; ++k)
         for (int i = 1; i <= global::mx; ++i)
         {
@@ -181,24 +196,13 @@ void iterationThread (Fields &fields, const int niter, const int ithread, Barrie
         }
         for (int j = 0; j < 3; ++j)
         {
-        for (int k = 1; k <= global::mz; ++k)
-        for (int i = 1; i <= global::mx; ++i)
-        {
-            A[j](k,i) = fac*(dx12*(A0[j](k  ,i-1) + A0[j](k  ,i+1)) +
-                             dz12*(A0[j](k-1,i  ) + A0[j](k+1,i  )) + J[j](k,i));
+            for (int k = 1; k <= global::mz; ++k)
+            for (int i = 1; i <= global::mx; ++i)
+            {
+                A[j](k,i) = fac*(dx12*(A0[j](k  ,i-1) + A0[j](k  ,i+1)) +
+                                 dz12*(A0[j](k-1,i  ) + A0[j](k+1,i  )) + J[j](k,i));
+            }
         }
-        }
-
-        boundaryConditionX (phi);
-        boundaryConditionX (A);
-
-        if (barrier.wait ())
-        {
-            boundaryConditionZ (fields.phi);
-            boundaryConditionZ (fields.A);
-        }
-
-        barrier.wait ();
     }
 }
 
@@ -244,6 +248,11 @@ int main(int argc, const char * argv[])
         auto t2 = std::chrono::high_resolution_clock::now();
         std::cout << "Serial run: " << std::chrono::duration_cast<std::chrono::milliseconds>(t2-t1).count () << " ms" << std::endl;
 
+        boundaryCondition(fields.rho);
+        boundaryCondition(fields.J);
+        boundaryCondition(fields.phi);
+        boundaryCondition(fields.A);
+
         myfile << fields.rho;
         myfile << fields.J;
         myfile << fields.phi;
@@ -265,6 +274,11 @@ int main(int argc, const char * argv[])
         for (auto it = threads.begin (); it != threads.end (); ++it) it->join ();
         auto t2 = std::chrono::high_resolution_clock::now();
         std::cout << "Parallel run: " << std::chrono::duration_cast<std::chrono::milliseconds>(t2-t1).count () << " ms" << std::endl;
+
+        boundaryCondition(fields.rho);
+        boundaryCondition(fields.J);
+        boundaryCondition(fields.phi);
+        boundaryCondition(fields.A);
 
         myfile << fields.rho;
         myfile << fields.J;
