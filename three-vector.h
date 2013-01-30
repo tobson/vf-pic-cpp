@@ -9,6 +9,8 @@
 #ifndef vf_pic_three_vector_h
 #define vf_pic_three_vector_h
 
+#include <stdexcept>
+
 /* Class decleration */
 
 template <class S>
