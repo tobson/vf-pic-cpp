@@ -9,6 +9,7 @@
 #ifndef vf_pic_scalar_field_h
 #define vf_pic_scalar_field_h
 
+#include "config.h"
 #include "global.h"
 
 #include <iostream>
@@ -88,13 +89,19 @@ public:
 template <typename T, int N1, int N2>
 ScalarBase<T,N1,N2>::ScalarBase (T *ptr): data (ptr)
 {
-    std::cout << "ScalarBase (" << this << "): Pointer ctor\n";
+    if (config::verbose)
+    {
+        std::cout << "ScalarBase (" << this << "): Pointer ctor\n";
+    }
 }
 
 template <typename T, int N1, int N2>
 ScalarBase<T,N1,N2>& ScalarBase<T,N1,N2>::operator= (const ScalarBase& other)
 {
-    std::cout << "ScalarBase (" << this << "): Copy assign\n";
+    if (config::verbose)
+    {
+        std::cout << "ScalarBase (" << this << "): Copy assign\n";
+    }
     if (this != &other)
     {
         for (int i1 = 1; i1 <= N1; ++i1)
@@ -109,21 +116,30 @@ ScalarBase<T,N1,N2>& ScalarBase<T,N1,N2>::operator= (const ScalarBase& other)
 template <typename T, int N1, int N2>
 ScalarBase<T,N1,N2>::ScalarBase (ScalarBase&& other) noexcept: data (other.data)
 {
-    std::cout << "ScalarBase (" << &other << ", " << this << "): Move ctor\n";
+    if (config::verbose)
+    {
+        std::cout << "ScalarBase (" << &other << ", " << this << "): Move ctor\n";
+    }
     other.data = nullptr;
 }
 
 template <typename T, int N1, int N2>
 ScalarBase<T,N1,N2>::~ScalarBase () noexcept
 {
-    std::cout << "ScalarBase (" << this << "): Destructor\n";
+    if (config::verbose)
+    {
+        std::cout << "ScalarBase (" << this << "): Destructor\n";
+    }
     data = nullptr;
 }
 
 template <typename T, int N1, int N2>
 ScalarBase<T,N1,N2>& ScalarBase<T,N1,N2>::operator= (const T& value)
 {
-    std::cout << "ScalarBase (" << this << "): Copy assign\n";
+    if (config::verbose)
+    {
+        std::cout << "ScalarBase (" << this << "): Copy assign\n";
+    }
     for (int i1 = 1; i1 <= N1; ++i1)
     for (int i2 = 1; i2 <= N2; ++i2)
     {
@@ -137,38 +153,53 @@ ScalarBase<T,N1,N2>& ScalarBase<T,N1,N2>::operator= (const T& value)
 template <typename T, int N1, int N2>
 ScalarField<T,N1,N2>::ScalarField (): ScalarBase<T,N1,N2> (new T[size])
 {
-    std::cout << "ScalarField (" << this << "): Default ctor (Allocated memory)\n";
+    if (config::verbose)
+    {
+        std::cout << "ScalarField (" << this << "): Default ctor (Allocated memory)\n";
+    }
 }
 
 template <typename T, int N1, int N2>
 ScalarField<T,N1,N2>::ScalarField (const ScalarField& other): ScalarBase<T,N1,N2> (new T[size])
 {
-    std::cout << "ScalarField (" << this << "): Copy ctor (Allocated memory)\n";
+    if (config::verbose)
+    {
+        std::cout << "ScalarField (" << this << "): Copy ctor (Allocated memory)\n";
+    }
     ScalarBase<T,N1,N2>::operator= (other);
 }
 
 template <typename T, int N1, int N2>
 ScalarField<T,N1,N2>& ScalarField<T,N1,N2>::operator= (const ScalarField& other)
 {
-    std::cout << "ScalarField (" << this << "): Copy assign\n";
+    if (config::verbose)
+    {
+        std::cout << "ScalarField (" << this << "): Copy assign\n";
+    }
     ScalarBase<T,N1,N2>::operator= (other);
 }
 
 template <typename T, int N1, int N2>
 ScalarField<T,N1,N2>::ScalarField (ScalarField&& other) noexcept: ScalarBase<T,N1,N2> (std::move (other))
 {
-    std::cout << "ScalarField (" << this << "): Move ctor\n";
+    if (config::verbose)
+    {
+        std::cout << "ScalarField (" << this << "): Move ctor\n";
+    }
 }
 
 template <typename T, int N1, int N2>
 ScalarField<T,N1,N2>::~ScalarField () noexcept
 {
-    std::cout << "ScalarField (" << this << "): Destructor";
-    if (data != nullptr)
+    if (config::verbose)
     {
-        std::cout << " (Deallocating memory...)";
+        std::cout << "ScalarField (" << this << "): Destructor";
+        if (data != nullptr)
+        {
+            std::cout << " (Deallocating memory...)";
+        }
+        std::cout << std::endl;
     }
-    std::cout << std::endl;
     delete[] data;
 }
 
@@ -178,7 +209,10 @@ template <typename T>
 LocalScalarFieldView<T>::LocalScalarFieldView
 (GlobalScalarField<T>& global, int ithread): ScalarBase<T,global::mz,global::mx> (&global(ithread*global::mz,0))
 {
-    std::cout << "LocalScalarFieldView (" << this << "): Global ctor\n";
+    if (config::verbose)
+    {
+        std::cout << "LocalScalarFieldView (" << this << "): Global ctor\n";
+    }
 }
 
 #endif
