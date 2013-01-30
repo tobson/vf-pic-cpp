@@ -5,7 +5,7 @@ CXXFLAGS += -MMD
 
 all: vf-pic jacobi test
 
-main = config.o global.o main.o
+main = config.o global.o grid.o main.o
 deps := $(deps) $(main:.o=.d)
 vf-pic: $(main)
 	$(CXX) $(LDFLAGS) $(main) $(LDLIBS) -o vf-pic
