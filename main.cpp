@@ -8,29 +8,46 @@
 
 #include "barrier.h"
 #include "config.h"
+#include "faraday.h"
 #include "global.h"
 #include "grid.h"
 #include "particles.h"
+#include "vector-field.h"
 
 #include <iostream>
 #include <libconfig.h++>
 #include <thread>
+#include <cstdio>
 #include <vector>
 
-struct Fields
+struct System
 {
-    GlobalScalarField<real> A, E;
+    GlobalVectorField<real> A, E;
+    GlobalParticleArray<real> particles;
 };
 
 class Iteration
 {
 public:
-    void operator() (Fields& fields, GlobalParticleArray<real>& particles, Barrier& barrier, int ithread)
+    void operator() (System(& system)[2], Barrier& barrier, int ithread, int niter)
     {
+        LocalVectorFieldView<real> A1 (system[0].A, ithread);
+        LocalVectorFieldView<real> E1 (system[0].E, ithread);
+
+        LocalParticleArrayView<real> particles1 (system[0].particles, ithread);
+
+        LocalVectorFieldView<real> A2 (system[1].A, ithread);
+        LocalVectorFieldView<real> E2 (system[1].E, ithread);
+
+        LocalParticleArrayView<real> particles2 (system[1].particles, ithread);
+        
+        faraday (A1, E1);
+
+        printf ("Hi, I'm thread %d!\n", ithread);
     }
 };
 
-int main(int argc, const char * argv[])
+int main (int argc, const char * argv[])
 {
     std::string srcdir = ".";
     if (argc > 1) srcdir = argv[1];
@@ -52,16 +69,15 @@ int main(int argc, const char * argv[])
     }
     
     Barrier barrier (global::nthreads);
-    Fields fields;
     Grid grid;
-    GlobalParticleArray<real> particles;
     Iteration iteration;
+    System system[2];
     
     std::vector<std::thread> threads;
 
     for (int ithread = 0; ithread < global::nthreads; ++ithread)
     {
-        std::thread thread (iteration, std::ref (fields), std::ref (particles), std::ref (barrier), ithread);
+        std::thread thread (iteration, std::ref (system), std::ref (barrier), ithread, 16);
         threads.push_back (std::move (thread));
     }
     
