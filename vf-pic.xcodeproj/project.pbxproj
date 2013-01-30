@@ -12,6 +12,7 @@
 		D24BC37016B64B1A006C64A3 /* barrier.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D28BAF1816B60B3800578956 /* barrier.cpp */; };
 		D24BC37216B64B1A006C64A3 /* libconfig++.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D28BAF0316B5FEB500578956 /* libconfig++.a */; };
 		D24BC37A16B64B92006C64A3 /* jacobi.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D24BC37916B64B92006C64A3 /* jacobi.cpp */; };
+		D25C8DB416B89B6600B0A607 /* grid.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D25C8DB216B89B6600B0A607 /* grid.cpp */; };
 		D28BAEFF16B5FD0200578956 /* global.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D28BAEFD16B5FD0200578956 /* global.cpp */; };
 		D28BAF0216B5FDDA00578956 /* config.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D28BAF0016B5FDDA00578956 /* config.cpp */; };
 		D28BAF0416B5FEB500578956 /* libconfig++.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D28BAF0316B5FEB500578956 /* libconfig++.a */; };
@@ -57,6 +58,8 @@
 /* Begin PBXFileReference section */
 		D24BC37716B64B1A006C64A3 /* jacobi */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = jacobi; sourceTree = BUILT_PRODUCTS_DIR; };
 		D24BC37916B64B92006C64A3 /* jacobi.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = jacobi.cpp; sourceTree = "<group>"; };
+		D25C8DB216B89B6600B0A607 /* grid.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = grid.cpp; sourceTree = "<group>"; };
+		D25C8DB316B89B6600B0A607 /* grid.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = grid.h; sourceTree = "<group>"; };
 		D28BAEFB16B5FB4500578956 /* param.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = param.h; sourceTree = "<group>"; };
 		D28BAEFD16B5FD0200578956 /* global.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = global.cpp; sourceTree = "<group>"; };
 		D28BAEFE16B5FD0200578956 /* global.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = global.h; sourceTree = "<group>"; };
@@ -112,6 +115,8 @@
 		D2915FA416B5F56A0084A612 = {
 			isa = PBXGroup;
 			children = (
+				D25C8DB216B89B6600B0A607 /* grid.cpp */,
+				D25C8DB316B89B6600B0A607 /* grid.h */,
 				D2F90E4B16B73ED400ABDA86 /* Makefile */,
 				D28BAF0316B5FEB500578956 /* libconfig++.a */,
 				D28BAF1816B60B3800578956 /* barrier.cpp */,
@@ -260,6 +265,7 @@
 				D28BAEFF16B5FD0200578956 /* global.cpp in Sources */,
 				D28BAF0216B5FDDA00578956 /* config.cpp in Sources */,
 				D28BAF1A16B60B3800578956 /* barrier.cpp in Sources */,
+				D25C8DB416B89B6600B0A607 /* grid.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

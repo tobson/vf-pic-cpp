@@ -8,6 +8,7 @@
 
 #include "config.h"
 #include "global.h"
+#include "grid.h"
 
 #include <iostream>
 #include <libconfig.h++>
@@ -32,6 +33,8 @@ int main(int argc, const char * argv[])
         std::cout << e.what () << std::endl;
         return 1;
     }
+    
+    Grid grid;
 
     // insert code here...
     std::cout << "Hello, World! My name is " << argv[0] << ".\n";
