@@ -9,6 +9,7 @@
 #ifndef vf_pic_three_vector_h
 #define vf_pic_three_vector_h
 
+#include <iostream>
 #include <stdexcept>
 
 /* Class decleration */
