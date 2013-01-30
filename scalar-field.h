@@ -84,6 +84,40 @@ public:
     using ScalarBase<T,global::mz,global::mx>::operator=;
 };
 
+/* Traits */
+
+template <class S>
+struct is_scalarfield
+{
+    static const bool value = false;
+};
+
+template <typename T, int N1, int N2>
+struct is_scalarfield<ScalarBase<T,N1,N2>>
+{
+    static const bool value = true;
+};
+template <typename T, int N1, int N2>
+struct is_scalarfield<ScalarField<T,N1,N2>>
+{
+    static const bool value = true;
+};
+template <typename T>
+struct is_scalarfield<GlobalScalarField<T>>
+{
+    static const bool value = true;
+};
+template <typename T>
+struct is_scalarfield<LocalScalarField<T>>
+{
+    static const bool value = true;
+};
+template <typename T>
+struct is_scalarfield<LocalScalarFieldView<T>>
+{
+    static const bool value = true;
+};
+
 /* Implementation of ScalarBase */
 
 template <typename T, int N1, int N2>
