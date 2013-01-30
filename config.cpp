@@ -71,7 +71,6 @@ bool throwOnCopyConstruct = false;
 /* Read configuration from input file */
 void read (const std::string& filename)
 {
-    std::cout << "filename = " << filename << std::endl;
     try
     {
         input.readFile (filename.c_str());
