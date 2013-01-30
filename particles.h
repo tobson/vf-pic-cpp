@@ -61,7 +61,9 @@ public:
 };
 
 template <typename T>
-using GlobalParticleArray = ParticleArray<T,global::npar>;
+class GlobalParticleArray: public ParticleArray<T,global::npar>
+{
+};
 
 template <typename T>
 struct LocalParticleArrayView: public ParticleBase<T,global::mpar>

@@ -66,10 +66,14 @@ public:
 };
 
 template <typename T>
-using GlobalScalarField = ScalarField<T,global::nz,global::nx>;
+class GlobalScalarField: public ScalarField<T,global::nz,global::nx>
+{
+};
 
 template <typename T>
-using LocalScalarField = ScalarField<T,global::mz,global::mx>;
+class LocalScalarField: public ScalarField<T,global::mz,global::mx>
+{
+};
 
 template <typename T>
 class LocalScalarFieldView: public ScalarBase<T,global::mz,global::mx>
