@@ -35,12 +35,6 @@ public:
     {
         return data[i1*(N2 + 2) + i2];
     }
-    inline friend std::ostream& operator<< (std::ostream& os, const ScalarBase& scalar)
-    {
-        const auto buffer = reinterpret_cast<char *> (scalar.data);
-        os.write (buffer, size*sizeof (T));
-        return os;
-    }
 protected:
     T *data;
     static const int size = (N1 + 2)*(N2 + 2);
@@ -63,6 +57,12 @@ public:
     using ScalarBase<T,N1,N2>::operator=;
     using ScalarBase<T,N1,N2>::data;
     using ScalarBase<T,N1,N2>::size;
+    friend std::ostream& operator<< (std::ostream& os, const ScalarField& scalar)
+    {
+        const auto buffer = reinterpret_cast<char *> (scalar.data);
+        os.write (buffer, size*sizeof (T));
+        return os;
+    }
 };
 
 template <typename T>
