@@ -40,8 +40,8 @@ protected:
     T *data;
     static const int size = (N1 + 2)*(N2 + 2);
 public:
-    static const int n1 = N1;
-    static const int n2 = N2;
+    static const int nz = N1;
+    static const int nx = N2;
     typedef T value_type;
 };
 
@@ -67,19 +67,18 @@ public:
 };
 
 template <typename T>
-class GlobalScalarField: public ScalarField<T,global::nz,global::nx>
+struct GlobalScalarField: public ScalarField<T,global::nz,global::nx>
 {
 };
 
 template <typename T>
-class LocalScalarField: public ScalarField<T,global::mz,global::mx>
+struct LocalScalarField: public ScalarField<T,global::mz,global::mx>
 {
 };
 
 template <typename T>
-class LocalScalarFieldView: public ScalarBase<T,global::mz,global::mx>
+struct LocalScalarFieldView: public ScalarBase<T,global::mz,global::mx>
 {
-public:
     LocalScalarFieldView (GlobalScalarField<T>&, int);
     using ScalarBase<T,global::mz,global::mx>::operator=;
 };

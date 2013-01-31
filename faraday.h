@@ -21,10 +21,10 @@ void faraday (ThreeVector<S>& A, const ThreeVector<S>& E)
     
     for (int j = 0; j < 3; ++j)
     {
-        for (int i1 = 1; i1 <= S::n1; ++i1)
-        for (int i2 = 1; i2 <= S::n2; ++i2)
+        for (int k = 1; k <= S::nz; ++k)
+        for (int i = 1; i <= S::nx; ++i)
         {
-            A[j](i1,i2) -= dt*E[j](i1,i2);
+            A[j](k,i) -= dt*E[j](k,i);
         }
     }
 }
