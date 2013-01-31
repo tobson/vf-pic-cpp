@@ -28,6 +28,10 @@ protected:
 public:
     ScalarBase& operator= (const ScalarBase&);
     ScalarBase& operator= (const T&);
+    ScalarBase& operator+= (const ScalarBase&);
+    ScalarBase& operator+= (const T&);
+    ScalarBase& operator*= (const ScalarBase&);
+    ScalarBase& operator*= (const T&);
     inline T& operator() (int i1, int i2)
     {
         return data[i1*(N2 + 2) + i2];
@@ -69,11 +73,17 @@ public:
 template <typename T>
 struct GlobalScalarField: public ScalarField<T,global::nz,global::nx>
 {
+    using ScalarBase<T,global::nz,global::nx>::operator=;
+    using ScalarBase<T,global::nz,global::nx>::operator+=;
+    using ScalarBase<T,global::nz,global::nx>::operator*=;
 };
 
 template <typename T>
 struct LocalScalarField: public ScalarField<T,global::mz,global::mx>
 {
+    using ScalarBase<T,global::mz,global::mx>::operator=;
+    using ScalarBase<T,global::mz,global::mx>::operator+=;
+    using ScalarBase<T,global::mz,global::mx>::operator*=;
 };
 
 template <typename T>
@@ -81,6 +91,8 @@ struct LocalScalarFieldView: public ScalarBase<T,global::mz,global::mx>
 {
     LocalScalarFieldView (GlobalScalarField<T>&, int);
     using ScalarBase<T,global::mz,global::mx>::operator=;
+    using ScalarBase<T,global::mz,global::mx>::operator+=;
+    using ScalarBase<T,global::mz,global::mx>::operator*=;
 };
 
 /* Traits */
@@ -129,24 +141,6 @@ ScalarBase<T,N1,N2>::ScalarBase (T *ptr): data (ptr)
 }
 
 template <typename T, int N1, int N2>
-ScalarBase<T,N1,N2>& ScalarBase<T,N1,N2>::operator= (const ScalarBase& other)
-{
-    if (config::verbose)
-    {
-        std::cout << "ScalarBase (" << this << "): Copy assign\n";
-    }
-    if (this != &other)
-    {
-        for (int i1 = 1; i1 <= N1; ++i1)
-        for (int i2 = 1; i2 <= N2; ++i2)
-        {
-            (*this)(i1,i2) = other(i1,i2);
-        }
-    }
-    return *this;
-}
-
-template <typename T, int N1, int N2>
 ScalarBase<T,N1,N2>::ScalarBase (ScalarBase&& other) noexcept: data (other.data)
 {
     if (config::verbose)
@@ -165,14 +159,24 @@ ScalarBase<T,N1,N2>::~ScalarBase () noexcept
     }
     data = nullptr;
 }
+        
+template <typename T, int N1, int N2>
+ScalarBase<T,N1,N2>& ScalarBase<T,N1,N2>::operator= (const ScalarBase& other)
+{
+    if (this != &other)
+    {
+        for (int i1 = 1; i1 <= N1; ++i1)
+        for (int i2 = 1; i2 <= N2; ++i2)
+        {
+            (*this)(i1,i2) = other(i1,i2);
+        }
+    }
+    return *this;
+}
 
 template <typename T, int N1, int N2>
 ScalarBase<T,N1,N2>& ScalarBase<T,N1,N2>::operator= (const T& value)
 {
-    if (config::verbose)
-    {
-        std::cout << "ScalarBase (" << this << "): Copy assign\n";
-    }
     for (int i1 = 1; i1 <= N1; ++i1)
     for (int i2 = 1; i2 <= N2; ++i2)
     {
@@ -181,6 +185,56 @@ ScalarBase<T,N1,N2>& ScalarBase<T,N1,N2>::operator= (const T& value)
     return *this;
 }
 
+template <typename T, int N1, int N2>
+ScalarBase<T,N1,N2>& ScalarBase<T,N1,N2>::operator+= (const ScalarBase& other)
+{
+    if (this != &other)
+    {
+        for (int i1 = 1; i1 <= N1; ++i1)
+        for (int i2 = 1; i2 <= N2; ++i2)
+        {
+            (*this)(i1,i2) += other(i1,i2);
+        }
+    }
+    return *this;
+}
+
+template <typename T, int N1, int N2>
+ScalarBase<T,N1,N2>& ScalarBase<T,N1,N2>::operator+= (const T& value)
+{
+    for (int i1 = 1; i1 <= N1; ++i1)
+    for (int i2 = 1; i2 <= N2; ++i2)
+    {
+        (*this)(i1,i2) += value;
+    }
+    return *this;
+}
+        
+template <typename T, int N1, int N2>
+ScalarBase<T,N1,N2>& ScalarBase<T,N1,N2>::operator*= (const ScalarBase& other)
+{
+    if (this != &other)
+    {
+        for (int i1 = 1; i1 <= N1; ++i1)
+        for (int i2 = 1; i2 <= N2; ++i2)
+        {
+            (*this)(i1,i2) += other(i1,i2);
+        }
+    }
+    return *this;
+}
+
+template <typename T, int N1, int N2>
+ScalarBase<T,N1,N2>& ScalarBase<T,N1,N2>::operator*= (const T& value)
+{
+    for (int i1 = 1; i1 <= N1; ++i1)
+    for (int i2 = 1; i2 <= N2; ++i2)
+    {
+        (*this)(i1,i2) += value;
+    }
+    return *this;
+}
+        
 /* Implementation of ScalarField */
 
 template <typename T, int N1, int N2>
