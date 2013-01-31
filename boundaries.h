@@ -10,6 +10,7 @@
 #define vf_pic_boundaries_h
 
 #include "scalar-field.h"
+#include "vector-field.h"
 
 template <typename T, int Nz, int Nx>
 void boundaryConditionX (ScalarBase<T,Nz,Nx>&);
@@ -52,10 +53,10 @@ void boundaryCondition (GlobalScalarField<T>& scalar)
 
 template <class S>
 void boundaryConditionX (ThreeVector<S>&);
-template <class S>
-void boundaryConditionZ (ThreeVector<S>&);
-template <class S>
-void boundaryCondition (ThreeVector<S>&);
+template <class T>
+void boundaryConditionZ (GlobalVectorField<T>&);
+template <class T>
+void boundaryCondition (GlobalVectorField<T>&);
 
 template <class S>
 void boundaryConditionX (ThreeVector<S>& vector)
@@ -65,16 +66,16 @@ void boundaryConditionX (ThreeVector<S>& vector)
     boundaryConditionX (vector.z);
 }
 
-template <class S>
-void boundaryConditionZ (ThreeVector<S>& vector)
+template <class T>
+void boundaryConditionZ (GlobalVectorField<T>& vector)
 {
     boundaryConditionZ (vector.x);
     boundaryConditionZ (vector.y);
     boundaryConditionZ (vector.z);
 }
 
-template <class S>
-void boundaryCondition (ThreeVector<S>& vector)
+template <class T>
+void boundaryCondition (GlobalVectorField<T>& vector)
 {
     boundaryConditionX (vector);
     boundaryConditionZ (vector);
