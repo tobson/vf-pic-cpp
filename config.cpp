@@ -206,17 +206,17 @@ void write (const std::string& filename)
         const int precision = sizeof (real);
         output.getRoot ().add ("precision", Setting::TypeInt) = precision;
     }
-    output.getRoot ().add ("nx", Setting::TypeInt) = global::nx;
-    output.getRoot ().add ("nz", Setting::TypeInt) = global::nz;
-    output.getRoot ().add ("npc", Setting::TypeInt) = global::npc;
-    output.getRoot ().add ("nthreads", Setting::TypeInt) = global::nthreads;
-    output.getRoot ().add ("alignment", Setting::TypeInt) = global::alignment;
+    output.getRoot ().add ("nx", Setting::TypeInt) = vfpic::nx;
+    output.getRoot ().add ("nz", Setting::TypeInt) = vfpic::nz;
+    output.getRoot ().add ("npc", Setting::TypeInt) = vfpic::npc;
+    output.getRoot ().add ("nthreads", Setting::TypeInt) = vfpic::nthreads;
+    output.getRoot ().add ("alignment", Setting::TypeInt) = vfpic::alignment;
 
     /* Also append global constants */
-    output.getRoot ().add ("mx", Setting::TypeInt) = global::mx;
-    output.getRoot ().add ("mz", Setting::TypeInt) = global::mz;
-    output.getRoot ().add ("npar", Setting::TypeInt) = global::npar;
-    output.getRoot ().add ("mpar", Setting::TypeInt) = global::mpar;
+    output.getRoot ().add ("mx", Setting::TypeInt) =  vfpic::mx;
+    output.getRoot ().add ("mz", Setting::TypeInt) = vfpic::mz;
+    output.getRoot ().add ("npar", Setting::TypeInt) = vfpic::npar;
+    output.getRoot ().add ("mpar", Setting::TypeInt) = vfpic::mpar;
 
     try
     {

@@ -24,7 +24,7 @@ int main(int argc, const char * argv[])
     try
     {
         config::read (srcdir + "/config.in");
-        global::computeVariables();
+        vfpic::computeVariables();
         config::write (srcdir + "/config.out");
     }
     catch (const libconfig::ConfigException& e)

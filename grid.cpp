@@ -11,11 +11,11 @@
 
 Grid::Grid ()
 {
-    for (int k = 0; k < global::mz + 2; ++k)
-    for (int i = 0; i < global::mx + 2; ++i)
+    for (int k = 0; k < vfpic::mz + 2; ++k)
+    for (int i = 0; i < vfpic::mx + 2; ++i)
     {
-        x(k,i) = config::x0 + (real (i) - 0.5)*global::dx;
-        z(k,i) = config::z0 + (real (k) - 0.5)*global::dz;
+        x(k,i) = config::x0 + (real (i) - 0.5)*vfpic::dx;
+        z(k,i) = config::z0 + (real (k) - 0.5)*vfpic::dz;
     }
 }
 

@@ -25,11 +25,11 @@ struct Grid
 {
     Grid ()
     {
-        for (int k = 0; k < global::nz + 2; ++k)
-        for (int i = 0; i < global::nx + 2; ++i)
+        for (int k = 0; k < vfpic::nz + 2; ++k)
+        for (int i = 0; i < vfpic::nx + 2; ++i)
         {
-            x(k,i) = config::x0 + (i - 0.5)*global::dx;
-            z(k,i) = config::z0 + (k - 0.5)*global::dz;
+            x(k,i) = config::x0 + (i - 0.5)*vfpic::dx;
+            z(k,i) = config::z0 + (k - 0.5)*vfpic::dz;
         }
     }
     GlobalScalarField<real> x, z;
@@ -47,8 +47,8 @@ struct Fields
         const GlobalScalarField<real> &x = grid.x;
         const GlobalScalarField<real> &z = grid.z;
                 
-        for (int k = 1; k <= global::nz; ++k)
-        for (int i = 1; i <= global::nx; ++i)
+        for (int k = 1; k <= vfpic::nz; ++k)
+        for (int i = 1; i <= vfpic::nx; ++i)
         {
             rho(k,i) = sin(two_pi*ikx*x(k,i))*cos(two_pi*ikz*z(k,i));
         }
@@ -59,8 +59,8 @@ struct Fields
         
         for (int j = 0; j < 3; ++j)
         {
-            for (int k = 1; k <= global::nz; ++k)
-            for (int i = 1; i <= global::nx; ++i)
+            for (int k = 1; k <= vfpic::nz; ++k)
+            for (int i = 1; i <= vfpic::nx; ++i)
             {
                 J[j](k,i) = (j + 2)*sin(two_pi*ikx*x(k,i))*cos(two_pi*ikz*z(k,i));
             }
@@ -76,8 +76,8 @@ struct Fields
 
 void iteration (Fields &fields, const int niter)
 {
-    const real dx12 = real (1.0)/(global::dx*global::dx);
-    const real dz12 = real (1.0)/(global::dz*global::dz);
+    const real dx12 = real (1.0)/(vfpic::dx*vfpic::dx);
+    const real dz12 = real (1.0)/(vfpic::dz*vfpic::dz);
     const real fac = real (0.5)/(dx12 + dz12);
 
     const GlobalScalarField<real>& rho = fields.rho;
@@ -95,16 +95,16 @@ void iteration (Fields &fields, const int niter)
         boundaryCondition (phi);
         boundaryCondition (A);
 
-        for (int k = 1; k <= global::nz; ++k)
-        for (int i = 1; i <= global::nx; ++i)
+        for (int k = 1; k <= vfpic::nz; ++k)
+        for (int i = 1; i <= vfpic::nx; ++i)
         {
             phi0(k,i) = fac*(dx12*(phi(k  ,i-1) + phi(k  ,i+1)) +
                              dz12*(phi(k-1,i  ) + phi(k+1,i  )) + rho(k,i));
         }
         for (int j = 0; j < 3; ++j)
         {
-            for (int k = 1; k <= global::nz; ++k)
-            for (int i = 1; i <= global::nx; ++i)
+            for (int k = 1; k <= vfpic::nz; ++k)
+            for (int i = 1; i <= vfpic::nx; ++i)
             {
                 A0[j](k,i) = fac*(dx12*(A[j](k  ,i-1) + A[j](k  ,i+1)) +
                                   dz12*(A[j](k-1,i  ) + A[j](k+1,i  )) + J[j](k,i));
@@ -114,16 +114,16 @@ void iteration (Fields &fields, const int niter)
         boundaryCondition (phi0);
         boundaryCondition (A0);
 
-        for (int k = 1; k <= global::nz; ++k)
-        for (int i = 1; i <= global::nx; ++i)
+        for (int k = 1; k <= vfpic::nz; ++k)
+        for (int i = 1; i <= vfpic::nx; ++i)
         {
             phi(k,i) = fac*(dx12*(phi0(k  ,i-1) + phi0(k  ,i+1)) +
                             dz12*(phi0(k-1,i  ) + phi0(k+1,i  )) + rho(k,i));
         }
         for (int j = 0; j < 3; ++j)
         {
-            for (int k = 1; k <= global::nz; ++k)
-            for (int i = 1; i <= global::nx; ++i)
+            for (int k = 1; k <= vfpic::nz; ++k)
+            for (int i = 1; i <= vfpic::nx; ++i)
             {
                 A[j](k,i) = fac*(dx12*(A0[j](k  ,i-1) + A0[j](k  ,i+1)) +
                                  dz12*(A0[j](k-1,i  ) + A0[j](k+1,i  )) + J[j](k,i));
@@ -134,8 +134,8 @@ void iteration (Fields &fields, const int niter)
 
 void iterationThread (Fields &fields, const int niter, const int ithread, Barrier &barrier)
 {
-    const real dx12 = real (1.0)/(global::dx*global::dx);
-    const real dz12 = real (1.0)/(global::dz*global::dz);
+    const real dx12 = real (1.0)/(vfpic::dx*vfpic::dx);
+    const real dz12 = real (1.0)/(vfpic::dz*vfpic::dz);
     const real fac = real (0.5)/(dx12 + dz12);
 
     const LocalScalarFieldView<real> rho (fields.rho, ithread);
@@ -161,16 +161,16 @@ void iterationThread (Fields &fields, const int niter, const int ithread, Barrie
 
         barrier.wait ();
 
-        for (int k = 1; k <= global::mz; ++k)
-        for (int i = 1; i <= global::mx; ++i)
+        for (int k = 1; k <= vfpic::mz; ++k)
+        for (int i = 1; i <= vfpic::mx; ++i)
         {
             phi0(k,i) = fac*(dx12*(phi(k  ,i-1) + phi(k  ,i+1)) +
                              dz12*(phi(k-1,i  ) + phi(k+1,i  )) + rho(k,i));
         }
         for (int j = 0; j < 3; ++j)
         {
-            for (int k = 1; k <= global::mz; ++k)
-            for (int i = 1; i <= global::mx; ++i)
+            for (int k = 1; k <= vfpic::mz; ++k)
+            for (int i = 1; i <= vfpic::mx; ++i)
             {
                 A0[j](k,i) = fac*(dx12*(A[j](k  ,i-1) + A[j](k  ,i+1)) +
                                   dz12*(A[j](k-1,i  ) + A[j](k+1,i  )) + J[j](k,i));
@@ -188,16 +188,16 @@ void iterationThread (Fields &fields, const int niter, const int ithread, Barrie
 
         barrier.wait ();
 
-        for (int k = 1; k <= global::mz; ++k)
-        for (int i = 1; i <= global::mx; ++i)
+        for (int k = 1; k <= vfpic::mz; ++k)
+        for (int i = 1; i <= vfpic::mx; ++i)
         {
             phi(k,i) = fac*(dx12*(phi0(k  ,i-1) + phi0(k  ,i+1)) +
                             dz12*(phi0(k-1,i  ) + phi0(k+1,i  )) + rho(k,i));
         }
         for (int j = 0; j < 3; ++j)
         {
-            for (int k = 1; k <= global::mz; ++k)
-            for (int i = 1; i <= global::mx; ++i)
+            for (int k = 1; k <= vfpic::mz; ++k)
+            for (int i = 1; i <= vfpic::mx; ++i)
             {
                 A[j](k,i) = fac*(dx12*(A0[j](k  ,i-1) + A0[j](k  ,i+1)) +
                                  dz12*(A0[j](k-1,i  ) + A0[j](k+1,i  )) + J[j](k,i));
@@ -214,7 +214,7 @@ int main(int argc, const char * argv[])
     try
     {
         config::read (srcdir + "/config.in");
-        global::computeVariables();
+        vfpic::computeVariables();
         config::write (srcdir + "/config.out");
     }
     catch (const libconfig::ConfigException& e)
@@ -263,10 +263,10 @@ int main(int argc, const char * argv[])
         Fields fields (grid);
 
         std::vector<std::thread> threads;
-        Barrier barrier (global::nthreads);
+        Barrier barrier (vfpic::nthreads);
 
         auto t1 = std::chrono::high_resolution_clock::now();
-        for (int ithread = 0; ithread < global::nthreads; ++ithread)
+        for (int ithread = 0; ithread < vfpic::nthreads; ++ithread)
         {
             std::thread th (iterationThread, std::ref (fields), niter, ithread, std::ref (barrier));
             threads.push_back (std::move (th));

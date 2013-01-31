@@ -32,25 +32,34 @@ class Iteration
 public:
     void operator() (System(& system)[2], Barrier& barrier, int ithread, int niter)
     {
-        LocalVectorFieldView<real> A1 (system[0].A, ithread);
-        LocalVectorFieldView<real> E1 (system[0].E, ithread);
-
-        LocalParticleArrayView<real> particles1 (system[0].particles, ithread);
-
-        LocalVectorFieldView<real> A2 (system[1].A, ithread);
-        LocalVectorFieldView<real> E2 (system[1].E, ithread);
-
-        LocalParticleArrayView<real> particles2 (system[1].particles, ithread);
+        System& system1 = system[0];
         
-        faraday (A1, E1);
-        
-        curl (H, A1);
-        
-        curlcurl (J, A1);
+        LocalVectorFieldView<real> A1 (system1.A, ithread);
+        LocalVectorFieldView<real> B1 (system1.B, ithread);
+        LocalVectorFieldView<real> E1 (system1.E, ithread);
 
+        LocalParticleArrayView<real> particles1 (system1.particles, ithread);
+
+        System& system2 = system[1];
+
+        LocalVectorFieldView<real> A2 (system2.A, ithread);
+        LocalVectorFieldView<real> B2 (system2.B, ithread);
+        LocalVectorFieldView<real> E2 (system2.E, ithread);
+
+        LocalParticleArrayView<real> particles2 (system2.particles, ithread);
+        
+        curl (H1, A1);
+
+        for (int it = 0; it < niter; ++it)
+        {
+            B1 = H1;
+            faraday (A1, E1);
+            curl (H1, A1);
+            B1 += H1; B1 *= real (0.5);
+        }
         printf ("Hi, I'm thread %d!\n", ithread);
     }
-    LocalVectorField<real> H, J;
+    LocalVectorField<real> H1, J;
 };
 
 int main (int argc, const char * argv[])
@@ -61,7 +70,7 @@ int main (int argc, const char * argv[])
     try
     {
         config::read (srcdir + "/config.in");
-        global::computeVariables();
+        vfpic::computeVariables();
         config::write (srcdir + "/config.out");
     }
     catch (const libconfig::ConfigException& e)
@@ -74,14 +83,14 @@ int main (int argc, const char * argv[])
         return 1;
     }
     
-    Barrier barrier (global::nthreads);
+    Barrier barrier (vfpic::nthreads);
     Grid grid;
     Iteration iteration;
     System system[2];
     
     std::vector<std::thread> threads;
 
-    for (int ithread = 0; ithread < global::nthreads; ++ithread)
+    for (int ithread = 0; ithread < vfpic::nthreads; ++ithread)
     {
         std::thread thread (iteration, std::ref (system), std::ref (barrier), ithread, 16);
         threads.push_back (std::move (thread));

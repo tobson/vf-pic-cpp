@@ -71,28 +71,28 @@ public:
 };
 
 template <typename T>
-struct GlobalScalarField: public ScalarField<T,global::nz,global::nx>
+struct GlobalScalarField: public ScalarField<T,vfpic::nz,vfpic::nx>
 {
-    using ScalarBase<T,global::nz,global::nx>::operator=;
-    using ScalarBase<T,global::nz,global::nx>::operator+=;
-    using ScalarBase<T,global::nz,global::nx>::operator*=;
+    using ScalarBase<T,vfpic::nz,vfpic::nx>::operator=;
+    using ScalarBase<T,vfpic::nz,vfpic::nx>::operator+=;
+    using ScalarBase<T,vfpic::nz,vfpic::nx>::operator*=;
 };
 
 template <typename T>
-struct LocalScalarField: public ScalarField<T,global::mz,global::mx>
+struct LocalScalarField: public ScalarField<T,vfpic::mz,vfpic::mx>
 {
-    using ScalarBase<T,global::mz,global::mx>::operator=;
-    using ScalarBase<T,global::mz,global::mx>::operator+=;
-    using ScalarBase<T,global::mz,global::mx>::operator*=;
+    using ScalarBase<T,vfpic::mz,vfpic::mx>::operator=;
+    using ScalarBase<T,vfpic::mz,vfpic::mx>::operator+=;
+    using ScalarBase<T,vfpic::mz,vfpic::mx>::operator*=;
 };
 
 template <typename T>
-struct LocalScalarFieldView: public ScalarBase<T,global::mz,global::mx>
+struct LocalScalarFieldView: public ScalarBase<T,vfpic::mz,vfpic::mx>
 {
     LocalScalarFieldView (GlobalScalarField<T>&, int);
-    using ScalarBase<T,global::mz,global::mx>::operator=;
-    using ScalarBase<T,global::mz,global::mx>::operator+=;
-    using ScalarBase<T,global::mz,global::mx>::operator*=;
+    using ScalarBase<T,vfpic::mz,vfpic::mx>::operator=;
+    using ScalarBase<T,vfpic::mz,vfpic::mx>::operator+=;
+    using ScalarBase<T,vfpic::mz,vfpic::mx>::operator*=;
 };
 
 /* Traits */
@@ -294,7 +294,7 @@ ScalarField<T,N1,N2>::~ScalarField () noexcept
 
 template <typename T>
 LocalScalarFieldView<T>::LocalScalarFieldView
-(GlobalScalarField<T>& global, int ithread): ScalarBase<T,global::mz,global::mx> (&global(ithread*global::mz,0))
+(GlobalScalarField<T>& global, int ithread): ScalarBase<T,vfpic::mz,vfpic::mx> (&global(ithread*vfpic::mz,0))
 {
     if (config::verbose)
     {

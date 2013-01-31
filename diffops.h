@@ -22,8 +22,8 @@ void curl (ThreeVector<S>& B, const ThreeVector<T>& A)
     
     static_assert (S::nx == T::nx && S::nz == T::nz, "Field dimensions must match");
 
-    const real fx = real (0.5)/global::dx;
-    const real fz = real (0.5)/global::dz;
+    const real fx = real (0.5)/vfpic::dx;
+    const real fz = real (0.5)/vfpic::dz;
 
     for (int k = 1; k <= T::nz; ++k)
     for (int i = 1; i <= T::nx; ++i)
@@ -50,10 +50,10 @@ void curlcurl (ThreeVector<S>& J, const ThreeVector<T>& A)
 
     const real two = real (2.0); // wtf?
     
-    const real fxx = real (1.0)/(global::dx*global::dx);
-    const real fzz = real (1.0)/(global::dz*global::dz);
+    const real fxx = real (1.0)/(vfpic::dx*vfpic::dx);
+    const real fzz = real (1.0)/(vfpic::dz*vfpic::dz);
     
-    const real fxz = real (0.25)/(global::dx*global::dz);
+    const real fxz = real (0.25)/(vfpic::dx*vfpic::dz);
     
     for (int k = 1; k <= T::nz; ++k)
     for (int i = 1; i <= T::nx; ++i)

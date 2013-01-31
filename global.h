@@ -15,7 +15,7 @@
 
 const real pi = 4.0*atan (1.0);
 
-namespace global
+namespace vfpic
 {
 const int mx = nx;
 const int mz = nz/nthreads;

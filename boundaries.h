@@ -32,8 +32,8 @@ void boundaryConditionX (ScalarBase<T,Nz,Nx>& scalar)
 template <typename T>
 void boundaryConditionZ (GlobalScalarField<T>& scalar)
 {
-    using global::nx;
-    using global::nz;
+    using vfpic::nx;
+    using vfpic::nz;
     
     for (int ix = 0; ix < nx + 2; ++ix)
     {

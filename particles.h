@@ -62,12 +62,12 @@ public:
 };
 
 template <typename T>
-class GlobalParticleArray: public ParticleArray<T,global::npar>
+class GlobalParticleArray: public ParticleArray<T,vfpic::npar>
 {
 };
 
 template <typename T>
-struct LocalParticleArrayView: public ParticleBase<T,global::mpar>
+struct LocalParticleArrayView: public ParticleBase<T,vfpic::mpar>
 {
     LocalParticleArrayView (GlobalParticleArray<T>&, int);
 };
@@ -181,7 +181,7 @@ ParticleArray<T,N>::~ParticleArray () noexcept
 
 template <typename T>
 LocalParticleArrayView<T>::LocalParticleArrayView (GlobalParticleArray<T>& array, int ithread):
-ParticleBase<T, global::mpar>(&array[ithread*global::mpar])
+ParticleBase<T, vfpic::mpar>(&array[ithread*vfpic::mpar])
 {
     if (config::verbose)
     {
