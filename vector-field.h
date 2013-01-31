@@ -16,9 +16,8 @@ template <typename T>
 using GlobalVectorField = ThreeVector<GlobalScalarField<T>>;
 
 template <typename T>
-class LocalVectorField: public ThreeVector<LocalScalarField<T>>
+struct LocalVectorField: public ThreeVector<LocalScalarField<T>>
 {
-public:
     using ThreeVector<LocalScalarField<T>>::operator=;
 };
 
