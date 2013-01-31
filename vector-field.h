@@ -13,12 +13,19 @@
 #include "three-vector.h"
 
 template <typename T>
-using GlobalVectorField = ThreeVector<GlobalScalarField<T>>;
+struct GlobalVectorField: public ThreeVector<GlobalScalarField<T>>
+{
+    using ThreeVector<GlobalScalarField<T>>::operator=;
+    using ThreeVector<GlobalScalarField<T>>::operator+=;
+    using ThreeVector<GlobalScalarField<T>>::operator*=;
+};
 
 template <typename T>
 struct LocalVectorField: public ThreeVector<LocalScalarField<T>>
 {
     using ThreeVector<LocalScalarField<T>>::operator=;
+    using ThreeVector<LocalScalarField<T>>::operator+=;
+    using ThreeVector<LocalScalarField<T>>::operator*=;
 };
 
 /* Decleration */
@@ -31,6 +38,8 @@ private:
 public:
     LocalVectorFieldView (GlobalVectorField<T>&, int);
     using ThreeVector<LocalScalarFieldView<T>>::operator=;
+    using ThreeVector<LocalScalarFieldView<T>>::operator+=;
+    using ThreeVector<LocalScalarFieldView<T>>::operator*=;
 };
 
 /* Implementation */
