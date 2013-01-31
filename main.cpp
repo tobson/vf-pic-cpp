@@ -8,6 +8,7 @@
 
 #include "barrier.h"
 #include "config.h"
+#include "diffops.h"
 #include "faraday.h"
 #include "global.h"
 #include "grid.h"
@@ -22,7 +23,7 @@
 
 struct System
 {
-    GlobalVectorField<real> A, E;
+    GlobalVectorField<real> A, B, E;
     GlobalParticleArray<real> particles;
 };
 
@@ -42,9 +43,14 @@ public:
         LocalParticleArrayView<real> particles2 (system[1].particles, ithread);
         
         faraday (A1, E1);
+        
+        curl (H, A1);
+        
+        curlcurl (J, A1);
 
         printf ("Hi, I'm thread %d!\n", ithread);
     }
+    LocalVectorField<real> H, J;
 };
 
 int main (int argc, const char * argv[])
