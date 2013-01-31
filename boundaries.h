@@ -13,10 +13,10 @@
 
 template <typename T, int Nz, int Nx>
 void boundaryConditionX (ScalarBase<T,Nz,Nx>&);
-template <typename T, int Nz, int Nx>
-void boundaryConditionZ (ScalarBase<T,Nz,Nx>&);
-template <typename T, int Nz, int Nx>
-void boundaryCondition (ScalarBase<T,Nz,Nx>&);
+template <typename T>
+void boundaryConditionZ (GlobalScalarField<T>&);
+template <typename T>
+void boundaryCondition (GlobalScalarField<T>&);
 
 template <typename T, int Nz, int Nx>
 void boundaryConditionX (ScalarBase<T,Nz,Nx>& scalar)
@@ -28,18 +28,21 @@ void boundaryConditionX (ScalarBase<T,Nz,Nx>& scalar)
     }
 }
 
-template <typename T, int Nz, int Nx>
-void boundaryConditionZ (ScalarBase<T,Nz,Nx>& scalar)
+template <typename T>
+void boundaryConditionZ (GlobalScalarField<T>& scalar)
 {
-    for (int ix = 0; ix < Nx + 2; ++ix)
+    using global::nx;
+    using global::nz;
+    
+    for (int ix = 0; ix < nx + 2; ++ix)
     {
-        scalar(0   ,ix) = scalar(Nz,ix);
-        scalar(Nz+1,ix) = scalar(1 ,ix);
+        scalar(0   ,ix) = scalar(nz,ix);
+        scalar(nz+1,ix) = scalar(1 ,ix);
     }
 }
 
-template <typename T, int Nz, int Nx>
-void boundaryCondition (ScalarBase<T,Nz,Nx>& scalar)
+template <typename T>
+void boundaryCondition (GlobalScalarField<T>& scalar)
 {
     boundaryConditionX (scalar);
     boundaryConditionZ (scalar);
