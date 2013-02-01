@@ -17,10 +17,10 @@
 template <class S, class T>
 void curl (ThreeVector<S>& B, const ThreeVector<T>& A)
 {
-    static_assert (is_scalarfield<S>::value, "Class S must be of ScalarField type");
-    static_assert (is_scalarfield<T>::value, "Class T must be of ScalarField type");
+    static_assert (is_scalarfield<S>::value, "");
+    static_assert (is_scalarfield<T>::value, "");
     
-    static_assert (S::nx == T::nx && S::nz == T::nz, "Field dimensions must match");
+    static_assert (S::nx == T::nx && S::nz == T::nz, "");
 
     const real fx = real (0.5)/vfpic::dx;
     const real fz = real (0.5)/vfpic::dz;
@@ -43,10 +43,10 @@ void curl (ThreeVector<S>& B, const ThreeVector<T>& A)
 template <class S, class T>
 void curlcurl (ThreeVector<S>& J, const ThreeVector<T>& A)
 {
-    static_assert (is_scalarfield<S>::value, "Class S must be of ScalarField type");
-    static_assert (is_scalarfield<T>::value, "Class T must be of ScalarField type");
+    static_assert (is_scalarfield<S>::value, "");
+    static_assert (is_scalarfield<T>::value, "");
     
-    static_assert (S::nx == T::nx && S::nz == T::nz, "Field dimensions don't match");
+    static_assert (S::nx == T::nx && S::nz == T::nz, "");
 
     const real two = real (2.0); // wtf?
     
