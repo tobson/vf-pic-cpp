@@ -35,7 +35,26 @@ protected:
     ParticleBase& operator= (ParticleBase&&) = delete;
     virtual ~ParticleBase () noexcept;
 public:
-    ParticleBase& operator= (const ParticleBase&);
+    ParticleBase& operator= (const ParticleBase& other)
+    {
+        if (this != other)
+        {
+            for (int index = 0; index < N; ++index)
+            {
+                particles[index] = other.particles[index];
+            }
+        }
+    }
+    ParticleBase& operator= (const T& other)
+    {
+        if (this != other)
+        {
+            for (int index = 0; index < N; ++index)
+            {
+                particles[index] = other;
+            }
+        }
+    }
     inline Particle<T>& operator[] (int index)
     {
         return particles[index];
@@ -77,46 +96,18 @@ struct LocalParticleArrayView: public ParticleBase<T,vfpic::mpar>
 template <typename T, int N>
 ParticleBase<T,N>::ParticleBase (Particle<T> *ptr): particles (ptr)
 {
-    if (config::verbose)
-    {
-        std::cout << "ParticleBase (" << this << "): Pointer ctor\n";
-    }
-}
-
-template <typename T, int N>
-ParticleBase<T,N>& ParticleBase<T,N>::operator= (const ParticleBase<T,N>& other)
-{
-    if (config::verbose)
-    {
-        std::cout << "ParticleBase (" << this << "): Copy assign\n";
-    }
-    if (this != other)
-    {
-        for (int index = 0; index < N; ++index)
-        {
-            (*this)[index] = other[index];
-        }
-    }
 }
 
 template <typename T, int N>
 ParticleBase<T,N>::ParticleBase (ParticleBase&& other) noexcept:
 particles (other.particles)
 {
-    if (config::verbose)
-    {
-        std::cout << "ParticleBase (" << this << "): Move ctor\n";
-    }
     other.particles = nullptr;
 }
 
 template <typename T, int N>
 ParticleBase<T,N>::~ParticleBase () noexcept
 {
-    if (config::verbose)
-    {
-        std::cout << "ParticleBase (" << this << "): Destructor\n";
-    }
     particles = nullptr;
 }
 
@@ -127,17 +118,16 @@ ParticleArray<T,N>::ParticleArray (): ParticleBase<T,N> (new Particle<T>[N])
 {
     if (config::verbose)
     {
-        std::cout << "ParticleArray (" << this << "): Default ctor (Allocated memory)\n";
+        printf ("ParticleArray (Default ctor): Allocated %lu bytes.\n", N*sizeof (T));
     }
 }
 
 template <typename T, int N>
-ParticleArray<T,N>::ParticleArray (const ParticleArray& other):
-ParticleBase<T,N> (new Particle<T>[N])
+ParticleArray<T,N>::ParticleArray (const ParticleArray& other): ParticleBase<T,N> (new Particle<T>[N])
 {
     if (config::verbose)
     {
-        std::cout << "ParticleArray (" << this << "): Copy ctor (Allocated memory)\n";
+        printf ("ParticleArray (Copy ctor): Allocated %lu bytes.\n", N*sizeof (T));
     }
     ParticleBase<T,N>::operator= (other);
 }
@@ -145,10 +135,6 @@ ParticleBase<T,N> (new Particle<T>[N])
 template <typename T, int N>
 ParticleArray<T,N>& ParticleArray<T,N>::operator= (const ParticleArray& other)
 {
-    if (config::verbose)
-    {
-        std::cout << "ParticleArray (" << this << "): Copy assign\n";
-    }
     ParticleBase<T,N>::operator= (other);
 }
 
@@ -156,10 +142,6 @@ template <typename T, int N>
 ParticleArray<T,N>::ParticleArray (ParticleArray&& other) noexcept:
 ParticleBase<T,N> (std::move (other))
 {
-    if (config::verbose)
-    {
-        std::cout << "ParticleArray (" << this << "): Move ctor\n";
-    }
 }
 
 template <typename T, int N>
@@ -167,12 +149,10 @@ ParticleArray<T,N>::~ParticleArray () noexcept
 {
     if (config::verbose)
     {
-        std::cout << "ParticleArray (" << this << "): Destructor";
-        if (this->particles != nullptr)
+         if (this->particles != nullptr)
         {
-            std::cout << " (Deallocating memory...)";
+            printf ("ParticleArray: Deallocated %lu bytes.\n", N*sizeof (T));
         }
-        std::cout << std::endl;
     }
     delete[] this->particles;
 }
@@ -183,10 +163,6 @@ template <typename T>
 LocalParticleArrayView<T>::LocalParticleArrayView (GlobalParticleArray<T>& array, int ithread):
 ParticleBase<T, vfpic::mpar>(&array[ithread*vfpic::mpar])
 {
-    if (config::verbose)
-    {
-        std::cout << "LocalParticleArrayView (" << this << "): Global ctor\n";
-    }
 }
 
 #endif /* defined(__vf_pic__particle__) */
