@@ -100,10 +100,10 @@ public:
     }
 protected:
     T *data;
-    static const unsigned long size = (N1 + 2)*(N2 + 2);
 public:
     static const int nz = N1;
     static const int nx = N2;
+    static const unsigned long size = (nx + 2)*(nz + 2);
     typedef T value_type;
 };
 
