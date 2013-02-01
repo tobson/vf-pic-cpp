@@ -14,9 +14,9 @@
 #include "vector-field.h"
 
 void boundaryConditionX (LocalScalarFieldView<real>&);
-void boundaryConditionX (LocalVectorFieldView<real>&);
-
 void boundaryConditionZ (GlobalScalarField<real>&);
+
+void boundaryConditionX (LocalVectorFieldView<real>&);
 void boundaryConditionZ (GlobalVectorField<real>&);
 
 void boundaryCondition (ScalarPair<real>&, Barrier&);
