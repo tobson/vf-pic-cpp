@@ -35,6 +35,14 @@ public:
         z = other.z;
         return *this;
     }
+    template <class U>
+    inline ThreeVector& operator= (U& other)
+    {
+        x = other;
+        y = other;
+        z = other;
+        return *this;
+    }
     inline ThreeVector& operator= (const typename S::value_type other)
     {
         x = other;
@@ -50,6 +58,14 @@ public:
         z += other.z;
         return *this;
     }
+    template <class U>
+    inline ThreeVector& operator+= (U& other)
+    {
+        x += other;
+        y += other;
+        z += other;
+        return *this;
+    }
     inline ThreeVector& operator+= (const typename S::value_type other)
     {
         x += other;
@@ -63,6 +79,14 @@ public:
         x *= other.x;
         y *= other.y;
         z *= other.z;
+        return *this;
+    }
+    template <class U>
+    inline ThreeVector& operator*= (U& other)
+    {
+        x *= other;
+        y *= other;
+        z *= other;
         return *this;
     }
     inline ThreeVector& operator*= (const typename S::value_type other)
