@@ -23,6 +23,9 @@
 		D28BAF1A16B60B3800578956 /* barrier.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D28BAF1816B60B3800578956 /* barrier.cpp */; };
 		D28BAF1B16B60B3800578956 /* barrier.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D28BAF1816B60B3800578956 /* barrier.cpp */; };
 		D2915FD316B5F8280084A612 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2915FC816B5F7FE0084A612 /* main.cpp */; };
+		D2C6828216BB7EB40023FB36 /* boundaries.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2C6828016BB7EB30023FB36 /* boundaries.cpp */; };
+		D2C6828316BB7EB40023FB36 /* boundaries.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2C6828016BB7EB30023FB36 /* boundaries.cpp */; };
+		D2C6828416BB7EB40023FB36 /* boundaries.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2C6828016BB7EB30023FB36 /* boundaries.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -74,11 +77,12 @@
 		D28BAF1716B608BC00578956 /* vector-field.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "vector-field.h"; sourceTree = "<group>"; };
 		D28BAF1816B60B3800578956 /* barrier.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = barrier.cpp; sourceTree = "<group>"; };
 		D28BAF1916B60B3800578956 /* barrier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = barrier.h; sourceTree = "<group>"; };
-		D28BAF1C16B615A300578956 /* boundaries.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = boundaries.h; sourceTree = "<group>"; };
 		D2915FC816B5F7FE0084A612 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		D2915FD116B5F8170084A612 /* vf-pic */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "vf-pic"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2C6827D16B9DF600023FB36 /* faraday.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = faraday.h; sourceTree = "<group>"; };
 		D2C6827E16B9EBA30023FB36 /* diffops.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = diffops.h; sourceTree = "<group>"; };
+		D2C6828016BB7EB30023FB36 /* boundaries.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = boundaries.cpp; sourceTree = "<group>"; };
+		D2C6828116BB7EB40023FB36 /* boundaries.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = boundaries.h; sourceTree = "<group>"; };
 		D2F90E4816B734C700ABDA86 /* jacobi.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = jacobi.py; sourceTree = "<group>"; };
 		D2F90E4A16B7375900ABDA86 /* vfpic.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = vfpic.py; sourceTree = "<group>"; };
 		D2F90E4B16B73ED400ABDA86 /* Makefile */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
@@ -120,6 +124,7 @@
 				D2F90E4B16B73ED400ABDA86 /* Makefile */,
 				D28BAF0316B5FEB500578956 /* libconfig++.a */,
 				D28BAF1816B60B3800578956 /* barrier.cpp */,
+				D2C6828016BB7EB30023FB36 /* boundaries.cpp */,
 				D28BAF0016B5FDDA00578956 /* config.cpp */,
 				D28BAEFD16B5FD0200578956 /* global.cpp */,
 				D25C8DB216B89B6600B0A607 /* grid.cpp */,
@@ -127,7 +132,7 @@
 				D2915FC816B5F7FE0084A612 /* main.cpp */,
 				D28BAF1416B604F200578956 /* test.cpp */,
 				D28BAF1916B60B3800578956 /* barrier.h */,
-				D28BAF1C16B615A300578956 /* boundaries.h */,
+				D2C6828116BB7EB40023FB36 /* boundaries.h */,
 				D28BAF0116B5FDDA00578956 /* config.h */,
 				D2C6827E16B9EBA30023FB36 /* diffops.h */,
 				D2C6827D16B9DF600023FB36 /* faraday.h */,
@@ -247,6 +252,7 @@
 				D24BC36E16B64B1A006C64A3 /* config.cpp in Sources */,
 				D24BC37016B64B1A006C64A3 /* barrier.cpp in Sources */,
 				D24BC37A16B64B92006C64A3 /* jacobi.cpp in Sources */,
+				D2C6828416BB7EB40023FB36 /* boundaries.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -258,6 +264,7 @@
 				D28BAF0B16B604B900578956 /* config.cpp in Sources */,
 				D28BAF1516B604F200578956 /* test.cpp in Sources */,
 				D28BAF1B16B60B3800578956 /* barrier.cpp in Sources */,
+				D2C6828316BB7EB40023FB36 /* boundaries.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -270,6 +277,7 @@
 				D28BAF0216B5FDDA00578956 /* config.cpp in Sources */,
 				D28BAF1A16B60B3800578956 /* barrier.cpp in Sources */,
 				D25C8DB416B89B6600B0A607 /* grid.cpp in Sources */,
+				D2C6828216BB7EB40023FB36 /* boundaries.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
