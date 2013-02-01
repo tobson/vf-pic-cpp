@@ -107,6 +107,13 @@ public:
         os << vector.z;
         return os;
     }
+    template <class U>
+    U lift (U (*func)(S&))
+    {
+        func (x);
+        func (y);
+        func (z);
+    }
 
     S x, y, z;
 };
