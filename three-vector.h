@@ -18,21 +18,89 @@ template <class S>
 class ThreeVector
 {
 public:
-    ThreeVector ();
-    ThreeVector (const S&, const S&, const S&);
-    ThreeVector (S&&, S&&, S&&);
+    ThreeVector ()
+    {
+    }
+    ThreeVector (const S& a, const S& b, const S& c): x (a), y (b), z (c)
+    {
+    }
+    ThreeVector (S&& a, S&& b, S&& c): x (std::move (a)), y (std::move (b)), z (std::move (c))
+    {
+    }
     template <class U>
-    ThreeVector& operator= (ThreeVector<U>&);
-    ThreeVector& operator= (const typename S::value_type);
+    inline ThreeVector& operator= (ThreeVector<U>& other)
+    {
+        x = other.x;
+        y = other.y;
+        z = other.z;
+        return *this;
+    }
+    inline ThreeVector& operator= (const typename S::value_type other)
+    {
+        x = other;
+        y = other;
+        z = other;
+        return *this;
+    }
     template <class U>
-    ThreeVector& operator+= (ThreeVector<U>&);
-    ThreeVector& operator+= (const typename S::value_type);
+    inline ThreeVector& operator+= (ThreeVector<U>& other)
+    {
+        x += other.x;
+        y += other.y;
+        z += other.z;
+        return *this;
+    }
+    inline ThreeVector& operator+= (const typename S::value_type other)
+    {
+        x += other;
+        y += other;
+        z += other;
+        return *this;
+    }
     template <class U>
-    ThreeVector& operator*= (ThreeVector<U>&);
-    ThreeVector& operator*= (const typename S::value_type);
-    S& operator[] (int);
-    const S& operator[] (int) const;
-    inline friend std::ostream& operator<< (std::ostream& os, const ThreeVector& vector)
+    inline ThreeVector& operator*= (ThreeVector<U>& other)
+    {
+        x *= other.x;
+        y *= other.y;
+        z *= other.z;
+        return *this;
+    }
+    inline ThreeVector& operator*= (const typename S::value_type other)
+    {
+        x *= other;
+        y *= other;
+        z *= other;
+        return *this;
+    }
+    inline S& operator[] (int j)
+    {
+        switch (j)
+        {
+            case 0:
+                return x;
+            case 1:
+                return y;
+            case 2:
+                return z;
+            default:
+                throw std::range_error ("Index out of bounds");
+        }
+    }
+    inline const S& operator[] (int j) const
+    {
+        switch (j)
+        {
+            case 0:
+                return x;
+            case 1:
+                return y;
+            case 2:
+                return z;
+            default:
+                throw std::range_error ("Index out of bounds");
+        }
+    }
+    friend std::ostream& operator<< (std::ostream& os, const ThreeVector& vector)
     {
         os << vector.x;
         os << vector.y;
@@ -42,114 +110,5 @@ public:
 
     S x, y, z;
 };
-
-/* Class implementation */
-
-template <class S>
-ThreeVector<S>::ThreeVector ():
-    x (), y (), z ()
-{
-}
-
-template <class S>
-ThreeVector<S>::ThreeVector (const S& a, const S& b, const S& c):
-    x (a), y (b), z (c)
-{
-}
-
-template <class S>
-ThreeVector<S>::ThreeVector (S&& a, S&& b, S&& c):
-    x (std::move (a)), y (std::move (b)), z (std::move (c))
-{
-}
-    
-template <class S>
-template <class U>
-ThreeVector<S>& ThreeVector<S>::operator= (ThreeVector<U>& other)
-{
-    x = other.x;
-    y = other.y;
-    z = other.z;
-    return *this;
-}
-        
-template <class S>
-ThreeVector<S>& ThreeVector<S>::operator= (const typename S::value_type other)
-{
-    x = other;
-    y = other;
-    z = other;
-    return *this;
-}
-
-template <class S>
-template <class U>
-ThreeVector<S>& ThreeVector<S>::operator+= (ThreeVector<U>& other)
-{
-    x += other.x;
-    y += other.y;
-    z += other.z;
-    return *this;
-}
-        
-template <class S>
-ThreeVector<S>& ThreeVector<S>::operator+= (const typename S::value_type other)
-{
-    x += other;
-    y += other;
-    z += other;
-    return *this;
-}
-       
-template <class S>
-template <class U>
-ThreeVector<S>& ThreeVector<S>::operator*= (ThreeVector<U>& other)
-{
-    x *= other.x;
-    y *= other.y;
-    z *= other.z;
-    return *this;
-}
-        
-template <class S>
-ThreeVector<S>& ThreeVector<S>::operator*= (const typename S::value_type other)
-{
-    x *= other;
-    y *= other;
-    z *= other;
-    return *this;
-}
-        
-template <class S>
-S& ThreeVector<S>::operator[] (int j)
-{
-    switch (j)
-    {
-    case 0:
-        return x;
-    case 1:
-        return y;
-    case 2:
-        return z;
-    default:
-        throw std::range_error ("Index out of bounds");
-    }
-}
-
-template <class S>
-const S& ThreeVector<S>::operator[] (int j) const
-{
-    switch (j)
-    {
-    case 0:
-        return x;
-    case 1:
-        return y;
-    case 2:
-        return z;
-    default:
-        throw std::range_error ("Index out of bounds");
-    }
-}
 
 #endif

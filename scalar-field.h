@@ -21,11 +21,19 @@ template <typename T, int N1, int N2>
 class ScalarBase
 {
 protected:
-    ScalarBase (T*);
+    ScalarBase (T *ptr): data (ptr)
+    {
+    }
+    ScalarBase (ScalarBase&& other) noexcept: data (other.data)
+    {
+        other.data = nullptr;
+    }
+    ~ScalarBase () noexcept
+    {
+        data = nullptr;
+    }
     ScalarBase (const ScalarBase&) = delete;
-    ScalarBase (ScalarBase&&) noexcept;
     ScalarBase& operator= (ScalarBase&&) = delete;
-    virtual ~ScalarBase () noexcept;
 public:
     inline T& operator() (int i1, int i2)
     {
@@ -103,12 +111,37 @@ template <typename T, int N1, int N2>
 class ScalarField: public ScalarBase<T,N1,N2>
 {
 public:
-    ScalarField ();
-    ScalarField (const ScalarField&);
+    ScalarField (): ScalarBase<T,N1,N2> (new T[size])
+    {
+        if (config::verbose)
+        {
+            printf ("ScalarField (Default ctor): Allocated %lu bytes.\n", size*sizeof (T));
+        }
+    }
+    ScalarField (const ScalarField& other): ScalarBase<T,N1,N2> (new T[size])
+    {
+        if (config::verbose)
+        {
+            printf ("ScalarField (Copy ctor): Allocated %lu bytes.\n", size*sizeof (T));
+        }
+        ScalarBase<T,N1,N2>::operator= (other);
+    }
+    ScalarField (ScalarField&& other) noexcept: ScalarBase<T,N1,N2> (std::move (other))
+    {
+    }
+    ~ScalarField () noexcept
+    {
+        if (config::verbose)
+        {
+            if (data != nullptr)
+            {
+                printf ("ScalarField: Deallocating %lu bytes...\n", size*sizeof (T));
+            }
+        }
+        delete[] data;
+    }
     ScalarField& operator= (const ScalarField&) = default;
-    ScalarField (ScalarField&&) noexcept;
     ScalarField& operator= (ScalarField&&) = delete;
-    virtual ~ScalarField () noexcept;
     
     using ScalarBase<T,N1,N2>::operator=;
     using ScalarBase<T,N1,N2>::operator+=;
@@ -143,7 +176,10 @@ struct LocalScalarField: public ScalarField<T,vfpic::mz,vfpic::mx>
 template <typename T>
 struct LocalScalarFieldView: public ScalarBase<T,vfpic::mz,vfpic::mx>
 {
-    LocalScalarFieldView (GlobalScalarField<T>&, int);
+    LocalScalarFieldView
+    (GlobalScalarField<T>& global, int ithread): ScalarBase<T,vfpic::mz,vfpic::mx> (&global(ithread*vfpic::mz,0))
+    {
+    }
     using ScalarBase<T,vfpic::mz,vfpic::mx>::operator=;
     using ScalarBase<T,vfpic::mz,vfpic::mx>::operator+=;
     using ScalarBase<T,vfpic::mz,vfpic::mx>::operator*=;
@@ -152,7 +188,10 @@ struct LocalScalarFieldView: public ScalarBase<T,vfpic::mz,vfpic::mx>
 template <typename T>
 struct ScalarPair
 {
-    ScalarPair (GlobalScalarField<T>&, int);
+    ScalarPair (GlobalScalarField<T>& global, int ithread):
+    global (global), local (LocalScalarFieldView<T> (global, ithread))
+    {
+    }
     GlobalScalarField<T>& global;
     LocalScalarFieldView<T> local;
 };
@@ -191,77 +230,5 @@ struct is_scalarfield<LocalScalarFieldView<T>>
 {
     static const bool value = true;
 };
-
-/* Implementation of ScalarBase */
-
-template <typename T, int N1, int N2>
-ScalarBase<T,N1,N2>::ScalarBase (T *ptr): data (ptr)
-{
-}
-
-template <typename T, int N1, int N2>
-ScalarBase<T,N1,N2>::ScalarBase (ScalarBase&& other) noexcept: data (other.data)
-{
-    other.data = nullptr;
-}
-
-template <typename T, int N1, int N2>
-ScalarBase<T,N1,N2>::~ScalarBase () noexcept
-{
-    data = nullptr;
-}
-        
-/* Implementation of ScalarField */
-
-template <typename T, int N1, int N2>
-ScalarField<T,N1,N2>::ScalarField (): ScalarBase<T,N1,N2> (new T[size])
-{
-    if (config::verbose)
-    {
-        printf ("ScalarField (Default ctor): Allocated %lu bytes.\n", size*sizeof (T));
-    }
-}
-
-template <typename T, int N1, int N2>
-ScalarField<T,N1,N2>::ScalarField (const ScalarField& other): ScalarBase<T,N1,N2> (new T[size])
-{
-    if (config::verbose)
-    {
-        printf ("ScalarField (Copy ctor): Allocated %lu bytes.\n", size*sizeof (T));
-    }
-    ScalarBase<T,N1,N2>::operator= (other);
-}
-
-template <typename T, int N1, int N2>
-ScalarField<T,N1,N2>::ScalarField (ScalarField&& other) noexcept: ScalarBase<T,N1,N2> (std::move (other))
-{
-}
-
-template <typename T, int N1, int N2>
-ScalarField<T,N1,N2>::~ScalarField () noexcept
-{
-    if (config::verbose)
-    {
-        if (data != nullptr)
-        {
-            printf ("ScalarField: Deallocating %lu bytes...\n", size*sizeof (T));
-        }
-    }
-    delete[] data;
-}
-
-/* Implementation of LocalScalarFieldView */
-
-template <typename T>
-LocalScalarFieldView<T>::LocalScalarFieldView
-(GlobalScalarField<T>& global, int ithread): ScalarBase<T,vfpic::mz,vfpic::mx> (&global(ithread*vfpic::mz,0))
-{
-}
-
-template <typename T>
-ScalarPair<T>::ScalarPair (GlobalScalarField<T>& global, int ithread):
-    global (global), local (LocalScalarFieldView<T> (global, ithread))
-{
-}
 
 #endif

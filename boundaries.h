@@ -13,15 +13,6 @@
 #include "vector-field.h"
 
 template <typename T, int Nz, int Nx>
-void boundaryConditionX (ScalarBase<T,Nz,Nx>&);
-template <typename T>
-void boundaryConditionZ (GlobalScalarField<T>&);
-template <typename T>
-void boundaryCondition (GlobalScalarField<T>&);
-template <typename T>
-void boundaryCondition (ScalarPair<T>&, Barrier&);
-
-template <typename T, int Nz, int Nx>
 void boundaryConditionX (ScalarBase<T,Nz,Nx>& scalar)
 {
     for (int iz = 1; iz <= Nz; ++iz)
@@ -62,15 +53,6 @@ void boundaryCondition (ScalarPair<T>& scalar, Barrier& barrier)
 }
 
 #include "vector-field.h"
-
-template <class S>
-void boundaryConditionX (ThreeVector<S>&);
-template <class T>
-void boundaryConditionZ (GlobalVectorField<T>&);
-template <class T>
-void boundaryCondition (GlobalVectorField<T>&);
-template <class T>
-void boundaryCondition (VectorPair<T>&, Barrier&);
 
 template <class S>
 void boundaryConditionX (ThreeVector<S>& vector)
