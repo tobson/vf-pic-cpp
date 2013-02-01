@@ -28,45 +28,42 @@ struct GlobalVariables
     GlobalParticleArray<real> particles;
 };
 
-class Iteration
+void iteration (GlobalVariables(& global)[2], Barrier& barrier, int ithread, int niter)
 {
-public:
-    void operator() (GlobalVariables(& global)[2], Barrier& barrier, int ithread, int niter)
+    LocalVectorField<real> H1, J;
+
+    GlobalVariables& global1 = global[0];
+    
+    VectorPair<real> A1 (global1.A, ithread);
+    VectorPair<real> B1 (global1.B, ithread);
+    VectorPair<real> E1 (global1.E, ithread);
+    
+    LocalParticleArrayView<real> particles1 (global1.particles, ithread);
+
+    GlobalVariables& global2 = global[1];
+
+    VectorPair<real> A2 (global2.A, ithread);
+    VectorPair<real> B2 (global2.B, ithread);
+    VectorPair<real> E2 (global2.E, ithread);
+
+    LocalParticleArrayView<real> particles2 (global2.particles, ithread);
+    
+    curl (H1, A1.local);
+
+    for (int it = 0; it < niter; ++it)
     {
-        GlobalVariables& global1 = global[0];
+        B1.local = H1;
         
-        VectorPair<real> A1 (global1.A, ithread);
-        VectorPair<real> B1 (global1.B, ithread);
-        VectorPair<real> E1 (global1.E, ithread);
-        
-        LocalParticleArrayView<real> particles1 (global1.particles, ithread);
-
-        GlobalVariables& global2 = global[1];
-
-        VectorPair<real> A2 (global2.A, ithread);
-        VectorPair<real> B2 (global2.B, ithread);
-        VectorPair<real> E2 (global2.E, ithread);
-
-        LocalParticleArrayView<real> particles2 (global2.particles, ithread);
+        faraday (A1.local, E1.local);
+        boundaryCondition (A1, barrier);
         
         curl (H1, A1.local);
-
-        for (int it = 0; it < niter; ++it)
-        {
-            B1.local = H1;
-            
-            faraday (A1.local, E1.local);
-            boundaryCondition (A1, barrier);
-            
-            curl (H1, A1.local);
-            
-            B1.local += H1; B1.local *= real (0.5);
-            boundaryCondition (B1, barrier);
-        }
-        printf ("Hi, I'm thread %d!\n", ithread);
+        
+        B1.local += H1; B1.local *= real (0.5);
+        boundaryCondition (B1, barrier);
     }
-    LocalVectorField<real> H1, J;
-};
+    printf ("Hi, I'm thread %d! size = %lu\n", ithread, H1.x.size);
+}
 
 int main (int argc, const char * argv[])
 {
@@ -91,7 +88,6 @@ int main (int argc, const char * argv[])
     
     Barrier barrier (vfpic::nthreads);
     Grid grid;
-    Iteration iteration;
     GlobalVariables global[2];
     
     std::vector<std::thread> threads;
