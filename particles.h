@@ -35,7 +35,7 @@ protected:
     ParticleBase& operator= (ParticleBase&&) = delete;
     virtual ~ParticleBase () noexcept;
 public:
-    ParticleBase& operator= (const ParticleBase& other)
+    inline ParticleBase& operator= (const ParticleBase& other)
     {
         if (this != other)
         {
@@ -45,7 +45,7 @@ public:
             }
         }
     }
-    ParticleBase& operator= (const T& other)
+    inline ParticleBase& operator= (const T& other)
     {
         if (this != other)
         {
