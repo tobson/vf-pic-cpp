@@ -18,6 +18,8 @@ template <typename T>
 void boundaryConditionZ (GlobalScalarField<T>&);
 template <typename T>
 void boundaryCondition (GlobalScalarField<T>&);
+template <typename T>
+void boundaryCondition (ScalarPair<T>&, Barrier&);
 
 template <typename T, int Nz, int Nx>
 void boundaryConditionX (ScalarBase<T,Nz,Nx>& scalar)
@@ -49,6 +51,16 @@ void boundaryCondition (GlobalScalarField<T>& scalar)
     boundaryConditionZ (scalar);
 }
 
+template <class T>
+void boundaryCondition (ScalarPair<T>& scalar, Barrier& barrier)
+{
+    boundaryConditionX (scalar.local);
+    if (barrier.wait ())
+    {
+        boundaryConditionZ (scalar.global);
+    }
+}
+
 #include "vector-field.h"
 
 template <class S>
@@ -57,6 +69,8 @@ template <class T>
 void boundaryConditionZ (GlobalVectorField<T>&);
 template <class T>
 void boundaryCondition (GlobalVectorField<T>&);
+template <class T>
+void boundaryCondition (VectorPair<T>&, Barrier&);
 
 template <class S>
 void boundaryConditionX (ThreeVector<S>& vector)
@@ -79,6 +93,16 @@ void boundaryCondition (GlobalVectorField<T>& vector)
 {
     boundaryConditionX (vector);
     boundaryConditionZ (vector);
+}
+
+template <class T>
+void boundaryCondition (VectorPair<T>& vector, Barrier& barrier)
+{
+    boundaryConditionX (vector.local);
+    if (barrier.wait ())
+    {
+        boundaryConditionZ (vector.global);
+    }
 }
 
 #endif

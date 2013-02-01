@@ -7,6 +7,7 @@
 //
 
 #include "barrier.h"
+#include "boundaries.h"
 #include "config.h"
 #include "diffops.h"
 #include "faraday.h"
@@ -21,7 +22,7 @@
 #include <cstdio>
 #include <vector>
 
-struct System
+struct GlobalVariables
 {
     GlobalVectorField<real> A, B, E;
     GlobalParticleArray<real> particles;
@@ -30,32 +31,37 @@ struct System
 class Iteration
 {
 public:
-    void operator() (System(& system)[2], Barrier& barrier, int ithread, int niter)
+    void operator() (GlobalVariables(& global)[2], Barrier& barrier, int ithread, int niter)
     {
-        System& system1 = system[0];
+        GlobalVariables& global1 = global[0];
         
-        LocalVectorFieldView<real> A1 (system1.A, ithread);
-        LocalVectorFieldView<real> B1 (system1.B, ithread);
-        LocalVectorFieldView<real> E1 (system1.E, ithread);
-
-        LocalParticleArrayView<real> particles1 (system1.particles, ithread);
-
-        System& system2 = system[1];
-
-        LocalVectorFieldView<real> A2 (system2.A, ithread);
-        LocalVectorFieldView<real> B2 (system2.B, ithread);
-        LocalVectorFieldView<real> E2 (system2.E, ithread);
-
-        LocalParticleArrayView<real> particles2 (system2.particles, ithread);
+        VectorPair<real> A1 (global1.A, ithread);
+        VectorPair<real> B1 (global1.B, ithread);
+        VectorPair<real> E1 (global1.E, ithread);
         
-        curl (H1, A1);
+        LocalParticleArrayView<real> particles1 (global1.particles, ithread);
+
+        GlobalVariables& global2 = global[1];
+
+        VectorPair<real> A2 (global2.A, ithread);
+        VectorPair<real> B2 (global2.B, ithread);
+        VectorPair<real> E2 (global2.E, ithread);
+
+        LocalParticleArrayView<real> particles2 (global2.particles, ithread);
+        
+        curl (H1, A1.local);
 
         for (int it = 0; it < niter; ++it)
         {
-            B1 = H1;
-            faraday (A1, E1);
-            curl (H1, A1);
-            B1 += H1; B1 *= real (0.5);
+            B1.local = H1;
+            
+            faraday (A1.local, E1.local);
+            boundaryCondition (A1, barrier);
+            
+            curl (H1, A1.local);
+            
+            B1.local += H1; B1.local *= real (0.5);
+            boundaryCondition (B1, barrier);
         }
         printf ("Hi, I'm thread %d!\n", ithread);
     }
@@ -86,13 +92,13 @@ int main (int argc, const char * argv[])
     Barrier barrier (vfpic::nthreads);
     Grid grid;
     Iteration iteration;
-    System system[2];
+    GlobalVariables global[2];
     
     std::vector<std::thread> threads;
 
     for (int ithread = 0; ithread < vfpic::nthreads; ++ithread)
     {
-        std::thread thread (iteration, std::ref (system), std::ref (barrier), ithread, 16);
+        std::thread thread (iteration, std::ref (global), std::ref (barrier), ithread, 16);
         threads.push_back (std::move (thread));
     }
     

@@ -95,6 +95,15 @@ struct LocalScalarFieldView: public ScalarBase<T,vfpic::mz,vfpic::mx>
     using ScalarBase<T,vfpic::mz,vfpic::mx>::operator*=;
 };
 
+template <typename T>
+struct ScalarPair
+{
+    ScalarPair (GlobalScalarField<T>&, int);
+    GlobalScalarField<T>& global;
+    LocalScalarFieldView<T> local;
+};
+
+
 /* Traits */
 
 template <class S>
@@ -300,6 +309,12 @@ LocalScalarFieldView<T>::LocalScalarFieldView
     {
         std::cout << "LocalScalarFieldView (" << this << "): Global ctor\n";
     }
+}
+
+template <typename T>
+ScalarPair<T>::ScalarPair (GlobalScalarField<T>& global, int ithread):
+    global (global), local (LocalScalarFieldView<T> (global, ithread))
+{
 }
 
 #endif

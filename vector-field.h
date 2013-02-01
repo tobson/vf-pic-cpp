@@ -12,6 +12,8 @@
 #include "scalar-field.h"
 #include "three-vector.h"
 
+/* Decleration */
+
 template <typename T>
 struct GlobalVectorField: public ThreeVector<GlobalScalarField<T>>
 {
@@ -28,18 +30,24 @@ struct LocalVectorField: public ThreeVector<LocalScalarField<T>>
     using ThreeVector<LocalScalarField<T>>::operator*=;
 };
 
-/* Decleration */
-
 template <typename T>
-class LocalVectorFieldView: public ThreeVector<LocalScalarFieldView<T>>
+struct LocalVectorFieldView: public ThreeVector<LocalScalarFieldView<T>>
 {
-private:
-    typedef LocalScalarFieldView<T> View;
-public:
     LocalVectorFieldView (GlobalVectorField<T>&, int);
     using ThreeVector<LocalScalarFieldView<T>>::operator=;
     using ThreeVector<LocalScalarFieldView<T>>::operator+=;
     using ThreeVector<LocalScalarFieldView<T>>::operator*=;
+private:
+    typedef LocalScalarFieldView<T> View;
+};
+
+template <typename T>
+struct VectorPair
+{
+    VectorPair (GlobalVectorField<T>&, int);
+    GlobalVectorField<T>& global;
+    LocalVectorFieldView<T> local;
+    ScalarPair<real> x, y, z;
 };
 
 /* Implementation */
@@ -47,6 +55,13 @@ public:
 template <typename T>
 LocalVectorFieldView<T>::LocalVectorFieldView (GlobalVectorField<T>& global, int ithread):
     ThreeVector<View> (View (global.x, ithread), View (global.y, ithread), View (global.z, ithread))
+{
+}
+
+template <typename T>
+VectorPair<T>::VectorPair (GlobalVectorField<T>& global, int ithread):
+    global (global), local (LocalVectorFieldView<T> (global, ithread)),
+    x (global.x, ithread), y (global.y, ithread), z (global.z, ithread)
 {
 }
 
