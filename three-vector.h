@@ -35,8 +35,7 @@ public:
         z = other.z;
         return *this;
     }
-    template <class U>
-    inline ThreeVector& operator= (U& other)
+    inline ThreeVector& operator= (S& other)
     {
         x = other;
         y = other;
@@ -58,8 +57,7 @@ public:
         z += other.z;
         return *this;
     }
-    template <class U>
-    inline ThreeVector& operator+= (U& other)
+    inline ThreeVector& operator+= (S& other)
     {
         x += other;
         y += other;
@@ -81,8 +79,7 @@ public:
         z *= other.z;
         return *this;
     }
-    template <class U>
-    inline ThreeVector& operator*= (U& other)
+    inline ThreeVector& operator*= (S& other)
     {
         x *= other;
         y *= other;
