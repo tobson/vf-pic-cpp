@@ -82,6 +82,17 @@ public:
         lift (std::mem_fn<Base&,Base,const Base&> (&Base::operator+=), other);
         return *this;
     }
+    inline ThreeVector& operator-= (const value_type& other)
+    {
+        lift (std::mem_fn<Base&,Base,const value_type&> (&Base::operator-=), other);
+        return *this;
+    }
+    template <class U>
+    inline ThreeVector& operator-= (const U& other)
+    {
+        lift (std::mem_fn<Base&,Base,const Base&> (&Base::operator-=), other);
+        return *this;
+    }
     inline ThreeVector& operator*= (const value_type& other)
     {
         lift (std::mem_fn<Base&,Base,const value_type&> (&Base::operator*=), other);
@@ -91,6 +102,17 @@ public:
     inline ThreeVector& operator*= (const U& other)
     {
         lift (std::mem_fn<Base&,Base,const Base&> (&Base::operator*=), other);
+        return *this;
+    }
+    inline ThreeVector& operator/= (const value_type& other)
+    {
+        lift (std::mem_fn<Base&,Base,const value_type&> (&Base::operator/=), other);
+        return *this;
+    }
+    template <class U>
+    inline ThreeVector& operator/= (const U& other)
+    {
+        lift (std::mem_fn<Base&,Base,const Base&> (&Base::operator/=), other);
         return *this;
     }
     inline S& operator[] (int j)

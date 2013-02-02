@@ -19,7 +19,9 @@ struct GlobalVectorField: public ThreeVector<GlobalScalarField<T>>
 {
     using ThreeVector<GlobalScalarField<T>>::operator=;
     using ThreeVector<GlobalScalarField<T>>::operator+=;
+    using ThreeVector<GlobalScalarField<T>>::operator-=;
     using ThreeVector<GlobalScalarField<T>>::operator*=;
+    using ThreeVector<GlobalScalarField<T>>::operator/=;
 };
 
 template <typename T>
@@ -27,7 +29,9 @@ struct LocalVectorField: public ThreeVector<LocalScalarField<T>>
 {
     using ThreeVector<LocalScalarField<T>>::operator=;
     using ThreeVector<LocalScalarField<T>>::operator+=;
+    using ThreeVector<LocalScalarField<T>>::operator-=;
     using ThreeVector<LocalScalarField<T>>::operator*=;
+    using ThreeVector<LocalScalarField<T>>::operator/=;
 };
 
 template <typename T>
@@ -39,7 +43,9 @@ struct LocalVectorFieldView: public ThreeVector<LocalScalarFieldView<T>>
     }
     using ThreeVector<LocalScalarFieldView<T>>::operator=;
     using ThreeVector<LocalScalarFieldView<T>>::operator+=;
+    using ThreeVector<LocalScalarFieldView<T>>::operator-=;
     using ThreeVector<LocalScalarFieldView<T>>::operator*=;
+    using ThreeVector<LocalScalarFieldView<T>>::operator/=;
 private:
     typedef LocalScalarFieldView<T> View;
 };
