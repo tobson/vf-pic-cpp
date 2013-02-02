@@ -19,94 +19,78 @@ template <class S>
 class ThreeVector
 {
 private:
-    typedef typename S::value_type T;
-    static const int N1 = S::nz;
-    static const int N2 = S::nx;
-    typedef ScalarBase<T,N1,N2> B;
+    typedef typename S::value_type value_type;
+    static const int nz = S::nz;
+    static const int nx = S::nx;
+    typedef ScalarBase<value_type,nz,nx> Base;
 public:
     ThreeVector ()
     {
-        static_assert (std::is_base_of<B,S>::value, "");
+        static_assert (std::is_base_of<Base,S>::value, "");
     }
     ThreeVector (const S& a, const S& b, const S& c): x (a), y (b), z (c)
     {
-        static_assert (std::is_base_of<B,S>::value, "");
+        static_assert (std::is_base_of<Base,S>::value, "");
     }
     ThreeVector (S&& a, S&& b, S&& c): x (std::move (a)), y (std::move (b)), z (std::move (c))
     {
-        static_assert (std::is_base_of<B,S>::value, "");
+        static_assert (std::is_base_of<Base,S>::value, "");
     }
 private:
     template <typename F, class U>
     inline void lift (F function, const ThreeVector<U>& other)
     {
-        static_assert (std::is_base_of<B,U>::value, "");
+        static_assert (std::is_base_of<Base,U>::value, "");
         function (x, other.x);
         function (y, other.y);
         function (z, other.z);
     }
     template <typename F>
-    inline void lift (F function, const B& other)
+    inline void lift (F function, const Base& other)
     {
         function (x, other);
         function (y, other);
         function (z, other);
     }
     template <typename F>
-    inline void lift (F function, const T& other)
+    inline void lift (F function, const value_type& other)
     {
         function (x, other);
         function (y, other);
         function (z, other);
     }
 public:
-    
-    template <class U>
-    inline ThreeVector& operator= (ThreeVector<U>& other)
+    inline ThreeVector& operator= (const value_type& other)
     {
-        lift (std::mem_fn<B&,B,const B&> (&B::operator=), other);
-        return *this;
-    }
-    inline ThreeVector& operator= (B& other)
-    {
-        lift (std::mem_fn<B&,B,const B&> (&B::operator=), other);
-        return *this;
-    }
-    inline ThreeVector& operator= (const T other)
-    {
-        lift (std::mem_fn<B&,B,const T&> (&B::operator=), other);
+        lift (std::mem_fn<Base&,Base,const value_type&> (&Base::operator=), other);
         return *this;
     }
     template <class U>
-    inline ThreeVector& operator+= (ThreeVector<U>& other)
+    inline ThreeVector& operator= (const U& other)
     {
-        lift (std::mem_fn<B&,B,const B&> (&B::operator+=), other);
+        lift (std::mem_fn<Base&,Base,const Base&> (&Base::operator=), other);
         return *this;
     }
-    inline ThreeVector& operator+= (B& other)
+    inline ThreeVector& operator+= (const value_type& other)
     {
-        lift (std::mem_fn<B&,B,const B&> (&B::operator+=), other);
-        return *this;
-    }
-    inline ThreeVector& operator+= (const T& other)
-    {
-        lift (std::mem_fn<B&,B,const T&> (&B::operator+=), other);
+        lift (std::mem_fn<Base&,Base,const value_type&> (&Base::operator+=), other);
         return *this;
     }
     template <class U>
-    inline ThreeVector& operator*= (ThreeVector<U>& other)
+    inline ThreeVector& operator+= (const U& other)
     {
-        lift (std::mem_fn<B&,B,const B&> (&B::operator*=), other);
+        lift (std::mem_fn<Base&,Base,const Base&> (&Base::operator+=), other);
         return *this;
     }
-    inline ThreeVector& operator*= (B& other)
+    inline ThreeVector& operator*= (const value_type& other)
     {
-        lift (std::mem_fn<B&,B,const B&> (&B::operator*=), other);
+        lift (std::mem_fn<Base&,Base,const value_type&> (&Base::operator*=), other);
         return *this;
     }
-    inline ThreeVector& operator*= (const T& other)
+    template <class U>
+    inline ThreeVector& operator*= (const U& other)
     {
-        lift (std::mem_fn<B&,B,const T&> (&B::operator*=), other);
+        lift (std::mem_fn<Base&,Base,const Base&> (&Base::operator*=), other);
         return *this;
     }
     inline S& operator[] (int j)
