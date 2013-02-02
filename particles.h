@@ -71,6 +71,14 @@ public:
     {
         return particles[index];
     }
+    Particle<T> *begin()
+    {
+        return particles;
+    }
+    Particle<T> *end()
+    {
+        return particles + N;
+    }
 protected:
     Particle<T> *particles;
 };
