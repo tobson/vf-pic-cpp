@@ -83,7 +83,6 @@ public:
         lift (std::mem_fn<B&,B,const B&> (&B::operator+=), other);
         return *this;
     }
-    template <class U>
     inline ThreeVector& operator+= (B& other)
     {
         lift (std::mem_fn<B&,B,const B&> (&B::operator+=), other);
