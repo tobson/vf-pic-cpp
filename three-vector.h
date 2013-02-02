@@ -9,6 +9,7 @@
 #ifndef vf_pic_three_vector_h
 #define vf_pic_three_vector_h
 
+#include <functional>
 #include <iostream>
 #include <stdexcept>
 
@@ -17,80 +18,96 @@
 template <class S>
 class ThreeVector
 {
+private:
+    typedef typename S::value_type T;
+    static const int N1 = S::nz;
+    static const int N2 = S::nx;
+    typedef ScalarBase<T,N1,N2> B;
 public:
     ThreeVector ()
     {
+        static_assert (std::is_base_of<B,S>::value, "");
     }
     ThreeVector (const S& a, const S& b, const S& c): x (a), y (b), z (c)
     {
+        static_assert (std::is_base_of<B,S>::value, "");
     }
     ThreeVector (S&& a, S&& b, S&& c): x (std::move (a)), y (std::move (b)), z (std::move (c))
     {
+        static_assert (std::is_base_of<B,S>::value, "");
     }
+private:
+    template <typename F, class U>
+    inline void lift (F function, const ThreeVector<U>& other)
+    {
+        static_assert (std::is_base_of<B,U>::value, "");
+        function (x, other.x);
+        function (y, other.y);
+        function (z, other.z);
+    }
+    template <typename F>
+    inline void lift (F function, const B& other)
+    {
+        function (x, other);
+        function (y, other);
+        function (z, other);
+    }
+    template <typename F>
+    inline void lift (F function, const T& other)
+    {
+        function (x, other);
+        function (y, other);
+        function (z, other);
+    }
+public:
+    
     template <class U>
     inline ThreeVector& operator= (ThreeVector<U>& other)
     {
-        x = other.x;
-        y = other.y;
-        z = other.z;
+        lift (std::mem_fn<B&,B,const B&> (&B::operator=), other);
         return *this;
     }
-    inline ThreeVector& operator= (S& other)
+    inline ThreeVector& operator= (B& other)
     {
-        x = other;
-        y = other;
-        z = other;
+        lift (std::mem_fn<B&,B,const B&> (&B::operator=), other);
         return *this;
     }
-    inline ThreeVector& operator= (const typename S::value_type other)
+    inline ThreeVector& operator= (const T other)
     {
-        x = other;
-        y = other;
-        z = other;
+        lift (std::mem_fn<B&,B,const T&> (&B::operator=), other);
         return *this;
     }
     template <class U>
     inline ThreeVector& operator+= (ThreeVector<U>& other)
     {
-        x += other.x;
-        y += other.y;
-        z += other.z;
+        lift (std::mem_fn<B&,B,const B&> (&B::operator+=), other);
         return *this;
     }
-    inline ThreeVector& operator+= (S& other)
+    template <class U>
+    inline ThreeVector& operator+= (B& other)
     {
-        x += other;
-        y += other;
-        z += other;
+        lift (std::mem_fn<B&,B,const B&> (&B::operator+=), other);
         return *this;
     }
-    inline ThreeVector& operator+= (const typename S::value_type other)
+    inline ThreeVector& operator+= (const T& other)
     {
-        x += other;
-        y += other;
-        z += other;
+        lift (std::mem_fn<B&,B,const T&> (&B::operator+=), other);
         return *this;
     }
     template <class U>
     inline ThreeVector& operator*= (ThreeVector<U>& other)
     {
-        x *= other.x;
-        y *= other.y;
-        z *= other.z;
+        lift (std::mem_fn<B&,B,const B&> (&B::operator*=), other);
         return *this;
     }
-    inline ThreeVector& operator*= (S& other)
+    inline ThreeVector& operator*= (B& other)
     {
-        x *= other;
-        y *= other;
-        z *= other;
+        lift (std::mem_fn<B&,B,const B&> (&B::operator*=), other);
         return *this;
     }
-    inline ThreeVector& operator*= (const typename S::value_type other)
+    inline ThreeVector& operator*= (const T& other)
     {
-        x *= other;
-        y *= other;
-        z *= other;
+        lift (std::mem_fn<B&,B,const T&> (&B::operator*=), other);
         return *this;
     }
     inline S& operator[] (int j)
