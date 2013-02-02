@@ -10,6 +10,7 @@
 #include "boundaries.h"
 #include "config.h"
 #include "diffops.h"
+#include "drift-kick.h"
 #include "faraday.h"
 #include "global.h"
 #include "grid.h"
@@ -61,6 +62,9 @@ void iteration (GlobalVariables(& global)[2], Barrier& barrier, int ithread, int
         
         B1.local += H1; B1.local *= real (0.5);
         boundaryCondition (B1, barrier);
+        
+        drift (particles1);
+        kick (particles1, E1.global, B1.global);
     }
     printf ("Hi, I'm thread %d!\n", ithread);
 }
