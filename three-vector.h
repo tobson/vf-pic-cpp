@@ -20,33 +20,31 @@ class ThreeVector
 {
 private:
     typedef typename S::value_type value_type;
-    static const int nz = S::nz;
-    static const int nx = S::nx;
-    typedef ScalarBase<value_type,nz,nx> Base;
+    typedef ScalarBase<value_type,S::nz,S::nx> Scalar;
 public:
     ThreeVector ()
     {
-        static_assert (std::is_base_of<Base,S>::value, "");
+        static_assert (std::is_base_of<Scalar,S>::value, "");
     }
     ThreeVector (const S& a, const S& b, const S& c): x (a), y (b), z (c)
     {
-        static_assert (std::is_base_of<Base,S>::value, "");
+        static_assert (std::is_base_of<Scalar,S>::value, "");
     }
     ThreeVector (S&& a, S&& b, S&& c): x (std::move (a)), y (std::move (b)), z (std::move (c))
     {
-        static_assert (std::is_base_of<Base,S>::value, "");
+        static_assert (std::is_base_of<Scalar,S>::value, "");
     }
 private:
     template <typename F, class U>
     inline void lift (F function, const ThreeVector<U>& other)
     {
-        static_assert (std::is_base_of<Base,U>::value, "");
+        static_assert (std::is_base_of<Scalar,U>::value, "");
         function (x, other.x);
         function (y, other.y);
         function (z, other.z);
     }
     template <typename F>
-    inline void lift (F function, const Base& other)
+    inline void lift (F function, const Scalar& other)
     {
         function (x, other);
         function (y, other);
@@ -62,57 +60,57 @@ private:
 public:
     inline ThreeVector& operator= (const value_type& other)
     {
-        lift (std::mem_fn<Base&,Base,const value_type&> (&Base::operator=), other);
+        lift (std::mem_fn<Scalar&,Scalar,const value_type&> (&Scalar::operator=), other);
         return *this;
     }
     template <class U>
     inline ThreeVector& operator= (const U& other)
     {
-        lift (std::mem_fn<Base&,Base,const Base&> (&Base::operator=), other);
+        lift (std::mem_fn<Scalar&,Scalar,const Scalar&> (&Scalar::operator=), other);
         return *this;
     }
     inline ThreeVector& operator+= (const value_type& other)
     {
-        lift (std::mem_fn<Base&,Base,const value_type&> (&Base::operator+=), other);
+        lift (std::mem_fn<Scalar&,Scalar,const value_type&> (&Scalar::operator+=), other);
         return *this;
     }
     template <class U>
     inline ThreeVector& operator+= (const U& other)
     {
-        lift (std::mem_fn<Base&,Base,const Base&> (&Base::operator+=), other);
+        lift (std::mem_fn<Scalar&,Scalar,const Scalar&> (&Scalar::operator+=), other);
         return *this;
     }
     inline ThreeVector& operator-= (const value_type& other)
     {
-        lift (std::mem_fn<Base&,Base,const value_type&> (&Base::operator-=), other);
+        lift (std::mem_fn<Scalar&,Scalar,const value_type&> (&Scalar::operator-=), other);
         return *this;
     }
     template <class U>
     inline ThreeVector& operator-= (const U& other)
     {
-        lift (std::mem_fn<Base&,Base,const Base&> (&Base::operator-=), other);
+        lift (std::mem_fn<Scalar&,Scalar,const Scalar&> (&Scalar::operator-=), other);
         return *this;
     }
     inline ThreeVector& operator*= (const value_type& other)
     {
-        lift (std::mem_fn<Base&,Base,const value_type&> (&Base::operator*=), other);
+        lift (std::mem_fn<Scalar&,Scalar,const value_type&> (&Scalar::operator*=), other);
         return *this;
     }
     template <class U>
     inline ThreeVector& operator*= (const U& other)
     {
-        lift (std::mem_fn<Base&,Base,const Base&> (&Base::operator*=), other);
+        lift (std::mem_fn<Scalar&,Scalar,const Scalar&> (&Scalar::operator*=), other);
         return *this;
     }
     inline ThreeVector& operator/= (const value_type& other)
     {
-        lift (std::mem_fn<Base&,Base,const value_type&> (&Base::operator/=), other);
+        lift (std::mem_fn<Scalar&,Scalar,const value_type&> (&Scalar::operator/=), other);
         return *this;
     }
     template <class U>
     inline ThreeVector& operator/= (const U& other)
     {
-        lift (std::mem_fn<Base&,Base,const Base&> (&Base::operator/=), other);
+        lift (std::mem_fn<Scalar&,Scalar,const Scalar&> (&Scalar::operator/=), other);
         return *this;
     }
     inline S& operator[] (int j)
@@ -149,13 +147,6 @@ public:
         os << vector.y;
         os << vector.z;
         return os;
-    }
-    template <class U>
-    U lift (U (*func)(S&))
-    {
-        func (x);
-        func (y);
-        func (z);
     }
 
     S x, y, z;
