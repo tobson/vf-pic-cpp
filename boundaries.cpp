@@ -27,10 +27,10 @@ void boundaryConditionZ (GlobalScalarField<real>& scalar)
     static_assert (GlobalScalarField<real>::nx == nx, "");
     static_assert (GlobalScalarField<real>::nz == nz, "");
 
-    for (int ix = 0; ix < nx + 2; ++ix)
+    for (int i = 0; i < nx + 2; ++i)
     {
-        scalar(0   ,ix) = scalar(nz,ix);
-        scalar(nz+1,ix) = scalar(1 ,ix);
+        scalar(0   ,i) = scalar(nz,i);
+        scalar(nz+1,i) = scalar(1 ,i);
     }
 }
 
@@ -60,5 +60,28 @@ void boundaryCondition (VectorPair<real>& vector, Barrier& barrier)
     {
         boundaryConditionZ (vector.global);
     }
+}
+
+void boundaryCondition (GlobalScalarField<real>& scalar)
+{
+    static_assert (GlobalScalarField<real>::nx == nx, "");
+    static_assert (GlobalScalarField<real>::nz == nz, "");
+
+    for (int k = 1; k <= nz; ++k)
+    {
+        scalar(k,0   ) = scalar(k,nx);
+        scalar(k,nx+1) = scalar(k,1 );
+    }
+    
+    for (int i = 0; i < nx + 2; ++i)
+    {
+        scalar(0   ,i) = scalar(nz,i);
+        scalar(nz+1,i) = scalar(1 ,i);
+    }
+}
+
+void boundaryCondition (GlobalVectorField<real>& vector)
+{
+    vector.lift (boundaryCondition);
 }
 

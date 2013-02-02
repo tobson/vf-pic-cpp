@@ -22,4 +22,7 @@ void boundaryConditionZ (GlobalVectorField<real>&);
 void boundaryCondition (ScalarPair<real>&, Barrier&);
 void boundaryCondition (VectorPair<real>&, Barrier&);
 
+void boundaryCondition (GlobalScalarField<real>&);
+void boundaryCondition (GlobalVectorField<real>&);
+
 #endif /* defined(__vf_pic__boundaries__) */
