@@ -19,10 +19,8 @@
 template <typename T>
 struct Particle
 {
-    T x, y, z;
+    T x, z;
     T vx, vy, vz;
-    T ex, ey, ez;
-    T bx, by, bz;
 };
 
 template <typename T, int N>
