@@ -12,6 +12,7 @@
 #include "config.h"
 #include "global.h"
 
+#include <algorithm>
 #include <iostream>
 #include <cstdio>
 
@@ -133,6 +134,10 @@ public:
                 (*this)(i1,i2) /= value;
             }
         return *this;
+    }
+    void fill (const T& value)
+    {
+        std::fill (data, data + size, value);
     }
 protected:
     T *data;
