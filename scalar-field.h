@@ -22,18 +22,8 @@ template <typename T, int N1, int N2>
 class ScalarBase
 {
 protected:
-    ScalarBase (T *ptr): data (ptr)
+    explicit ScalarBase (T *ptr): data (ptr)
     {
-    }
-    ScalarBase (const ScalarBase&) = default;
-    ScalarBase (ScalarBase&& other) noexcept: data (other.data)
-    {
-        other.data = nullptr;
-    }
-    ScalarBase& operator= (ScalarBase&&) = delete;
-    ~ScalarBase () noexcept
-    {
-        data = nullptr;
     }
 public:
     /* Index operators */
@@ -172,9 +162,12 @@ public:
         }
         ScalarBase<T,N1,N2>::operator= (other);
     }
-    ScalarField (ScalarField&& other) noexcept: ScalarBase<T,N1,N2> (std::move (other))
+    ScalarField& operator= (const ScalarField&) = default;
+    ScalarField (ScalarField&& other) noexcept: ScalarBase<T,N1,N2> (other.data)
     {
+        other.data = nullptr;
     }
+    ScalarField& operator= (ScalarField&&) = delete;
     ~ScalarField () noexcept
     {
         if (config::verbose)
@@ -186,8 +179,6 @@ public:
         }
         delete[] data;
     }
-    ScalarField& operator= (const ScalarField&) = default;
-    ScalarField& operator= (ScalarField&&) = delete;
     
     using ScalarBase<T,N1,N2>::operator=;
     using ScalarBase<T,N1,N2>::operator+=;
@@ -206,24 +197,10 @@ public:
 };
 
 template <typename T>
-struct GlobalScalarField: public ScalarField<T,vfpic::nz,vfpic::nx>
-{
-    using ScalarField<T,vfpic::nz,vfpic::nx>::operator=;
-    using ScalarField<T,vfpic::nz,vfpic::nx>::operator+=;
-    using ScalarField<T,vfpic::nz,vfpic::nx>::operator-=;
-    using ScalarField<T,vfpic::nz,vfpic::nx>::operator*=;
-    using ScalarField<T,vfpic::nz,vfpic::nx>::operator/=;
-};
+using GlobalScalarField = ScalarField<T,vfpic::nz,vfpic::nx>;
 
 template <typename T>
-struct LocalScalarField: public ScalarField<T,vfpic::mz,vfpic::mx>
-{
-    using ScalarField<T,vfpic::mz,vfpic::mx>::operator=;
-    using ScalarField<T,vfpic::mz,vfpic::mx>::operator+=;
-    using ScalarField<T,vfpic::mz,vfpic::mx>::operator-=;
-    using ScalarField<T,vfpic::mz,vfpic::mx>::operator*=;
-    using ScalarField<T,vfpic::mz,vfpic::mx>::operator/=;
-};
+using LocalScalarField = ScalarField<T,vfpic::mz,vfpic::mx>;
 
 template <typename T>
 struct LocalScalarFieldView: public ScalarBase<T,vfpic::mz,vfpic::mx>

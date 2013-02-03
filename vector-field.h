@@ -15,24 +15,10 @@
 /* Decleration */
 
 template <typename T>
-struct GlobalVectorField: public ThreeVector<GlobalScalarField<T>>
-{
-    using ThreeVector<GlobalScalarField<T>>::operator=;
-    using ThreeVector<GlobalScalarField<T>>::operator+=;
-    using ThreeVector<GlobalScalarField<T>>::operator-=;
-    using ThreeVector<GlobalScalarField<T>>::operator*=;
-    using ThreeVector<GlobalScalarField<T>>::operator/=;
-};
+using GlobalVectorField = ThreeVector<GlobalScalarField<T>>;
 
 template <typename T>
-struct LocalVectorField: public ThreeVector<LocalScalarField<T>>
-{
-    using ThreeVector<LocalScalarField<T>>::operator=;
-    using ThreeVector<LocalScalarField<T>>::operator+=;
-    using ThreeVector<LocalScalarField<T>>::operator-=;
-    using ThreeVector<LocalScalarField<T>>::operator*=;
-    using ThreeVector<LocalScalarField<T>>::operator/=;
-};
+using LocalVectorField = ThreeVector<LocalScalarField<T>>;
 
 template <typename T>
 struct LocalVectorFieldView: public ThreeVector<LocalScalarFieldView<T>>
