@@ -130,10 +130,6 @@ public:
         }
         return *this;
     }
-    void fill (const T& value)
-    {
-        std::fill (data, data + size, value);
-    }
 protected:
     T *data;
 public:
@@ -188,6 +184,10 @@ public:
     using ScalarBase<T,N1,N2>::data;
     using ScalarBase<T,N1,N2>::size;
     
+    void fill (const T& value)
+    {
+        std::fill (data, data + size, value);
+    }
     friend std::ostream& operator<< (std::ostream& os, const ScalarField& scalar)
     {
         const auto buffer = reinterpret_cast<char *> (scalar.data);
@@ -208,14 +208,6 @@ struct LocalScalarFieldView: public ScalarBase<T,vfpic::mz,vfpic::mx>
     LocalScalarFieldView
     (GlobalScalarField<T>& global, int ithread): ScalarBase<T,vfpic::mz,vfpic::mx> (&global(ithread*vfpic::mz,0))
     {
-    }
-    void fill (const T& value)
-    {
-        for (int k = 1; k <= vfpic::mz; ++k)
-        for (int i = 1; i <= vfpic::mx; ++i)
-        {
-            (*this)(k,i) = value;
-        }
     }
     using ScalarBase<T,vfpic::mz,vfpic::mx>::operator=;
     using ScalarBase<T,vfpic::mz,vfpic::mx>::operator+=;
