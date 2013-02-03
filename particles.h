@@ -77,6 +77,14 @@ public:
     {
         return particles + N;
     }
+    const Particle<T> *begin() const
+    {
+        return particles;
+    }
+    const Particle<T> *end() const
+    {
+        return particles + N;
+    }
 protected:
     Particle<T> *particles;
 };
