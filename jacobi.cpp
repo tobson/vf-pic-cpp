@@ -54,8 +54,8 @@ struct Fields
         }
         boundaryCondition(rho);
 
-        phi = 0.0;
-        phi0 = 0.0;
+        phi.fill (0.0);
+        phi0.fill (0.0);
         
         for (int j = 0; j < 3; ++j)
         {
@@ -65,8 +65,8 @@ struct Fields
                 J[j](k,i) = (j + 2)*sin(two_pi*ikx*x(k,i))*cos(two_pi*ikz*z(k,i));
             }
 
-            A[j] = 0.0;
-            A0[j] = 0.0;
+            A[j].fill (0.0);
+            A0[j].fill (0.0);
         }
         boundaryCondition(J);
     }

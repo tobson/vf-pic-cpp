@@ -28,24 +28,7 @@ protected:
     ScalarBase (const ScalarBase& other): data (other.data)
     {
     }
-    ScalarBase (ScalarBase&& other) noexcept: data (other.data)
-    {
-        other.data = nullptr;
-    }
-    ~ScalarBase () noexcept
-    {
-        data = nullptr;
-    }
-    ScalarBase& operator= (ScalarBase&&) = delete;
 public:
-    inline T& operator() (int i1, int i2)
-    {
-        return data[i1*(N2 + 2) + i2];
-    }
-    inline const T& operator() (int i1, int i2) const
-    {
-        return data[i1*(N2 + 2) + i2];
-    }
     inline ScalarBase& operator= (const ScalarBase& other)
     {
         for (int i1 = 1; i1 <= N1; ++i1)
@@ -55,14 +38,24 @@ public:
         }
         return *this;
     }
-    inline ScalarBase& operator= (const T value)
+protected:
+    ScalarBase (ScalarBase&& other) noexcept: data (other.data)
     {
-        for (int i1 = 1; i1 <= N1; ++i1)
-        for (int i2 = 1; i2 <= N2; ++i2)
-        {
-            (*this)(i1,i2) = value;
-        }
-        return *this;
+        other.data = nullptr;
+    }
+    ScalarBase& operator= (ScalarBase&&) = delete;
+    ~ScalarBase () noexcept
+    {
+        data = nullptr;
+    }
+public:
+    inline T& operator() (int i1, int i2)
+    {
+        return data[i1*(N2 + 2) + i2];
+    }
+    inline const T& operator() (int i1, int i2) const
+    {
+        return data[i1*(N2 + 2) + i2];
     }
     inline ScalarBase& operator+= (const ScalarBase& other)
     {
@@ -73,31 +66,13 @@ public:
         }
         return *this;
     }
-    inline ScalarBase& operator+= (const T& value)
+    inline ScalarBase& operator-= (const ScalarBase& other)
     {
         for (int i1 = 1; i1 <= N1; ++i1)
         for (int i2 = 1; i2 <= N2; ++i2)
         {
-            (*this)(i1,i2) += value;
+            (*this)(i1,i2) -= other(i1,i2);
         }
-        return *this;
-    }
-    inline ScalarBase& operator-= (const ScalarBase& other)
-    {
-        for (int i1 = 1; i1 <= N1; ++i1)
-            for (int i2 = 1; i2 <= N2; ++i2)
-            {
-                (*this)(i1,i2) -= other(i1,i2);
-            }
-        return *this;
-    }
-    inline ScalarBase& operator-= (const T& value)
-    {
-        for (int i1 = 1; i1 <= N1; ++i1)
-            for (int i2 = 1; i2 <= N2; ++i2)
-            {
-                (*this)(i1,i2) -= value;
-            }
         return *this;
     }
     inline ScalarBase& operator*= (const ScalarBase& other)
@@ -109,31 +84,13 @@ public:
         }
         return *this;
     }
-    inline ScalarBase& operator*= (const T& value)
+    inline ScalarBase& operator/= (const ScalarBase& other)
     {
         for (int i1 = 1; i1 <= N1; ++i1)
         for (int i2 = 1; i2 <= N2; ++i2)
         {
-            (*this)(i1,i2) *= value;
+            (*this)(i1,i2) /= other(i1,i2);
         }
-        return *this;
-    }
-    inline ScalarBase& operator/= (const ScalarBase& other)
-    {
-        for (int i1 = 1; i1 <= N1; ++i1)
-            for (int i2 = 1; i2 <= N2; ++i2)
-            {
-                (*this)(i1,i2) /= other(i1,i2);
-            }
-        return *this;
-    }
-    inline ScalarBase& operator/= (const T& value)
-    {
-        for (int i1 = 1; i1 <= N1; ++i1)
-            for (int i2 = 1; i2 <= N2; ++i2)
-            {
-                (*this)(i1,i2) /= value;
-            }
         return *this;
     }
     void fill (const T& value)
@@ -227,6 +184,14 @@ struct LocalScalarFieldView: public ScalarBase<T,vfpic::mz,vfpic::mx>
     LocalScalarFieldView
     (GlobalScalarField<T>& global, int ithread): ScalarBase<T,vfpic::mz,vfpic::mx> (&global(ithread*vfpic::mz,0))
     {
+    }
+    void fill (const T& value)
+    {
+        for (int k = 1; k <= vfpic::mz; ++k)
+        for (int i = 1; i <= vfpic::mx; ++i)
+        {
+            (*this)(k,i) = value;
+        }
     }
     using ScalarBase<T,vfpic::mz,vfpic::mx>::operator=;
     using ScalarBase<T,vfpic::mz,vfpic::mx>::operator+=;
