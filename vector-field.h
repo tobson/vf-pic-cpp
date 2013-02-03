@@ -24,7 +24,9 @@ template <typename T>
 struct LocalVectorFieldView: public ThreeVector<LocalScalarFieldView<T>>
 {
     LocalVectorFieldView (GlobalVectorField<T>& global, int ithread):
-    ThreeVector<View> (View (global.x, ithread), View (global.y, ithread), View (global.z, ithread))
+    ThreeVector<View> (View (global.x, ithread),
+                       View (global.y, ithread),
+                       View (global.z, ithread))
     {
     }
     using ThreeVector<LocalScalarFieldView<T>>::operator=;
@@ -41,7 +43,9 @@ struct VectorPair
 {
     VectorPair (GlobalVectorField<T>& global, int ithread):
     global (global), local (LocalVectorFieldView<T> (global, ithread)),
-    x (global.x, ithread), y (global.y, ithread), z (global.z, ithread)
+    x (global.x, ithread),
+    y (global.y, ithread),
+    z (global.z, ithread)
     {
     }
     GlobalVectorField<T>& global;
