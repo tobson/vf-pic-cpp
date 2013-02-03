@@ -42,7 +42,6 @@ public:
     {
         return data[i1*(N2 + 2) + i2];
     }
-    
     inline const T& operator() (int i1, int i2) const
     {
         return data[i1*(N2 + 2) + i2];
@@ -56,7 +55,7 @@ public:
         }
         return *this;
     }
-    inline ScalarBase& operator= (const T& value)
+    inline ScalarBase& operator= (const T value)
     {
         for (int i1 = 1; i1 <= N1; ++i1)
         for (int i2 = 1; i2 <= N2; ++i2)
