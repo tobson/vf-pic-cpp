@@ -27,39 +27,17 @@ template <typename T, int N>
 class ParticleBase
 {
 protected:
-    ParticleBase (Particle<T> *ptr): particles (ptr)
+    explicit ParticleBase (Particle<T> *ptr): particles (ptr)
     {
     }
-    ParticleBase (ParticleBase&& other) noexcept: particles (other.particles)
-    {
-        other.particles = nullptr;
-    }
-    ~ParticleBase () noexcept
-    {
-        particles = nullptr;
-    }
-    ParticleBase (const ParticleBase&) = delete;
-    ParticleBase& operator= (ParticleBase&&) = delete;
 public:
     inline ParticleBase& operator= (const ParticleBase& other)
     {
-        if (this != other)
-        {
-            for (int index = 0; index < N; ++index)
-            {
-                particles[index] = other.particles[index];
-            }
-        }
+        std::copy (other.particles, other.particles + N, particles);
     }
-    inline ParticleBase& operator= (const T& other)
+    inline ParticleBase& operator= (const T& value)
     {
-        if (this != other)
-        {
-            for (int index = 0; index < N; ++index)
-            {
-                particles[index] = other;
-            }
-        }
+        std::fill (particles, particles + N, value);
     }
     inline Particle<T>& operator[] (int index)
     {
@@ -108,13 +86,10 @@ public:
         }
         ParticleBase<T,N>::operator= (other);
     }
-    inline ParticleArray& operator= (const ParticleArray& other)
+    ParticleArray& operator= (const ParticleArray&) = default;
+    ParticleArray (ParticleArray&& other) noexcept: ParticleBase<T,N> (other.particles)
     {
-        ParticleBase<T,N>::operator= (other);
-        return *this;
-    }
-    ParticleArray (ParticleArray&& other) noexcept: ParticleBase<T,N> (std::move (other))
-    {
+        other.particles = nullptr;
     }
     ParticleArray& operator= (ParticleArray&&) = delete;
     ~ParticleArray () noexcept
@@ -132,9 +107,7 @@ public:
 };
 
 template <typename T>
-class GlobalParticleArray: public ParticleArray<T,vfpic::npar>
-{
-};
+using GlobalParticleArray = ParticleArray<T,vfpic::npar>;
 
 template <typename T>
 struct LocalParticleArrayView: public ParticleBase<T,vfpic::mpar>
