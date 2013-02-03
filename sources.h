@@ -17,6 +17,15 @@ template <typename T>
 struct FourCurrent
 {
     T zero, one, two, three;
+    inline void assign (const T& _zero, const T& _one, const T& _two, const T& _three)
+    {
+        zero = _zero;
+        one = _one;
+        two = _two;
+        three = _three;
+        
+        static_assert (std::is_pod<FourCurrent<T>>::value, "");
+    }
 };
 
 template <typename T, int N1, int N2>
