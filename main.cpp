@@ -36,8 +36,6 @@ void iteration (GlobalVariables(& global)[2], Barrier& barrier, int ithread, int
 {
     LocalVectorField<real> H1, J;
     LocalSources<real> sources;
-    LocalScalarField<real> onehalf;
-    onehalf.fill (real (0.5));
 
     VectorPair<real> A1 (global[0].A, ithread);
     VectorPair<real> B1 (global[0].B, ithread);
@@ -62,7 +60,7 @@ void iteration (GlobalVariables(& global)[2], Barrier& barrier, int ithread, int
         
         curl (H1, A1.local);
         
-        B1.local += H1; B1.local *= onehalf;
+        B1.local += H1; B1.local *= real (0.5);
         boundaryCondition (B1, barrier);
         
         drift (particles1);
