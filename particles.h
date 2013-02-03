@@ -34,10 +34,12 @@ public:
     inline ParticleBase& operator= (const ParticleBase& other)
     {
         std::copy (other.particles, other.particles + N, particles);
+        return *this;
     }
     inline ParticleBase& operator= (const T& value)
     {
         std::fill (particles, particles + N, value);
+        return *this;
     }
     inline Particle<T>& operator[] (int index)
     {
