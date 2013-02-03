@@ -13,10 +13,28 @@
 #include "scalar-field.h"
 #include "vector-field.h"
 
+//template <typename T, int Nz, int Nx>
+//void boundaryConditionX (ScalarBase<T,Nz,Nx>&);
+//template <class S>
+//void boundaryConditionX (ThreeVector<S>&);
+
 template <typename T, int Nz, int Nx>
-void boundaryConditionX (ScalarBase<T,Nz,Nx>&);
+void boundaryConditionX (ScalarBase<T,Nz,Nx>& scalar)
+{
+    for (int k = 1; k <= Nz; ++k)
+    {
+        scalar(k,0   ) = scalar(k,Nx);
+        scalar(k,Nx+1) = scalar(k,1 );
+    }
+}
+
 template <class S>
-void boundaryConditionX (ThreeVector<S>&);
+void boundaryConditionX (ThreeVector<S>& vector)
+{
+    boundaryConditionX (vector.x);
+    boundaryConditionX (vector.y);
+    boundaryConditionX (vector.z);
+}
 
 void boundaryConditionZ (GlobalScalarField<real>&);
 void boundaryConditionZ (GlobalVectorField<real>&);
