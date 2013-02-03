@@ -25,6 +25,9 @@ protected:
     ScalarBase (T *ptr): data (ptr)
     {
     }
+    ScalarBase (const ScalarBase& other): data (other.data)
+    {
+    }
     ScalarBase (ScalarBase&& other) noexcept: data (other.data)
     {
         other.data = nullptr;
@@ -32,9 +35,6 @@ protected:
     ~ScalarBase () noexcept
     {
         data = nullptr;
-    }
-    ScalarBase (const ScalarBase& other): data (other.data)
-    {
     }
     ScalarBase& operator= (ScalarBase&&) = delete;
 public:
