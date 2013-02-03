@@ -25,20 +25,7 @@ protected:
     ScalarBase (T *ptr): data (ptr)
     {
     }
-    ScalarBase (const ScalarBase& other): data (other.data)
-    {
-    }
-public:
-    inline ScalarBase& operator= (const ScalarBase& other)
-    {
-        for (int i1 = 1; i1 <= N1; ++i1)
-        for (int i2 = 1; i2 <= N2; ++i2)
-        {
-            (*this)(i1,i2) = other(i1,i2);
-        }
-        return *this;
-    }
-protected:
+    ScalarBase (const ScalarBase&) = default;
     ScalarBase (ScalarBase&& other) noexcept: data (other.data)
     {
         other.data = nullptr;
@@ -49,6 +36,7 @@ protected:
         data = nullptr;
     }
 public:
+    /* Index operators */
     inline T& operator() (int i1, int i2)
     {
         return data[i1*(N2 + 2) + i2];
@@ -57,6 +45,26 @@ public:
     {
         return data[i1*(N2 + 2) + i2];
     }
+    /* Assign */
+    inline ScalarBase& operator= (const ScalarBase& other)
+    {
+        for (int i1 = 1; i1 <= N1; ++i1)
+        for (int i2 = 1; i2 <= N2; ++i2)
+        {
+            (*this)(i1,i2) = other(i1,i2);
+        }
+        return *this;
+    }
+    inline ScalarBase& operator= (const T& value)
+    {
+        for (int i1 = 1; i1 <= N1; ++i1)
+        for (int i2 = 1; i2 <= N2; ++i2)
+        {
+            (*this)(i1,i2) = value;
+        }
+        return *this;
+    }
+    /* Add to */
     inline ScalarBase& operator+= (const ScalarBase& other)
     {
         for (int i1 = 1; i1 <= N1; ++i1)
@@ -75,6 +83,7 @@ public:
         }
         return *this;
     }
+    /* Subtract from */
     inline ScalarBase& operator-= (const ScalarBase& other)
     {
         for (int i1 = 1; i1 <= N1; ++i1)
@@ -93,6 +102,7 @@ public:
         }
         return *this;
     }
+    /* Multiply with */
     inline ScalarBase& operator*= (const ScalarBase& other)
     {
         for (int i1 = 1; i1 <= N1; ++i1)
@@ -111,6 +121,7 @@ public:
         }
         return *this;
     }
+    /* Divide by */
     inline ScalarBase& operator/= (const ScalarBase& other)
     {
         for (int i1 = 1; i1 <= N1; ++i1)
