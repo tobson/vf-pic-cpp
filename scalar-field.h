@@ -33,7 +33,9 @@ protected:
     {
         data = nullptr;
     }
-    ScalarBase (const ScalarBase&) = delete;
+    ScalarBase (const ScalarBase& other): data (other.data)
+    {
+    }
     ScalarBase& operator= (ScalarBase&&) = delete;
 public:
     inline T& operator() (int i1, int i2)
