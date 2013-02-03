@@ -66,12 +66,30 @@ public:
         }
         return *this;
     }
+    inline ScalarBase& operator+= (const T& value)
+    {
+        for (int i1 = 1; i1 <= N1; ++i1)
+        for (int i2 = 1; i2 <= N2; ++i2)
+        {
+            (*this)(i1,i2) += value;
+        }
+        return *this;
+    }
     inline ScalarBase& operator-= (const ScalarBase& other)
     {
         for (int i1 = 1; i1 <= N1; ++i1)
         for (int i2 = 1; i2 <= N2; ++i2)
         {
             (*this)(i1,i2) -= other(i1,i2);
+        }
+        return *this;
+    }
+    inline ScalarBase& operator-= (const T& value)
+    {
+        for (int i1 = 1; i1 <= N1; ++i1)
+        for (int i2 = 1; i2 <= N2; ++i2)
+        {
+            (*this)(i1,i2) -= value;
         }
         return *this;
     }
@@ -84,12 +102,30 @@ public:
         }
         return *this;
     }
+    inline ScalarBase& operator*= (const T& value)
+    {
+        for (int i1 = 1; i1 <= N1; ++i1)
+        for (int i2 = 1; i2 <= N2; ++i2)
+        {
+            (*this)(i1,i2) *= value;
+        }
+        return *this;
+    }
     inline ScalarBase& operator/= (const ScalarBase& other)
     {
         for (int i1 = 1; i1 <= N1; ++i1)
         for (int i2 = 1; i2 <= N2; ++i2)
         {
             (*this)(i1,i2) /= other(i1,i2);
+        }
+        return *this;
+    }
+    inline ScalarBase& operator/= (const T& value)
+    {
+        for (int i1 = 1; i1 <= N1; ++i1)
+        for (int i2 = 1; i2 <= N2; ++i2)
+        {
+            (*this)(i1,i2) /= value;
         }
         return *this;
     }
