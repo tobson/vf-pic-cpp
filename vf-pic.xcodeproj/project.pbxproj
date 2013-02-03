@@ -73,6 +73,7 @@
 /* Begin PBXFileReference section */
 		D20381A116BCF1FD008755DC /* sse */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = sse; sourceTree = BUILT_PRODUCTS_DIR; };
 		D20381A216BCF25A008755DC /* sse.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = sse.cpp; sourceTree = "<group>"; };
+		D20381BB16BDFE20008755DC /* sources.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = sources.h; sourceTree = "<group>"; };
 		D24BC37716B64B1A006C64A3 /* jacobi */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = jacobi; sourceTree = BUILT_PRODUCTS_DIR; };
 		D24BC37916B64B92006C64A3 /* jacobi.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = jacobi.cpp; sourceTree = "<group>"; };
 		D25C8DB216B89B6600B0A607 /* grid.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = grid.cpp; sourceTree = "<group>"; };
@@ -168,6 +169,7 @@
 				D28BAEFB16B5FB4500578956 /* param.h */,
 				D2F90E5216B748E900ABDA86 /* particles.h */,
 				D28BAF0616B601AB00578956 /* scalar-field.h */,
+				D20381BB16BDFE20008755DC /* sources.h */,
 				D28BAF1616B6080A00578956 /* three-vector.h */,
 				D28BAF1716B608BC00578956 /* vector-field.h */,
 				D28BAF0516B600D900578956 /* config.in */,

@@ -15,6 +15,7 @@
 #include "global.h"
 #include "grid.h"
 #include "particles.h"
+#include "sources.h"
 #include "vector-field.h"
 
 #include <iostream>
@@ -27,27 +28,25 @@ struct GlobalVariables
 {
     GlobalVectorField<real> A, B, E;
     GlobalParticleArray<real> particles;
+    GlobalSources<real> sources;
 };
 
 void iteration (GlobalVariables(& global)[2], Barrier& barrier, int ithread, int niter)
 {
     LocalVectorField<real> H1, J;
+    LocalSources<real> sources;
 
-    GlobalVariables& global1 = global[0];
+    VectorPair<real> A1 (global[0].A, ithread);
+    VectorPair<real> B1 (global[0].B, ithread);
+    VectorPair<real> E1 (global[0].E, ithread);
     
-    VectorPair<real> A1 (global1.A, ithread);
-    VectorPair<real> B1 (global1.B, ithread);
-    VectorPair<real> E1 (global1.E, ithread);
-    
-    LocalParticleArrayView<real> particles1 (global1.particles, ithread);
+    LocalParticleArrayView<real> particles1 (global[0].particles, ithread);
 
-    GlobalVariables& global2 = global[1];
+    VectorPair<real> A2 (global[1].A, ithread);
+    VectorPair<real> B2 (global[1].B, ithread);
+    VectorPair<real> E2 (global[1].E, ithread);
 
-    VectorPair<real> A2 (global2.A, ithread);
-    VectorPair<real> B2 (global2.B, ithread);
-    VectorPair<real> E2 (global2.E, ithread);
-
-    LocalParticleArrayView<real> particles2 (global2.particles, ithread);
+    LocalParticleArrayView<real> particles2 (global[1].particles, ithread);
     
     curl (H1, A1.local);
 
