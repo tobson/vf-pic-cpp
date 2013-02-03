@@ -13,21 +13,19 @@
 #include "scalar-field.h"
 #include "three-vector.h"
 
+template <typename T>
+struct FourCurrent
+{
+    T zero, one, two, three;
+};
+
 template <typename T, int N1, int N2>
-struct Sources
-{
-    ScalarField<T,N1,N2> density;
-    ThreeVector<ScalarField<T,N1,N2>> current;
-};
+using Sources = ScalarField<FourCurrent<T>,N1,N2>;
 
 template <typename T>
-class LocalSources: public Sources<T,vfpic::mz,vfpic::mx>
-{
-};
+using LocalSources = Sources<T,vfpic::mz,vfpic::mx>;
 
 template <typename T>
-class GlobalSources: public Sources<T,vfpic::nz,vfpic::nx>
-{
-};
+using GlobalSources = Sources<T,vfpic::nz,vfpic::nx>;
 
 #endif

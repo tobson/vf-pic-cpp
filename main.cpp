@@ -9,6 +9,7 @@
 #include "barrier.h"
 #include "boundaries.h"
 #include "config.h"
+#include "deposit.h"
 #include "diffops.h"
 #include "drift-kick.h"
 #include "faraday.h"
@@ -64,6 +65,8 @@ void iteration (GlobalVariables(& global)[2], Barrier& barrier, int ithread, int
         
         drift (particles1);
         kick (particles1, E1.global, B1.global);
+        
+        deposit (particles1, sources);
     }
     printf ("Hi, I'm thread %d!\n", ithread);
 }
