@@ -360,7 +360,6 @@
 		D203819F16BCF1FD008755DC /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				ICC_LANG_ANSI = "c++0x";
 				PRODUCT_NAME = sse;
 			};
@@ -369,7 +368,6 @@
 		D20381A016BCF1FD008755DC /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				ICC_LANG_ANSI = "c++0x";
 				PRODUCT_NAME = sse;
 			};
@@ -392,7 +390,6 @@
 		D28BAF1016B604B900578956 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				GCC_VERSION = "";
 				PRODUCT_NAME = test;
 			};
 			name = Debug;
@@ -400,7 +397,6 @@
 		D28BAF1116B604B900578956 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				GCC_VERSION = "";
 				PRODUCT_NAME = test;
 			};
 			name = Release;
