@@ -190,8 +190,7 @@ public:
     }
     friend std::ostream& operator<< (std::ostream& os, const ScalarField& scalar)
     {
-        const auto buffer = reinterpret_cast<char *> (scalar.data);
-        os.write (buffer, size*sizeof (T));
+        os.write (reinterpret_cast<char *> (scalar.data), size*sizeof (T));
         return os;
     }
 };
