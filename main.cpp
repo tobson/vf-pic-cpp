@@ -67,8 +67,8 @@ void iteration (std::array<GlobalVariables<real>,2>& global, Barrier& barrier, c
         drift (particles1);
         kick (particles1, E1.global, B1.global);
         
-        deposit (particles1, global0.rho1, global0.U);
-        deposit (particles1, global0.rho1, global0.U);
+        deposit (global0);
+        deposit (global0);
     }
     printf ("Hi, I'm thread %d!\n", ithread);
 }

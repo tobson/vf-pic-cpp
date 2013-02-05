@@ -10,12 +10,11 @@
 
 Deposit::Deposit (Barrier& barrier, const int ithread):
 barrier (barrier), ithread (ithread),
-norm (real (vfpic::npc)/config::rho0)
+norm1 (real (vfpic::npc)/config::rho0)
 {
 }
 
-void Deposit::operator()(const LocalParticleArrayView<real>& particles,
-                    GlobalScalarField<real>& rho1, GlobalVectorField<real>& U)
+void Deposit::operator() (GlobalVariables<real>& global)
 {
     using config::x0;
     using config::z0;
@@ -25,6 +24,8 @@ void Deposit::operator()(const LocalParticleArrayView<real>& particles,
     
     const real zero = real (0.0);
     const real one = real (1.0);
+    
+    const LocalParticleArrayView<real> particles (global.particles, ithread);
     
     static_assert (std::is_pod<FourMomentum<real>>::value, "");
     const FourMomentum<real> fourzero = {zero, zero, zero, zero};
@@ -55,7 +56,7 @@ void Deposit::operator()(const LocalParticleArrayView<real>& particles,
         sources (k1,i1).accumulate (w11,w11*p->vx,w11*p->vy,w11*p->vz);
     }
     addGhosts ();
-    convert (rho1, U);
+    convert (global);
 }
 
 void Deposit::addGhosts ()
@@ -75,20 +76,20 @@ void Deposit::addGhosts ()
     }
 }
 
-void Deposit::convert (GlobalScalarField<real>& rho1, GlobalVectorField<real>& U)
+void Deposit::convert (GlobalVariables<real>& global)
 {
     {
-        SourceView sources1 (sources, ithread);
-        LocalScalarFieldView<real> _rho (rho1, ithread);
-        LocalVectorFieldView<real> _U (U, ithread);
+        LocalScalarFieldView<FourMomentum<real>> sources1 (sources, ithread);
+        LocalScalarFieldView<real> rho (global.rho1, ithread);
+        LocalVectorFieldView<real> U (global.U, ithread);
 
         for (int k = 1; k <= vfpic::mz; ++k)
         for (int i = 1; i <= vfpic::mx; ++i)
         {
-            _rho (k,i) = sources1 (k,i).rho;
-            _U.x (k,i) = sources1 (k,i).rux;
-            _U.y (k,i) = sources1 (k,i).ruy;
-            _U.z (k,i) = sources1 (k,i).ruz;
+            rho (k,i) = sources1 (k,i).rho;
+            U.x (k,i) = sources1 (k,i).rux;
+            U.y (k,i) = sources1 (k,i).ruy;
+            U.z (k,i) = sources1 (k,i).ruz;
         }
         barrier.wait ();
     }
@@ -97,27 +98,27 @@ void Deposit::convert (GlobalScalarField<real>& rho1, GlobalVectorField<real>& U
     {
         const int kthread = jthread % vfpic::nthreads;
 
-        SourceView sources1 (sources, kthread);
-        LocalScalarFieldView<real> _rho (rho1, kthread);
-        LocalVectorFieldView<real> _U (U, kthread);
+        LocalScalarFieldView<FourMomentum<real>> sources1 (sources, kthread);
+        LocalScalarFieldView<real> rho (global.rho1, kthread);
+        LocalVectorFieldView<real> U (global.U, kthread);
 
         for (int k = 1; k <= vfpic::mz; ++k)
         for (int i = 1; i <= vfpic::mx; ++i)
         {
-            _rho (k,i) = sources1 (k,i).rho;
-            _U.x (k,i) = sources1 (k,i).rux;
-            _U.y (k,i) = sources1 (k,i).ruy;
-            _U.z (k,i) = sources1 (k,i).ruz;
+            rho (k,i) += sources1 (k,i).rho;
+            U.x (k,i) += sources1 (k,i).rux;
+            U.y (k,i) += sources1 (k,i).ruy;
+            U.z (k,i) += sources1 (k,i).ruz;
         }
         barrier.wait ();
     }
-    // Normalize
+    // Compute reciprocal of mass density and normalize
     {
-        LocalScalarFieldView<real> _rho1 (rho1, ithread);
-        LocalVectorFieldView<real> _U (U, ithread);
+        LocalScalarFieldView<real> rho1 (global.rho1, ithread);
+        LocalVectorFieldView<real> U (global.U, ithread);
         
-        _rho1.reciprocal ();
-        _U *= _rho1;
-        rho1 *= norm;
+        rho1.reciprocal ();
+        U *= rho1;
+        rho1 *= norm1;
     }
 }

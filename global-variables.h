@@ -9,6 +9,10 @@
 #ifndef vf_pic_global_variables_h
 #define vf_pic_global_variables_h
 
+#include "scalar-field.h"
+#include "particles.h"
+#include "vector-field.h"
+
 template <typename T>
 struct GlobalVariables
 {
