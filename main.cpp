@@ -20,12 +20,29 @@
 #include "vector-field.h"
 
 #include <array>
+#include <cstdio>
 #include <iostream>
 #include <libconfig.h++>
+#include <random>
 #include <thread>
-#include <cstdio>
 #include <vector>
 
+void initialCondition (GlobalVariables<real>& global)
+{
+    std::mt19937 gen;
+    std::uniform_real_distribution<> uniform;
+    std::normal_distribution<> normal;
+    
+    for (auto p = global.particles.begin (); p != global.particles.end (); ++p)
+    {
+        p->x = config::x0 + uniform (gen)*config::Lx;
+        p->z = config::z0 + uniform (gen)*config::Lz;
+        
+        p->vx = config::cs0*normal (gen);
+        p->vy = config::cs0*normal (gen);
+        p->vz = config::cs0*normal (gen);
+    }
+}
 
 void iteration (std::array<GlobalVariables<real>,2>& global, Barrier& barrier, const int ithread, int niter)
 {
@@ -96,6 +113,8 @@ int main (int argc, const char * argv[])
     Barrier barrier (vfpic::nthreads);
     Grid grid;
     std::array<GlobalVariables<real>,2> global;
+    
+    initialCondition (global.at (0));
     
     std::vector<std::thread> threads;
 
