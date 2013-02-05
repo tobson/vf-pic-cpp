@@ -14,39 +14,36 @@
 #include "drift-kick.h"
 #include "faraday.h"
 #include "global.h"
+#include "global-variables.h"
 #include "grid.h"
 #include "particles.h"
 #include "vector-field.h"
 
+#include <array>
 #include <iostream>
 #include <libconfig.h++>
 #include <thread>
 #include <cstdio>
 #include <vector>
 
-struct GlobalVariables
-{
-    GlobalVectorField<real> A1, A2;
-    GlobalVectorField<real> B1, B2;
-    GlobalVectorField<real> E1, E2;
-    GlobalParticleArray<real> particles1, particles2;
-    GlobalScalarField<real> rho1;
-    GlobalVectorField<real> U;
-};
 
-void iteration (GlobalVariables& global, Barrier& barrier, const int ithread, int niter)
+void iteration (std::array<GlobalVariables<real>,2>& global, Barrier& barrier, const int ithread, int niter)
 {
-    VectorPair<real> A1 (global.A1, ithread);
-    VectorPair<real> B1 (global.B1, ithread);
-    VectorPair<real> E1 (global.E1, ithread);
+    GlobalVariables<real>& global0 = global.at (0);
+
+    VectorPair<real> A0 (global0.A, ithread);
+    VectorPair<real> B0 (global0.B, ithread);
+    VectorPair<real> E0 (global0.E, ithread);
     
-    LocalParticleArrayView<real> particles1 (global.particles1, ithread);
+    LocalParticleArrayView<real> particles0 (global0.particles, ithread);
 
-    VectorPair<real> A2 (global.A2, ithread);
-    VectorPair<real> B2 (global.B2, ithread);
-    VectorPair<real> E2 (global.E2, ithread);
+    GlobalVariables<real>& global1 = global.at (1);
 
-    LocalParticleArrayView<real> particles2 (global.particles2, ithread);
+    VectorPair<real> A1 (global1.A, ithread);
+    VectorPair<real> B1 (global1.B, ithread);
+    VectorPair<real> E1 (global1.E, ithread);
+    
+    LocalParticleArrayView<real> particles1 (global1.particles, ithread);
     
     LocalVectorField<real> H1, J;
     
@@ -70,8 +67,8 @@ void iteration (GlobalVariables& global, Barrier& barrier, const int ithread, in
         drift (particles1);
         kick (particles1, E1.global, B1.global);
         
-        deposit (particles1, global.rho1, global.U);
-        deposit (particles1, global.rho1, global.U);
+        deposit (particles1, global0.rho1, global0.U);
+        deposit (particles1, global0.rho1, global0.U);
     }
     printf ("Hi, I'm thread %d!\n", ithread);
 }
@@ -99,7 +96,7 @@ int main (int argc, const char * argv[])
     
     Barrier barrier (vfpic::nthreads);
     Grid grid;
-    GlobalVariables global;
+    std::array<GlobalVariables<real>,2> global;
     
     std::vector<std::thread> threads;
 

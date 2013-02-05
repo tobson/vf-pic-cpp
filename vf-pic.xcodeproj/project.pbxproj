@@ -106,6 +106,7 @@
 		D2E0962D16BE43F2003AA5DA /* three-vector-union.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "three-vector-union.h"; sourceTree = "<group>"; };
 		D2E0963516BF83C7003AA5DA /* libconfig++.la */ = {isa = PBXFileReference; lastKnownFileType = text; name = "libconfig++.la"; path = "../../macports/lib/libconfig++.la"; sourceTree = "<group>"; };
 		D2E0963716BF83E8003AA5DA /* libconfig++.9.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libconfig++.9.dylib"; path = "../../macports/lib/libconfig++.9.dylib"; sourceTree = "<group>"; };
+		D2E0963C16C0E92C003AA5DA /* global-variables.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "global-variables.h"; sourceTree = "<group>"; };
 		D2F90E4816B734C700ABDA86 /* jacobi.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = jacobi.py; sourceTree = "<group>"; };
 		D2F90E4A16B7375900ABDA86 /* vfpic.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = vfpic.py; sourceTree = "<group>"; };
 		D2F90E4B16B73ED400ABDA86 /* Makefile */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
@@ -172,6 +173,7 @@
 				D2C6827E16B9EBA30023FB36 /* diffops.h */,
 				D2C6828916BB9CAC0023FB36 /* drift-kick.h */,
 				D2C6827D16B9DF600023FB36 /* faraday.h */,
+				D2E0963C16C0E92C003AA5DA /* global-variables.h */,
 				D28BAEFE16B5FD0200578956 /* global.h */,
 				D25C8DB316B89B6600B0A607 /* grid.h */,
 				D28BAEFB16B5FB4500578956 /* param.h */,
