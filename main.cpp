@@ -27,29 +27,35 @@
 
 struct GlobalVariables
 {
-    GlobalVectorField<real> A, B, E;
-    GlobalParticleArray<real> particles;
-    GlobalSources<real> sources;
+    GlobalVectorField<real> A1, A2;
+    GlobalVectorField<real> B1, B2;
+    GlobalVectorField<real> E1, E2;
+    GlobalParticleArray<real> particles1, particles2;
+    GlobalScalarField<real> rho;
+    GlobalVectorField<real> U;
+    Sources<real> sources;
 };
 
-void iteration (GlobalVariables(& global)[2], Barrier& barrier, int ithread, int niter)
+void iteration (GlobalVariables& global, Barrier& barrier, const int ithread, int niter)
 {
-    LocalVectorField<real> H1, J;
-    LocalSources<real> sources;
-
-    VectorPair<real> A1 (global[0].A, ithread);
-    VectorPair<real> B1 (global[0].B, ithread);
-    VectorPair<real> E1 (global[0].E, ithread);
+    VectorPair<real> A1 (global.A1, ithread);
+    VectorPair<real> B1 (global.B1, ithread);
+    VectorPair<real> E1 (global.E1, ithread);
     
-    LocalParticleArrayView<real> particles1 (global[0].particles, ithread);
+    LocalParticleArrayView<real> particles1 (global.particles1, ithread);
 
-    VectorPair<real> A2 (global[1].A, ithread);
-    VectorPair<real> B2 (global[1].B, ithread);
-    VectorPair<real> E2 (global[1].E, ithread);
+    VectorPair<real> A2 (global.A2, ithread);
+    VectorPair<real> B2 (global.B2, ithread);
+    VectorPair<real> E2 (global.E2, ithread);
 
-    LocalParticleArrayView<real> particles2 (global[1].particles, ithread);
+    LocalParticleArrayView<real> particles2 (global.particles2, ithread);
+    
+    LocalVectorField<real> H1, J;
+    Sources<real> sources;
     
     curl (H1, A1.local);
+    
+    Deposit deposit (barrier, ithread);
 
     for (int it = 0; it < niter; ++it)
     {
@@ -59,6 +65,7 @@ void iteration (GlobalVariables(& global)[2], Barrier& barrier, int ithread, int
         boundaryCondition (A1, barrier);
         
         curl (H1, A1.local);
+        curlcurl(J, A1.local);
         
         B1.local += H1; B1.local *= real (0.5);
         boundaryCondition (B1, barrier);
@@ -66,7 +73,8 @@ void iteration (GlobalVariables(& global)[2], Barrier& barrier, int ithread, int
         drift (particles1);
         kick (particles1, E1.global, B1.global);
         
-        deposit (particles1, sources);
+        deposit (particles1, global.rho, global.U);
+        deposit (particles1, global.rho, global.U);
     }
     printf ("Hi, I'm thread %d!\n", ithread);
 }
@@ -94,7 +102,7 @@ int main (int argc, const char * argv[])
     
     Barrier barrier (vfpic::nthreads);
     Grid grid;
-    GlobalVariables global[2];
+    GlobalVariables global;
     
     std::vector<std::thread> threads;
 

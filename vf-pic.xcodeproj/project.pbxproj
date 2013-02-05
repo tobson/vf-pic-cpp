@@ -28,10 +28,10 @@
 		D2C6828316BB7EB40023FB36 /* boundaries.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2C6828016BB7EB30023FB36 /* boundaries.cpp */; };
 		D2C6828416BB7EB40023FB36 /* boundaries.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2C6828016BB7EB30023FB36 /* boundaries.cpp */; };
 		D2C6828A16BB9CAC0023FB36 /* drift-kick.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2C6828816BB9CAC0023FB36 /* drift-kick.cpp */; };
-		D2E0963116BF0A60003AA5DA /* libconfig++.9.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D2E0963016BF0A60003AA5DA /* libconfig++.9.dylib */; };
-		D2E0963216BF0A91003AA5DA /* libconfig++.9.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D2E0963016BF0A60003AA5DA /* libconfig++.9.dylib */; };
-		D2E0963316BF0AB7003AA5DA /* libconfig++.9.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D2E0963016BF0A60003AA5DA /* libconfig++.9.dylib */; };
-		D2E0963416BF0AD7003AA5DA /* libconfig++.9.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D2E0963016BF0A60003AA5DA /* libconfig++.9.dylib */; };
+		D2E0963816BF83E8003AA5DA /* libconfig++.9.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D2E0963716BF83E8003AA5DA /* libconfig++.9.dylib */; };
+		D2E0963916BF840B003AA5DA /* libconfig++.9.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D2E0963716BF83E8003AA5DA /* libconfig++.9.dylib */; };
+		D2E0963A16BF8421003AA5DA /* libconfig++.9.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D2E0963716BF83E8003AA5DA /* libconfig++.9.dylib */; };
+		D2E0963B16BF8439003AA5DA /* libconfig++.9.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D2E0963716BF83E8003AA5DA /* libconfig++.9.dylib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -76,7 +76,6 @@
 /* Begin PBXFileReference section */
 		D20381A116BCF1FD008755DC /* sse */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = sse; sourceTree = BUILT_PRODUCTS_DIR; };
 		D20381A216BCF25A008755DC /* sse.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = sse.cpp; sourceTree = "<group>"; };
-		D20381BB16BDFE20008755DC /* sources.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = sources.h; sourceTree = "<group>"; };
 		D20381BC16BE0195008755DC /* deposit.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = deposit.cpp; sourceTree = "<group>"; };
 		D20381BD16BE0195008755DC /* deposit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = deposit.h; sourceTree = "<group>"; };
 		D24BC37716B64B1A006C64A3 /* jacobi */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = jacobi; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -88,7 +87,6 @@
 		D28BAEFE16B5FD0200578956 /* global.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = global.h; sourceTree = "<group>"; };
 		D28BAF0016B5FDDA00578956 /* config.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = config.cpp; sourceTree = "<group>"; };
 		D28BAF0116B5FDDA00578956 /* config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = config.h; sourceTree = "<group>"; };
-		D28BAF0316B5FEB500578956 /* libconfig++.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libconfig++.a"; path = "../../macports/lib/libconfig++.a"; sourceTree = "<group>"; };
 		D28BAF0516B600D900578956 /* config.in */ = {isa = PBXFileReference; lastKnownFileType = text; path = config.in; sourceTree = "<group>"; };
 		D28BAF0616B601AB00578956 /* scalar-field.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "scalar-field.h"; sourceTree = "<group>"; };
 		D28BAF1216B604B900578956 /* test */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = test; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -106,8 +104,8 @@
 		D2C6828816BB9CAC0023FB36 /* drift-kick.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "drift-kick.cpp"; sourceTree = "<group>"; };
 		D2C6828916BB9CAC0023FB36 /* drift-kick.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "drift-kick.h"; sourceTree = "<group>"; };
 		D2E0962D16BE43F2003AA5DA /* three-vector-union.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "three-vector-union.h"; sourceTree = "<group>"; };
-		D2E0962E16BF0A14003AA5DA /* libconfig.9.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libconfig.9.dylib; path = ../../macports/lib/libconfig.9.dylib; sourceTree = "<group>"; };
-		D2E0963016BF0A60003AA5DA /* libconfig++.9.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libconfig++.9.dylib"; path = "../../macports/lib/libconfig++.9.dylib"; sourceTree = "<group>"; };
+		D2E0963516BF83C7003AA5DA /* libconfig++.la */ = {isa = PBXFileReference; lastKnownFileType = text; name = "libconfig++.la"; path = "../../macports/lib/libconfig++.la"; sourceTree = "<group>"; };
+		D2E0963716BF83E8003AA5DA /* libconfig++.9.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libconfig++.9.dylib"; path = "../../macports/lib/libconfig++.9.dylib"; sourceTree = "<group>"; };
 		D2F90E4816B734C700ABDA86 /* jacobi.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = jacobi.py; sourceTree = "<group>"; };
 		D2F90E4A16B7375900ABDA86 /* vfpic.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = vfpic.py; sourceTree = "<group>"; };
 		D2F90E4B16B73ED400ABDA86 /* Makefile */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
@@ -120,7 +118,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D2E0963416BF0AD7003AA5DA /* libconfig++.9.dylib in Frameworks */,
+				D2E0963B16BF8439003AA5DA /* libconfig++.9.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -128,7 +126,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D2E0963316BF0AB7003AA5DA /* libconfig++.9.dylib in Frameworks */,
+				D2E0963A16BF8421003AA5DA /* libconfig++.9.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -136,7 +134,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D2E0963116BF0A60003AA5DA /* libconfig++.9.dylib in Frameworks */,
+				D2E0963916BF840B003AA5DA /* libconfig++.9.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -144,7 +142,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D2E0963216BF0A91003AA5DA /* libconfig++.9.dylib in Frameworks */,
+				D2E0963816BF83E8003AA5DA /* libconfig++.9.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -154,10 +152,7 @@
 		D2915FA416B5F56A0084A612 = {
 			isa = PBXGroup;
 			children = (
-				D2E0963016BF0A60003AA5DA /* libconfig++.9.dylib */,
-				D2E0962E16BF0A14003AA5DA /* libconfig.9.dylib */,
 				D2F90E4B16B73ED400ABDA86 /* Makefile */,
-				D28BAF0316B5FEB500578956 /* libconfig++.a */,
 				D28BAF1816B60B3800578956 /* barrier.cpp */,
 				D2C6828016BB7EB30023FB36 /* boundaries.cpp */,
 				D28BAF0016B5FDDA00578956 /* config.cpp */,
@@ -169,6 +164,7 @@
 				D2915FC816B5F7FE0084A612 /* main.cpp */,
 				D20381A216BCF25A008755DC /* sse.cpp */,
 				D28BAF1416B604F200578956 /* test.cpp */,
+				D2E0963716BF83E8003AA5DA /* libconfig++.9.dylib */,
 				D28BAF1916B60B3800578956 /* barrier.h */,
 				D2C6828116BB7EB40023FB36 /* boundaries.h */,
 				D28BAF0116B5FDDA00578956 /* config.h */,
@@ -181,11 +177,11 @@
 				D28BAEFB16B5FB4500578956 /* param.h */,
 				D2F90E5216B748E900ABDA86 /* particles.h */,
 				D28BAF0616B601AB00578956 /* scalar-field.h */,
-				D20381BB16BDFE20008755DC /* sources.h */,
 				D2E0962D16BE43F2003AA5DA /* three-vector-union.h */,
 				D28BAF1616B6080A00578956 /* three-vector.h */,
 				D28BAF1716B608BC00578956 /* vector-field.h */,
 				D28BAF0516B600D900578956 /* config.in */,
+				D2E0963516BF83C7003AA5DA /* libconfig++.la */,
 				D2F90E4C16B73FE300ABDA86 /* local.mk */,
 				D2F90E4816B734C700ABDA86 /* jacobi.py */,
 				D2F90E4A16B7375900ABDA86 /* vfpic.py */,
@@ -361,6 +357,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ICC_LANG_ANSI = "c++0x";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../../macports/lib\"",
+				);
 				PRODUCT_NAME = sse;
 			};
 			name = Debug;
@@ -369,6 +369,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ICC_LANG_ANSI = "c++0x";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../../macports/lib\"",
+				);
 				PRODUCT_NAME = sse;
 			};
 			name = Release;
@@ -376,6 +380,10 @@
 		D24BC37516B64B1A006C64A3 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../../macports/lib\"",
+				);
 				PRODUCT_NAME = jacobi;
 			};
 			name = Debug;
@@ -383,6 +391,10 @@
 		D24BC37616B64B1A006C64A3 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../../macports/lib\"",
+				);
 				PRODUCT_NAME = jacobi;
 			};
 			name = Release;
@@ -390,6 +402,10 @@
 		D28BAF1016B604B900578956 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../../macports/lib\"",
+				);
 				PRODUCT_NAME = test;
 			};
 			name = Debug;
@@ -397,6 +413,10 @@
 		D28BAF1116B604B900578956 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../../macports/lib\"",
+				);
 				PRODUCT_NAME = test;
 			};
 			name = Release;
@@ -438,6 +458,10 @@
 		D2915FCF16B5F8170084A612 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../../macports/lib\"",
+				);
 				PRODUCT_NAME = "vf-pic";
 			};
 			name = Debug;
@@ -445,6 +469,10 @@
 		D2915FD016B5F8170084A612 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../../macports/lib\"",
+				);
 				PRODUCT_NAME = "vf-pic";
 			};
 			name = Release;
