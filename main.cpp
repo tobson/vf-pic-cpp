@@ -16,7 +16,6 @@
 #include "global.h"
 #include "grid.h"
 #include "particles.h"
-#include "sources.h"
 #include "vector-field.h"
 
 #include <iostream>
@@ -33,7 +32,6 @@ struct GlobalVariables
     GlobalParticleArray<real> particles1, particles2;
     GlobalScalarField<real> rho;
     GlobalVectorField<real> U;
-    Sources<real> sources;
 };
 
 void iteration (GlobalVariables& global, Barrier& barrier, const int ithread, int niter)
@@ -51,7 +49,6 @@ void iteration (GlobalVariables& global, Barrier& barrier, const int ithread, in
     LocalParticleArrayView<real> particles2 (global.particles2, ithread);
     
     LocalVectorField<real> H1, J;
-    Sources<real> sources;
     
     curl (H1, A1.local);
     
