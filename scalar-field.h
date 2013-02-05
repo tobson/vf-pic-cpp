@@ -130,6 +130,14 @@ public:
         }
         return *this;
     }
+    void reciprocal ()
+    {
+        for (int i1 = 1; i1 <= N1; ++i1)
+        for (int i2 = 1; i2 <= N2; ++i2)
+        {
+            (*this)(i1,i2) = T (1)/(*this)(i1,i2);
+        }
+    }
 protected:
     T *data;
 public:
