@@ -10,12 +10,12 @@
 
 Deposit::Deposit (Barrier& barrier, const int ithread):
 barrier (barrier), ithread (ithread),
-norm (config::rho0/real (vfpic::npc))
+norm (real (vfpic::npc)/config::rho0)
 {
 }
 
 void Deposit::operator()(const LocalParticleArrayView<real>& particles,
-                    GlobalScalarField<real>& rho, GlobalVectorField<real>& U)
+                    GlobalScalarField<real>& rho1, GlobalVectorField<real>& U)
 {
     using config::x0;
     using config::z0;
@@ -55,11 +55,7 @@ void Deposit::operator()(const LocalParticleArrayView<real>& particles,
         sources (k1,i1).accumulate (w11,w11*p->vx,w11*p->vy,w11*p->vz);
     }
     addGhosts ();
-    convert (rho, U);
-    
-    // Compute rho1 first
-    U /= rho;
-    rho *= norm;
+    convert (rho1, U);
 }
 
 void Deposit::addGhosts ()
@@ -79,20 +75,20 @@ void Deposit::addGhosts ()
     }
 }
 
-void Deposit::convert (GlobalScalarField<real>& rho, GlobalVectorField<real>& U)
+void Deposit::convert (GlobalScalarField<real>& rho1, GlobalVectorField<real>& U)
 {
     {
         SourceView sources1 (sources, ithread);
-        LocalScalarFieldView<real> rho1 (rho, ithread);
-        LocalVectorFieldView<real> U1 (U, ithread);
+        LocalScalarFieldView<real> _rho (rho1, ithread);
+        LocalVectorFieldView<real> _U (U, ithread);
 
         for (int k = 1; k <= vfpic::mz; ++k)
         for (int i = 1; i <= vfpic::mx; ++i)
         {
-            rho1 (k,i) = sources1 (k,i).rho;
-            U1.x (k,i) = sources1 (k,i).rux;
-            U1.y (k,i) = sources1 (k,i).ruy;
-            U1.z (k,i) = sources1 (k,i).ruz;
+            _rho (k,i) = sources1 (k,i).rho;
+            _U.x (k,i) = sources1 (k,i).rux;
+            _U.y (k,i) = sources1 (k,i).ruy;
+            _U.z (k,i) = sources1 (k,i).ruz;
         }
         barrier.wait ();
     }
@@ -102,17 +98,26 @@ void Deposit::convert (GlobalScalarField<real>& rho, GlobalVectorField<real>& U)
         const int kthread = jthread % vfpic::nthreads;
 
         SourceView sources1 (sources, kthread);
-        LocalScalarFieldView<real> rho1 (rho, kthread);
-        LocalVectorFieldView<real> U1 (U, kthread);
+        LocalScalarFieldView<real> _rho (rho1, kthread);
+        LocalVectorFieldView<real> _U (U, kthread);
 
         for (int k = 1; k <= vfpic::mz; ++k)
         for (int i = 1; i <= vfpic::mx; ++i)
         {
-            rho1 (k,i) += sources1 (k,i).rho;
-            U1.x (k,i) += sources1 (k,i).rux;
-            U1.y (k,i) += sources1 (k,i).ruy;
-            U1.z (k,i) += sources1 (k,i).ruz;
+            _rho (k,i) = sources1 (k,i).rho;
+            _U.x (k,i) = sources1 (k,i).rux;
+            _U.y (k,i) = sources1 (k,i).ruy;
+            _U.z (k,i) = sources1 (k,i).ruz;
         }
         barrier.wait ();
+    }
+    // Normalize
+    {
+        LocalScalarFieldView<real> _rho1 (rho1, ithread);
+        LocalVectorFieldView<real> _U (U, ithread);
+        
+        _rho1.reciprocal ();
+        _U *= _rho1;
+        rho1 *= norm;
     }
 }

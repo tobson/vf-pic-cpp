@@ -30,7 +30,7 @@ struct GlobalVariables
     GlobalVectorField<real> B1, B2;
     GlobalVectorField<real> E1, E2;
     GlobalParticleArray<real> particles1, particles2;
-    GlobalScalarField<real> rho;
+    GlobalScalarField<real> rho1;
     GlobalVectorField<real> U;
 };
 
@@ -70,8 +70,8 @@ void iteration (GlobalVariables& global, Barrier& barrier, const int ithread, in
         drift (particles1);
         kick (particles1, E1.global, B1.global);
         
-        deposit (particles1, global.rho, global.U);
-        deposit (particles1, global.rho, global.U);
+        deposit (particles1, global.rho1, global.U);
+        deposit (particles1, global.rho1, global.U);
     }
     printf ("Hi, I'm thread %d!\n", ithread);
 }
