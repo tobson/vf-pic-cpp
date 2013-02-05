@@ -42,6 +42,11 @@ void initialCondition (GlobalVariables<real>& global)
         p->vy = config::cs0*normal (gen);
         p->vz = config::cs0*normal (gen);
     }
+    
+    global.A = real (0);
+    global.E = real (0);
+    
+    curl (global.B, global.A);
 }
 
 void iteration (std::array<GlobalVariables<real>,2>& global, Barrier& barrier, const int ithread, int niter)
