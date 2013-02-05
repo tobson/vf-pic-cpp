@@ -46,7 +46,12 @@ void initialCondition (GlobalVariables<real>& global)
     global.A = real (0);
     global.E = real (0);
     
+    boundaryCondition (global.A);
+    boundaryCondition (global.E);
+    
     curl (global.B, global.A);
+    
+    boundaryCondition (global.B);
 }
 
 void iteration (std::array<GlobalVariables<real>,2>& global, Barrier& barrier, const int ithread, int niter)
@@ -67,22 +72,22 @@ void iteration (std::array<GlobalVariables<real>,2>& global, Barrier& barrier, c
     
     LocalParticleArrayView<real> particles1 (global1.particles, ithread);
     
-    LocalVectorField<real> H1, J;
+    LocalVectorField<real> H, J;
     
-    curl (H1, A1);
+    curl (H, A0);
     
     Deposit deposit (barrier, ithread);
 
     for (int it = 0; it < niter; ++it)
     {
-        B1 = H1;
+        B0 = H;
         
-        faraday (A1, E1);
+        faraday (A0, E0);
         boundaryCondition (global0.A, barrier, ithread);
         
-        curl (H1, A1);
+        curl (H, A0);
         
-        B1 += H1; B1 *= real (0.5);
+        B0 += H; B0 *= real (0.5);
         boundaryCondition (global0.B, barrier, ithread);
         
         drift (particles0);
