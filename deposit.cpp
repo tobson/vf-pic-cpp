@@ -9,7 +9,8 @@
 #include "deposit.h"
 
 Deposit::Deposit (Barrier& barrier, const int ithread):
-barrier (barrier), ithread (ithread)
+barrier (barrier), ithread (ithread),
+norm (config::rho0/real (vfpic::npc))
 {
 }
 
@@ -55,6 +56,10 @@ void Deposit::operator()(const LocalParticleArrayView<real>& particles,
     }
     addGhosts ();
     convert (rho, U);
+    
+    // Compute rho1 first
+    U /= rho;
+    rho *= norm;
 }
 
 void Deposit::addGhosts ()

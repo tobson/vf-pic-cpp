@@ -44,6 +44,7 @@ private:
     };
     Barrier& barrier;
     const int ithread;
+    const real norm;
     GlobalScalarField<FourMomentum<real>> sources;
     typedef LocalScalarFieldView<FourMomentum<real>> SourceView;
 };
