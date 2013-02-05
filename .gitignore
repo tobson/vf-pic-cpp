@@ -1,14 +1,17 @@
 config.in
 config.out
-jacobi
 local.mk
 param.h
-test
-vf-pic
 vf-pic.xcodeproj/project.xcworkspace
 vf-pic.xcodeproj/xcuserdata
+
+jacobi
+test
+vf-pic
+sse
 
 *.d
 *.o
 *.pyc
 *.dat
+*.swp
