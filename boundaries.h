@@ -39,8 +39,8 @@ void boundaryConditionX (ThreeVector<S>& vector)
 void boundaryConditionZ (GlobalScalarField<real>&);
 void boundaryConditionZ (GlobalVectorField<real>&);
 
-void boundaryCondition (ScalarPair<real>&, Barrier&);
-void boundaryCondition (VectorPair<real>&, Barrier&);
+void boundaryCondition (GlobalScalarField<real>&, Barrier&, const int);
+void boundaryCondition (GlobalVectorField<real>&, Barrier&, const int);
 
 void boundaryCondition (GlobalScalarField<real>&);
 void boundaryCondition (GlobalVectorField<real>&);

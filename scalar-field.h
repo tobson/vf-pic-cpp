@@ -223,18 +223,6 @@ struct LocalScalarFieldView: public ScalarBase<T,vfpic::mz,vfpic::mx>
     using ScalarBase<T,vfpic::mz,vfpic::mx>::operator/=;
 };
 
-template <typename T>
-struct ScalarPair
-{
-    ScalarPair (GlobalScalarField<T>& global, int ithread):
-    global (global), local (LocalScalarFieldView<T> (global, ithread))
-    {
-    }
-    GlobalScalarField<T>& global;
-    LocalScalarFieldView<T> local;
-};
-
-
 /* Traits */
 
 template <class S>

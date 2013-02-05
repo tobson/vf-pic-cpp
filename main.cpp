@@ -31,41 +31,40 @@ void iteration (std::array<GlobalVariables<real>,2>& global, Barrier& barrier, c
 {
     GlobalVariables<real>& global0 = global.at (0);
 
-    VectorPair<real> A0 (global0.A, ithread);
-    VectorPair<real> B0 (global0.B, ithread);
-    VectorPair<real> E0 (global0.E, ithread);
+    LocalVectorFieldView<real> A0 (global0.A, ithread);
+    LocalVectorFieldView<real> B0 (global0.B, ithread);
+    LocalVectorFieldView<real> E0 (global0.E, ithread);
     
     LocalParticleArrayView<real> particles0 (global0.particles, ithread);
 
     GlobalVariables<real>& global1 = global.at (1);
 
-    VectorPair<real> A1 (global1.A, ithread);
-    VectorPair<real> B1 (global1.B, ithread);
-    VectorPair<real> E1 (global1.E, ithread);
+    LocalVectorFieldView<real> A1 (global1.A, ithread);
+    LocalVectorFieldView<real> B1 (global1.B, ithread);
+    LocalVectorFieldView<real> E1 (global1.E, ithread);
     
     LocalParticleArrayView<real> particles1 (global1.particles, ithread);
     
     LocalVectorField<real> H1, J;
     
-    curl (H1, A1.local);
+    curl (H1, A1);
     
     Deposit deposit (barrier, ithread);
 
     for (int it = 0; it < niter; ++it)
     {
-        B1.local = H1;
+        B1 = H1;
         
-        faraday (A1.local, E1.local);
-        boundaryCondition (A1, barrier);
+        faraday (A1, E1);
+        boundaryCondition (global0.A, barrier, ithread);
         
-        curl (H1, A1.local);
-        curlcurl(J, A1.local);
+        curl (H1, A1);
         
-        B1.local += H1; B1.local *= real (0.5);
-        boundaryCondition (B1, barrier);
+        B1 += H1; B1 *= real (0.5);
+        boundaryCondition (global0.B, barrier, ithread);
         
-        drift (particles1);
-        kick (particles1, E1.global, B1.global);
+        drift (particles0);
+        kick (particles0, global0.E, global0.B);
         
         deposit (global0);
         deposit (global0);

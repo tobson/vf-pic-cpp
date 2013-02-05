@@ -38,19 +38,4 @@ private:
     typedef LocalScalarFieldView<T> View;
 };
 
-template <typename T>
-struct VectorPair
-{
-    VectorPair (GlobalVectorField<T>& global, int ithread):
-    global (global), local (LocalVectorFieldView<T> (global, ithread)),
-    x (global.x, ithread),
-    y (global.y, ithread),
-    z (global.z, ithread)
-    {
-    }
-    GlobalVectorField<T>& global;
-    LocalVectorFieldView<T> local;
-    ScalarPair<real> x, y, z;
-};
-
 #endif

@@ -44,21 +44,25 @@ void boundaryConditionZ (GlobalVectorField<real>& vector)
     boundaryConditionZ (vector.z);
 }
 
-void boundaryCondition (ScalarPair<real>& scalar, Barrier& barrier)
+void boundaryCondition (GlobalScalarField<real>& global,
+                        Barrier& barrier, const int ithread)
 {
-    boundaryConditionX (scalar.local);
+    LocalScalarFieldView<real> local (global, ithread);
+    boundaryConditionX (local);
     if (barrier.wait ())
     {
-        boundaryConditionZ (scalar.global);
+        boundaryConditionZ (global);
     }
 }
 
-void boundaryCondition (VectorPair<real>& vector, Barrier& barrier)
+void boundaryCondition (GlobalVectorField<real>& global,
+                        Barrier& barrier, const int ithread)
 {
-    boundaryConditionX (vector.local);
+    LocalVectorFieldView<real> local (global, ithread);
+    boundaryConditionX (local);
     if (barrier.wait ())
     {
-        boundaryConditionZ (vector.global);
+        boundaryConditionZ (global);
     }
 }
 
@@ -70,8 +74,7 @@ void boundaryCondition (GlobalScalarField<real>& scalar)
 
 void boundaryCondition (GlobalVectorField<real>& vector)
 {
-    boundaryCondition (vector.x);
-    boundaryCondition (vector.y);
-    boundaryCondition (vector.z);
+    boundaryConditionX (vector);
+    boundaryConditionZ (vector);
 }
 
