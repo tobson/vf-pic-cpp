@@ -14,49 +14,39 @@
 
 #include <type_traits>
 
-template <class S, class T>
-void curl (ThreeVector<S>& B, const ThreeVector<T>& A)
+template <template<typename, int, int> class S1, template<typename, int, int> class S2, typename T, int Nz, int Nx>
+void curl (ThreeVector<S1<T,Nz,Nx>>& B, const ThreeVector<S2<T,Nz,Nx>>& A)
 {
-    static_assert (is_scalarfield<S>::value, "");
-    static_assert (is_scalarfield<T>::value, "");
-    
-    static_assert (S::nx == T::nx && S::nz == T::nz, "");
-
     const real fx = real (0.5)/vfpic::dx;
     const real fz = real (0.5)/vfpic::dz;
 
-    for (int k = 1; k <= T::nz; ++k)
-    for (int i = 1; i <= T::nx; ++i)
+    for (int k = 1; k <= Nz; ++k)
+    for (int i = 1; i <= Nx; ++i)
     {
         B.x (k,i) = -fz*(A.y (k+1,i  ) - A.y (k-1,i  ));
         B.z (k,i) = +fx*(A.y (k  ,i+1) - A.y (k  ,i-1));
     }
     
-    for (int k = 1; k <= T::nz; ++k)
-    for (int i = 1; i <= T::nx; ++i)
+    for (int k = 1; k <= Nz; ++k)
+    for (int i = 1; i <= Nx; ++i)
     {
         B.y (k,i) = fz*(A.x (k+1,i  ) - A.x (k-1,i  ))
                   - fx*(A.z (k  ,i+1) - A.z (k  ,i-1));
     }
 }
 
-template <class S, class T>
-void curlcurl (ThreeVector<S>& J, const ThreeVector<T>& A)
+template <template<typename, int, int> class S1, template<typename, int, int> class S2, typename T, int Nz, int Nx>
+void curlcurl (ThreeVector<S1<T,Nz,Nx>>& J, const ThreeVector<S2<T,Nz,Nx>>& A)
 {
-    static_assert (is_scalarfield<S>::value, "");
-    static_assert (is_scalarfield<T>::value, "");
-    
-    static_assert (S::nx == T::nx && S::nz == T::nz, "");
-
-    const real two = real (2.0); // wtf?
+    const real two = real (2.0);
     
     const real fxx = real (1.0)/(vfpic::dx*vfpic::dx);
     const real fzz = real (1.0)/(vfpic::dz*vfpic::dz);
     
     const real fxz = real (0.25)/(vfpic::dx*vfpic::dz);
     
-    for (int k = 1; k <= T::nz; ++k)
-    for (int i = 1; i <= T::nx; ++i)
+    for (int k = 1; k <= Nz; ++k)
+    for (int i = 1; i <= Nx; ++i)
     {
         J.x (k,i) = fxz*(A.z (k+1,i+1) - A.z (k+1,i-1) - A.z (k-1,i+1) + A.z (k-1,i-1));
         J.z (k,i) = fxz*(A.x (k+1,i+1) - A.x (k-1,i+1) - A.x (k+1,i-1) + A.x (k-1,i-1));
@@ -65,8 +55,8 @@ void curlcurl (ThreeVector<S>& J, const ThreeVector<T>& A)
         J.z (k,i) -= fxx*(A.z (k  ,i+1) - two*A.z (k,i) + A.z (k  ,i-1));
     }
     
-    for (int k = 1; k <= T::nz; ++k)
-    for (int i = 1; i <= T::nx; ++i)
+    for (int k = 1; k <= Nz; ++k)
+    for (int i = 1; i <= Nx; ++i)
     {
         J.y (k,i) = -fxx*(A.y (k  ,i+1) - two*A.y (k,i) + A.y (k  ,i-1))
                     -fzz*(A.y (k+1,i  ) - two*A.y (k,i) + A.y (k-1,i  ));

@@ -148,9 +148,8 @@ public:
 };
 
 template <typename T, int N1, int N2>
-class ScalarField: public ScalarBase<T,N1,N2>
+struct ScalarField: public ScalarBase<T,N1,N2>
 {
-public:
     ScalarField (): ScalarBase<T,N1,N2> (new T[size])
     {
         if (config::verbose)
@@ -192,6 +191,8 @@ public:
     using ScalarBase<T,N1,N2>::data;
     using ScalarBase<T,N1,N2>::size;
     
+    typedef ScalarBase<T,N1,N2> base_type;
+    
     void fill (const T& value)
     {
         std::fill (data, data + size, value);
@@ -209,19 +210,25 @@ using GlobalScalarField = ScalarField<T,vfpic::nz,vfpic::nx>;
 template <typename T>
 using LocalScalarField = ScalarField<T,vfpic::mz,vfpic::mx>;
 
-template <typename T>
-struct LocalScalarFieldView: public ScalarBase<T,vfpic::mz,vfpic::mx>
+template <typename T, int N1, int N2>
+struct ScalarBaseView: public ScalarBase<T,N1,N2>
 {
-    LocalScalarFieldView
-    (GlobalScalarField<T>& global, int ithread): ScalarBase<T,vfpic::mz,vfpic::mx> (&global(ithread*vfpic::mz,0))
+    ScalarBaseView
+    (GlobalScalarField<T>& global, int ithread): ScalarBase<T,N1,N2> (&global(ithread*vfpic::mz,0))
     {
+        static_assert (N1 == vfpic::mz && N2 == vfpic::mx, "");
     }
     using ScalarBase<T,vfpic::mz,vfpic::mx>::operator=;
     using ScalarBase<T,vfpic::mz,vfpic::mx>::operator+=;
     using ScalarBase<T,vfpic::mz,vfpic::mx>::operator-=;
     using ScalarBase<T,vfpic::mz,vfpic::mx>::operator*=;
     using ScalarBase<T,vfpic::mz,vfpic::mx>::operator/=;
+    
+    typedef ScalarBase<T,N1,N2> base_type;
 };
+
+template <typename T>
+using LocalScalarFieldView = ScalarBaseView<T,vfpic::mz,vfpic::mx>;
 
 /* Traits */
 

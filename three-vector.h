@@ -20,11 +20,10 @@ class ThreeVector
 {
 private:
     typedef typename S::value_type value_type;
-    typedef ScalarBase<value_type,S::nz,S::nx> Scalar;
+    typedef typename S::base_type base_type;
 public:
     ThreeVector ()
     {
-        static_assert (std::is_base_of<Scalar,S>::value, "");
     }
     ThreeVector (const ThreeVector& other) = default;
     ThreeVector& operator= (const ThreeVector& other) = default;
@@ -33,22 +32,19 @@ public:
     y (std::move (other.y)),
     z (std::move (other.z))
     {
-        static_assert (std::is_base_of<Scalar,S>::value, "");
     }
     ThreeVector& operator= (ThreeVector&& other) = delete;
     virtual ~ThreeVector () = default;
 public:
     ThreeVector (const S& a, const S& b, const S& c): x (a), y (b), z (c)
     {
-        static_assert (std::is_base_of<Scalar,S>::value, "");
     }
     ThreeVector (S&& a, S&& b, S&& c): x (std::move (a)), y (std::move (b)), z (std::move (c))
     {
-        static_assert (std::is_base_of<Scalar,S>::value, "");
     }
 private:
-    using FieldOp = std::mem_fun1_t<Scalar&,Scalar,const Scalar&>;
-    using ValueOp = std::mem_fun1_t<Scalar&,Scalar,const value_type&>;
+    using FieldOp = std::mem_fun1_t<base_type&,base_type,const base_type&>;
+    using ValueOp = std::mem_fun1_t<base_type&,base_type,const value_type&>;
     inline void lift (ValueOp func, const value_type& other)
     {
         func (&x, other);
@@ -58,12 +54,12 @@ private:
     template <class U>
     inline void lift (FieldOp func, const ThreeVector<U>& other)
     {
-        static_assert (std::is_base_of<Scalar,U>::value, "");
+        static_assert (std::is_base_of<base_type,U>::value, "");
         func (&x, other.x);
         func (&y, other.y);
         func (&z, other.z);
     }
-    inline void lift (FieldOp func, const Scalar& other)
+    inline void lift (FieldOp func, const base_type& other)
     {
         func (&x, other);
         func (&y, other);
@@ -73,61 +69,61 @@ public:
     /* Assign */
     inline ThreeVector& operator= (const value_type& value)
     {
-        lift (ValueOp (&Scalar::operator=), value);
+        lift (ValueOp (&base_type::operator=), value);
         return *this;
     }
     template <class U>
     inline ThreeVector& operator= (const U& other)
     {
-        lift (FieldOp (&Scalar::operator=), other);
+        lift (FieldOp (&base_type::operator=), other);
         return *this;
     }
     /* Add to */
     inline ThreeVector& operator+= (const value_type& value)
     {
-        lift (ValueOp (&Scalar::operator+=), value);
+        lift (ValueOp (&base_type::operator+=), value);
         return *this;
     }
     template <class U>
     inline ThreeVector& operator+= (const U& other)
     {
-        lift (FieldOp (&Scalar::operator+=), other);
+        lift (FieldOp (&base_type::operator+=), other);
         return *this;
     }
     /* Subtract from */
     inline ThreeVector& operator-= (const value_type& value)
     {
-        lift (ValueOp (&Scalar::operator-=), value);
+        lift (ValueOp (&base_type::operator-=), value);
         return *this;
     }
     template <class U>
     inline ThreeVector& operator-= (const U& other)
     {
-        lift (FieldOp (&Scalar::operator-=), other);
+        lift (FieldOp (&base_type::operator-=), other);
         return *this;
     }
     /* Multiply with */
     inline ThreeVector& operator*= (const value_type& value)
     {
-        lift (ValueOp (&Scalar::operator*=), value);
+        lift (ValueOp (&base_type::operator*=), value);
         return *this;
     }
     template <class U>
     inline ThreeVector& operator*= (const U& other)
     {
-        lift (FieldOp (&Scalar::operator*=), other);
+        lift (FieldOp (&base_type::operator*=), other);
         return *this;
     }
     /* Divide by */
     inline ThreeVector& operator/= (const value_type& value)
     {
-        lift (ValueOp (&Scalar::operator/=), value);
+        lift (ValueOp (&base_type::operator/=), value);
         return *this;
     }
     template <class U>
     inline ThreeVector& operator/= (const U& other)
     {
-        lift (FieldOp (&Scalar::operator/=), other);
+        lift (FieldOp (&base_type::operator/=), other);
         return *this;
     }
     inline S& operator[] (int j)
