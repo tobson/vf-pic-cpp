@@ -9,10 +9,8 @@
 #include "global.h"
 #include "drift-kick.h"
 
-void drift (LocalParticleArrayView<real>& particles)
+void drift (LocalParticleArrayView<real>& particles, const real dt)
 {
-    using config::dt;
-    
     using config::x0;
     using config::z0;
     
@@ -34,10 +32,9 @@ void drift (LocalParticleArrayView<real>& particles)
 
 void kick (LocalParticleArrayView<real>& particles,
            const GlobalVectorField<real>& E,
-           const GlobalVectorField<real>& B)
+           const GlobalVectorField<real>& B, const real dt)
 {
     using config::em;
-    using config::dt;
     
     using config::x0;
     using config::z0;

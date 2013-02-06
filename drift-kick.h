@@ -12,10 +12,10 @@
 #include "particles.h"
 #include "vector-field.h"
 
-void drift (LocalParticleArrayView<real>&);
+void drift (LocalParticleArrayView<real>&, const real);
 
 void kick (LocalParticleArrayView<real>&,
            const GlobalVectorField<real>&,
-           const GlobalVectorField<real>&);
+           const GlobalVectorField<real>&, const real);
 
 #endif /* defined(__vf_pic__drift_kick__) */

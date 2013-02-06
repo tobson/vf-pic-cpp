@@ -99,8 +99,8 @@ void iteration (GlobalVariables<real>& global, Barrier& barrier, const int ithre
         B += H; B *= real (0.5);
         boundaryCondition (global.B);
         
-        drift (particles);
-        kick (particles, global.E, global.B);
+        drift (particles, config::dt);
+        kick (particles, global.E, global.B, config::dt);
 
         deposit (fluid, particles);
         
