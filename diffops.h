@@ -38,10 +38,10 @@ void curl (ThreeVector<S1,T,Nz,Nx>* B, const ThreeVector<S2,T,Nz,Nx>& A)
 template <template<typename, int, int> class S1, template<typename, int, int> class S2, typename T, int Nz, int Nx>
 void curlcurl (ThreeVector<S1,T,Nz,Nx>* J, const ThreeVector<S2,T,Nz,Nx>& A)
 {
-    const real two = real (2.0);
+    const real two = real (2);
     
-    const real fxx = real (1.0)/(vfpic::dx*vfpic::dx);
-    const real fzz = real (1.0)/(vfpic::dz*vfpic::dz);
+    const real fxx = real (1)/(vfpic::dx*vfpic::dx);
+    const real fzz = real (1)/(vfpic::dz*vfpic::dz);
     
     const real fxz = real (0.25)/(vfpic::dx*vfpic::dz);
     

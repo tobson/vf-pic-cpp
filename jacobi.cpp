@@ -28,8 +28,8 @@ struct Grid
         for (int k = 0; k < vfpic::nz + 2; ++k)
         for (int i = 0; i < vfpic::nx + 2; ++i)
         {
-            x(k,i) = config::x0 + (i - 0.5)*vfpic::dx;
-            z(k,i) = config::z0 + (k - 0.5)*vfpic::dz;
+            x(k,i) = config::x0 + (i - real (0.5))*vfpic::dx;
+            z(k,i) = config::z0 + (k - real (0.5))*vfpic::dz;
         }
     }
     GlobalScalarField<real> x, z;
@@ -39,7 +39,7 @@ struct Fields
 {
     Fields (const Grid &grid)
     {
-        const real two_pi = 2.0*pi;
+        const real two_pi = real (2)*pi;
 
         using config::ikx;
         using config::ikz;
@@ -54,8 +54,8 @@ struct Fields
         }
         boundaryCondition(rho);
 
-        phi.fill (0.0);
-        phi0.fill (0.0);
+        phi.fill (0);
+        phi0.fill (0);
         
         for (int j = 0; j < 3; ++j)
         {
@@ -65,8 +65,8 @@ struct Fields
                 J[j](k,i) = (j + 2)*sin(two_pi*ikx*x(k,i))*cos(two_pi*ikz*z(k,i));
             }
 
-            A[j].fill (0.0);
-            A0[j].fill (0.0);
+            A[j].fill (0);
+            A0[j].fill (0);
         }
         boundaryCondition(J);
     }
@@ -76,8 +76,8 @@ struct Fields
 
 void iteration (Fields &fields, const int niter)
 {
-    const real dx12 = real (1.0)/(vfpic::dx*vfpic::dx);
-    const real dz12 = real (1.0)/(vfpic::dz*vfpic::dz);
+    const real dx12 = real (1)/(vfpic::dx*vfpic::dx);
+    const real dz12 = real (1)/(vfpic::dz*vfpic::dz);
     const real fac = real (0.5)/(dx12 + dz12);
 
     const GlobalScalarField<real>& rho = fields.rho;
@@ -134,8 +134,8 @@ void iteration (Fields &fields, const int niter)
 
 void iterationThread (Fields &fields, const int niter, const int ithread, Barrier &barrier)
 {
-    const real dx12 = real (1.0)/(vfpic::dx*vfpic::dx);
-    const real dz12 = real (1.0)/(vfpic::dz*vfpic::dz);
+    const real dx12 = real (1)/(vfpic::dx*vfpic::dx);
+    const real dz12 = real (1)/(vfpic::dz*vfpic::dz);
     const real fac = real (0.5)/(dx12 + dz12);
 
     const LocalScalarFieldView<real> rho (fields.rho, ithread);

@@ -13,7 +13,7 @@
 
 #include <cmath>
 
-const real pi = 4.0*atan (1.0);
+const real pi = real (4)*atan (real (1));
 
 namespace vfpic
 {

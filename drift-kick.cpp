@@ -23,8 +23,8 @@ void drift (LocalParticleArrayView<real>* particles,
     using config::Lx;
     using config::Lz;
     
-    const real Lx1 = real (1.0)/config::Lx;
-    const real Lz1 = real (1.0)/config::Lz;
+    const real Lx1 = real (1)/config::Lx;
+    const real Lz1 = real (1)/config::Lz;
     
     auto pnew = particles->begin ();
     auto pold = particles2.begin ();
@@ -54,6 +54,10 @@ void kick (LocalParticleArrayView<real>* particles,
            const GlobalVectorField<real>& E,
            const GlobalVectorField<real>& B, const real dt)
 {
+    const real half = real (0.5);
+    const real one = real (1);
+    const real two = real (2);
+
     using config::em;
     
     using config::x0;
@@ -62,18 +66,15 @@ void kick (LocalParticleArrayView<real>* particles,
     using vfpic::dx;
     using vfpic::dz;
     
-    const real emdt2 = 0.5*em*dt;
-    
-    const real one = real (1.0);
-    const real two = real (2.0);
+    const real emdt2 = half*em*dt;
 
     auto pnew = particles->begin ();
     auto pold = particles2.begin ();
 
     for (int n = 0; n < vfpic::mpar; ++n)
     {
-        const real xdx = (pnew->x - x0)/dx + 0.5;
-        const real zdz = (pnew->z - z0)/dz + 0.5;
+        const real xdx = (pnew->x - x0)/dx + half;
+        const real zdz = (pnew->z - z0)/dz + half;
         
         const int i0 (xdx);
         const int k0 (zdz);

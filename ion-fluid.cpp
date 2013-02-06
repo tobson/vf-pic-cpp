@@ -25,6 +25,7 @@ void Deposit::operator() (IonFluid<real>* fluid,
     
     const real zero = real (0.0);
     const real one = real (1.0);
+    const real half = real (0.5);
     
     static_assert (std::is_pod<FourMomentum<real>>::value, "");
     const FourMomentum<real> fourzero = {zero, zero, zero, zero};
@@ -32,8 +33,8 @@ void Deposit::operator() (IonFluid<real>* fluid,
     
     for (auto p = particles.begin (); p != particles.end (); ++p)
     {
-        const real xdx = (p->x - x0)/dx + 0.5;
-        const real zdz = (p->z - z0)/dz + 0.5;
+        const real xdx = (p->x - x0)/dx + half;
+        const real zdz = (p->z - z0)/dz + half;
         
         const int i0 (xdx);
         const int k0 (zdz);

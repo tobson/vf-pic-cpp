@@ -88,8 +88,8 @@ void iteration (GlobalVariables<real>& global, Barrier& barrier, const int ithre
     Deposit deposit (barrier, ithread);
     Ohm ohm (ithread);
     
-    const real onehalf = real (0.5);
-    const real two = real (2.0);
+    const real half = real (0.5);
+    const real two = real (2);
 
     for (int it = 0; it < niter; ++it)
     {
@@ -100,13 +100,13 @@ void iteration (GlobalVariables<real>& global, Barrier& barrier, const int ithre
         
         curl (&H, A);
         
-        B += H; B *= onehalf;
+        B += H; B *= half;
         boundaryCondition (global.B);
         
         kick (&particles, global.E, global.B, dt);
-        drift (&particles, onehalf*dt);
+        drift (&particles, half*dt);
         deposit (&fluid, particles);
-        drift (&particles, onehalf*dt);
+        drift (&particles, half*dt);
 
         curlcurl (&J, A);
         ohm (&D, H, J, fluid);

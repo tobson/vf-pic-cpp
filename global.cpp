@@ -17,7 +17,7 @@ real dx, dz;
 
 void computeVariables ()
 {
-    dx = 1.0/nx;
-    dz = 1.0/nz;
+    dx = real (1)/real (nx);
+    dz = real (1)/real (nz);
 }
 }
