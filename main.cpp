@@ -16,6 +16,7 @@
 #include "global.h"
 #include "global-variables.h"
 #include "grid.h"
+#include "ohm.h"
 #include "particles.h"
 #include "vector-field.h"
 
@@ -48,10 +49,6 @@ void initialCondition (GlobalVariables<real>& global)
     
     boundaryCondition (global.A);
     boundaryCondition (global.E);
-    
-    curl (global.B, global.A);
-    
-    boundaryCondition (global.B);
 }
 
 void iteration (std::array<GlobalVariables<real>,2>& global, Barrier& barrier, const int ithread, int niter)
@@ -72,11 +69,12 @@ void iteration (std::array<GlobalVariables<real>,2>& global, Barrier& barrier, c
     
     LocalParticleArrayView<real> particles1 (global1.particles, ithread);
     
-    LocalVectorField<real> H, J;
+    LocalVectorField<real> H, J, D;
     
     curl (H, A0);
     
     Deposit deposit (barrier, ithread);
+    Ohm ohm (ithread);
 
     for (int it = 0; it < niter; ++it)
     {
@@ -86,15 +84,18 @@ void iteration (std::array<GlobalVariables<real>,2>& global, Barrier& barrier, c
         boundaryCondition (global0.A, barrier, ithread);
         
         curl (H, A0);
+        curlcurl (J, A0);
         
         B0 += H; B0 *= real (0.5);
         boundaryCondition (global0.B, barrier, ithread);
         
         drift (particles0);
         kick (particles0, global0.E, global0.B);
+
+        // This computes the inverse ion mass density rho1 and the ion fluid velocity U
+        deposit (global0);
         
-        deposit (global0);
-        deposit (global0);
+        ohm (D, H, J, global0);
     }
     printf ("Hi, I'm thread %d!\n", ithread);
 }
