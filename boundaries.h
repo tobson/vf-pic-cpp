@@ -13,8 +13,8 @@
 #include "scalar-field.h"
 #include "vector-field.h"
 
-template <typename T, int Nz, int Nx>
-void boundaryConditionX (ScalarBase<T,Nz,Nx>& scalar)
+template <template <typename, int, int> class S, typename T, int Nz, int Nx>
+void boundaryConditionX (S<T,Nz,Nx>& scalar)
 {
     for (int k = 1; k <= Nz; ++k)
     {

@@ -35,10 +35,16 @@ public:
     ThreeVector& operator= (ThreeVector&& other) = delete;
     virtual ~ThreeVector () = default;
 public:
-    ThreeVector (const S<T,N1,N2>& a, const S<T,N1,N2>& b, const S<T,N1,N2>& c): x (a), y (b), z (c)
+    ThreeVector (const S<T,N1,N2>& a, const S<T,N1,N2>& b, const S<T,N1,N2>& c):
+    x (a),
+    y (b),
+    z (c)
     {
     }
-    ThreeVector (S<T,N1,N2>&& a, S<T,N1,N2>&& b, S<T,N1,N2>&& c): x (std::move (a)), y (std::move (b)), z (std::move (c))
+    ThreeVector (S<T,N1,N2>&& a, S<T,N1,N2>&& b, S<T,N1,N2>&& c):
+    x (std::move (a)),
+    y (std::move (b)),
+    z (std::move (c))
     {
     }
 private:
@@ -58,8 +64,10 @@ private:
         func (&y, other.y);
         func (&z, other.z);
     }
-    inline void lift (FieldOp func, const base_class& other)
+    template <template <typename, int, int> class U>
+    inline void lift (FieldOp func, const U<T,N1,N2>& other)
     {
+        static_assert (std::is_base_of<base_class,U<T,N1,N2>>::value, "");
         func (&x, other);
         func (&y, other);
         func (&z, other);
