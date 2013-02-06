@@ -31,7 +31,7 @@ void curl (ThreeVector<S1,T,Nz,Nx>* B, const ThreeVector<S2,T,Nz,Nx>& A)
     for (int i = 1; i <= Nx; ++i)
     {
         B->y (k,i) = fz*(A.x (k+1,i  ) - A.x (k-1,i  ))
-                  - fx*(A.z (k  ,i+1) - A.z (k  ,i-1));
+                   - fx*(A.z (k  ,i+1) - A.z (k  ,i-1));
     }
 }
 
