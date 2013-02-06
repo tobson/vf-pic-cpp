@@ -26,18 +26,19 @@ void drift (LocalParticleArrayView<real>* particles,
     const real Lx1 = real (1.0)/config::Lx;
     const real Lz1 = real (1.0)/config::Lz;
     
-    auto p = particles->begin ();
-    auto p2 = particles2.begin ();
+    auto pnew = particles->begin ();
+    auto pold = particles2.begin ();
     
     for (int n = 0; n < vfpic::mpar; ++n)
     {
-        p->x = p2->x + p->vx*dt;
-        p->x -= floor ((p->x - x0)*Lx1)*Lx;
+        pnew->x = pold->x + pnew->vx*dt;
+        pnew->x -= floor ((pnew->x - x0)*Lx1)*Lx;
 
-        p->z = p2->z + p->vz*dt;
-        p->z -= floor ((p->z - z0)*Lz1)*Lz;
+        pnew->z = pold->z + pnew->vz*dt;
+        pnew->z -= floor ((pnew->z - z0)*Lz1)*Lz;
         
-        ++p; ++p2;
+        ++pnew;
+        ++pold;
     }
 }
 
@@ -63,12 +64,16 @@ void kick (LocalParticleArrayView<real>* particles,
     
     const real emdt2 = 0.5*em*dt;
     
-    const real one = 1.0;
+    const real one = real (1.0);
+    const real two = real (2.0);
 
-    for (auto p = particles->begin (); p != particles->end (); ++p)
+    auto pnew = particles->begin ();
+    auto pold = particles2.begin ();
+
+    for (int n = 0; n < vfpic::mpar; ++n)
     {
-        const real xdx = (p->x - x0)/dx + 0.5;
-        const real zdz = (p->z - z0)/dz + 0.5;
+        const real xdx = (pnew->x - x0)/dx + 0.5;
+        const real zdz = (pnew->z - z0)/dz + 0.5;
         
         const int i0 (xdx);
         const int k0 (zdz);
@@ -100,18 +105,21 @@ void kick (LocalParticleArrayView<real>* particles,
         by *= emdt2;
         bz *= emdt2;
         
-        const real vmx = p->vx + ex;
-        const real vmy = p->vy + ey;
-        const real vmz = p->vz + ez;
+        const real vmx = pold->vx + ex;
+        const real vmy = pold->vy + ey;
+        const real vmz = pold->vz + ez;
         
         const real vpx = vmx + (vmy*bz - vmz*by);
         const real vpy = vmy + (vmz*bx - vmx*bz);
         const real vpz = vmz + (vmx*by - vmy*bx);
         
-        const real fac = 2.0/(1.0 + bx*bx + by*by + bz*bz);
+        const real fac = two/(one + bx*bx + by*by + bz*bz);
         
-        p->vx = vmx + (vpy*bz - vpz*by)*fac + ex;
-        p->vy = vmy + (vpz*bx - vpx*bz)*fac + ey;
-        p->vz = vmz + (vpx*by - vpy*bx)*fac + ez;
+        pnew->vx = vmx + (vpy*bz - vpz*by)*fac + ex;
+        pnew->vy = vmy + (vpz*bx - vpx*bz)*fac + ey;
+        pnew->vz = vmz + (vpx*by - vpy*bx)*fac + ez;
+        
+        ++pnew;
+        ++pold;
     }
 }
