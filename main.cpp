@@ -76,10 +76,13 @@ void iteration (GlobalVariables<real>& global, Barrier& barrier, const int ithre
 
     LocalVectorFieldView<real> B (global.B, ithread);
     
+    IonFluid<real>& fluid = global.fluid;
+    
     LocalVectorField<real> H, J, D;
     
     curl (H, A);
     
+    BoundaryCondition boundaryCondition (barrier, ithread);
     Deposit deposit (barrier, ithread);
     Ohm ohm (ithread);
 
@@ -88,21 +91,20 @@ void iteration (GlobalVariables<real>& global, Barrier& barrier, const int ithre
         B = H;
         
         faraday (A, E);
-        boundaryCondition (global.A, barrier, ithread);
+        boundaryCondition (global.A);
         
         curl (H, A);
         curlcurl (J, A);
         
         B += H; B *= real (0.5);
-        boundaryCondition (global.B, barrier, ithread);
+        boundaryCondition (global.B);
         
         drift (particles);
         kick (particles, global.E, global.B);
 
-        // This computes the inverse ion mass density rho1 and the ion fluid velocity U
-        deposit (global.fluid, particles);
+        deposit (fluid, particles);
         
-        ohm (D, H, J, global.fluid);
+        ohm (D, H, J, fluid);
     }
     printf ("Hi, I'm thread %d!\n", ithread);
 }

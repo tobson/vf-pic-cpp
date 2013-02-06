@@ -45,4 +45,15 @@ void boundaryCondition (GlobalVectorField<real>&, Barrier&, const int);
 void boundaryCondition (GlobalScalarField<real>&);
 void boundaryCondition (GlobalVectorField<real>&);
 
+class BoundaryCondition
+{
+public:
+    BoundaryCondition (Barrier&, const int);
+    void operator() (GlobalScalarField<real>&);
+    void operator() (GlobalVectorField<real>&);
+private:
+    Barrier& barrier;
+    const int ithread;
+};
+
 #endif /* defined(__vf_pic__boundaries__) */

@@ -78,3 +78,27 @@ void boundaryCondition (GlobalVectorField<real>& vector)
     boundaryConditionZ (vector);
 }
 
+BoundaryCondition::BoundaryCondition (Barrier& barrier, const int ithread):
+barrier (barrier), ithread (ithread)
+{
+}
+
+void BoundaryCondition::operator() (GlobalScalarField<real>& global)
+{
+    LocalScalarFieldView<real> local (global, ithread);
+    boundaryConditionX (local);
+    if (barrier.wait ())
+    {
+        boundaryConditionZ (global);
+    }
+}
+
+void BoundaryCondition::operator() (GlobalVectorField<real>& global)
+{
+    LocalVectorFieldView<real> local (global, ithread);
+    boundaryConditionX (local);
+    if (barrier.wait ())
+    {
+        boundaryConditionZ (global);
+    }
+}
