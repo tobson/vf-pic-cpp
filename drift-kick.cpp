@@ -11,6 +11,12 @@
 
 void drift (LocalParticleArrayView<real>& particles, const real dt)
 {
+    drift (particles, particles, dt);
+}
+
+void drift (LocalParticleArrayView<real>& particles,
+            const LocalParticleArrayView<real>& particles2, const real dt)
+{
     using config::x0;
     using config::z0;
     
@@ -20,17 +26,30 @@ void drift (LocalParticleArrayView<real>& particles, const real dt)
     const real Lx1 = real (1.0)/config::Lx;
     const real Lz1 = real (1.0)/config::Lz;
     
-    for (auto p = particles.begin (); p != particles.end (); ++p)
+    auto p = particles.begin ();
+    auto p2 = particles2.begin ();
+    
+    for (int n = 0; n < vfpic::mpar; ++n)
     {
-        p->x += p->vx*dt;
+        p->x = p2->x + p->vx*dt;
         p->x -= floor ((p->x - x0)*Lx1)*Lx;
 
-        p->z += p->vz*dt;
+        p->z = p2->z + p->vz*dt;
         p->z -= floor ((p->z - z0)*Lz1)*Lz;
+        
+        ++p; ++p2;
     }
 }
 
 void kick (LocalParticleArrayView<real>& particles,
+           const GlobalVectorField<real>& E,
+           const GlobalVectorField<real>& B, const real dt)
+{
+    kick (particles, particles, E, B, dt);
+}
+
+void kick (LocalParticleArrayView<real>& particles,
+           const LocalParticleArrayView<real>& particles2,
            const GlobalVectorField<real>& E,
            const GlobalVectorField<real>& B, const real dt)
 {

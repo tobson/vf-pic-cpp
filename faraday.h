@@ -14,4 +14,8 @@
 void faraday (LocalVectorFieldView<real>&,
               const LocalVectorFieldView<real>&, const real);
 
+void faraday (LocalVectorFieldView<real>&,
+              const LocalVectorFieldView<real>&,
+              const LocalVectorFieldView<real>&, const real);
+
 #endif

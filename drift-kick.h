@@ -14,7 +14,15 @@
 
 void drift (LocalParticleArrayView<real>&, const real);
 
+void drift (LocalParticleArrayView<real>&,
+            const LocalParticleArrayView<real>&, const real);
+
 void kick (LocalParticleArrayView<real>&,
+           const GlobalVectorField<real>&,
+           const GlobalVectorField<real>&, const real);
+
+void kick (LocalParticleArrayView<real>&,
+           const LocalParticleArrayView<real>&,
            const GlobalVectorField<real>&,
            const GlobalVectorField<real>&, const real);
 

@@ -64,6 +64,8 @@ void initialCondition (GlobalVectorField<real>& A,
 
 void iteration (GlobalVariables<real>& global, Barrier& barrier, const int ithread, int niter)
 {
+    using config::dt;
+    
     LocalVectorFieldView<real> A (global.A, ithread);
     LocalVectorFieldView<real> E (global.E, ithread);
     
@@ -90,21 +92,24 @@ void iteration (GlobalVariables<real>& global, Barrier& barrier, const int ithre
     {
         B = H;
         
-        faraday (A, E, config::dt);
+        faraday (A, E, dt);
         boundaryCondition (global.A);
         
         curl (H, A);
-        curlcurl (J, A);
         
         B += H; B *= real (0.5);
         boundaryCondition (global.B);
         
-        drift (particles, config::dt);
-        kick (particles, global.E, global.B, config::dt);
-
+        kick (particles, global.E, global.B, dt);
+        drift (particles, real (0.5)*dt);
         deposit (fluid, particles);
-        
+        drift (particles, real (0.5)*dt);
+
+        curlcurl (J, A);
         ohm (D, H, J, fluid);
+        
+        D *= real (2); D -= E; E2 = D;
+        
     }
     printf ("Hi, I'm thread %d!\n", ithread);
 }
