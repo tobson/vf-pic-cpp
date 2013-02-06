@@ -12,7 +12,7 @@ Ohm::Ohm (const int ithread): ithread (ithread)
 {
 }
 
-void Ohm::operator() (LocalVectorField<real>& E,
+void Ohm::operator() (LocalVectorField<real>* E,
                       const LocalVectorField<real>& B,
                       const LocalVectorField<real>& J,
                       IonFluid<real>& global)
@@ -34,8 +34,8 @@ void Ohm::operator() (LocalVectorField<real>& E,
     for (int k = 1; k <= vfpic::mz; ++k)
     for (int i = 1; i <= vfpic::mx; ++i)
     {
-        E.x (k,i) = Ue.z (k,i)*B.y (k,i) - Ue.y (k,i)*B.z (k,i);
-        E.y (k,i) = Ue.x (k,i)*B.z (k,i) - Ue.z (k,i)*B.x (k,i);
-        E.z (k,i) = Ue.y (k,i)*B.x (k,i) - Ue.x (k,i)*B.y (k,i);
+        E->x (k,i) = Ue.z (k,i)*B.y (k,i) - Ue.y (k,i)*B.z (k,i);
+        E->y (k,i) = Ue.x (k,i)*B.z (k,i) - Ue.z (k,i)*B.x (k,i);
+        E->z (k,i) = Ue.y (k,i)*B.x (k,i) - Ue.x (k,i)*B.y (k,i);
     }
 }

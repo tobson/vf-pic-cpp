@@ -82,7 +82,7 @@ void iteration (GlobalVariables<real>& global, Barrier& barrier, const int ithre
     
     LocalVectorField<real> H, J, D;
     
-    curl (H, A);
+    curl (&H, A);
     
     BoundaryCondition boundaryCondition (barrier, ithread);
     Deposit deposit (barrier, ithread);
@@ -95,18 +95,18 @@ void iteration (GlobalVariables<real>& global, Barrier& barrier, const int ithre
         faraday (A, E, dt);
         boundaryCondition (global.A);
         
-        curl (H, A);
+        curl (&H, A);
         
         B += H; B *= real (0.5);
         boundaryCondition (global.B);
         
-        kick (particles, global.E, global.B, dt);
-        drift (particles, real (0.5)*dt);
-        deposit (fluid, particles);
-        drift (particles, real (0.5)*dt);
+        kick (&particles, global.E, global.B, dt);
+        drift (&particles, real (0.5)*dt);
+        deposit (&fluid, particles);
+        drift (&particles, real (0.5)*dt);
 
-        curlcurl (J, A);
-        ohm (D, H, J, fluid);
+        curlcurl (&J, A);
+        ohm (&D, H, J, fluid);
         
         D *= real (2); D -= E; E2 = D;
         

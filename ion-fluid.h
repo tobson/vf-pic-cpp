@@ -25,10 +25,10 @@ class Deposit
 {
 public:
     Deposit (Barrier&, const int);
-    void operator() (IonFluid<real>&, const LocalParticleArrayView<real>&);
+    void operator() (IonFluid<real>*, const LocalParticleArrayView<real>&);
 private:
     void addGhosts ();
-    void convert (IonFluid<real>&);
+    void convert (IonFluid<real>*);
     template <typename T>
     struct FourMomentum
     {

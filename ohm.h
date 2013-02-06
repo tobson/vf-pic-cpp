@@ -15,7 +15,7 @@ class Ohm
 {
 public:
     Ohm (const int);
-    void operator() (LocalVectorField<real>&,
+    void operator() (LocalVectorField<real>*,
                      const LocalVectorField<real>&,
                      const LocalVectorField<real>&,
                      IonFluid<real>&);

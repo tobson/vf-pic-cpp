@@ -14,7 +14,7 @@ norm1 (real (vfpic::npc)/config::rho0)
 {
 }
 
-void Deposit::operator() (IonFluid<real>& fluid,
+void Deposit::operator() (IonFluid<real>* fluid,
                           const LocalParticleArrayView<real>& particles)
 {
     using config::x0;
@@ -75,12 +75,12 @@ void Deposit::addGhosts ()
     }
 }
 
-void Deposit::convert (IonFluid<real>& fluid)
+void Deposit::convert (IonFluid<real>* fluid)
 {
     {
         LocalScalarFieldView<FourMomentum<real>> sources1 (sources, ithread);
-        LocalScalarFieldView<real> rho (fluid.rho1, ithread);
-        LocalVectorFieldView<real> U (fluid.U, ithread);
+        LocalScalarFieldView<real> rho (fluid->rho1, ithread);
+        LocalVectorFieldView<real> U (fluid->U, ithread);
 
         for (int k = 1; k <= vfpic::mz; ++k)
         for (int i = 1; i <= vfpic::mx; ++i)
@@ -98,8 +98,8 @@ void Deposit::convert (IonFluid<real>& fluid)
         const int kthread = jthread % vfpic::nthreads;
 
         LocalScalarFieldView<FourMomentum<real>> sources1 (sources, kthread);
-        LocalScalarFieldView<real> rho (fluid.rho1, kthread);
-        LocalVectorFieldView<real> U (fluid.U, kthread);
+        LocalScalarFieldView<real> rho (fluid->rho1, kthread);
+        LocalVectorFieldView<real> U (fluid->U, kthread);
 
         for (int k = 1; k <= vfpic::mz; ++k)
         for (int i = 1; i <= vfpic::mx; ++i)
@@ -113,8 +113,8 @@ void Deposit::convert (IonFluid<real>& fluid)
     }
     // Compute reciprocal of mass density and normalize
     {
-        LocalScalarFieldView<real> rho1 (fluid.rho1, ithread);
-        LocalVectorFieldView<real> U (fluid.U, ithread);
+        LocalScalarFieldView<real> rho1 (fluid->rho1, ithread);
+        LocalVectorFieldView<real> U (fluid->U, ithread);
         
         rho1.reciprocal ();
         U *= rho1;
