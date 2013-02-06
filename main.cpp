@@ -87,28 +87,31 @@ void iteration (GlobalVariables<real>& global, Barrier& barrier, const int ithre
     BoundaryCondition boundaryCondition (barrier, ithread);
     Deposit deposit (barrier, ithread);
     Ohm ohm (ithread);
+    
+    const real onehalf = real (0.5);
+    const real two = real (2.0);
 
     for (int it = 0; it < niter; ++it)
     {
         B = H;
         
-        faraday (A, E, dt);
+        faraday (&A, E, dt);
         boundaryCondition (global.A);
         
         curl (&H, A);
         
-        B += H; B *= real (0.5);
+        B += H; B *= onehalf;
         boundaryCondition (global.B);
         
         kick (&particles, global.E, global.B, dt);
-        drift (&particles, real (0.5)*dt);
+        drift (&particles, onehalf*dt);
         deposit (&fluid, particles);
-        drift (&particles, real (0.5)*dt);
+        drift (&particles, onehalf*dt);
 
         curlcurl (&J, A);
         ohm (&D, H, J, fluid);
         
-        D *= real (2); D -= E; E2 = D;
+        D *= two; D -= E; E2 = D;
         
     }
     printf ("Hi, I'm thread %d!\n", ithread);

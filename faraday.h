@@ -11,10 +11,10 @@
 
 #include "vector-field.h"
 
-void faraday (LocalVectorFieldView<real>&,
+void faraday (LocalVectorFieldView<real>*,
               const LocalVectorFieldView<real>&, const real);
 
-void faraday (LocalVectorFieldView<real>&,
+void faraday (LocalVectorFieldView<real>*,
               const LocalVectorFieldView<real>&,
               const LocalVectorFieldView<real>&, const real);
 
