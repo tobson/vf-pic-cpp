@@ -34,7 +34,7 @@ struct GlobalVariables
     GlobalVectorField<real> E, E2;
     GlobalVectorField<real> B;
     IonFluid<T> fluid;
-    GlobalParticleArray<T> particles, particles2;;
+    GlobalParticleArray<T> particles, particles2;
 };
 
 void initialCondition (GlobalVectorField<real>& A,
