@@ -14,7 +14,6 @@
 #include "drift-kick.h"
 #include "faraday.h"
 #include "global.h"
-#include "global-variables.h"
 #include "grid.h"
 #include "ohm.h"
 #include "particles.h"
@@ -28,13 +27,25 @@
 #include <thread>
 #include <vector>
 
-void initialCondition (GlobalVariables<real>& global)
+template <typename T>
+struct GlobalVariables
+{
+    GlobalVectorField<real> A, A2;
+    GlobalVectorField<real> E, E2;
+    GlobalVectorField<real> B;
+    IonFluid<T> fluid;
+    GlobalParticleArray<T> particles, particles2;;
+};
+
+void initialCondition (GlobalVectorField<real>& A,
+                       GlobalVectorField<real>& E,
+                       GlobalParticleArray<real>& particles)
 {
     std::mt19937 gen;
     std::uniform_real_distribution<> uniform;
     std::normal_distribution<> normal;
     
-    for (auto p = global.particles.begin (); p != global.particles.end (); ++p)
+    for (auto p = particles.begin (); p != particles.end (); ++p)
     {
         p->x = config::x0 + uniform (gen)*config::Lx;
         p->z = config::z0 + uniform (gen)*config::Lz;
@@ -44,58 +55,54 @@ void initialCondition (GlobalVariables<real>& global)
         p->vz = config::cs0*normal (gen);
     }
     
-    global.A = real (0);
-    global.E = real (0);
+    A = real (0);
+    E = real (0);
     
-    boundaryCondition (global.A);
-    boundaryCondition (global.E);
+    boundaryCondition (A);
+    boundaryCondition (E);
 }
 
-void iteration (std::array<GlobalVariables<real>,2>& global, Barrier& barrier, const int ithread, int niter)
+void iteration (GlobalVariables<real>& global, Barrier& barrier, const int ithread, int niter)
 {
-    GlobalVariables<real>& global0 = global.at (0);
-
-    LocalVectorFieldView<real> A0 (global0.A, ithread);
-    LocalVectorFieldView<real> B0 (global0.B, ithread);
-    LocalVectorFieldView<real> E0 (global0.E, ithread);
+    LocalVectorFieldView<real> A (global.A, ithread);
+    LocalVectorFieldView<real> E (global.E, ithread);
     
-    LocalParticleArrayView<real> particles0 (global0.particles, ithread);
+    LocalParticleArrayView<real> particles (global.particles, ithread);
 
-    GlobalVariables<real>& global1 = global.at (1);
-
-    LocalVectorFieldView<real> A1 (global1.A, ithread);
-    LocalVectorFieldView<real> B1 (global1.B, ithread);
-    LocalVectorFieldView<real> E1 (global1.E, ithread);
+    LocalVectorFieldView<real> A2 (global.A2, ithread);
+    LocalVectorFieldView<real> E2 (global.E2, ithread);
     
-    LocalParticleArrayView<real> particles1 (global1.particles, ithread);
+    LocalParticleArrayView<real> particles2 (global.particles2, ithread);
+
+    LocalVectorFieldView<real> B (global.B, ithread);
     
     LocalVectorField<real> H, J, D;
     
-    curl (H, A0);
+    curl (H, A);
     
     Deposit deposit (barrier, ithread);
     Ohm ohm (ithread);
 
     for (int it = 0; it < niter; ++it)
     {
-        B0 = H;
+        B = H;
         
-        faraday (A0, E0);
-        boundaryCondition (global0.A, barrier, ithread);
+        faraday (A, E);
+        boundaryCondition (global.A, barrier, ithread);
         
-        curl (H, A0);
-        curlcurl (J, A0);
+        curl (H, A);
+        curlcurl (J, A);
         
-        B0 += H; B0 *= real (0.5);
-        boundaryCondition (global0.B, barrier, ithread);
+        B += H; B *= real (0.5);
+        boundaryCondition (global.B, barrier, ithread);
         
-        drift (particles0);
-        kick (particles0, global0.E, global0.B);
+        drift (particles);
+        kick (particles, global.E, global.B);
 
         // This computes the inverse ion mass density rho1 and the ion fluid velocity U
-        deposit (global0);
+        deposit (global.fluid, particles);
         
-        ohm (D, H, J, global0);
+        ohm (D, H, J, global.fluid);
     }
     printf ("Hi, I'm thread %d!\n", ithread);
 }
@@ -123,9 +130,9 @@ int main (int argc, const char * argv[])
     
     Barrier barrier (vfpic::nthreads);
     Grid grid;
-    std::array<GlobalVariables<real>,2> global;
+    GlobalVariables<real> global;
     
-    initialCondition (global.at (0));
+    initialCondition (global.A, global.E, global.particles);
     
     std::vector<std::thread> threads;
 

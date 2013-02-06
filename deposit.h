@@ -10,19 +10,25 @@
 #define __vf_pic__deposit__
 
 #include "barrier.h"
-#include "global-variables.h"
 #include "particles.h"
 #include "scalar-field.h"
 #include "vector-field.h"
+
+template <typename T>
+struct IonFluid
+{
+    GlobalScalarField<T> rho1;
+    GlobalVectorField<T> U;
+};
 
 class Deposit
 {
 public:
     Deposit (Barrier&, const int);
-    void operator() (GlobalVariables<real>&);
+    void operator() (IonFluid<real>&, const LocalParticleArrayView<real>&);
 private:
     void addGhosts ();
-    void convert (GlobalVariables<real>&);
+    void convert (IonFluid<real>&);
     template <typename T>
     struct FourMomentum
     {

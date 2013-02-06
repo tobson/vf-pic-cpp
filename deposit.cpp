@@ -14,7 +14,8 @@ norm1 (real (vfpic::npc)/config::rho0)
 {
 }
 
-void Deposit::operator() (GlobalVariables<real>& global)
+void Deposit::operator() (IonFluid<real>& fluid,
+                          const LocalParticleArrayView<real>& particles)
 {
     using config::x0;
     using config::z0;
@@ -24,8 +25,6 @@ void Deposit::operator() (GlobalVariables<real>& global)
     
     const real zero = real (0.0);
     const real one = real (1.0);
-    
-    const LocalParticleArrayView<real> particles (global.particles, ithread);
     
     static_assert (std::is_pod<FourMomentum<real>>::value, "");
     const FourMomentum<real> fourzero = {zero, zero, zero, zero};
@@ -56,7 +55,7 @@ void Deposit::operator() (GlobalVariables<real>& global)
         sources (k1,i1).accumulate (w11,w11*p->vx,w11*p->vy,w11*p->vz);
     }
     addGhosts ();
-    convert (global);
+    convert (fluid);
 }
 
 void Deposit::addGhosts ()
@@ -76,12 +75,12 @@ void Deposit::addGhosts ()
     }
 }
 
-void Deposit::convert (GlobalVariables<real>& global)
+void Deposit::convert (IonFluid<real>& fluid)
 {
     {
         LocalScalarFieldView<FourMomentum<real>> sources1 (sources, ithread);
-        LocalScalarFieldView<real> rho (global.rho1, ithread);
-        LocalVectorFieldView<real> U (global.U, ithread);
+        LocalScalarFieldView<real> rho (fluid.rho1, ithread);
+        LocalVectorFieldView<real> U (fluid.U, ithread);
 
         for (int k = 1; k <= vfpic::mz; ++k)
         for (int i = 1; i <= vfpic::mx; ++i)
@@ -99,8 +98,8 @@ void Deposit::convert (GlobalVariables<real>& global)
         const int kthread = jthread % vfpic::nthreads;
 
         LocalScalarFieldView<FourMomentum<real>> sources1 (sources, kthread);
-        LocalScalarFieldView<real> rho (global.rho1, kthread);
-        LocalVectorFieldView<real> U (global.U, kthread);
+        LocalScalarFieldView<real> rho (fluid.rho1, kthread);
+        LocalVectorFieldView<real> U (fluid.U, kthread);
 
         for (int k = 1; k <= vfpic::mz; ++k)
         for (int i = 1; i <= vfpic::mx; ++i)
@@ -114,8 +113,8 @@ void Deposit::convert (GlobalVariables<real>& global)
     }
     // Compute reciprocal of mass density and normalize
     {
-        LocalScalarFieldView<real> rho1 (global.rho1, ithread);
-        LocalVectorFieldView<real> U (global.U, ithread);
+        LocalScalarFieldView<real> rho1 (fluid.rho1, ithread);
+        LocalVectorFieldView<real> U (fluid.U, ithread);
         
         rho1.reciprocal ();
         U *= rho1;
