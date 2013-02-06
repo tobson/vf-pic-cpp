@@ -90,7 +90,7 @@ void iteration (GlobalVariables<real>& global, Barrier& barrier, const int ithre
     {
         B = H;
         
-        faraday (A, E);
+        faraday (A, E, config::dt);
         boundaryCondition (global.A);
         
         curl (H, A);
