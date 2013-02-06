@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		D20381A416BCF25A008755DC /* sse.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D20381A216BCF25A008755DC /* sse.cpp */; };
-		D20381BE16BE0196008755DC /* deposit.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D20381BC16BE0195008755DC /* deposit.cpp */; };
+		D20381BE16BE0196008755DC /* ion-fluid.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D20381BC16BE0195008755DC /* ion-fluid.cpp */; };
 		D20381BF16BE2121008755DC /* global.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D28BAEFD16B5FD0200578956 /* global.cpp */; };
 		D20381C016BE212F008755DC /* config.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D28BAF0016B5FDDA00578956 /* config.cpp */; };
 		D206FBFD16C1C31C008BD080 /* ohm.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D206FBFB16C1C31C008BD080 /* ohm.cpp */; };
@@ -77,8 +77,8 @@
 /* Begin PBXFileReference section */
 		D20381A116BCF1FD008755DC /* sse */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = sse; sourceTree = BUILT_PRODUCTS_DIR; };
 		D20381A216BCF25A008755DC /* sse.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = sse.cpp; sourceTree = "<group>"; };
-		D20381BC16BE0195008755DC /* deposit.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = deposit.cpp; sourceTree = "<group>"; };
-		D20381BD16BE0195008755DC /* deposit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = deposit.h; sourceTree = "<group>"; };
+		D20381BC16BE0195008755DC /* ion-fluid.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "ion-fluid.cpp"; sourceTree = "<group>"; };
+		D20381BD16BE0195008755DC /* ion-fluid.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ion-fluid.h"; sourceTree = "<group>"; };
 		D206FBFB16C1C31C008BD080 /* ohm.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ohm.cpp; sourceTree = "<group>"; };
 		D206FBFC16C1C31C008BD080 /* ohm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ohm.h; sourceTree = "<group>"; };
 		D24BC37716B64B1A006C64A3 /* jacobi */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = jacobi; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -160,7 +160,7 @@
 				D28BAF1816B60B3800578956 /* barrier.cpp */,
 				D2C6828016BB7EB30023FB36 /* boundaries.cpp */,
 				D28BAF0016B5FDDA00578956 /* config.cpp */,
-				D20381BC16BE0195008755DC /* deposit.cpp */,
+				D20381BC16BE0195008755DC /* ion-fluid.cpp */,
 				D2C6828816BB9CAC0023FB36 /* drift-kick.cpp */,
 				D28BAEFD16B5FD0200578956 /* global.cpp */,
 				D25C8DB216B89B6600B0A607 /* grid.cpp */,
@@ -173,7 +173,7 @@
 				D28BAF1916B60B3800578956 /* barrier.h */,
 				D2C6828116BB7EB40023FB36 /* boundaries.h */,
 				D28BAF0116B5FDDA00578956 /* config.h */,
-				D20381BD16BE0195008755DC /* deposit.h */,
+				D20381BD16BE0195008755DC /* ion-fluid.h */,
 				D2C6827E16B9EBA30023FB36 /* diffops.h */,
 				D2C6828916BB9CAC0023FB36 /* drift-kick.h */,
 				D2C6827D16B9DF600023FB36 /* faraday.h */,
@@ -353,7 +353,7 @@
 				D25C8DB416B89B6600B0A607 /* grid.cpp in Sources */,
 				D2C6828216BB7EB40023FB36 /* boundaries.cpp in Sources */,
 				D2C6828A16BB9CAC0023FB36 /* drift-kick.cpp in Sources */,
-				D20381BE16BE0196008755DC /* deposit.cpp in Sources */,
+				D20381BE16BE0196008755DC /* ion-fluid.cpp in Sources */,
 				D206FBFD16C1C31C008BD080 /* ohm.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

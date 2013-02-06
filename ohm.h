@@ -9,7 +9,7 @@
 #ifndef __vf_pic__ohm__
 #define __vf_pic__ohm__
 
-#include "global-variables.h"
+#include "ion-fluid.h"
 
 class Ohm
 {
@@ -18,7 +18,7 @@ public:
     void operator() (LocalVectorField<real>&,
                      const LocalVectorField<real>&,
                      const LocalVectorField<real>&,
-                     GlobalVariables<real>&);
+                     IonFluid<real>&);
 private:
     const int ithread;
     LocalVectorField<real> Ue;
