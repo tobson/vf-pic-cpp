@@ -13,11 +13,6 @@
 #include "scalar-field.h"
 #include "vector-field.h"
 
-//template <typename T, int Nz, int Nx>
-//void boundaryConditionX (ScalarBase<T,Nz,Nx>&);
-//template <class S>
-//void boundaryConditionX (ThreeVector<S>&);
-
 template <typename T, int Nz, int Nx>
 void boundaryConditionX (ScalarBase<T,Nz,Nx>& scalar)
 {
@@ -28,8 +23,8 @@ void boundaryConditionX (ScalarBase<T,Nz,Nx>& scalar)
     }
 }
 
-template <class S>
-void boundaryConditionX (ThreeVector<S>& vector)
+template <template <typename, int, int> class S, typename T, int Nz, int Nx>
+void boundaryConditionX (ThreeVector<S,T,Nz,Nx>& vector)
 {
     boundaryConditionX (vector.x);
     boundaryConditionX (vector.y);

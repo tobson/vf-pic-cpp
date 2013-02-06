@@ -132,19 +132,17 @@ public:
     }
     void reciprocal ()
     {
+        const real one = T (1);
+        
         for (int i1 = 1; i1 <= N1; ++i1)
         for (int i2 = 1; i2 <= N2; ++i2)
         {
-            (*this)(i1,i2) = T (1)/(*this)(i1,i2);
+            (*this)(i1,i2) = one/(*this)(i1,i2);
         }
     }
 protected:
     T *data;
-public:
-    static const int nz = N1;
-    static const int nx = N2;
-    static const unsigned long size = (nx + 2)*(nz + 2);
-    typedef T value_type;
+    static const unsigned long size = (N1 + 2)*(N2 + 2);
 };
 
 template <typename T, int N1, int N2>
@@ -191,8 +189,6 @@ struct ScalarField: public ScalarBase<T,N1,N2>
     using ScalarBase<T,N1,N2>::data;
     using ScalarBase<T,N1,N2>::size;
     
-    typedef ScalarBase<T,N1,N2> base_type;
-    
     void fill (const T& value)
     {
         std::fill (data, data + size, value);
@@ -213,55 +209,19 @@ using LocalScalarField = ScalarField<T,vfpic::mz,vfpic::mx>;
 template <typename T, int N1, int N2>
 struct ScalarBaseView: public ScalarBase<T,N1,N2>
 {
-    ScalarBaseView
-    (GlobalScalarField<T>& global, int ithread): ScalarBase<T,N1,N2> (&global(ithread*vfpic::mz,0))
+    ScalarBaseView (GlobalScalarField<T>& global, int ithread):
+    ScalarBase<T,N1,N2> (&global(ithread*N1,0))
     {
         static_assert (N1 == vfpic::mz && N2 == vfpic::mx, "");
     }
-    using ScalarBase<T,vfpic::mz,vfpic::mx>::operator=;
-    using ScalarBase<T,vfpic::mz,vfpic::mx>::operator+=;
-    using ScalarBase<T,vfpic::mz,vfpic::mx>::operator-=;
-    using ScalarBase<T,vfpic::mz,vfpic::mx>::operator*=;
-    using ScalarBase<T,vfpic::mz,vfpic::mx>::operator/=;
-    
-    typedef ScalarBase<T,N1,N2> base_type;
+    using ScalarBase<T,N1,N2>::operator=;
+    using ScalarBase<T,N1,N2>::operator+=;
+    using ScalarBase<T,N1,N2>::operator-=;
+    using ScalarBase<T,N1,N2>::operator*=;
+    using ScalarBase<T,N1,N2>::operator/=;
 };
 
 template <typename T>
 using LocalScalarFieldView = ScalarBaseView<T,vfpic::mz,vfpic::mx>;
-
-/* Traits */
-
-template <class S>
-struct is_scalarfield
-{
-    static const bool value = false;
-};
-
-template <typename T, int N1, int N2>
-struct is_scalarfield<ScalarBase<T,N1,N2>>
-{
-    static const bool value = true;
-};
-template <typename T, int N1, int N2>
-struct is_scalarfield<ScalarField<T,N1,N2>>
-{
-    static const bool value = true;
-};
-template <typename T>
-struct is_scalarfield<GlobalScalarField<T>>
-{
-    static const bool value = true;
-};
-template <typename T>
-struct is_scalarfield<LocalScalarField<T>>
-{
-    static const bool value = true;
-};
-template <typename T>
-struct is_scalarfield<LocalScalarFieldView<T>>
-{
-    static const bool value = true;
-};
 
 #endif

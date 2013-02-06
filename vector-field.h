@@ -15,27 +15,28 @@
 /* Decleration */
 
 template <typename T>
-using GlobalVectorField = ThreeVector<GlobalScalarField<T>>;
+using GlobalVectorField = ThreeVector<ScalarField,T,vfpic::nz,vfpic::nx>;
 
 template <typename T>
-using LocalVectorField = ThreeVector<LocalScalarField<T>>;
+using LocalVectorField = ThreeVector<ScalarField,T,vfpic::mz,vfpic::mx>;
 
 template <typename T>
-struct LocalVectorFieldView: public ThreeVector<LocalScalarFieldView<T>>
+class LocalVectorFieldView: public ThreeVector<ScalarBaseView,T,vfpic::mz,vfpic::mx>
 {
+    using base_class = ThreeVector<ScalarBaseView,T,vfpic::mz,vfpic::mx>;
+    using scalar_class = ScalarBaseView<T,vfpic::mz,vfpic::mx>;
+public:
     LocalVectorFieldView (GlobalVectorField<T>& global, int ithread):
-    ThreeVector<View> (View (global.x, ithread),
-                       View (global.y, ithread),
-                       View (global.z, ithread))
+    base_class (scalar_class (global.x, ithread),
+                scalar_class (global.y, ithread),
+                scalar_class (global.z, ithread))
     {
     }
-    using ThreeVector<LocalScalarFieldView<T>>::operator=;
-    using ThreeVector<LocalScalarFieldView<T>>::operator+=;
-    using ThreeVector<LocalScalarFieldView<T>>::operator-=;
-    using ThreeVector<LocalScalarFieldView<T>>::operator*=;
-    using ThreeVector<LocalScalarFieldView<T>>::operator/=;
-private:
-    typedef LocalScalarFieldView<T> View;
+    using base_class::operator=;
+    using base_class::operator+=;
+    using base_class::operator-=;
+    using base_class::operator*=;
+    using base_class::operator/=;
 };
 
 #endif

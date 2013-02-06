@@ -15,7 +15,7 @@
 #include <type_traits>
 
 template <template<typename, int, int> class S1, template<typename, int, int> class S2, typename T, int Nz, int Nx>
-void curl (ThreeVector<S1<T,Nz,Nx>>& B, const ThreeVector<S2<T,Nz,Nx>>& A)
+void curl (ThreeVector<S1,T,Nz,Nx>& B, const ThreeVector<S2,T,Nz,Nx>& A)
 {
     const real fx = real (0.5)/vfpic::dx;
     const real fz = real (0.5)/vfpic::dz;
@@ -36,7 +36,7 @@ void curl (ThreeVector<S1<T,Nz,Nx>>& B, const ThreeVector<S2<T,Nz,Nx>>& A)
 }
 
 template <template<typename, int, int> class S1, template<typename, int, int> class S2, typename T, int Nz, int Nx>
-void curlcurl (ThreeVector<S1<T,Nz,Nx>>& J, const ThreeVector<S2<T,Nz,Nx>>& A)
+void curlcurl (ThreeVector<S1,T,Nz,Nx>& J, const ThreeVector<S2,T,Nz,Nx>& A)
 {
     const real two = real (2.0);
     

@@ -10,24 +10,6 @@
 
 using namespace vfpic;
 
-//template <typename T, int Nz, int Nx>
-//void boundaryConditionX (ScalarBase<T,Nz,Nx>& scalar)
-//{
-//    for (int k = 1; k <= Nz; ++k)
-//    {
-//        scalar(k,0   ) = scalar(k,Nx);
-//        scalar(k,Nx+1) = scalar(k,1 );
-//    }
-//}
-
-//template <class S>
-//void boundaryConditionX (ThreeVector<S>& vector)
-//{
-//    boundaryConditionX (vector.x);
-//    boundaryConditionX (vector.y);
-//    boundaryConditionX (vector.z);
-//}
-
 void boundaryConditionZ (GlobalScalarField<real>& scalar)
 {
     for (int i = 0; i < nx + 2; ++i)
