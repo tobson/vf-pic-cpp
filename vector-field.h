@@ -14,16 +14,25 @@
 
 /* Decleration */
 
-template <typename T>
-using GlobalVectorField = ThreeVector<ScalarField,T,vfpic::nz,vfpic::nx>;
+template <typename T, int N1, int N2>
+using VectorBase = ThreeVector<ScalarBase,T,N1,N2>;
+
+template <typename T, int N1, int N2>
+using VectorField = ThreeVector<ScalarField,T,N1,N2>;
+
+template <typename T, int N1, int N2>
+using VectorBaseView = ThreeVector<ScalarBaseView,T,N1,N2>;
 
 template <typename T>
-using LocalVectorField = ThreeVector<ScalarField,T,vfpic::mz,vfpic::mx>;
+using GlobalVectorField = VectorField<T,vfpic::nz,vfpic::nx>;
 
 template <typename T>
-class LocalVectorFieldView: public ThreeVector<ScalarBaseView,T,vfpic::mz,vfpic::mx>
+using LocalVectorField = VectorField<T,vfpic::mz,vfpic::mx>;
+
+template <typename T>
+class LocalVectorFieldView: public VectorBaseView<T,vfpic::mz,vfpic::mx>
 {
-    using base_class = ThreeVector<ScalarBaseView,T,vfpic::mz,vfpic::mx>;
+    using base_class = VectorBaseView<T,vfpic::mz,vfpic::mx>;
     using scalar_class = ScalarBaseView<T,vfpic::mz,vfpic::mx>;
 public:
     LocalVectorFieldView (GlobalVectorField<T>& global, int ithread):

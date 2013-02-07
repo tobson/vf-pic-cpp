@@ -11,18 +11,19 @@
 
 #include "ion-fluid.h"
 
+template <typename T, int Nz, int Nx>
 class Ohm
 {
 public:
     Ohm (const int);
-    void operator() (const LocalVectorField<real>&,
-                     const LocalVectorField<real>&,
-                     const LocalScalarFieldView<real>&,
-                     const LocalVectorFieldView<real>&,
-                     LocalVectorField<real>*);
+    void operator() (const VectorField<T,Nz,Nx>&,
+                     const VectorField<T,Nz,Nx>&,
+                     const ScalarBaseView<T,Nz,Nx>&,
+                     const VectorBaseView<T,Nz,Nx>&,
+                     VectorField<T,Nz,Nx>*);
 private:
     const int ithread;
-    LocalVectorField<real> U;
+    VectorField<T,Nz,Nx> U;
 };
 
 

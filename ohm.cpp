@@ -8,36 +8,40 @@
 
 #include "ohm.h"
 
-Ohm::Ohm (const int ithread): ithread (ithread)
+template <typename T, int Nz, int Nx>
+Ohm<T,Nz,Nx>::Ohm (const int ithread): ithread (ithread)
 {
 }
 
-void Ohm::operator() (const LocalVectorField<real>& B,
-                      const LocalVectorField<real>& J,
-                      const LocalScalarFieldView<real>& rho,
-                      const LocalVectorFieldView<real>& ruu, 
-                      LocalVectorField<real>* E)
+template <typename T, int Nz, int Nx>
+void Ohm<T,Nz,Nx>::operator() (const VectorField<T,Nz,Nx>& B,
+                               const VectorField<T,Nz,Nx>& J,
+                               const ScalarBaseView<T,Nz,Nx>& rho,
+                               const VectorBaseView<T,Nz,Nx>& ruu,
+                               VectorField<T,Nz,Nx>* E)
 {
     const real me = real (1)/config::em;
     
     for (int j = 0; j < 3; ++j)
     {
-        const LocalScalarFieldView<real>& ruj = ruu[j];
-        const LocalScalarField<real>& Jj = J[j];
+        const ScalarBaseView<T,Nz,Nx>& ruj = ruu[j];
+        const ScalarField<T,Nz,Nx>& Jj = J[j];
         
-        LocalScalarField<real>& Uj = U[j];
+        ScalarField<T,Nz,Nx>& Uj = U[j];
         
-        for (int k = 1; k <= vfpic::mz; ++k)
-        for (int i = 1; i <= vfpic::mx; ++i)
+        for (int k = 1; k <= Nz; ++k)
+        for (int i = 1; i <= Nx; ++i)
         {
             Uj (k,i) = (ruj (k,i) - me*Jj (k,i))/rho (k,i); // Better multiply with inverse density
         }
     }
-    for (int k = 1; k <= vfpic::mz; ++k)
-    for (int i = 1; i <= vfpic::mx; ++i)
+    for (int k = 1; k <= Nz; ++k)
+    for (int i = 1; i <= Nx; ++i)
     {
         E->x (k,i) = U.z (k,i)*B.y (k,i) - U.y (k,i)*B.z (k,i);
         E->y (k,i) = U.x (k,i)*B.z (k,i) - U.z (k,i)*B.x (k,i);
         E->z (k,i) = U.y (k,i)*B.x (k,i) - U.x (k,i)*B.y (k,i);
     }
 }
+
+template class Ohm<real,vfpic::mz,vfpic::mx>;
