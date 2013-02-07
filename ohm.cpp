@@ -12,10 +12,9 @@ Ohm::Ohm (const int ithread): ithread (ithread)
 {
 }
 
-void Ohm::operator() (LocalVectorField<real>* E,
-                      const LocalVectorField<real>& B,
+void Ohm::operator() (const LocalVectorField<real>& B,
                       const LocalVectorField<real>& J,
-                      IonFluid<real>& global)
+                      IonFluid<real>& global, LocalVectorField<real>* E)
 {
     const real me = real (1)/config::em;
 

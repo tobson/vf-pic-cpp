@@ -43,7 +43,7 @@ template<
 template<typename, int, int> class S1,
 template<typename, int, int> class S2,
 template<typename, int, int> class S3, typename T, int Nz, int Nx>
-void average (const S1<T,Nz,Nx>& start, S2<T,Nz,Nx>* pmid, const S3<T,Nz,Nx> end)
+void average (const S1<T,Nz,Nx>& start, const S3<T,Nz,Nx> end, S2<T,Nz,Nx>* pmid)
 {
     const real half = real (0.5);
     
@@ -60,11 +60,11 @@ template<
 template<typename, int, int> class S1,
 template<typename, int, int> class S2,
 template<typename, int, int> class S3, typename T, int Nz, int Nx>
-void average (const ThreeVector<S1,T,Nz,Nx>& start, ThreeVector<S2,T,Nz,Nx>* pmid, const ThreeVector<S3,T,Nz,Nx>& end)
+void average (const ThreeVector<S1,T,Nz,Nx>& start, const ThreeVector<S3,T,Nz,Nx>& end, ThreeVector<S2,T,Nz,Nx>* pmid)
 {
     ThreeVector<S2,T,Nz,Nx>& mid = *pmid;
     
-    for (int j = 0; j < 3; ++j) average (start[j], &mid[j], end[j]);
+    for (int j = 0; j < 3; ++j) average (start[j], end[j], &mid[j]);
 }
 
 #endif

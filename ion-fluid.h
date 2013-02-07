@@ -25,7 +25,7 @@ class Deposit
 {
 public:
     Deposit (Barrier&, const int);
-    void operator() (IonFluid<real>*, const LocalParticleArrayView<real>&);
+    void operator() (const LocalParticleArrayView<real>&, IonFluid<real>*);
 private:
     void addGhosts ();
     void convert (IonFluid<real>*);

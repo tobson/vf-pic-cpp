@@ -14,8 +14,8 @@ norm1 (real (vfpic::npc)/config::rho0)
 {
 }
 
-void Deposit::operator() (IonFluid<real>* fluid,
-                          const LocalParticleArrayView<real>& particles)
+void Deposit::operator() (const LocalParticleArrayView<real>& particles,
+                          IonFluid<real> *fluid)
 {
     using config::x0;
     using config::z0;
@@ -76,7 +76,7 @@ void Deposit::addGhosts ()
     }
 }
 
-void Deposit::convert (IonFluid<real>* fluid)
+void Deposit::convert (IonFluid<real> *fluid)
 {
     {
         LocalScalarFieldView<FourMomentum<real>> sources1 (sources, ithread);

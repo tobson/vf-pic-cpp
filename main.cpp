@@ -31,9 +31,9 @@
 template <typename T>
 struct GlobalVariables
 {
-    GlobalVectorField<real> A, A2;
+    GlobalVectorField<T> A, A2;
     GlobalParticleArray<T> particles, particles2;
-    GlobalVectorField<real> E, B;
+    GlobalVectorField<T> E, B;
     IonFluid<T> fluid;
 };
 
@@ -84,49 +84,49 @@ void iteration (GlobalVariables<real>& global, Barrier& barrier, const int ithre
     Ohm ohm (ithread);
     
     /* Store magnetic field before entering the time loop. */
-    curl (&H2, A);
+    curl (A, &H2);
 
     for (int it = 0; it < niter; ++it)
     {
         /* Predictor step */
         
-        faraday (A, E, &A, dt);
+        faraday (A, E, dt, &A);
         boundaryCondition (global.A);
         
-        curl (&H, A);
+        curl (A, &H);
+        curlcurl (A, &J);
         
-        average (H2, &B, H);
+        average (H, H2, &B);
         boundaryCondition (global.B);
         
-        kick (global.E, global.B, particles, &particles, dt);
-        drift (particles, &particles, 0.5*dt);
-        deposit (&global.fluid, particles);
-        drift (particles, &particles, 0.5*dt);
+        kick (global.E, global.B, particles, dt, &particles);
+        drift (particles, 0.5*dt, &particles);
+        deposit (particles, &global.fluid);
+        drift (particles, 0.5*dt, &particles);
 
-        curlcurl (&J, A);
-        ohm (&D, H, J, global.fluid);
+        ohm (H, J, global.fluid, &D);
         
         extrapolate (E, D, &E);
 
         /* Corrector step */
 
-        faraday (A, E, &A, dt);
+        faraday (A, E, dt, &A2);
         boundaryCondition (global.A2);
 
-        curl (&H2, A2);
+        curl (A2, &H2);
+        curlcurl (A2, &J2);
 
-        average (H, &B, H2);
+        average (H, H2, &B);
         boundaryCondition (global.B);
 
         // Careful: Does this work with shear?
-        kick (global.E, global.B, particles, &particles2, dt);
-        drift (particles2, &particles2, 0.5*dt);
-        deposit (&global.fluid, particles2);
+        kick (global.E, global.B, particles, dt, &particles2);
+        drift (particles2, 0.5*dt, &particles2);
+        deposit (particles2, &global.fluid);
 
-        curlcurl (&J2, A2);
-        ohm (&D2, H2, J2, global.fluid);
+        ohm (H2, J2, global.fluid, &D2);
 
-        average (D, &E, D2);
+        average (D, D2, &E);
 
         /* We need the right H2 in the next iteration */
         H2 = H;

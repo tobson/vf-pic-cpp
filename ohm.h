@@ -15,10 +15,9 @@ class Ohm
 {
 public:
     Ohm (const int);
-    void operator() (LocalVectorField<real>*,
+    void operator() (const LocalVectorField<real>&,
                      const LocalVectorField<real>&,
-                     const LocalVectorField<real>&,
-                     IonFluid<real>&);
+                     IonFluid<real>&, LocalVectorField<real>*);
 private:
     const int ithread;
     LocalVectorField<real> Ue;

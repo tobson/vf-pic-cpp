@@ -10,8 +10,8 @@
 #include "drift-kick.h"
 #include "global.h"
 
-void drift (const LocalParticleArrayView<real>& old,
-            LocalParticleArrayView<real> *pnew, const real dt)
+void drift (const LocalParticleArrayView<real>& old, const real dt,
+            LocalParticleArrayView<real> *pnew)
 {
     const Particle<real> *rhs = old.begin ();
     Particle<real> *lhs = pnew->begin ();
@@ -27,11 +27,9 @@ void drift (const LocalParticleArrayView<real>& old,
     boundaryCondition (*pnew);
 }
 
-void kick (const GlobalVectorField<real>& E,
-           const GlobalVectorField<real>& B,
-           const LocalParticleArrayView<real>& old,
-           LocalParticleArrayView<real> *pnew,
-           const real dt)
+void kick (const GlobalVectorField<real>& E, const GlobalVectorField<real>& B,
+           const LocalParticleArrayView<real>& old, const real dt,
+           LocalParticleArrayView<real> *pnew)
 {
     using config::em;
     
