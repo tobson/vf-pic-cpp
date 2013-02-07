@@ -90,7 +90,7 @@ void iteration (GlobalVariables<real>& global, Barrier& barrier, const int ithre
     {
         /* Predictor step */
         
-        faraday (&A, A, E, dt);
+        faraday (A, E, &A, dt);
         boundaryCondition (global.A);
         
         curl (&H, A);
@@ -110,7 +110,7 @@ void iteration (GlobalVariables<real>& global, Barrier& barrier, const int ithre
 
         /* Corrector step */
 
-        faraday (&A2, A, E, dt);
+        faraday (A, E, &A, dt);
         boundaryCondition (global.A2);
 
         curl (&H2, A2);
