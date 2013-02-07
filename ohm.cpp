@@ -22,10 +22,15 @@ void Ohm::operator() (const LocalVectorField<real>& B,
     
     for (int j = 0; j < 3; ++j)
     {
+        const LocalScalarFieldView<real>& ruj = ruu[j];
+        const LocalScalarField<real>& Jj = J[j];
+        
+        LocalScalarField<real>& Uj = U[j];
+        
         for (int k = 1; k <= vfpic::mz; ++k)
         for (int i = 1; i <= vfpic::mx; ++i)
         {
-            U[j] (k,i) = (ruu[j] (k,i) - me*J[j] (k,i))/rho (k,i);
+            Uj (k,i) = (ruj (k,i) - me*Jj (k,i))/rho (k,i); // Better multiply with inverse density
         }
     }
     for (int k = 1; k <= vfpic::mz; ++k)
