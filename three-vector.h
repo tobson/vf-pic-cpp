@@ -9,6 +9,8 @@
 #ifndef vf_pic_three_vector_h
 #define vf_pic_three_vector_h
 
+#include "scalar-field.h"
+
 #include <functional>
 #include <iostream>
 #include <stdexcept>
