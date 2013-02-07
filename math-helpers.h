@@ -43,7 +43,7 @@ template<
 template<typename, int, int> class S1,
 template<typename, int, int> class S2,
 template<typename, int, int> class S3, typename T, int Nz, int Nx>
-void average (const S1<T,Nz,Nx>& start, const S3<T,Nz,Nx> end, S2<T,Nz,Nx>* pmid)
+void average (const S1<T,Nz,Nx>& start, const S3<T,Nz,Nx>& end, S2<T,Nz,Nx>* pmid)
 {
     const real half = real (0.5);
     
