@@ -156,7 +156,6 @@
 		D2915FA416B5F56A0084A612 = {
 			isa = PBXGroup;
 			children = (
-				D206FC0116C3539F008BD080 /* math-helpers.h */,
 				D2F90E4B16B73ED400ABDA86 /* Makefile */,
 				D28BAF1816B60B3800578956 /* barrier.cpp */,
 				D2C6828016BB7EB30023FB36 /* boundaries.cpp */,
@@ -180,6 +179,7 @@
 				D28BAEFE16B5FD0200578956 /* global.h */,
 				D25C8DB316B89B6600B0A607 /* grid.h */,
 				D20381BD16BE0195008755DC /* ion-fluid.h */,
+				D206FC0116C3539F008BD080 /* math-helpers.h */,
 				D206FBFC16C1C31C008BD080 /* ohm.h */,
 				D28BAEFB16B5FB4500578956 /* param.h */,
 				D2F90E5216B748E900ABDA86 /* particles.h */,

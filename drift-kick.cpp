@@ -6,53 +6,32 @@
 //  Copyright (c) 2013 Tobias Heinemann. All rights reserved.
 //
 
-#include "global.h"
+#include "boundaries.h"
 #include "drift-kick.h"
+#include "global.h"
 
-void drift (LocalParticleArrayView<real>* particles, const real dt)
+void drift (const LocalParticleArrayView<real>& old,
+            LocalParticleArrayView<real> *pnew, const real dt)
 {
-    drift (particles, *particles, dt);
-}
-
-void drift (LocalParticleArrayView<real>* particles,
-            const LocalParticleArrayView<real>& particles2, const real dt)
-{
-    using config::x0;
-    using config::z0;
-    
-    using config::Lx;
-    using config::Lz;
-    
-    const real Lx1 = real (1)/config::Lx;
-    const real Lz1 = real (1)/config::Lz;
-    
-    auto pnew = particles->begin ();
-    auto pold = particles2.begin ();
+    auto lhs = pnew->begin ();
+    auto rhs = old.begin ();
     
     for (int n = 0; n < vfpic::mpar; ++n)
     {
-        pnew->x = pold->x + pnew->vx*dt;
-        pnew->x -= floor ((pnew->x - x0)*Lx1)*Lx;
+        lhs->x = rhs->x + rhs->vx*dt;
+        lhs->z = rhs->z + rhs->vz*dt;
 
-        pnew->z = pold->z + pnew->vz*dt;
-        pnew->z -= floor ((pnew->z - z0)*Lz1)*Lz;
-        
-        ++pnew;
-        ++pold;
+        ++lhs; ++rhs;
     }
+
+    boundaryCondition (pnew);
 }
 
-void kick (LocalParticleArrayView<real>* particles,
-           const GlobalVectorField<real>& E,
-           const GlobalVectorField<real>& B, const real dt)
-{
-    kick (particles, *particles, E, B, dt);
-}
-
-void kick (LocalParticleArrayView<real>* particles,
-           const LocalParticleArrayView<real>& particles2,
-           const GlobalVectorField<real>& E,
-           const GlobalVectorField<real>& B, const real dt)
+void kick (const GlobalVectorField<real>& E,
+           const GlobalVectorField<real>& B,
+           const LocalParticleArrayView<real>& old,
+           LocalParticleArrayView<real> *pnew,
+           const real dt)
 {
     const real half = real (0.5);
     const real one = real (1);
@@ -68,13 +47,13 @@ void kick (LocalParticleArrayView<real>* particles,
     
     const real emdt2 = half*em*dt;
 
-    auto pnew = particles->begin ();
-    auto pold = particles2.begin ();
+    auto lhs = pnew->begin ();
+    auto rhs = old.begin ();
 
     for (int n = 0; n < vfpic::mpar; ++n)
     {
-        const real xdx = (pnew->x - x0)/dx + half;
-        const real zdz = (pnew->z - z0)/dz + half;
+        const real xdx = (rhs->x - x0)/dx + half;
+        const real zdz = (rhs->z - z0)/dz + half;
         
         const int i0 (xdx);
         const int k0 (zdz);
@@ -106,9 +85,9 @@ void kick (LocalParticleArrayView<real>* particles,
         by *= emdt2;
         bz *= emdt2;
         
-        const real vmx = pold->vx + ex;
-        const real vmy = pold->vy + ey;
-        const real vmz = pold->vz + ez;
+        const real vmx = rhs->vx + ex;
+        const real vmy = rhs->vy + ey;
+        const real vmz = rhs->vz + ez;
         
         const real vpx = vmx + (vmy*bz - vmz*by);
         const real vpy = vmy + (vmz*bx - vmx*bz);
@@ -116,11 +95,10 @@ void kick (LocalParticleArrayView<real>* particles,
         
         const real fac = two/(one + bx*bx + by*by + bz*bz);
         
-        pnew->vx = vmx + (vpy*bz - vpz*by)*fac + ex;
-        pnew->vy = vmy + (vpz*bx - vpx*bz)*fac + ey;
-        pnew->vz = vmz + (vpx*by - vpy*bx)*fac + ez;
+        lhs->vx = vmx + (vpy*bz - vpz*by)*fac + ex;
+        lhs->vy = vmy + (vpz*bx - vpx*bz)*fac + ey;
+        lhs->vz = vmz + (vpx*by - vpy*bx)*fac + ez;
         
-        ++pnew;
-        ++pold;
+        ++lhs; ++rhs;
     }
 }

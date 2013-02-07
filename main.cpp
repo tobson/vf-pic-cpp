@@ -98,10 +98,10 @@ void iteration (GlobalVariables<real>& global, Barrier& barrier, const int ithre
         average (H2, &B, H);
         boundaryCondition (global.B);
         
-        kick (&particles, global.E, global.B, dt);
-        drift (&particles, 0.5*dt);
+        kick (global.E, global.B, particles, &particles, dt);
+        drift (particles, &particles, 0.5*dt);
         deposit (&global.fluid, particles);
-        drift (&particles, particles, 0.5*dt);
+        drift (particles, &particles, 0.5*dt);
 
         curlcurl (&J, A);
         ohm (&D, H, J, global.fluid);
@@ -119,8 +119,8 @@ void iteration (GlobalVariables<real>& global, Barrier& barrier, const int ithre
         boundaryCondition (global.B);
 
         // Careful: Does this work with shear?
-        kick (&particles2, particles, global.E, global.B, dt);
-        drift (&particles2, particles, 0.5*dt);
+        kick (global.E, global.B, particles, &particles2, dt);
+        drift (particles2, &particles2, 0.5*dt);
         deposit (&global.fluid, particles2);
 
         curlcurl (&J2, A2);

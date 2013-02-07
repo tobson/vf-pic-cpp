@@ -10,6 +10,7 @@
 #define __vf_pic__boundaries__
 
 #include "barrier.h"
+#include "particles.h"
 #include "scalar-field.h"
 #include "vector-field.h"
 
@@ -50,5 +51,7 @@ private:
     Barrier& barrier;
     const int ithread;
 };
+
+void boundaryCondition (LocalParticleArrayView<real>*);
 
 #endif /* defined(__vf_pic__boundaries__) */
