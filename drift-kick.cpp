@@ -13,8 +13,8 @@
 void drift (const LocalParticleArrayView<real>& old,
             LocalParticleArrayView<real> *pnew, const real dt)
 {
-    auto lhs = pnew->begin ();
-    auto rhs = old.begin ();
+    Particle<real> *lhs = pnew->begin ();
+    const Particle<real> *rhs = old.begin ();
     
     for (int n = 0; n < vfpic::mpar; ++n)
     {
@@ -47,8 +47,8 @@ void kick (const GlobalVectorField<real>& E,
     
     const real emdt2 = half*em*dt;
 
-    auto lhs = pnew->begin ();
-    auto rhs = old.begin ();
+    Particle<real> *lhs = pnew->begin ();
+    const Particle<real> *rhs = old.begin ();
 
     for (int n = 0; n < vfpic::mpar; ++n)
     {
