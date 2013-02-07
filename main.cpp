@@ -31,10 +31,9 @@ template <typename T>
 struct GlobalVariables
 {
     GlobalVectorField<real> A, A2;
-    GlobalVectorField<real> E;
-    GlobalVectorField<real> B;
-    IonFluid<T> fluid;
     GlobalParticleArray<T> particles, particles2;
+    GlobalVectorField<real> E, B;
+    IonFluid<T> fluid;
 };
 
 void initialCondition (GlobalVectorField<real>& A,
@@ -134,7 +133,7 @@ void iteration (GlobalVariables<real>& global, Barrier& barrier, const int ithre
 
         /* Corrector step */
 
-        faraday (&A2, A, dt);
+        faraday (&A2, A, E, dt);
         boundaryCondition (global.A2);
 
         curl (&H2, A2);
