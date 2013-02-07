@@ -85,7 +85,7 @@ void BoundaryCondition::operator() (GlobalVectorField<real>& global)
     }
 }
 
-void boundaryCondition (LocalParticleArrayView<real> *particles)
+void boundaryCondition (LocalParticleArrayView<real>& particles)
 {
     using config::x0;
     using config::z0;
@@ -96,7 +96,7 @@ void boundaryCondition (LocalParticleArrayView<real> *particles)
     const real Lx1 = real (1)/Lx;
     const real Lz1 = real (1)/Lz;
 
-    auto p = particles->begin ();
+    auto p = particles.begin ();
 
     for (int n = 0; n < vfpic::mpar; ++n)
     {

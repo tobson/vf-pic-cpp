@@ -24,7 +24,7 @@ void drift (const LocalParticleArrayView<real>& old,
         ++lhs; ++rhs;
     }
 
-    boundaryCondition (pnew);
+    boundaryCondition (*pnew);
 }
 
 void kick (const GlobalVectorField<real>& E,

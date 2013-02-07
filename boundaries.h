@@ -52,6 +52,6 @@ private:
     const int ithread;
 };
 
-void boundaryCondition (LocalParticleArrayView<real>*);
+void boundaryCondition (LocalParticleArrayView<real>&);
 
 #endif /* defined(__vf_pic__boundaries__) */
