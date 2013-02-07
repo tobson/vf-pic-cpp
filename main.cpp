@@ -15,6 +15,7 @@
 #include "faraday.h"
 #include "global.h"
 #include "grid.h"
+#include "math-helpers.h"
 #include "ohm.h"
 #include "particles.h"
 #include "vector-field.h"
@@ -82,9 +83,6 @@ void iteration (GlobalVariables<real>& global, Barrier& barrier, const int ithre
     Deposit deposit (barrier, ithread);
     Ohm ohm (ithread);
     
-    const real half = real (0.5);
-    const real two = real (2);
-
     /* Store magnetic field before entering the time loop. */
     curl (&H2, A);
 
@@ -92,44 +90,23 @@ void iteration (GlobalVariables<real>& global, Barrier& barrier, const int ithre
     {
         /* Predictor step */
         
-        faraday (&A, E, dt);
+        faraday (&A, A, E, dt);
         boundaryCondition (global.A);
         
         curl (&H, A);
         
-        for (int j = 0; j < 3; ++j)
-        {
-          auto Bj = B[j];
-          auto Hj = H[j];
-          auto H2j = H2[j];
-
-          for (int k = 1; k <= vfpic::mz; ++k)
-          for (int i = 1; i <= vfpic::mx; ++i)
-          {
-            Bj (k,i) = half*(Hj (k,i) + H2j (k,i));
-          }
-        }
+        average (H2, &B, H);
         boundaryCondition (global.B);
         
         kick (&particles, global.E, global.B, dt);
-        drift (&particles, half*dt);
+        drift (&particles, 0.5*dt);
         deposit (&global.fluid, particles);
-        drift (&particles, half*dt);
+        drift (&particles, particles, 0.5*dt);
 
         curlcurl (&J, A);
         ohm (&D, H, J, global.fluid);
         
-        for (int j = 0; j < 3; ++j)
-        {
-          auto Dj = D[j];
-          auto Ej = E[j];
-
-          for (int k = 1; k <= vfpic::mz; ++k)
-          for (int i = 1; i <= vfpic::mx; ++i)
-          {
-            Ej (k,i) = two*Dj (k,i) - Ej (k,i);
-          }
-        }
+        extrapolate (E, D, &E);
 
         /* Corrector step */
 
@@ -138,40 +115,19 @@ void iteration (GlobalVariables<real>& global, Barrier& barrier, const int ithre
 
         curl (&H2, A2);
 
-        for (int j = 0; j < 3; ++j)
-        {
-          auto Bj = B[j];
-          auto Hj = H[j];
-          auto H2j = H2[j];
-
-          for (int k = 1; k <= vfpic::mz; ++k)
-          for (int i = 1; i <= vfpic::mx; ++i)
-          {
-            Bj (k,i) = half*(Hj (k,i) + H2j (k,i));
-          }
-        }
+        average (H, &B, H2);
         boundaryCondition (global.B);
 
         // Careful: Does this work with shear?
         kick (&particles2, particles, global.E, global.B, dt);
-        drift (&particles2, particles, half*dt);
+        drift (&particles2, particles, 0.5*dt);
         deposit (&global.fluid, particles2);
 
         curlcurl (&J2, A2);
         ohm (&D2, H2, J2, global.fluid);
 
-        for (int j = 0; j < 3; ++j)
-        {
-          auto Dj = D[j];
-          auto D2j = D2[j];
-          auto Ej = E[j];
+        average (D, &E, D2);
 
-          for (int k = 1; k <= vfpic::mz; ++k)
-          for (int i = 1; i <= vfpic::mx; ++i)
-          {
-            Ej (k,i) = half*(Dj (k,i) + D2j (k,i));
-          }
-        }
         /* We need the right H2 in the next iteration */
         H2 = H;
     }
