@@ -13,8 +13,8 @@
 void drift (const LocalParticleArrayView<real>& old,
             LocalParticleArrayView<real> *pnew, const real dt)
 {
-    Particle<real> *lhs = pnew->begin ();
     const Particle<real> *rhs = old.begin ();
+    Particle<real> *lhs = pnew->begin ();
     
     for (int n = 0; n < vfpic::mpar; ++n)
     {
@@ -33,10 +33,6 @@ void kick (const GlobalVectorField<real>& E,
            LocalParticleArrayView<real> *pnew,
            const real dt)
 {
-    const real half = real (0.5);
-    const real one = real (1);
-    const real two = real (2);
-
     using config::em;
     
     using config::x0;
@@ -45,10 +41,14 @@ void kick (const GlobalVectorField<real>& E,
     using vfpic::dx;
     using vfpic::dz;
     
+    const real half = real (0.5);
+    const real one = real (1);
+    const real two = real (2);
+    
     const real emdt2 = half*em*dt;
 
-    Particle<real> *lhs = pnew->begin ();
     const Particle<real> *rhs = old.begin ();
+    Particle<real> *lhs = pnew->begin ();
 
     for (int n = 0; n < vfpic::mpar; ++n)
     {
