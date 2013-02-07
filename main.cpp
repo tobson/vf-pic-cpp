@@ -31,7 +31,7 @@ template <typename T>
 struct GlobalVariables
 {
     GlobalVectorField<real> A, A2;
-    GlobalVectorField<real> E, E2;
+    GlobalVectorField<real> E;
     GlobalVectorField<real> B;
     IonFluid<T> fluid;
     GlobalParticleArray<T> particles, particles2;
@@ -66,23 +66,18 @@ void iteration (GlobalVariables<real>& global, Barrier& barrier, const int ithre
 {
     using config::dt;
     
-    LocalVectorFieldView<real> A (global.A, ithread);
-    LocalVectorFieldView<real> E (global.E, ithread);
-    
-    LocalParticleArrayView<real> particles (global.particles, ithread);
-
+    LocalVectorFieldView<real> A  (global.A , ithread);
     LocalVectorFieldView<real> A2 (global.A2, ithread);
-    LocalVectorFieldView<real> E2 (global.E2, ithread);
     
+    LocalParticleArrayView<real> particles  (global.particles , ithread);
     LocalParticleArrayView<real> particles2 (global.particles2, ithread);
 
+    LocalVectorFieldView<real> E (global.E, ithread);
     LocalVectorFieldView<real> B (global.B, ithread);
     
-    IonFluid<real>& fluid = global.fluid;
-    
-    LocalVectorField<real> H, J, D;
-    
-    curl (&H, A);
+    LocalVectorField<real> D, D2;
+    LocalVectorField<real> J, J2;
+    LocalVectorField<real> H, H2;
     
     BoundaryCondition boundaryCondition (barrier, ithread);
     Deposit deposit (barrier, ithread);
@@ -91,28 +86,95 @@ void iteration (GlobalVariables<real>& global, Barrier& barrier, const int ithre
     const real half = real (0.5);
     const real two = real (2);
 
+    /* Store magnetic field before entering the time loop. */
+    curl (&H2, A);
+
     for (int it = 0; it < niter; ++it)
     {
-        B = H;
+        /* Predictor step */
         
         faraday (&A, E, dt);
         boundaryCondition (global.A);
         
         curl (&H, A);
         
-        B += H; B *= half;
+        for (int j = 0; j < 3; ++j)
+        {
+          auto Bj = B[j];
+          auto Hj = H[j];
+          auto H2j = H2[j];
+
+          for (int k = 1; k <= vfpic::mz; ++k)
+          for (int i = 1; i <= vfpic::mx; ++i)
+          {
+            Bj (k,i) = half*(Hj (k,i) + H2j (k,i));
+          }
+        }
         boundaryCondition (global.B);
         
         kick (&particles, global.E, global.B, dt);
         drift (&particles, half*dt);
-        deposit (&fluid, particles);
+        deposit (&global.fluid, particles);
         drift (&particles, half*dt);
 
         curlcurl (&J, A);
-        ohm (&D, H, J, fluid);
+        ohm (&D, H, J, global.fluid);
         
-        D *= two; D -= E; E2 = D;
-        
+        for (int j = 0; j < 3; ++j)
+        {
+          auto Dj = D[j];
+          auto Ej = E[j];
+
+          for (int k = 1; k <= vfpic::mz; ++k)
+          for (int i = 1; i <= vfpic::mx; ++i)
+          {
+            Ej (k,i) = two*Dj (k,i) - Ej (k,i);
+          }
+        }
+
+        /* Corrector step */
+
+        faraday (&A2, A, dt);
+        boundaryCondition (global.A2);
+
+        curl (&H2, A2);
+
+        for (int j = 0; j < 3; ++j)
+        {
+          auto Bj = B[j];
+          auto Hj = H[j];
+          auto H2j = H2[j];
+
+          for (int k = 1; k <= vfpic::mz; ++k)
+          for (int i = 1; i <= vfpic::mx; ++i)
+          {
+            Bj (k,i) = half*(Hj (k,i) + H2j (k,i));
+          }
+        }
+        boundaryCondition (global.B);
+
+        // Careful: Does this work with shear?
+        kick (&particles2, particles, global.E, global.B, dt);
+        drift (&particles2, particles, half*dt);
+        deposit (&global.fluid, particles2);
+
+        curlcurl (&J2, A2);
+        ohm (&D2, H2, J2, global.fluid);
+
+        for (int j = 0; j < 3; ++j)
+        {
+          auto Dj = D[j];
+          auto D2j = D2[j];
+          auto Ej = E[j];
+
+          for (int k = 1; k <= vfpic::mz; ++k)
+          for (int i = 1; i <= vfpic::mx; ++i)
+          {
+            Ej (k,i) = half*(Dj (k,i) + D2j (k,i));
+          }
+        }
+        /* We need the right H2 in the next iteration */
+        H2 = H;
     }
     printf ("Hi, I'm thread %d!\n", ithread);
 }
