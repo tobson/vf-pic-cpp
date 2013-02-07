@@ -14,21 +14,15 @@
 #include "scalar-field.h"
 #include "vector-field.h"
 
-template <typename T>
-struct IonFluid
-{
-    GlobalScalarField<T> rho1;
-    GlobalVectorField<T> U;
-};
-
 class Deposit
 {
 public:
     Deposit (Barrier&, const int);
-    void operator() (const LocalParticleArrayView<real>&, IonFluid<real>*);
+    void operator() (const LocalParticleArrayView<real>&,
+                     GlobalScalarField<real>*, GlobalVectorField<real>*);
 private:
     void addGhosts ();
-    void convert (IonFluid<real>*);
+    void convert (GlobalScalarField<real>*, GlobalVectorField<real>*);
     template <typename T>
     struct FourMomentum
     {
@@ -50,7 +44,7 @@ private:
     };
     Barrier& barrier;
     const int ithread;
-    const real norm1;
+    const real norm;
     GlobalScalarField<FourMomentum<real>> sources;
 };
 

@@ -34,7 +34,7 @@ struct GlobalVariables
     GlobalVectorField<T> A, A2;
     GlobalParticleArray<T> particles, particles2;
     GlobalVectorField<T> E, B;
-    IonFluid<T> fluid;
+    GlobalScalarField<T> rho; GlobalVectorField<T> ruu;
 };
 
 void initialCondition (GlobalVectorField<real>& A,
@@ -71,65 +71,75 @@ void iteration (GlobalVariables<real>& global, Barrier& barrier, const int ithre
     
     LocalParticleArrayView<real> particles  (global.particles , ithread);
     LocalParticleArrayView<real> particles2 (global.particles2, ithread);
+    
+    LocalVectorField<real> D;
+    LocalVectorField<real> D2;
 
     LocalVectorFieldView<real> E (global.E, ithread);
     LocalVectorFieldView<real> B (global.B, ithread);
+
+    LocalScalarFieldView<real> rho (global.rho, ithread);
+    LocalVectorFieldView<real> ruu (global.ruu, ithread);
     
-    LocalVectorField<real> D, D2;
-    LocalVectorField<real> J, J2;
-    LocalVectorField<real> H, H2;
+    LocalVectorField<real> J, H;
     
     BoundaryCondition boundaryCondition (barrier, ithread);
     Deposit deposit (barrier, ithread);
     Ohm ohm (ithread);
     
-    /* Store magnetic field before entering the time loop. */
-    curl (A, &H2);
-
     for (int it = 0; it < niter; ++it)
     {
         /* Predictor step */
         
-        faraday (A, E, dt, &A);
-        boundaryCondition (global.A);
+        curl (A, &B); // Better use information from previous time step
+        
+        faraday (A, E, dt, &A); // No need to set bc's for A if they are set for E and initial A
         
         curl (A, &H);
-        curlcurl (A, &J);
         
-        average (H, H2, &B);
+        average (B, H, &B);
         boundaryCondition (global.B);
         
         kick (global.E, global.B, particles, dt, &particles);
+        
         drift (particles, 0.5*dt, &particles);
-        deposit (particles, &global.fluid);
+        
+        deposit (particles, &global.rho, &global.ruu);
+        
         drift (particles, 0.5*dt, &particles);
 
-        ohm (H, J, global.fluid, &D);
+        curlcurl (A, &J);
+
+        ohm (H, J, rho, ruu, &D);
         
         extrapolate (E, D, &E);
+        boundaryCondition (global.E);
 
         /* Corrector step */
 
+        curl (A, &B); // Better use information from predictor step
+        
         faraday (A, E, dt, &A2);
-        boundaryCondition (global.A2);
 
-        curl (A2, &H2);
-        curlcurl (A2, &J2);
+        curl (A2, &H);
 
-        average (H, H2, &B);
+        average (B, H, &B);
         boundaryCondition (global.B);
 
         // Careful: Does this work with shear?
         kick (global.E, global.B, particles, dt, &particles2);
+        
+        // Positions of particles2 probably aren't right
         drift (particles2, 0.5*dt, &particles2);
-        deposit (particles2, &global.fluid);
+        
+        deposit (particles2, &global.rho, &global.ruu);
 
-        ohm (H2, J2, global.fluid, &D2);
+        curlcurl (A2, &J);
+        
+        ohm (H, J, rho, ruu, &D2);
 
         average (D, D2, &E);
-
-        /* We need the right H2 in the next iteration */
-        H2 = H;
+        boundaryCondition (global.E);
     }
     printf ("Hi, I'm thread %d!\n", ithread);
 }

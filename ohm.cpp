@@ -14,27 +14,25 @@ Ohm::Ohm (const int ithread): ithread (ithread)
 
 void Ohm::operator() (const LocalVectorField<real>& B,
                       const LocalVectorField<real>& J,
-                      IonFluid<real>& global, LocalVectorField<real>* E)
+                      const LocalScalarFieldView<real>& rho,
+                      const LocalVectorFieldView<real>& ruu, 
+                      LocalVectorField<real>* E)
 {
     const real me = real (1)/config::em;
-
-    const LocalVectorFieldView<real> U (global.U, ithread);
-    const LocalScalarFieldView<real> rho1 (global.rho1, ithread);
     
-    // Compute electron fluid velocity and store it in global.U, which up to now held the ion fluid velocity.
     for (int j = 0; j < 3; ++j)
     {
         for (int k = 1; k <= vfpic::mz; ++k)
         for (int i = 1; i <= vfpic::mx; ++i)
         {
-            Ue[j] (k,i) = U[j] (k,i) - me*rho1 (k,i)*J[j] (k,i);
+            U[j] (k,i) = (ruu[j] (k,i) - me*J[j] (k,i))/rho (k,i);
         }
     }
     for (int k = 1; k <= vfpic::mz; ++k)
     for (int i = 1; i <= vfpic::mx; ++i)
     {
-        E->x (k,i) = Ue.z (k,i)*B.y (k,i) - Ue.y (k,i)*B.z (k,i);
-        E->y (k,i) = Ue.x (k,i)*B.z (k,i) - Ue.z (k,i)*B.x (k,i);
-        E->z (k,i) = Ue.y (k,i)*B.x (k,i) - Ue.x (k,i)*B.y (k,i);
+        E->x (k,i) = U.z (k,i)*B.y (k,i) - U.y (k,i)*B.z (k,i);
+        E->y (k,i) = U.x (k,i)*B.z (k,i) - U.z (k,i)*B.x (k,i);
+        E->z (k,i) = U.y (k,i)*B.x (k,i) - U.x (k,i)*B.y (k,i);
     }
 }
