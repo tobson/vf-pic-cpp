@@ -32,7 +32,7 @@ struct Grid
             z(k,i) = config::z0 + (k - real (0.5))*vfpic::dz;
         }
     }
-    GlobalScalarField<real> x, z;
+    NewGlobalScalarField<real> x, z;
 };
 
 struct Fields
@@ -70,8 +70,8 @@ struct Fields
         }
         boundaryCondition(J);
     }
-    GlobalScalarField<real> rho, phi, phi0;
-    GlobalVectorField<real> J, A, A0;
+    NewGlobalScalarField<real> rho, phi, phi0;
+    NewGlobalVectorField<real> J, A, A0;
 };
 
 void iteration (Fields &fields, const int niter)

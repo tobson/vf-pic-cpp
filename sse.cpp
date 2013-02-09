@@ -66,10 +66,10 @@ private:
 };
 
 template <typename T, int N1, int N2>
-struct VecField3: public VecTemplate<ScalarField,T,N1,N2>
+struct VecField3: public VecTemplate<NewScalarField,T,N1,N2>
 {
-    using S = ScalarField<T,N1,N2>;
-    VecField3 (): VecTemplate<ScalarField,T,N1,N2> (new S, new S, new S)
+    using S = NewScalarField<T,N1,N2>;
+    VecField3 (): VecTemplate<NewScalarField,T,N1,N2> (new S, new S, new S)
     {
     }
 };
@@ -89,11 +89,18 @@ void test (const VecBase<real,vfpic::mz,vfpic::mx>& vector)
 {
 }
 
+template <typename T, int N1, int N2>
+void func (NewVectorField<T,N1,N2>& other)
+{
+}
+
+template void func<real,vfpic::nz,vfpic::nx> (NewGlobalVectorField<real>&);
+
 int main (int argc, const char * argv[])
 {
     config::verbose = true;
 
-    GlobalVectorField<real> a;
+    NewGlobalVectorField<real> a;
     
     VecField3<real,vfpic::mz,vfpic::mx> v1, v2;
     v1 += v2;

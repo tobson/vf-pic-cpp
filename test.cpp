@@ -37,20 +37,27 @@ int main(int argc, const char * argv[])
         return 1;
     }
 
+    if (false)
     {
-        GlobalScalarField<float> a,b;
+        NewGlobalScalarField<float> a,b;
         std::vector<LocalScalarFieldView<float>> vec;
         vec.push_back (LocalScalarFieldView<float> (a,0));
         vec.push_back (LocalScalarFieldView<float> (b,0));
     }
 
     {
-        GlobalVectorField<float> a,b;
+        NewGlobalVectorField<float> a,b;
+        a = b;
+        GlobalVectorField<float> c (std::move (a));
         std::vector<LocalVectorFieldView<float>> vec;
         vec.push_back (LocalVectorFieldView<float> (a,0));
-        vec.push_back (LocalVectorFieldView<float> (b,0));
+//        vec.push_back (LocalVectorFieldView<float> (b,0));
+//        LocalVectorField<real> d;
+//        vec[0].x (3,7) = 3.2;
+//        d = vec[1];
     }
 
+    if (false)
     {
         GlobalParticleArray<float> a,b;
         std::vector<LocalParticleArrayView<float>> vec;
