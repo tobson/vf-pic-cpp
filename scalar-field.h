@@ -24,7 +24,6 @@ class ScalarBase
 protected:
     explicit ScalarBase (T *ptr): data (ptr)
     {
-        std::cout << "ScalarBase: Pointer constructor called.\n";
     }
 public:
     virtual ~ScalarBase () = default;

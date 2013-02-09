@@ -31,22 +31,22 @@ struct VectorBase
         components.push_back (std::unique_ptr<S> (pz));
     }
     VectorBase () = delete;
-    VectorBase (const VectorBase&) = delete;
-    VectorBase (VectorBase&& other):
+    VectorBase (const VectorBase& other) = delete;
+    VectorBase& operator= (const VectorBase& other)
+    {
+        x = other.x;
+        y = other.y;
+        z = other.z;
+        
+        return *this;
+    }
+    VectorBase (VectorBase&& other) noexcept:
     x (other.x),
     y (other.y),
     z (other.z),
     components (std::move (other.components))
     {
     }
-    VectorBase& operator= (const VectorBase& other)
-    {
-        x = other.x;
-        y = other.y;
-        z = other.z;
-        return *this;
-    }
-    VectorBase& operator= (VectorBase&&) = delete;
     virtual ~VectorBase () noexcept = default;
 private:
     using FieldOp = std::mem_fun1_t<S&,S,const S&>;
@@ -155,25 +155,6 @@ struct VectorTemplate: public VectorBase<T,N1,N2>
         components.push_back (&y);
         components.push_back (&z);
     }
-    VectorTemplate () = delete;
-    VectorTemplate (const VectorTemplate&) = delete;
-    VectorTemplate operator= (const VectorTemplate& other)
-    {
-        VectorBase<T,N1,N2>::operator= (other);
-    }
-    VectorTemplate (VectorTemplate&& other):
-    VectorBase<T,N1,N2> (std::move (other)),
-    x (*static_cast<S<T,N1,N2>*> (VectorBase<T,N1,N2>::components.at (0).get ())),
-    y (*static_cast<S<T,N1,N2>*> (VectorBase<T,N1,N2>::components.at (1).get ())),
-    z (*static_cast<S<T,N1,N2>*> (VectorBase<T,N1,N2>::components.at (2).get ()))
-    {
-        components.push_back (&x);
-        components.push_back (&y);
-        components.push_back (&z);
-    }
-    VectorTemplate operator= (VectorTemplate&&) = delete;
-    virtual ~VectorTemplate () noexcept = default;
-    
     S<T,N1,N2>& operator[] (int j)
     {
         return *components[j];
@@ -194,9 +175,28 @@ template <typename T, int N1, int N2>
 struct VectorField: public VectorTemplate<ScalarField,T,N1,N2>
 {
     using S = ScalarField<T,N1,N2>;
-    VectorField (): VectorTemplate<ScalarField,T,N1,N2> (new S, new S, new S)
+    VectorField ():
+    VectorTemplate<ScalarField,T,N1,N2> (new S, new S, new S)
     {
     }
+    VectorField (const VectorField& other):
+    VectorTemplate<ScalarField,T,N1,N2> (new S, new S, new S)
+    {
+        *this = other;
+    }
+    VectorField& operator= (const VectorField& other)
+    {
+        this->x = other.x;
+        this->y = other.y;
+        this->z = other.z;
+
+        return *this;
+    }
+    VectorField (VectorField&& other):
+    VectorTemplate<ScalarField,T,N1,N2> (std::move (other))
+    {
+    }
+    VectorField& operator= (VectorField&&) = delete;
     friend std::ostream& operator<< (std::ostream& os, const VectorField& vector)
     {
         os << vector.x;
