@@ -83,7 +83,7 @@ void iteration (GlobalVariables<real>& global, Barrier& barrier, const int ithre
     
     LocalVectorField<real> J, H;
     
-    BoundaryCondition boundaryCondition (barrier, ithread);
+    BoundaryCondition<real> boundaryCondition (barrier, ithread);
     Deposit deposit (barrier, ithread);
     Ohm<real,vfpic::mz,vfpic::mx> ohm;
     

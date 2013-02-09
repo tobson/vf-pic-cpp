@@ -16,25 +16,26 @@
 
 template <typename T, int Nz, int Nx>
 void boundaryConditionX (ScalarBase<T,Nz,Nx>&);
-
 template <typename T, int Nz, int Nx>
 void boundaryConditionX (VectorBase<T,Nz,Nx>&);
 
-void boundaryConditionZ (GlobalScalarField<real>&);
-void boundaryConditionZ (GlobalVectorField<real>&);
+template <typename T>
+void boundaryConditionZ (GlobalScalarField<T>&);
+template <typename T>
+void boundaryConditionZ (GlobalVectorField<T>&);
 
-void boundaryCondition (GlobalScalarField<real>&, Barrier&, const int);
-void boundaryCondition (GlobalVectorField<real>&, Barrier&, const int);
+template <typename T>
+void boundaryCondition (GlobalScalarField<T>&);
+template <typename T>
+void boundaryCondition (GlobalVectorField<T>&);
 
-void boundaryCondition (GlobalScalarField<real>&);
-void boundaryCondition (GlobalVectorField<real>&);
-
+template <typename T>
 class BoundaryCondition
 {
 public:
     BoundaryCondition (Barrier&, const int);
-    void operator() (GlobalScalarField<real>&);
-    void operator() (GlobalVectorField<real>&);
+    void operator() (GlobalScalarField<T>&);
+    void operator() (GlobalVectorField<T>&);
 private:
     Barrier& barrier;
     const int ithread;
