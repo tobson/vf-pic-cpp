@@ -15,7 +15,7 @@
 template <typename T, int N1, int N2>
 struct VecBase
 {
-    using S = ScalarBase<T,N1,N2>;
+    using S = ScalarField<T,N1,N2>;
     VecBase (S *px, S *py, S *pz): x (*px), y (*py), z (*pz)
     {
         components.push_back (std::unique_ptr<S> (px));
@@ -38,7 +38,7 @@ struct VecBase
     }
     S& x; S& y; S& z;
 protected:
-    std::vector<std::unique_ptr<ScalarBase<T,N1,N2>>> components;
+    std::vector<std::unique_ptr<ScalarField<T,N1,N2>>> components;
 };
 
 template <template <typename, int, int> class S, typename T, int N1, int N2>
@@ -74,11 +74,11 @@ struct VecField3: public VecTemplate<NewScalarField,T,N1,N2>
     }
 };
 
-struct VecView3: public VecTemplate<ScalarBaseView,real,vfpic::mz,vfpic::mx>
+struct VecView3: public VecTemplate<ScalarFieldView,real,vfpic::mz,vfpic::mx>
 {
-    using S = ScalarBaseView<real,vfpic::mz,vfpic::mx>;
+    using S = ScalarFieldView<real,vfpic::mz,vfpic::mx>;
     VecView3 (GlobalVectorField<real>& global, int ithread):
-    VecTemplate<ScalarBaseView,real,vfpic::mz,vfpic::mx> (new S (global.x, ithread),
+    VecTemplate<ScalarFieldView,real,vfpic::mz,vfpic::mx> (new S (global.x, ithread),
                                                           new S (global.y, ithread),
                                                           new S (global.z, ithread))
     {

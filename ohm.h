@@ -15,11 +15,11 @@ template <typename T, int Nz, int Nx>
 class Ohm
 {
 public:
-    void operator() (const VectorBase<T,Nz,Nx>&,
-                     const VectorBase<T,Nz,Nx>&,
-                     const ScalarBase<T,Nz,Nx>&,
-                     const VectorBase<T,Nz,Nx>&,
-                     VectorBase<T,Nz,Nx>*);
+    void operator() (const VectorField<T,Nz,Nx>&,
+                     const VectorField<T,Nz,Nx>&,
+                     const ScalarField<T,Nz,Nx>&,
+                     const VectorField<T,Nz,Nx>&,
+                     VectorField<T,Nz,Nx>*);
 private:
     NewVectorField<T,Nz,Nx> U;
 };

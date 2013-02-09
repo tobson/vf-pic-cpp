@@ -12,11 +12,11 @@
 #include "vector-field.h"
 
 template<typename T, int Nz, int Nx>
-void extrapolate (const ScalarBase<T,Nz,Nx>& start, const ScalarBase<T,Nz,Nx>& mid, ScalarBase<T,Nz,Nx>* pend)
+void extrapolate (const ScalarField<T,Nz,Nx>& start, const ScalarField<T,Nz,Nx>& mid, ScalarField<T,Nz,Nx>* pend)
 {
     const real two = real (2);
     
-    ScalarBase<T,Nz,Nx>& end = *pend;
+    ScalarField<T,Nz,Nx>& end = *pend;
     
     for (int k = 1; k <= Nz; ++k)
     for (int i = 1; i <= Nx; ++i)
@@ -26,19 +26,19 @@ void extrapolate (const ScalarBase<T,Nz,Nx>& start, const ScalarBase<T,Nz,Nx>& m
 }
 
 template<typename T, int Nz, int Nx>
-void extrapolate (const VectorBase<T,Nz,Nx>& start, const VectorBase<T,Nz,Nx>& mid, VectorBase<T,Nz,Nx>* pend)
+void extrapolate (const VectorField<T,Nz,Nx>& start, const VectorField<T,Nz,Nx>& mid, VectorField<T,Nz,Nx>* pend)
 {
-    VectorBase<T,Nz,Nx>& end = *pend;
+    VectorField<T,Nz,Nx>& end = *pend;
     
     for (int j = 0; j < 3; ++j) extrapolate (start[j], mid[j], &end[j]);
 }
 
 template<typename T, int Nz, int Nx>
-void average (const ScalarBase<T,Nz,Nx>& start, const ScalarBase<T,Nz,Nx>& end, ScalarBase<T,Nz,Nx>* pmid)
+void average (const ScalarField<T,Nz,Nx>& start, const ScalarField<T,Nz,Nx>& end, ScalarField<T,Nz,Nx>* pmid)
 {
     const real half = real (0.5);
     
-    ScalarBase<T,Nz,Nx>& mid = *pmid;
+    ScalarField<T,Nz,Nx>& mid = *pmid;
     
     for (int k = 1; k <= Nz; ++k)
     for (int i = 1; i <= Nx; ++i)
@@ -48,9 +48,9 @@ void average (const ScalarBase<T,Nz,Nx>& start, const ScalarBase<T,Nz,Nx>& end, 
 }
 
 template<typename T, int Nz, int Nx>
-void average (const VectorBase<T,Nz,Nx>& start, const VectorBase<T,Nz,Nx>& end, VectorBase<T,Nz,Nx>* pmid)
+void average (const VectorField<T,Nz,Nx>& start, const VectorField<T,Nz,Nx>& end, VectorField<T,Nz,Nx>* pmid)
 {
-    VectorBase<T,Nz,Nx>& mid = *pmid;
+    VectorField<T,Nz,Nx>& mid = *pmid;
     
     for (int j = 0; j < 3; ++j) average (start[j], end[j], &mid[j]);
 }

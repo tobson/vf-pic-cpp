@@ -9,9 +9,9 @@
 #include "faraday.h"
 
 template<typename T, int Nz, int Nx>
-void faraday (const ScalarBase<T,Nz,Nx>& Aold, const ScalarBase<T,Nz,Nx>& E, const real dt, ScalarBase<T,Nz,Nx>* pAnew)
+void faraday (const ScalarField<T,Nz,Nx>& Aold, const ScalarField<T,Nz,Nx>& E, const real dt, ScalarField<T,Nz,Nx>* pAnew)
 {
-    ScalarBase<T,Nz,Nx>& Anew = *pAnew;
+    ScalarField<T,Nz,Nx>& Anew = *pAnew;
     
     for (int k = 1; k <= Nz; ++k)
     for (int i = 1; i <= Nx; ++i)
@@ -21,10 +21,10 @@ void faraday (const ScalarBase<T,Nz,Nx>& Aold, const ScalarBase<T,Nz,Nx>& E, con
 }
 
 template<typename T, int Nz, int Nx>
-void faraday (const VectorBase<T,Nz,Nx>& Aold,
-              const VectorBase<T,Nz,Nx>& E, const real dt, VectorBase<T,Nz,Nx>* pAnew)
+void faraday (const VectorField<T,Nz,Nx>& Aold,
+              const VectorField<T,Nz,Nx>& E, const real dt, VectorField<T,Nz,Nx>* pAnew)
 {
-    VectorBase<T,Nz,Nx>& Anew = *pAnew;
+    VectorField<T,Nz,Nx>& Anew = *pAnew;
     
     for (int j = 0; j < 3; ++j) faraday (Aold[j], E[j], dt, &Anew[j]);
 }
@@ -34,6 +34,6 @@ void faraday (const VectorBase<T,Nz,Nx>& Aold,
 using vfpic::mx;
 using vfpic::mz;
 
-template void faraday (const VectorBase<real,mz,mx>&,
-                       const VectorBase<real,mz,mx>&, const real,
-                       VectorBase<real,mz,mx>*);
+template void faraday (const VectorField<real,mz,mx>&,
+                       const VectorField<real,mz,mx>&, const real,
+                       VectorField<real,mz,mx>*);

@@ -12,7 +12,7 @@
 #include "scalar-field.h"
 
 template <typename T, int Nz, int Nx>
-void curl (const VectorBase<T,Nz,Nx>& A, VectorBase<T,Nz,Nx>* B)
+void curl (const VectorField<T,Nz,Nx>& A, VectorField<T,Nz,Nx>* B)
 {
     const real fx = real (0.5)/vfpic::dx;
     const real fz = real (0.5)/vfpic::dz;
@@ -33,7 +33,7 @@ void curl (const VectorBase<T,Nz,Nx>& A, VectorBase<T,Nz,Nx>* B)
 }
 
 template <typename T, int Nz, int Nx>
-void curlcurl (const VectorBase<T,Nz,Nx>& A, VectorBase<T,Nz,Nx>* J)
+void curlcurl (const VectorField<T,Nz,Nx>& A, VectorField<T,Nz,Nx>* J)
 {
     const real two = real (2);
     

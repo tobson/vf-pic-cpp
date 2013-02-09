@@ -31,8 +31,8 @@ void drift (const ParticleBase<T,Np>& old, const real dt,
 }
 
 template <typename T, int Np, int Nz, int Nx>
-void kick (const VectorBase<T,Nz,Nx>& E,
-           const VectorBase<T,Nz,Nx>& B,
+void kick (const VectorField<T,Nz,Nx>& E,
+           const VectorField<T,Nz,Nx>& B,
            const ParticleBase<T,Np>& old, const real dt,
                  ParticleBase<T,Np> *pnew)
 {
@@ -104,8 +104,8 @@ void kick (const VectorBase<T,Nz,Nx>& E,
 template void drift (const ParticleBase<real,mpar>&, const real,
                            ParticleBase<real,mpar>*);
 
-template void kick (const VectorBase<real,nz,nx>&,
-                    const VectorBase<real,nz,nx>&,
+template void kick (const VectorField<real,nz,nx>&,
+                    const VectorField<real,nz,nx>&,
                     const ParticleBase<real,mpar>&, const real dt,
                           ParticleBase<real,mpar>*);
 

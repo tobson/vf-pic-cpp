@@ -15,9 +15,9 @@
 #include "vector-field.h"
 
 template <typename T, int Nz, int Nx>
-void boundaryConditionX (ScalarBase<T,Nz,Nx>&);
+void boundaryConditionX (ScalarField<T,Nz,Nx>&);
 template <typename T, int Nz, int Nx>
-void boundaryConditionX (VectorBase<T,Nz,Nx>&);
+void boundaryConditionX (VectorField<T,Nz,Nx>&);
 
 template <typename T>
 void boundaryConditionZ (GlobalScalarField<T>&);

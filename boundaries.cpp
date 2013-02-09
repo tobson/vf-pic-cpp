@@ -11,7 +11,7 @@
 using namespace vfpic;
 
 template <typename T, int Nz, int Nx>
-void boundaryConditionX (ScalarBase<T,Nz,Nx>& scalar)
+void boundaryConditionX (ScalarField<T,Nz,Nx>& scalar)
 {
     for (int k = 1; k <= Nz; ++k)
     {
@@ -21,7 +21,7 @@ void boundaryConditionX (ScalarBase<T,Nz,Nx>& scalar)
 }
 
 template <typename T, int Nz, int Nx>
-void boundaryConditionX (VectorBase<T,Nz,Nx>& vector)
+void boundaryConditionX (VectorField<T,Nz,Nx>& vector)
 {
     boundaryConditionX (vector.x);
     boundaryConditionX (vector.y);
@@ -113,8 +113,8 @@ void boundaryCondition (ParticleBase<T,N>& particles)
 
 /* Explicit instantiation */
 
-template void boundaryConditionX (ScalarBase<real,mz,mx>&);
-template void boundaryConditionX (VectorBase<real,mz,mx>&);
+template void boundaryConditionX (ScalarField<real,mz,mx>&);
+template void boundaryConditionX (VectorField<real,mz,mx>&);
 template void boundaryConditionZ (GlobalScalarField<real>&);
 template void boundaryConditionZ (GlobalVectorField<real>&);
 template void boundaryCondition (GlobalScalarField<real>&);

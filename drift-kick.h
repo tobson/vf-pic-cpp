@@ -16,7 +16,7 @@ template <typename T, int Np>
 void drift (const ParticleBase<T,Np>&, const real, ParticleBase<T,Np>*);
 
 template <typename T, int Np, int Nz, int Nx>
-void kick (const VectorBase<T,Nz,Nx>&, const VectorBase<T,Nz,Nx>&,
+void kick (const VectorField<T,Nz,Nx>&, const VectorField<T,Nz,Nx>&,
            const ParticleBase<T,Np>&, const real, ParticleBase<T,Np>*);
 
 #endif /* defined(__vf_pic__drift_kick__) */

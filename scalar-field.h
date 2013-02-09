@@ -19,14 +19,14 @@
 /* Declerations */
 
 template <typename T, int N1, int N2>
-class ScalarBase
+class ScalarField
 {
 protected:
-    explicit ScalarBase (T *ptr): data (ptr)
+    explicit ScalarField (T *ptr): data (ptr)
     {
     }
 public:
-    virtual ~ScalarBase () = default;
+    virtual ~ScalarField () = default;
     /* Index operators */
     inline T& operator() (int i1, int i2)
     {
@@ -37,7 +37,7 @@ public:
         return data[i1*(N2 + 2) + i2];
     }
     /* Assign */
-    inline ScalarBase& operator= (const ScalarBase& other)
+    inline ScalarField& operator= (const ScalarField& other)
     {
         for (int i1 = 1; i1 <= N1; ++i1)
         for (int i2 = 1; i2 <= N2; ++i2)
@@ -46,7 +46,7 @@ public:
         }
         return *this;
     }
-    inline ScalarBase& operator= (const T& value)
+    inline ScalarField& operator= (const T& value)
     {
         for (int i1 = 1; i1 <= N1; ++i1)
         for (int i2 = 1; i2 <= N2; ++i2)
@@ -56,7 +56,7 @@ public:
         return *this;
     }
     /* Add to */
-    inline ScalarBase& operator+= (const ScalarBase& other)
+    inline ScalarField& operator+= (const ScalarField& other)
     {
         for (int i1 = 1; i1 <= N1; ++i1)
         for (int i2 = 1; i2 <= N2; ++i2)
@@ -65,7 +65,7 @@ public:
         }
         return *this;
     }
-    inline ScalarBase& operator+= (const T& value)
+    inline ScalarField& operator+= (const T& value)
     {
         for (int i1 = 1; i1 <= N1; ++i1)
         for (int i2 = 1; i2 <= N2; ++i2)
@@ -75,7 +75,7 @@ public:
         return *this;
     }
     /* Subtract from */
-    inline ScalarBase& operator-= (const ScalarBase& other)
+    inline ScalarField& operator-= (const ScalarField& other)
     {
         for (int i1 = 1; i1 <= N1; ++i1)
         for (int i2 = 1; i2 <= N2; ++i2)
@@ -84,7 +84,7 @@ public:
         }
         return *this;
     }
-    inline ScalarBase& operator-= (const T& value)
+    inline ScalarField& operator-= (const T& value)
     {
         for (int i1 = 1; i1 <= N1; ++i1)
         for (int i2 = 1; i2 <= N2; ++i2)
@@ -94,7 +94,7 @@ public:
         return *this;
     }
     /* Multiply with */
-    inline ScalarBase& operator*= (const ScalarBase& other)
+    inline ScalarField& operator*= (const ScalarField& other)
     {
         for (int i1 = 1; i1 <= N1; ++i1)
         for (int i2 = 1; i2 <= N2; ++i2)
@@ -103,7 +103,7 @@ public:
         }
         return *this;
     }
-    inline ScalarBase& operator*= (const T& value)
+    inline ScalarField& operator*= (const T& value)
     {
         for (int i1 = 1; i1 <= N1; ++i1)
         for (int i2 = 1; i2 <= N2; ++i2)
@@ -113,7 +113,7 @@ public:
         return *this;
     }
     /* Divide by */
-    inline ScalarBase& operator/= (const ScalarBase& other)
+    inline ScalarField& operator/= (const ScalarField& other)
     {
         for (int i1 = 1; i1 <= N1; ++i1)
         for (int i2 = 1; i2 <= N2; ++i2)
@@ -122,7 +122,7 @@ public:
         }
         return *this;
     }
-    inline ScalarBase& operator/= (const T& value)
+    inline ScalarField& operator/= (const T& value)
     {
         for (int i1 = 1; i1 <= N1; ++i1)
         for (int i2 = 1; i2 <= N2; ++i2)
@@ -151,25 +151,25 @@ protected:
 };
 
 template <typename T, int N1, int N2>
-struct NewScalarField: public ScalarBase<T,N1,N2>
+struct NewScalarField: public ScalarField<T,N1,N2>
 {
-    NewScalarField (): ScalarBase<T,N1,N2> (new T[size])
+    NewScalarField (): ScalarField<T,N1,N2> (new T[size])
     {
         if (config::verbose)
         {
             printf ("NewScalarField (Default ctor): Allocated %lu bytes.\n", size*sizeof (T));
         }
     }
-    NewScalarField (const NewScalarField& other): ScalarBase<T,N1,N2> (new T[size])
+    NewScalarField (const NewScalarField& other): ScalarField<T,N1,N2> (new T[size])
     {
         if (config::verbose)
         {
             printf ("NewScalarField (Copy ctor): Allocated %lu bytes.\n", size*sizeof (T));
         }
-        ScalarBase<T,N1,N2>::operator= (other);
+        ScalarField<T,N1,N2>::operator= (other);
     }
     NewScalarField& operator= (const NewScalarField&) = default;
-    NewScalarField (NewScalarField&& other) noexcept: ScalarBase<T,N1,N2> (other.data)
+    NewScalarField (NewScalarField&& other) noexcept: ScalarField<T,N1,N2> (other.data)
     {
         other.data = nullptr;
     }
@@ -186,10 +186,10 @@ struct NewScalarField: public ScalarBase<T,N1,N2>
         delete[] data;
     }
     
-    using ScalarBase<T,N1,N2>::operator=;
+    using ScalarField<T,N1,N2>::operator=;
 
-    using ScalarBase<T,N1,N2>::data;
-    using ScalarBase<T,N1,N2>::size;
+    using ScalarField<T,N1,N2>::data;
+    using ScalarField<T,N1,N2>::size;
     
     friend std::ostream& operator<< (std::ostream& os, const NewScalarField& scalar)
     {
@@ -199,23 +199,23 @@ struct NewScalarField: public ScalarBase<T,N1,N2>
 };
 
 template <typename T, int N1, int N2>
-struct ScalarBaseView: public ScalarBase<T,N1,N2>
+struct ScalarFieldView: public ScalarField<T,N1,N2>
 {
     template <int M1, int M2>
-    ScalarBaseView (ScalarBase<T,M1,M2>& global, const int ithread):
-    ScalarBase<T,N1,N2> (&global(ithread*N1,0))
+    ScalarFieldView (ScalarField<T,M1,M2>& global, const int ithread):
+    ScalarField<T,N1,N2> (&global(ithread*N1,0))
     {
         using vfpic::nthreads;
         static_assert (M1 == nthreads*N1 && M2 == N2, "");
     }
-    using ScalarBase<T,N1,N2>::operator=;
+    using ScalarField<T,N1,N2>::operator=;
 };
 
 template <typename T>
-using GlobalScalarField = ScalarBase<T,vfpic::nz,vfpic::nx>;
+using GlobalScalarField = ScalarField<T,vfpic::nz,vfpic::nx>;
 
 template <typename T>
-using LocalScalarField = ScalarBase<T,vfpic::mz,vfpic::mx>;
+using LocalScalarField = ScalarField<T,vfpic::mz,vfpic::mx>;
 
 template <typename T>
 using NewGlobalScalarField = NewScalarField<T,vfpic::nz,vfpic::nx>;
@@ -224,6 +224,16 @@ template <typename T>
 using NewLocalScalarField = NewScalarField<T,vfpic::mz,vfpic::mx>;
 
 template <typename T>
-using LocalScalarFieldView = ScalarBaseView<T,vfpic::mz,vfpic::mx>;
+using LocalScalarFieldView = ScalarFieldView<T,vfpic::mz,vfpic::mx>;
+
+//template <typename T>
+//struct LocalScalarFieldView: public LocalScalarField<T>
+//{
+//    LocalScalarFieldView (LocalScalarField<T>& global, const int ithread):
+//    LocalScalarField<T> (&global(ithread*vfpic::mz,0))
+//    {
+//    }
+//    using LocalScalarField<T>::operator=;
+//};
 
 #endif
