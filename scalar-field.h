@@ -26,6 +26,7 @@ protected:
     {
     }
 public:
+    virtual ~ScalarBase () = default;
     /* Index operators */
     inline T& operator() (int i1, int i2)
     {
