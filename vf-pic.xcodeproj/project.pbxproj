@@ -12,6 +12,7 @@
 		D20381BF16BE2121008755DC /* global.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D28BAEFD16B5FD0200578956 /* global.cpp */; };
 		D20381C016BE212F008755DC /* config.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D28BAF0016B5FDDA00578956 /* config.cpp */; };
 		D206FBFD16C1C31C008BD080 /* ohm.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D206FBFB16C1C31C008BD080 /* ohm.cpp */; };
+		D206FC0416C62E3D008BD080 /* faraday.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D206FC0316C62E3D008BD080 /* faraday.cpp */; };
 		D24BC36D16B64B1A006C64A3 /* global.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D28BAEFD16B5FD0200578956 /* global.cpp */; };
 		D24BC36E16B64B1A006C64A3 /* config.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D28BAF0016B5FDDA00578956 /* config.cpp */; };
 		D24BC37016B64B1A006C64A3 /* barrier.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D28BAF1816B60B3800578956 /* barrier.cpp */; };
@@ -82,6 +83,7 @@
 		D206FBFB16C1C31C008BD080 /* ohm.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ohm.cpp; sourceTree = "<group>"; };
 		D206FBFC16C1C31C008BD080 /* ohm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ohm.h; sourceTree = "<group>"; };
 		D206FC0116C3539F008BD080 /* math-helpers.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "math-helpers.h"; sourceTree = "<group>"; };
+		D206FC0316C62E3D008BD080 /* faraday.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = faraday.cpp; sourceTree = "<group>"; };
 		D24BC37716B64B1A006C64A3 /* jacobi */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = jacobi; sourceTree = BUILT_PRODUCTS_DIR; };
 		D24BC37916B64B92006C64A3 /* jacobi.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = jacobi.cpp; sourceTree = "<group>"; };
 		D25C8DB216B89B6600B0A607 /* grid.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = grid.cpp; sourceTree = "<group>"; };
@@ -156,6 +158,7 @@
 		D2915FA416B5F56A0084A612 = {
 			isa = PBXGroup;
 			children = (
+				D206FC0316C62E3D008BD080 /* faraday.cpp */,
 				D2F90E4B16B73ED400ABDA86 /* Makefile */,
 				D28BAF1816B60B3800578956 /* barrier.cpp */,
 				D2C6828016BB7EB30023FB36 /* boundaries.cpp */,
@@ -355,6 +358,7 @@
 				D2C6828A16BB9CAC0023FB36 /* drift-kick.cpp in Sources */,
 				D20381BE16BE0196008755DC /* ion-fluid.cpp in Sources */,
 				D206FBFD16C1C31C008BD080 /* ohm.cpp in Sources */,
+				D206FC0416C62E3D008BD080 /* faraday.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
