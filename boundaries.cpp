@@ -10,6 +10,27 @@
 
 using namespace vfpic;
 
+template <typename T, int Nz, int Nx>
+void boundaryConditionX (ScalarBase<T,Nz,Nx>& scalar)
+{
+    for (int k = 1; k <= Nz; ++k)
+    {
+        scalar(k,0   ) = scalar(k,Nx);
+        scalar(k,Nx+1) = scalar(k,1 );
+    }
+}
+
+template <typename T, int Nz, int Nx>
+void boundaryConditionX (VectorBase<T,Nz,Nx>& vector)
+{
+    boundaryConditionX (vector.x);
+    boundaryConditionX (vector.y);
+    boundaryConditionX (vector.z);
+}
+
+/* Explicit instantiation */
+template void boundaryConditionX (VectorBase<real,vfpic::mz,vfpic::mx>&);
+
 void boundaryConditionZ (GlobalScalarField<real>& scalar)
 {
     for (int i = 0; i < nx + 2; ++i)
@@ -85,20 +106,21 @@ void BoundaryCondition::operator() (GlobalVectorField<real>& global)
     }
 }
 
-void boundaryCondition (LocalParticleArrayView<real>& particles)
+template <typename T, int N>
+void boundaryCondition (ParticleBase<T,N>& particles)
 {
     using config::x0;
     using config::z0;
     
     using config::Lx;
     using config::Lz;
-
-    const real Lx1 = real (1)/Lx;
-    const real Lz1 = real (1)/Lz;
-
-    auto p = particles.begin ();
-
-    for (int n = 0; n < vfpic::mpar; ++n)
+    
+    const T Lx1 = T (1)/Lx;
+    const T Lz1 = T (1)/Lz;
+    
+    Particle<T> *p = particles.begin ();
+    
+    for (int n = 0; n < N; ++n)
     {
         p->x -= floor ((p->x - x0)*Lx1)*Lx;
         p->z -= floor ((p->z - z0)*Lz1)*Lz;
@@ -106,3 +128,5 @@ void boundaryCondition (LocalParticleArrayView<real>& particles)
         ++p;
     }
 }
+
+template void boundaryCondition (ParticleBase<real,vfpic::mpar>&);

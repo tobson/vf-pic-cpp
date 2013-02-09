@@ -12,8 +12,9 @@
 #include "particles.h"
 #include "vector-field.h"
 
-void drift (const LocalParticleArrayView<real>&, const real,
-            LocalParticleArrayView<real> *);
+template <typename T, int N>
+void drift (const ParticleBase<T,N>&, const real,
+            ParticleBase<T,N> *);
 
 void kick (const GlobalVectorField<real>&, const GlobalVectorField<real>&,
            const LocalParticleArrayView<real>&, const real,

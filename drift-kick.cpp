@@ -10,13 +10,14 @@
 #include "drift-kick.h"
 #include "global.h"
 
-void drift (const LocalParticleArrayView<real>& old, const real dt,
-            LocalParticleArrayView<real> *pnew)
+template <typename T, int N>
+void drift (const ParticleBase<T,N>& old, const real dt,
+            ParticleBase<T,N> *pnew)
 {
-    const Particle<real> *rhs = old.begin ();
-    Particle<real> *lhs = pnew->begin ();
+    const Particle<T> *rhs = old.begin ();
+    Particle<T> *lhs = pnew->begin ();
     
-    for (int n = 0; n < vfpic::mpar; ++n)
+    for (int dummy = 0; dummy < N; ++dummy)
     {
         lhs->x = rhs->x + rhs->vx*dt;
         lhs->z = rhs->z + rhs->vz*dt;
@@ -26,6 +27,10 @@ void drift (const LocalParticleArrayView<real>& old, const real dt,
 
     boundaryCondition (*pnew);
 }
+
+/* Explicit instantiation */
+template void drift (const ParticleBase<real,vfpic::mpar>&,
+                     const real, ParticleBase<real,vfpic::mpar>*);
 
 void kick (const GlobalVectorField<real>& E, const GlobalVectorField<real>& B,
            const LocalParticleArrayView<real>& old, const real dt,

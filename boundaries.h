@@ -15,22 +15,10 @@
 #include "vector-field.h"
 
 template <typename T, int Nz, int Nx>
-void boundaryConditionX (ScalarBase<T,Nz,Nx>& scalar)
-{
-    for (int k = 1; k <= Nz; ++k)
-    {
-        scalar(k,0   ) = scalar(k,Nx);
-        scalar(k,Nx+1) = scalar(k,1 );
-    }
-}
+void boundaryConditionX (ScalarBase<T,Nz,Nx>&);
 
 template <typename T, int Nz, int Nx>
-void boundaryConditionX (VectorBase<T,Nz,Nx>& vector)
-{
-    boundaryConditionX (vector.x);
-    boundaryConditionX (vector.y);
-    boundaryConditionX (vector.z);
-}
+void boundaryConditionX (VectorBase<T,Nz,Nx>&);
 
 void boundaryConditionZ (GlobalScalarField<real>&);
 void boundaryConditionZ (GlobalVectorField<real>&);
@@ -52,6 +40,7 @@ private:
     const int ithread;
 };
 
-void boundaryCondition (LocalParticleArrayView<real>&);
+template <typename T, int N>
+void boundaryCondition (ParticleBase<T,N>&);
 
 #endif /* defined(__vf_pic__boundaries__) */
