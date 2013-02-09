@@ -13,9 +13,10 @@
 
 const int nx = 16, nz = 32;
 
+template <typename T, int N1, int N2>
 struct VecBase
 {
-    using S = ScalarBase<real,nz,nx>;
+    using S = ScalarBase<T,N1,N2>;
     VecBase (S *px, S *py, S *pz): x (*px), y (*py), z (*pz)
     {
         components.push_back (std::unique_ptr<S> (px));
@@ -38,50 +39,54 @@ struct VecBase
     }
     S& x; S& y; S& z;
 protected:
-    std::vector<std::unique_ptr<ScalarBase<real,nz,nx>>> components;
+    std::vector<std::unique_ptr<ScalarBase<T,N1,N2>>> components;
 };
 
-template <class S>
-struct VecTemplate: public VecBase
+template <template <typename, int, int> class S, typename T, int N1, int N2>
+struct VecTemplate: public VecBase<T,N1,N2>
 {
-    VecTemplate (S *px, S *py, S *pz): VecBase (px, py, pz),
-    x (*static_cast<S*> (components.at (0).get ())),
-    y (*static_cast<S*> (components.at (1).get ())),
-    z (*static_cast<S*> (components.at (2).get ()))
+    VecTemplate (S<T,N1,N2> *px, S<T,N1,N2> *py, S<T,N1,N2> *pz):
+    VecBase<T,N1,N2> (px, py, pz),
+    x (*static_cast<S<T,N1,N2>*> (VecBase<T,N1,N2>::components.at (0).get ())),
+    y (*static_cast<S<T,N1,N2>*> (VecBase<T,N1,N2>::components.at (1).get ())),
+    z (*static_cast<S<T,N1,N2>*> (VecBase<T,N1,N2>::components.at (2).get ()))
     {
-        _components.push_back (&x);
-        _components.push_back (&y);
-        _components.push_back (&z);
+        components.push_back (&x);
+        components.push_back (&y);
+        components.push_back (&z);
     }
-    S& operator[] (int j)
+    S<T,N1,N2>& operator[] (int j)
     {
-        return *_components[j];
+        return *components[j];
     }
-    S &x, &y, &z;
+    S<T,N1,N2>& x;
+    S<T,N1,N2>& y;
+    S<T,N1,N2>& z;
 private:
-    std::vector<S*> _components;
+    std::vector<S<T,N1,N2>*> components;
 };
 
-struct VecField3: public VecTemplate<ScalarField<real,nz,nx>>
+template <typename T, int N1, int N2>
+struct VecField3: public VecTemplate<ScalarField,T,N1,N2>
 {
     using S = ScalarField<real,nz,nx>;
-    VecField3 (): VecTemplate<S> (new S, new S, new S)
+    VecField3 (): VecTemplate<ScalarField,real,N1,N2> (new S, new S, new S)
     {
     }
 };
 
-struct VecView3: public VecTemplate<ScalarBaseView<real,nz,nx>>
+struct VecView3: public VecTemplate<ScalarBaseView,real,nz,nx>
 {
     using S = ScalarBaseView<real,nz,nx>;
     VecView3 (GlobalVectorField<real>& global, int ithread):
-    VecTemplate<S> (new S (global.x, ithread),
-                    new S (global.y, ithread),
-                    new S (global.z, ithread))
+    VecTemplate<ScalarBaseView,real,nz,nx> (new S (global.x, ithread),
+                                            new S (global.y, ithread),
+                                            new S (global.z, ithread))
     {
     }
 };
 
-void test (const VecBase& vector)
+void test (const VecBase<real,nz,nx>& vector)
 {
 }
 
@@ -91,7 +96,7 @@ int main (int argc, const char * argv[])
 
     GlobalVectorField<real> a;
     
-    VecField3 v1, v2;
+    VecField3<real,nz,nx> v1, v2;
     v1 += v2;
     test (v1);
     
