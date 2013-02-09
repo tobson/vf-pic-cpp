@@ -12,6 +12,7 @@
 #include "scalar-field.h"
 #include "three-vector.h"
 
+#include <memory>
 #include <vector>
 
 /* Decleration */
