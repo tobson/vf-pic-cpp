@@ -11,8 +11,6 @@
 #include <iostream>
 #include <vector>
 
-const int nx = 16, nz = 32;
-
 template <typename T, int N1, int N2>
 struct VecBase
 {
@@ -69,24 +67,24 @@ private:
 template <typename T, int N1, int N2>
 struct VecField3: public VecTemplate<ScalarField,T,N1,N2>
 {
-    using S = ScalarField<real,nz,nx>;
+    using S = ScalarField<real,vfpic::nz,vfpic::nx>;
     VecField3 (): VecTemplate<ScalarField,real,N1,N2> (new S, new S, new S)
     {
     }
 };
 
-struct VecView3: public VecTemplate<ScalarBaseView,real,nz,nx>
+struct VecView3: public VecTemplate<ScalarBaseView,real,vfpic::nz,vfpic::nx>
 {
-    using S = ScalarBaseView<real,nz,nx>;
+    using S = ScalarBaseView<real,vfpic::nz,vfpic::nx>;
     VecView3 (GlobalVectorField<real>& global, int ithread):
-    VecTemplate<ScalarBaseView,real,nz,nx> (new S (global.x, ithread),
-                                            new S (global.y, ithread),
-                                            new S (global.z, ithread))
+    VecTemplate<ScalarBaseView,real,vfpic::nz,vfpic::nx> (new S (global.x, ithread),
+                                                          new S (global.y, ithread),
+                                                          new S (global.z, ithread))
     {
     }
 };
 
-void test (const VecBase<real,nz,nx>& vector)
+void test (const VecBase<real,vfpic::nz,vfpic::nx>& vector)
 {
 }
 
@@ -96,7 +94,7 @@ int main (int argc, const char * argv[])
 
     GlobalVectorField<real> a;
     
-    VecField3<real,nz,nx> v1, v2;
+    VecField3<real,vfpic::nz,vfpic::nx> v1, v2;
     v1 += v2;
     test (v1);
     
