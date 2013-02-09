@@ -97,7 +97,6 @@
 		D28BAF0616B601AB00578956 /* scalar-field.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "scalar-field.h"; sourceTree = "<group>"; };
 		D28BAF1216B604B900578956 /* test */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = test; sourceTree = BUILT_PRODUCTS_DIR; };
 		D28BAF1416B604F200578956 /* test.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = test.cpp; sourceTree = "<group>"; };
-		D28BAF1616B6080A00578956 /* three-vector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "three-vector.h"; sourceTree = "<group>"; };
 		D28BAF1716B608BC00578956 /* vector-field.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "vector-field.h"; sourceTree = "<group>"; };
 		D28BAF1816B60B3800578956 /* barrier.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = barrier.cpp; sourceTree = "<group>"; };
 		D28BAF1916B60B3800578956 /* barrier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = barrier.h; sourceTree = "<group>"; };
@@ -109,7 +108,6 @@
 		D2C6828116BB7EB40023FB36 /* boundaries.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = boundaries.h; sourceTree = "<group>"; };
 		D2C6828816BB9CAC0023FB36 /* drift-kick.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "drift-kick.cpp"; sourceTree = "<group>"; };
 		D2C6828916BB9CAC0023FB36 /* drift-kick.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "drift-kick.h"; sourceTree = "<group>"; };
-		D2E0962D16BE43F2003AA5DA /* three-vector-union.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "three-vector-union.h"; sourceTree = "<group>"; };
 		D2E0963516BF83C7003AA5DA /* libconfig++.la */ = {isa = PBXFileReference; lastKnownFileType = text; name = "libconfig++.la"; path = "../../macports/lib/libconfig++.la"; sourceTree = "<group>"; };
 		D2E0963716BF83E8003AA5DA /* libconfig++.9.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libconfig++.9.dylib"; path = "../../macports/lib/libconfig++.9.dylib"; sourceTree = "<group>"; };
 		D2F90E4816B734C700ABDA86 /* jacobi.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = jacobi.py; sourceTree = "<group>"; };
@@ -158,12 +156,12 @@
 		D2915FA416B5F56A0084A612 = {
 			isa = PBXGroup;
 			children = (
-				D206FC0316C62E3D008BD080 /* faraday.cpp */,
 				D2F90E4B16B73ED400ABDA86 /* Makefile */,
 				D28BAF1816B60B3800578956 /* barrier.cpp */,
 				D2C6828016BB7EB30023FB36 /* boundaries.cpp */,
 				D28BAF0016B5FDDA00578956 /* config.cpp */,
 				D2C6828816BB9CAC0023FB36 /* drift-kick.cpp */,
+				D206FC0316C62E3D008BD080 /* faraday.cpp */,
 				D28BAEFD16B5FD0200578956 /* global.cpp */,
 				D25C8DB216B89B6600B0A607 /* grid.cpp */,
 				D20381BC16BE0195008755DC /* ion-fluid.cpp */,
@@ -177,18 +175,16 @@
 				D2C6828116BB7EB40023FB36 /* boundaries.h */,
 				D28BAF0116B5FDDA00578956 /* config.h */,
 				D2C6827E16B9EBA30023FB36 /* diffops.h */,
-				D25C8DB316B89B6600B0A607 /* grid.h */,
 				D2C6828916BB9CAC0023FB36 /* drift-kick.h */,
 				D2C6827D16B9DF600023FB36 /* faraday.h */,
 				D28BAEFE16B5FD0200578956 /* global.h */,
+				D25C8DB316B89B6600B0A607 /* grid.h */,
 				D20381BD16BE0195008755DC /* ion-fluid.h */,
 				D206FC0116C3539F008BD080 /* math-helpers.h */,
 				D206FBFC16C1C31C008BD080 /* ohm.h */,
 				D28BAEFB16B5FB4500578956 /* param.h */,
 				D2F90E5216B748E900ABDA86 /* particles.h */,
 				D28BAF0616B601AB00578956 /* scalar-field.h */,
-				D2E0962D16BE43F2003AA5DA /* three-vector-union.h */,
-				D28BAF1616B6080A00578956 /* three-vector.h */,
 				D28BAF1716B608BC00578956 /* vector-field.h */,
 				D28BAF0516B600D900578956 /* config.in */,
 				D2E0963516BF83C7003AA5DA /* libconfig++.la */,
