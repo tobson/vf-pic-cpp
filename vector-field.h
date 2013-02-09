@@ -26,28 +26,92 @@ struct VectorBase
         components.push_back (std::unique_ptr<S> (py));
         components.push_back (std::unique_ptr<S> (pz));
     }
-    VectorBase& operator+= (const VectorBase& other)
+    VectorBase& operator= (const VectorBase& other)
     {
-        x += other.x;
-        y += other.y;
-        z += other.z;
-        
+        x = other.x;
+        y = other.y;
+        z = other.z;
         return *this;
     }
-    VectorBase& operator*= (const T value)
+private:
+    using FieldOp = std::mem_fun1_t<S&,S,const S&>;
+    using ValueOp = std::mem_fun1_t<S&,S,const T&>;
+    void lift (FieldOp func, const VectorBase& other)
     {
-        x *= value;
-        y *= value;
-        z *= value;
-        
+        func (&x, other.x);
+        func (&y, other.y);
+        func (&z, other.z);
+    }
+    void lift (FieldOp func, const S& other)
+    {
+        func (&x, other);
+        func (&y, other);
+        func (&z, other);
+    }
+    void lift (ValueOp func, const T& other)
+    {
+        func (&x, other);
+        func (&y, other);
+        func (&z, other);
+    }
+public:
+    /* Assign */
+    VectorBase& operator= (const T& value)
+    {
+        lift (ValueOp (&S::operator=), value);
         return *this;
     }
-    VectorBase& operator= (const T value)
+    VectorBase& operator= (const S& other)
     {
-        x = value;
-        y = value;
-        z = value;
-        
+        lift (FieldOp (&S::operator=), other);
+        return *this;
+    }
+    /* Add to */
+    VectorBase& operator+= (const T& value)
+    {
+        lift (ValueOp (&S::operator+=), value);
+        return *this;
+    }
+    template <class U>
+    VectorBase& operator+= (const U& other)
+    {
+        lift (FieldOp (&S::operator+=), other);
+        return *this;
+    }
+    /* Subtract from */
+    inline VectorBase& operator-= (const T& value)
+    {
+        lift (ValueOp (&S::operator-=), value);
+        return *this;
+    }
+    template <class U>
+    inline VectorBase& operator-= (const U& other)
+    {
+        lift (FieldOp (&S::operator-=), other);
+        return *this;
+    }
+    /* Multiply with */
+    inline VectorBase& operator*= (const T& value)
+    {
+        lift (ValueOp (&S::operator*=), value);
+        return *this;
+    }
+    template <class U>
+    inline VectorBase& operator*= (const U& other)
+    {
+        lift (FieldOp (&S::operator*=), other);
+        return *this;
+    }
+    /* Divide by */
+    inline VectorBase& operator/= (const T& value)
+    {
+        lift (ValueOp (&S::operator/=), value);
+        return *this;
+    }
+    template <class U>
+    inline VectorBase& operator/= (const U& other)
+    {
+        lift (FieldOp (&S::operator/=), other);
         return *this;
     }
     S& operator[] (int j)
