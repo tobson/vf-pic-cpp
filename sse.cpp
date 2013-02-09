@@ -9,6 +9,7 @@
 #include "vector-field.h"
 
 #include <iostream>
+#include <memory>
 #include <vector>
 
 template <typename T, int N1, int N2>
@@ -67,24 +68,24 @@ private:
 template <typename T, int N1, int N2>
 struct VecField3: public VecTemplate<ScalarField,T,N1,N2>
 {
-    using S = ScalarField<real,vfpic::nz,vfpic::nx>;
-    VecField3 (): VecTemplate<ScalarField,real,N1,N2> (new S, new S, new S)
+    using S = ScalarField<T,N1,N2>;
+    VecField3 (): VecTemplate<ScalarField,T,N1,N2> (new S, new S, new S)
     {
     }
 };
 
-struct VecView3: public VecTemplate<ScalarBaseView,real,vfpic::nz,vfpic::nx>
+struct VecView3: public VecTemplate<ScalarBaseView,real,vfpic::mz,vfpic::mx>
 {
-    using S = ScalarBaseView<real,vfpic::nz,vfpic::nx>;
+    using S = ScalarBaseView<real,vfpic::mz,vfpic::mx>;
     VecView3 (GlobalVectorField<real>& global, int ithread):
-    VecTemplate<ScalarBaseView,real,vfpic::nz,vfpic::nx> (new S (global.x, ithread),
+    VecTemplate<ScalarBaseView,real,vfpic::mz,vfpic::mx> (new S (global.x, ithread),
                                                           new S (global.y, ithread),
                                                           new S (global.z, ithread))
     {
     }
 };
 
-void test (const VecBase<real,vfpic::nz,vfpic::nx>& vector)
+void test (const VecBase<real,vfpic::mz,vfpic::mx>& vector)
 {
 }
 
@@ -94,7 +95,7 @@ int main (int argc, const char * argv[])
 
     GlobalVectorField<real> a;
     
-    VecField3<real,vfpic::nz,vfpic::nx> v1, v2;
+    VecField3<real,vfpic::mz,vfpic::mx> v1, v2;
     v1 += v2;
     test (v1);
     
