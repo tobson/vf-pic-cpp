@@ -208,22 +208,26 @@ struct VectorField: public VectorTemplate<ScalarField,T,N1,N2>
     using VectorTemplate<ScalarField,T,N1,N2>::operator=;
 };
 
+template <typename T, int N1, int N2>
+struct VectorBaseView: public VectorTemplate<ScalarBaseView,T,N1,N2>
+{
+    using S = ScalarBaseView<T,N1,N2>;
+    template <int M1, int M2>
+    VectorBaseView (VectorField<T,M1,M2>& global, int ithread):
+    VectorTemplate<ScalarBaseView,T,N1,N2> (new S (global.x, ithread),
+                                            new S (global.y, ithread),
+                                            new S (global.z, ithread))
+    {
+    }
+};
+
 template <typename T>
 using GlobalVectorField = VectorField<T,vfpic::nz,vfpic::nx>;
 
 template <typename T>
 using LocalVectorField = VectorField<T,vfpic::mz,vfpic::mx>;
-
+        
 template <typename T>
-struct LocalVectorFieldView: public VectorTemplate<ScalarBaseView,T,vfpic::mz,vfpic::mx>
-{
-    using S = ScalarBaseView<T,vfpic::mz,vfpic::mx>;
-    LocalVectorFieldView (GlobalVectorField<T>& global, int ithread):
-    VectorTemplate<ScalarBaseView,T,vfpic::mz,vfpic::mx> (new S (global.x, ithread),
-                                                          new S (global.y, ithread),
-                                                          new S (global.z, ithread))
-    {
-    }
-};
+using LocalVectorFieldView = VectorBaseView<T,vfpic::mz,vfpic::mx>;
 
 #endif

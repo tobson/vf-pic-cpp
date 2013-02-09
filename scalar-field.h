@@ -133,7 +133,7 @@ public:
     }
     void reciprocal ()
     {
-        const real one = T (1);
+        const T one = T (1);
         
         for (int i1 = 1; i1 <= N1; ++i1)
         for (int i2 = 1; i2 <= N2; ++i2)
@@ -183,10 +183,7 @@ struct ScalarField: public ScalarBase<T,N1,N2>
     }
     
     using ScalarBase<T,N1,N2>::operator=;
-    using ScalarBase<T,N1,N2>::operator+=;
-    using ScalarBase<T,N1,N2>::operator-=;
-    using ScalarBase<T,N1,N2>::operator*=;
-    using ScalarBase<T,N1,N2>::operator/=;
+
     using ScalarBase<T,N1,N2>::data;
     using ScalarBase<T,N1,N2>::size;
     
@@ -201,26 +198,24 @@ struct ScalarField: public ScalarBase<T,N1,N2>
     }
 };
 
+template <typename T, int N1, int N2>
+struct ScalarBaseView: public ScalarBase<T,N1,N2>
+{
+    template <int M1, int M2>
+    ScalarBaseView (ScalarField<T,M1,M2>& global, const int ithread):
+    ScalarBase<T,N1,N2> (&global(ithread*N1,0))
+    {
+        using vfpic::nthreads;
+        static_assert (M1 == nthreads*N1 && M2 == N2, "");
+    }
+    using ScalarBase<T,N1,N2>::operator=;
+};
+
 template <typename T>
 using GlobalScalarField = ScalarField<T,vfpic::nz,vfpic::nx>;
 
 template <typename T>
 using LocalScalarField = ScalarField<T,vfpic::mz,vfpic::mx>;
-
-template <typename T, int N1, int N2>
-struct ScalarBaseView: public ScalarBase<T,N1,N2>
-{
-    ScalarBaseView (GlobalScalarField<T>& global, int ithread):
-    ScalarBase<T,N1,N2> (&global(ithread*N1,0))
-    {
-//        static_assert (N1 == vfpic::mz && N2 == vfpic::mx, "");
-    }
-    using ScalarBase<T,N1,N2>::operator=;
-    using ScalarBase<T,N1,N2>::operator+=;
-    using ScalarBase<T,N1,N2>::operator-=;
-    using ScalarBase<T,N1,N2>::operator*=;
-    using ScalarBase<T,N1,N2>::operator/=;
-};
 
 template <typename T>
 using LocalScalarFieldView = ScalarBaseView<T,vfpic::mz,vfpic::mx>;
