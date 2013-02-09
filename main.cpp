@@ -85,7 +85,7 @@ void iteration (GlobalVariables<real>& global, Barrier& barrier, const int ithre
     
     BoundaryCondition boundaryCondition (barrier, ithread);
     Deposit deposit (barrier, ithread);
-    Ohm<real,vfpic::mz,vfpic::mx> ohm (ithread);
+    Ohm<real,vfpic::mz,vfpic::mx> ohm;
     
     for (int it = 0; it < niter; ++it)
     {

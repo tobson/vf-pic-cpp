@@ -9,25 +9,20 @@
 #include "ohm.h"
 
 template <typename T, int Nz, int Nx>
-Ohm<T,Nz,Nx>::Ohm (const int ithread): ithread (ithread)
+void Ohm<T,Nz,Nx>::operator() (const VectorBase<T,Nz,Nx>& B,
+                               const VectorBase<T,Nz,Nx>& J,
+                               const ScalarBase<T,Nz,Nx>& rho,
+                               const VectorBase<T,Nz,Nx>& ruu,
+                               VectorBase<T,Nz,Nx>* E)
 {
-}
-
-template <typename T, int Nz, int Nx>
-void Ohm<T,Nz,Nx>::operator() (const VectorField<T,Nz,Nx>& B,
-                               const VectorField<T,Nz,Nx>& J,
-                               const ScalarBaseView<T,Nz,Nx>& rho,
-                               const VectorBaseView<T,Nz,Nx>& ruu,
-                               VectorField<T,Nz,Nx>* E)
-{
-    const real me = real (1)/config::em;
+    const T me = T (1)/config::em;
     
     for (int j = 0; j < 3; ++j)
     {
-        const ScalarBaseView<T,Nz,Nx>& ruj = ruu[j];
-        const ScalarField<T,Nz,Nx>& Jj = J[j];
+        const ScalarBase<T,Nz,Nx>& ruj = ruu[j];
+        const ScalarBase<T,Nz,Nx>& Jj = J[j];
         
-        ScalarField<T,Nz,Nx>& Uj = U[j];
+        ScalarBase<T,Nz,Nx>& Uj = U[j];
         
         for (int k = 1; k <= Nz; ++k)
         for (int i = 1; i <= Nx; ++i)

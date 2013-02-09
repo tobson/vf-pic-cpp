@@ -11,15 +11,12 @@
 
 #include "three-vector.h"
 
-template<
-template<typename, int, int> class S1,
-template<typename, int, int> class S2,
-template<typename, int, int> class S3, typename T, int Nz, int Nx>
-void extrapolate (const S1<T,Nz,Nx>& start, const S2<T,Nz,Nx>& mid, S3<T,Nz,Nx>* pend)
+template<typename T, int Nz, int Nx>
+void extrapolate (const ScalarBase<T,Nz,Nx>& start, const ScalarBase<T,Nz,Nx>& mid, ScalarBase<T,Nz,Nx>* pend)
 {
     const real two = real (2);
     
-    S3<T,Nz,Nx>& end = *pend;
+    ScalarBase<T,Nz,Nx>& end = *pend;
     
     for (int k = 1; k <= Nz; ++k)
     for (int i = 1; i <= Nx; ++i)
@@ -28,26 +25,20 @@ void extrapolate (const S1<T,Nz,Nx>& start, const S2<T,Nz,Nx>& mid, S3<T,Nz,Nx>*
     }
 }
 
-template<
-template<typename, int, int> class S1,
-template<typename, int, int> class S2,
-template<typename, int, int> class S3, typename T, int Nz, int Nx>
-void extrapolate (const ThreeVector<S1,T,Nz,Nx>& start, const ThreeVector<S2,T,Nz,Nx>& mid, ThreeVector<S3,T,Nz,Nx>* pend)
+template<typename T, int Nz, int Nx>
+void extrapolate (const VectorBase<T,Nz,Nx>& start, const VectorBase<T,Nz,Nx>& mid, VectorBase<T,Nz,Nx>* pend)
 {
-    ThreeVector<S3,T,Nz,Nx>& end = *pend;
+    VectorBase<T,Nz,Nx>& end = *pend;
     
     for (int j = 0; j < 3; ++j) extrapolate (start[j], mid[j], &end[j]);
 }
 
-template<
-template<typename, int, int> class S1,
-template<typename, int, int> class S2,
-template<typename, int, int> class S3, typename T, int Nz, int Nx>
-void average (const S1<T,Nz,Nx>& start, const S3<T,Nz,Nx>& end, S2<T,Nz,Nx>* pmid)
+template<typename T, int Nz, int Nx>
+void average (const ScalarBase<T,Nz,Nx>& start, const ScalarBase<T,Nz,Nx>& end, ScalarBase<T,Nz,Nx>* pmid)
 {
     const real half = real (0.5);
     
-    S2<T,Nz,Nx>& mid = *pmid;
+    ScalarBase<T,Nz,Nx>& mid = *pmid;
     
     for (int k = 1; k <= Nz; ++k)
     for (int i = 1; i <= Nx; ++i)
@@ -56,13 +47,10 @@ void average (const S1<T,Nz,Nx>& start, const S3<T,Nz,Nx>& end, S2<T,Nz,Nx>* pmi
     }
 }
 
-template<
-template<typename, int, int> class S1,
-template<typename, int, int> class S2,
-template<typename, int, int> class S3, typename T, int Nz, int Nx>
-void average (const ThreeVector<S1,T,Nz,Nx>& start, const ThreeVector<S3,T,Nz,Nx>& end, ThreeVector<S2,T,Nz,Nx>* pmid)
+template<typename T, int Nz, int Nx>
+void average (const VectorBase<T,Nz,Nx>& start, const VectorBase<T,Nz,Nx>& end, VectorBase<T,Nz,Nx>* pmid)
 {
-    ThreeVector<S2,T,Nz,Nx>& mid = *pmid;
+    VectorBase<T,Nz,Nx>& mid = *pmid;
     
     for (int j = 0; j < 3; ++j) average (start[j], end[j], &mid[j]);
 }

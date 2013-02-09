@@ -10,12 +10,9 @@
 #define vf_pic_diffops_h
 
 #include "scalar-field.h"
-#include "three-vector.h"
 
-#include <type_traits>
-
-template <template<typename, int, int> class S1, template<typename, int, int> class S2, typename T, int Nz, int Nx>
-void curl (const ThreeVector<S2,T,Nz,Nx>& A, ThreeVector<S1,T,Nz,Nx>* B)
+template <typename T, int Nz, int Nx>
+void curl (const VectorBase<T,Nz,Nx>& A, VectorBase<T,Nz,Nx>* B)
 {
     const real fx = real (0.5)/vfpic::dx;
     const real fz = real (0.5)/vfpic::dz;
@@ -35,8 +32,8 @@ void curl (const ThreeVector<S2,T,Nz,Nx>& A, ThreeVector<S1,T,Nz,Nx>* B)
     }
 }
 
-template <template<typename, int, int> class S1, template<typename, int, int> class S2, typename T, int Nz, int Nx>
-void curlcurl (const ThreeVector<S2,T,Nz,Nx>& A, ThreeVector<S1,T,Nz,Nx>* J)
+template <typename T, int Nz, int Nx>
+void curlcurl (const VectorBase<T,Nz,Nx>& A, VectorBase<T,Nz,Nx>* J)
 {
     const real two = real (2);
     

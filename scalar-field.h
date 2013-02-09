@@ -24,6 +24,7 @@ class ScalarBase
 protected:
     explicit ScalarBase (T *ptr): data (ptr)
     {
+        std::cout << "ScalarBase: Pointer constructor called.\n";
     }
 public:
     virtual ~ScalarBase () = default;
@@ -213,7 +214,7 @@ struct ScalarBaseView: public ScalarBase<T,N1,N2>
     ScalarBaseView (GlobalScalarField<T>& global, int ithread):
     ScalarBase<T,N1,N2> (&global(ithread*N1,0))
     {
-        static_assert (N1 == vfpic::mz && N2 == vfpic::mx, "");
+//        static_assert (N1 == vfpic::mz && N2 == vfpic::mx, "");
     }
     using ScalarBase<T,N1,N2>::operator=;
     using ScalarBase<T,N1,N2>::operator+=;
