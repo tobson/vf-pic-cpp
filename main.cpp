@@ -31,10 +31,10 @@
 template <typename T>
 struct GlobalVariables
 {
-    GlobalVectorField<T> A, A2;
+    NewGlobalVectorField<T> A, A2;
     GlobalParticleArray<T> particles, particles2;
-    GlobalVectorField<T> E, B;
-    GlobalScalarField<T> rho; GlobalVectorField<T> ruu;
+    NewGlobalVectorField<T> E, B;
+    NewGlobalScalarField<T> rho; NewGlobalVectorField<T> ruu;
 };
 
 void initialCondition (GlobalVectorField<real>& A,
@@ -72,8 +72,8 @@ void iteration (GlobalVariables<real>& global, Barrier& barrier, const int ithre
     LocalParticleArrayView<real> particles  (global.particles , ithread);
     LocalParticleArrayView<real> particles2 (global.particles2, ithread);
     
-    LocalVectorField<real> D;
-    LocalVectorField<real> D2;
+    NewLocalVectorField<real> D;
+    NewLocalVectorField<real> D2;
 
     LocalVectorFieldView<real> E (global.E, ithread);
     LocalVectorFieldView<real> B (global.B, ithread);
@@ -81,10 +81,10 @@ void iteration (GlobalVariables<real>& global, Barrier& barrier, const int ithre
     LocalScalarFieldView<real> rho (global.rho, ithread);
     LocalVectorFieldView<real> ruu (global.ruu, ithread);
     
-    LocalVectorField<real> J, H;
+    NewLocalVectorField<real> J, H;
     
     BoundaryCondition<real> boundaryCondition (barrier, ithread);
-    Deposit deposit (barrier, ithread);
+    Deposit<real,vfpic::mpar> deposit (barrier, ithread);
     Ohm<real,vfpic::mz,vfpic::mx> ohm;
     
     for (int it = 0; it < niter; ++it)

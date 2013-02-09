@@ -14,7 +14,7 @@
 
 struct Grid
 {
-    GlobalScalarField<real> x, z;
+    NewGlobalScalarField<real> x, z;
     Grid ();
     friend std::ostream& operator<< (std::ostream&, const Grid&);
 };

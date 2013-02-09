@@ -10,7 +10,6 @@
 #define vf_pic_vector_field_h
 
 #include "scalar-field.h"
-#include "three-vector.h"
 
 #include <memory>
 #include <vector>
@@ -172,19 +171,19 @@ private:
 };
 
 template <typename T, int N1, int N2>
-struct VectorField: public VectorTemplate<ScalarField,T,N1,N2>
+struct NewVectorField: public VectorTemplate<NewScalarField,T,N1,N2>
 {
-    using S = ScalarField<T,N1,N2>;
-    VectorField ():
-    VectorTemplate<ScalarField,T,N1,N2> (new S, new S, new S)
+    using S = NewScalarField<T,N1,N2>;
+    NewVectorField ():
+    VectorTemplate<NewScalarField,T,N1,N2> (new S, new S, new S)
     {
     }
-    VectorField (const VectorField& other):
-    VectorTemplate<ScalarField,T,N1,N2> (new S, new S, new S)
+    NewVectorField (const NewVectorField& other):
+    VectorTemplate<NewScalarField,T,N1,N2> (new S, new S, new S)
     {
         *this = other;
     }
-    VectorField& operator= (const VectorField& other)
+    NewVectorField& operator= (const NewVectorField& other)
     {
         this->x = other.x;
         this->y = other.y;
@@ -192,12 +191,12 @@ struct VectorField: public VectorTemplate<ScalarField,T,N1,N2>
 
         return *this;
     }
-    VectorField (VectorField&& other):
-    VectorTemplate<ScalarField,T,N1,N2> (std::move (other))
+    NewVectorField (NewVectorField&& other):
+    VectorTemplate<NewScalarField,T,N1,N2> (std::move (other))
     {
     }
-    VectorField& operator= (VectorField&&) = delete;
-    friend std::ostream& operator<< (std::ostream& os, const VectorField& vector)
+    NewVectorField& operator= (NewVectorField&&) = delete;
+    friend std::ostream& operator<< (std::ostream& os, const NewVectorField& vector)
     {
         os << vector.x;
         os << vector.y;
@@ -205,7 +204,7 @@ struct VectorField: public VectorTemplate<ScalarField,T,N1,N2>
         
         return os;
     }
-    using VectorTemplate<ScalarField,T,N1,N2>::operator=;
+    using VectorTemplate<NewScalarField,T,N1,N2>::operator=;
 };
 
 template <typename T, int N1, int N2>
@@ -213,7 +212,7 @@ struct VectorBaseView: public VectorTemplate<ScalarBaseView,T,N1,N2>
 {
     using S = ScalarBaseView<T,N1,N2>;
     template <int M1, int M2>
-    VectorBaseView (VectorField<T,M1,M2>& global, int ithread):
+    VectorBaseView (VectorBase<T,M1,M2>& global, int ithread):
     VectorTemplate<ScalarBaseView,T,N1,N2> (new S (global.x, ithread),
                                             new S (global.y, ithread),
                                             new S (global.z, ithread))
@@ -222,10 +221,16 @@ struct VectorBaseView: public VectorTemplate<ScalarBaseView,T,N1,N2>
 };
 
 template <typename T>
-using GlobalVectorField = VectorField<T,vfpic::nz,vfpic::nx>;
+using GlobalVectorField = VectorBase<T,vfpic::nz,vfpic::nx>;
 
 template <typename T>
-using LocalVectorField = VectorField<T,vfpic::mz,vfpic::mx>;
+using LocalVectorField = VectorBase<T,vfpic::mz,vfpic::mx>;
+
+template <typename T>
+using NewGlobalVectorField = NewVectorField<T,vfpic::nz,vfpic::nx>;
+
+template <typename T>
+using NewLocalVectorField = NewVectorField<T,vfpic::mz,vfpic::mx>;
         
 template <typename T>
 using LocalVectorFieldView = VectorBaseView<T,vfpic::mz,vfpic::mx>;

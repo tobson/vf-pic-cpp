@@ -141,42 +141,46 @@ public:
             (*this)(i1,i2) = one/(*this)(i1,i2);
         }
     }
+    void fill (const T& value)
+    {
+        std::fill (data, data + size, value);
+    }
 protected:
     T *data;
     static const unsigned long size = (N1 + 2)*(N2 + 2);
 };
 
 template <typename T, int N1, int N2>
-struct ScalarField: public ScalarBase<T,N1,N2>
+struct NewScalarField: public ScalarBase<T,N1,N2>
 {
-    ScalarField (): ScalarBase<T,N1,N2> (new T[size])
+    NewScalarField (): ScalarBase<T,N1,N2> (new T[size])
     {
         if (config::verbose)
         {
-            printf ("ScalarField (Default ctor): Allocated %lu bytes.\n", size*sizeof (T));
+            printf ("NewScalarField (Default ctor): Allocated %lu bytes.\n", size*sizeof (T));
         }
     }
-    ScalarField (const ScalarField& other): ScalarBase<T,N1,N2> (new T[size])
+    NewScalarField (const NewScalarField& other): ScalarBase<T,N1,N2> (new T[size])
     {
         if (config::verbose)
         {
-            printf ("ScalarField (Copy ctor): Allocated %lu bytes.\n", size*sizeof (T));
+            printf ("NewScalarField (Copy ctor): Allocated %lu bytes.\n", size*sizeof (T));
         }
         ScalarBase<T,N1,N2>::operator= (other);
     }
-    ScalarField& operator= (const ScalarField&) = default;
-    ScalarField (ScalarField&& other) noexcept: ScalarBase<T,N1,N2> (other.data)
+    NewScalarField& operator= (const NewScalarField&) = default;
+    NewScalarField (NewScalarField&& other) noexcept: ScalarBase<T,N1,N2> (other.data)
     {
         other.data = nullptr;
     }
-    ScalarField& operator= (ScalarField&&) = delete;
-    ~ScalarField () noexcept
+    NewScalarField& operator= (NewScalarField&&) = delete;
+    ~NewScalarField () noexcept
     {
         if (config::verbose)
         {
             if (data != nullptr)
             {
-                printf ("ScalarField: Deallocating %lu bytes...\n", size*sizeof (T));
+                printf ("NewScalarField: Deallocating %lu bytes...\n", size*sizeof (T));
             }
         }
         delete[] data;
@@ -187,11 +191,7 @@ struct ScalarField: public ScalarBase<T,N1,N2>
     using ScalarBase<T,N1,N2>::data;
     using ScalarBase<T,N1,N2>::size;
     
-    void fill (const T& value)
-    {
-        std::fill (data, data + size, value);
-    }
-    friend std::ostream& operator<< (std::ostream& os, const ScalarField& scalar)
+    friend std::ostream& operator<< (std::ostream& os, const NewScalarField& scalar)
     {
         os.write (reinterpret_cast<char *> (scalar.data), size*sizeof (T));
         return os;
@@ -202,7 +202,7 @@ template <typename T, int N1, int N2>
 struct ScalarBaseView: public ScalarBase<T,N1,N2>
 {
     template <int M1, int M2>
-    ScalarBaseView (ScalarField<T,M1,M2>& global, const int ithread):
+    ScalarBaseView (ScalarBase<T,M1,M2>& global, const int ithread):
     ScalarBase<T,N1,N2> (&global(ithread*N1,0))
     {
         using vfpic::nthreads;
@@ -212,10 +212,16 @@ struct ScalarBaseView: public ScalarBase<T,N1,N2>
 };
 
 template <typename T>
-using GlobalScalarField = ScalarField<T,vfpic::nz,vfpic::nx>;
+using GlobalScalarField = ScalarBase<T,vfpic::nz,vfpic::nx>;
 
 template <typename T>
-using LocalScalarField = ScalarField<T,vfpic::mz,vfpic::mx>;
+using LocalScalarField = ScalarBase<T,vfpic::mz,vfpic::mx>;
+
+template <typename T>
+using NewGlobalScalarField = NewScalarField<T,vfpic::nz,vfpic::nx>;
+
+template <typename T>
+using NewLocalScalarField = NewScalarField<T,vfpic::mz,vfpic::mx>;
 
 template <typename T>
 using LocalScalarFieldView = ScalarBaseView<T,vfpic::mz,vfpic::mx>;

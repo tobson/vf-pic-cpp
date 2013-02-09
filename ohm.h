@@ -21,7 +21,7 @@ public:
                      const VectorBase<T,Nz,Nx>&,
                      VectorBase<T,Nz,Nx>*);
 private:
-    VectorField<T,Nz,Nx> U;
+    NewVectorField<T,Nz,Nx> U;
 };
 
 

@@ -14,16 +14,18 @@
 #include "scalar-field.h"
 #include "vector-field.h"
 
+template <typename T, int Np>
 class Deposit
 {
 public:
     Deposit (Barrier&, const int);
-    void operator() (const LocalParticleArrayView<real>&,
-                     GlobalScalarField<real>*, GlobalVectorField<real>*);
+    void operator() (const ParticleBase<T,Np>&,
+                     GlobalScalarField<T>*,
+                     GlobalVectorField<T>*);
 private:
     void addGhosts ();
-    void convert (GlobalScalarField<real>*, GlobalVectorField<real>*);
-    template <typename T>
+    void convert (GlobalScalarField<T>*,
+                  GlobalVectorField<T>*);
     struct FourMomentum
     {
         T rho, rux, ruy, ruz;
@@ -45,7 +47,7 @@ private:
     Barrier& barrier;
     const int ithread;
     const real norm;
-    GlobalScalarField<FourMomentum<real>> sources;
+    NewScalarField<FourMomentum,vfpic::nz,vfpic::nx> sources;
 };
 
 #endif /* defined(__vf_pic__deposit__) */

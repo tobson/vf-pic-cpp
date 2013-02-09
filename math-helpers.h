@@ -9,7 +9,7 @@
 #ifndef vf_pic_math_helpers_h
 #define vf_pic_math_helpers_h
 
-#include "three-vector.h"
+#include "vector-field.h"
 
 template<typename T, int Nz, int Nx>
 void extrapolate (const ScalarBase<T,Nz,Nx>& start, const ScalarBase<T,Nz,Nx>& mid, ScalarBase<T,Nz,Nx>* pend)
