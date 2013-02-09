@@ -12,12 +12,11 @@
 #include "particles.h"
 #include "vector-field.h"
 
-template <typename T, int N>
-void drift (const ParticleBase<T,N>&, const real,
-            ParticleBase<T,N> *);
+template <typename T, int Np>
+void drift (const ParticleBase<T,Np>&, const real, ParticleBase<T,Np>*);
 
-void kick (const GlobalVectorField<real>&, const GlobalVectorField<real>&,
-           const LocalParticleArrayView<real>&, const real,
-           LocalParticleArrayView<real> *);
+template <typename T, int Np, int Nz, int Nx>
+void kick (const VectorBase<T,Nz,Nx>&, const VectorBase<T,Nz,Nx>&,
+           const ParticleBase<T,Np>&, const real, ParticleBase<T,Np>*);
 
 #endif /* defined(__vf_pic__drift_kick__) */

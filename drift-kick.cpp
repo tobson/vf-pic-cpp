@@ -10,14 +10,16 @@
 #include "drift-kick.h"
 #include "global.h"
 
-template <typename T, int N>
-void drift (const ParticleBase<T,N>& old, const real dt,
-            ParticleBase<T,N> *pnew)
+using namespace vfpic;
+
+template <typename T, int Np>
+void drift (const ParticleBase<T,Np>& old, const real dt,
+                  ParticleBase<T,Np> *pnew)
 {
     const Particle<T> *rhs = old.begin ();
     Particle<T> *lhs = pnew->begin ();
     
-    for (int dummy = 0; dummy < N; ++dummy)
+    for (int dummy = 0; dummy < Np; ++dummy)
     {
         lhs->x = rhs->x + rhs->vx*dt;
         lhs->z = rhs->z + rhs->vz*dt;
@@ -28,32 +30,24 @@ void drift (const ParticleBase<T,N>& old, const real dt,
     boundaryCondition (*pnew);
 }
 
-/* Explicit instantiation */
-template void drift (const ParticleBase<real,vfpic::mpar>&,
-                     const real, ParticleBase<real,vfpic::mpar>*);
-
-void kick (const GlobalVectorField<real>& E, const GlobalVectorField<real>& B,
-           const LocalParticleArrayView<real>& old, const real dt,
-           LocalParticleArrayView<real> *pnew)
+template <typename T, int Np, int Nz, int Nx>
+void kick (const VectorBase<T,Nz,Nx>& E,
+           const VectorBase<T,Nz,Nx>& B,
+           const ParticleBase<T,Np>& old, const real dt,
+                 ParticleBase<T,Np> *pnew)
 {
-    using config::em;
+    using namespace config;
     
-    using config::x0;
-    using config::z0;
-    
-    using vfpic::dx;
-    using vfpic::dz;
-    
-    const real half = real (0.5);
-    const real one = real (1);
-    const real two = real (2);
+    const T half = T (0.5);
+    const T one = T (1);
+    const T two = T (2);
     
     const real emdt2 = half*em*dt;
 
-    const Particle<real> *rhs = old.begin ();
-    Particle<real> *lhs = pnew->begin ();
+    const Particle<T> *rhs = old.begin ();
+    Particle<T> *lhs = pnew->begin ();
 
-    for (int n = 0; n < vfpic::mpar; ++n)
+    for (int dummy = 0; dummy < Np; ++dummy)
     {
         const real xdx = (rhs->x - x0)/dx + half;
         const real zdz = (rhs->z - z0)/dz + half;
@@ -105,3 +99,13 @@ void kick (const GlobalVectorField<real>& E, const GlobalVectorField<real>& B,
         ++lhs; ++rhs;
     }
 }
+
+/* Explicit instantiation */
+template void drift (const ParticleBase<real,mpar>&, const real,
+                           ParticleBase<real,mpar>*);
+
+template void kick (const VectorBase<real,nz,nx>&,
+                    const VectorBase<real,nz,nx>&,
+                    const ParticleBase<real,mpar>&, const real dt,
+                          ParticleBase<real,mpar>*);
+
