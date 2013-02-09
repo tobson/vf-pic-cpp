@@ -21,11 +21,23 @@ template <typename T, int N1, int N2>
 struct VectorBase
 {
     using S = ScalarBase<T,N1,N2>;
-    VectorBase (S *px, S *py, S *pz): x (*px), y (*py), z (*pz)
+    VectorBase (S *px, S *py, S *pz):
+    x (*px),
+    y (*py),
+    z (*pz)
     {
         components.push_back (std::unique_ptr<S> (px));
         components.push_back (std::unique_ptr<S> (py));
         components.push_back (std::unique_ptr<S> (pz));
+    }
+    VectorBase () = delete;
+    VectorBase (const VectorBase&) = delete;
+    VectorBase (VectorBase&& other):
+    x (other.x),
+    y (other.y),
+    z (other.z),
+    components (std::move (other.components))
+    {
     }
     VectorBase& operator= (const VectorBase& other)
     {
@@ -34,6 +46,8 @@ struct VectorBase
         z = other.z;
         return *this;
     }
+    VectorBase& operator= (VectorBase&&) = delete;
+    virtual ~VectorBase () noexcept = default;
 private:
     using FieldOp = std::mem_fun1_t<S&,S,const S&>;
     using ValueOp = std::mem_fun1_t<S&,S,const T&>;
@@ -141,6 +155,25 @@ struct VectorTemplate: public VectorBase<T,N1,N2>
         components.push_back (&y);
         components.push_back (&z);
     }
+    VectorTemplate () = delete;
+    VectorTemplate (const VectorTemplate&) = delete;
+    VectorTemplate operator= (const VectorTemplate& other)
+    {
+        VectorBase<T,N1,N2>::operator= (other);
+    }
+    VectorTemplate (VectorTemplate&& other):
+    VectorBase<T,N1,N2> (std::move (other)),
+    x (*static_cast<S<T,N1,N2>*> (VectorBase<T,N1,N2>::components.at (0).get ())),
+    y (*static_cast<S<T,N1,N2>*> (VectorBase<T,N1,N2>::components.at (1).get ())),
+    z (*static_cast<S<T,N1,N2>*> (VectorBase<T,N1,N2>::components.at (2).get ()))
+    {
+        components.push_back (&x);
+        components.push_back (&y);
+        components.push_back (&z);
+    }
+    VectorTemplate operator= (VectorTemplate&&) = delete;
+    virtual ~VectorTemplate () noexcept = default;
+    
     S<T,N1,N2>& operator[] (int j)
     {
         return *components[j];
