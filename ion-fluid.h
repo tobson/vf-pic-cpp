@@ -29,20 +29,8 @@ private:
     struct FourMomentum
     {
         T rho, rux, ruy, ruz;
-        void accumulate (const T& _rho, T&& _rux, T&& _ruy, T&& _ruz)
-        {
-            rho += _rho;
-            rux += _rux;
-            ruy += _ruy;
-            ruz += _ruz;
-        }
-        void operator+= (const FourMomentum& other)
-        {
-            rho += other.rho;
-            rux += other.rux;
-            ruy += other.ruy;
-            ruz += other.ruz;
-        }
+        void accumulate (const T&, T&&, T&&, T&&);
+        void operator+= (const FourMomentum&);
     };
     Barrier& barrier;
     const int ithread;

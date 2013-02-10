@@ -136,4 +136,23 @@ void Deposit<T,Np>::convert (GlobalScalarField<T> *rho, GlobalVectorField<T> *ru
     }
 }
 
+template <typename T, int Np>
+void Deposit<T,Np>::FourMomentum::accumulate
+(const T& _rho, T&& _rux, T&& _ruy, T&& _ruz)
+{
+    rho += _rho;
+    rux += _rux;
+    ruy += _ruy;
+    ruz += _ruz;
+}
+
+template <typename T, int Np>
+void Deposit<T,Np>::FourMomentum::operator+= (const FourMomentum& other)
+{
+    rho += other.rho;
+    rux += other.rux;
+    ruy += other.ruy;
+    ruz += other.ruz;
+}
+
 template class Deposit<real,vfpic::mpar>;
