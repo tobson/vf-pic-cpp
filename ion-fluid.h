@@ -35,7 +35,7 @@ private:
     Barrier& barrier;
     const int ithread;
     const real norm;
-    NewScalarField<FourMomentum,vfpic::nz,vfpic::nx> sources;
+    NewGlobalScalarField<FourMomentum> sources;
 };
 
 #endif /* defined(__vf_pic__deposit__) */
