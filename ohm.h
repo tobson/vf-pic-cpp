@@ -9,7 +9,7 @@
 #ifndef __vf_pic__ohm__
 #define __vf_pic__ohm__
 
-#include "ion-fluid.h"
+#include "vector-field.h"
 
 template <typename T, int Nz, int Nx>
 class Ohm

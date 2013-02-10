@@ -9,7 +9,7 @@
 #include "barrier.h"
 #include "boundaries.h"
 #include "config.h"
-#include "ion-fluid.h"
+#include "deposit.h"
 #include "diffops.h"
 #include "drift-kick.h"
 #include "faraday.h"
