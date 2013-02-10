@@ -18,7 +18,7 @@ norm (config::rho0/T (vfpic::npc))
 }
 
 template <typename T, int Np>
-void Deposit<T,Np>::operator() (const ParticleBase<T,Np>& particles,
+void Deposit<T,Np>::operator() (const Particles<T,Np>& particles,
                                       GlobalScalarField<T> *rho,
                                       GlobalVectorField<T> *ruu)
 {

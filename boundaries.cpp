@@ -89,7 +89,7 @@ void BoundaryCondition<T>::operator() (GlobalVectorField<T>& global)
 }
 
 template <typename T, int N>
-void boundaryCondition (ParticleBase<T,N>& particles)
+void boundaryCondition (Particles<T,N>& particles)
 {
     using config::x0;
     using config::z0;
@@ -122,5 +122,5 @@ template void boundaryCondition (GlobalVectorField<real>&);
 
 template class BoundaryCondition<real>;
 
-template void boundaryCondition (ParticleBase<real,mpar>&);
+template void boundaryCondition (Particles<real,mpar>&);
 

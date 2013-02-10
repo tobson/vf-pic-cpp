@@ -32,14 +32,14 @@ template <typename T>
 struct GlobalVariables
 {
     NewGlobalVectorField<T> A, A2;
-    GlobalParticleArray<T> particles, particles2;
+    NewGlobalParticles<T> particles, particles2;
     NewGlobalVectorField<T> E, B;
     NewGlobalScalarField<T> rho; NewGlobalVectorField<T> ruu;
 };
 
 void initialCondition (GlobalVectorField<real>& A,
                        GlobalVectorField<real>& E,
-                       GlobalParticleArray<real>& particles)
+                       GlobalParticles<real>& particles)
 {
     std::mt19937 gen;
     std::uniform_real_distribution<> uniform;
@@ -69,8 +69,8 @@ void iteration (GlobalVariables<real>& global, Barrier& barrier, const int ithre
     LocalVectorFieldView<real> A  (global.A , ithread);
     LocalVectorFieldView<real> A2 (global.A2, ithread);
     
-    LocalParticleArrayView<real> particles  (global.particles , ithread);
-    LocalParticleArrayView<real> particles2 (global.particles2, ithread);
+    LocalParticlesView<real> particles  (global.particles , ithread);
+    LocalParticlesView<real> particles2 (global.particles2, ithread);
     
     NewLocalVectorField<real> D;
     NewLocalVectorField<real> D2;

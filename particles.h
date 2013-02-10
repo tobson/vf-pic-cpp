@@ -24,98 +24,107 @@ struct Particle
 };
 
 template <typename T, int N>
-class ParticleBase
+class Particles
 {
 protected:
-    explicit ParticleBase (Particle<T> *ptr): particles (ptr)
+    explicit Particles (Particle<T> *ptr): array (ptr)
     {
     }
 public:
-    inline ParticleBase& operator= (const ParticleBase& other)
+    inline Particles& operator= (const Particles& other)
     {
-        std::copy (other.particles, other.particles + N, particles);
+        std::copy (other.array, other.array + N, array);
         return *this;
     }
-    inline ParticleBase& operator= (const T& value)
+    inline Particles& operator= (const T& value)
     {
-        std::fill (particles, particles + N, value);
+        std::fill (array, array + N, value);
         return *this;
     }
     inline Particle<T>& operator[] (int index)
     {
-        return particles[index];
+        return array[index];
     }
     inline const Particle<T>& operator[] (int index) const
     {
-        return particles[index];
+        return array[index];
     }
     Particle<T> *begin()
     {
-        return particles;
+        return array;
     }
     Particle<T> *end()
     {
-        return particles + N;
+        return array + N;
     }
     const Particle<T> *begin() const
     {
-        return particles;
+        return array;
     }
     const Particle<T> *end() const
     {
-        return particles + N;
+        return array + N;
     }
 protected:
-    Particle<T> *particles;
+    Particle<T> *array;
 };
 
 template <typename T, int N>
-class ParticleArray: public ParticleBase<T,N>
+class NewParticles: public Particles<T,N>
 {
 public:
-    ParticleArray (): ParticleBase<T,N> (new Particle<T>[N])
+    NewParticles (): Particles<T,N> (new Particle<T>[N])
     {
         if (config::verbose)
         {
-            printf ("ParticleArray (Default ctor): Allocated %lu bytes.\n", N*sizeof (T));
+            printf ("NewParticles (Default ctor): Allocated %lu bytes.\n", N*sizeof (T));
         }
     }
-    ParticleArray (const ParticleArray& other): ParticleBase<T,N> (new Particle<T>[N])
+    NewParticles (const NewParticles& other): Particles<T,N> (new Particle<T>[N])
     {
         if (config::verbose)
         {
-            printf ("ParticleArray (Copy ctor): Allocated %lu bytes.\n", N*sizeof (T));
+            printf ("NewParticles (Copy ctor): Allocated %lu bytes.\n", N*sizeof (T));
         }
-        ParticleBase<T,N>::operator= (other);
+        Particles<T,N>::operator= (other);
     }
-    ParticleArray& operator= (const ParticleArray&) = default;
-    ParticleArray (ParticleArray&& other) noexcept: ParticleBase<T,N> (other.particles)
+    NewParticles& operator= (const NewParticles&) = default;
+    NewParticles (NewParticles&& other) noexcept: Particles<T,N> (other.array)
     {
-        other.particles = nullptr;
+        other.array = nullptr;
     }
-    ParticleArray& operator= (ParticleArray&&) = delete;
-    ~ParticleArray () noexcept
+    NewParticles& operator= (NewParticles&&) = delete;
+    ~NewParticles () noexcept
     {
         if (config::verbose)
         {
-            if (this->particles != nullptr)
+            if (this->array != nullptr)
             {
-                printf ("ParticleArray: Deallocated %lu bytes.\n", N*sizeof (T));
+                printf ("NewParticles: Deallocated %lu bytes.\n", N*sizeof (T));
             }
         }
-        delete[] this->particles;
+        delete[] this->array;
     }
-    using ParticleBase<T,N>::operator=;
+    using Particles<T,N>::operator=;
 };
 
 template <typename T>
-using GlobalParticleArray = ParticleArray<T,vfpic::npar>;
+using GlobalParticles = Particles<T,vfpic::npar>;
 
 template <typename T>
-struct LocalParticleArrayView: public ParticleBase<T,vfpic::mpar>
+using LocalParticles = Particles<T,vfpic::mpar>;
+
+template <typename T>
+using NewGlobalParticles = NewParticles<T,vfpic::npar>;
+
+template <typename T>
+using NewLocalParticles = NewParticles<T,vfpic::mpar>;
+
+template <typename T>
+struct LocalParticlesView: public Particles<T,vfpic::mpar>
 {
-    LocalParticleArrayView (GlobalParticleArray<T>& array, int ithread):
-    ParticleBase<T, vfpic::mpar>(&array[ithread*vfpic::mpar])
+    LocalParticlesView (NewGlobalParticles<T>& array, int ithread):
+    Particles<T, vfpic::mpar>(&array[ithread*vfpic::mpar])
     {
     }
 };

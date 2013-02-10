@@ -19,7 +19,7 @@ class Deposit
 {
 public:
     Deposit (Barrier&, const int);
-    void operator() (const ParticleBase<T,Np>&,
+    void operator() (const Particles<T,Np>&,
                      GlobalScalarField<T>*,
                      GlobalVectorField<T>*);
 private:

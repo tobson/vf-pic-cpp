@@ -42,6 +42,6 @@ private:
 };
 
 template <typename T, int N>
-void boundaryCondition (ParticleBase<T,N>&);
+void boundaryCondition (Particles<T,N>&);
 
 #endif /* defined(__vf_pic__boundaries__) */

@@ -13,8 +13,8 @@
 using namespace vfpic;
 
 template <typename T, int Np>
-void drift (const ParticleBase<T,Np>& old, const real dt,
-                  ParticleBase<T,Np> *pnew)
+void drift (const Particles<T,Np>& old, const real dt,
+                  Particles<T,Np> *pnew)
 {
     const Particle<T> *rhs = old.begin ();
     Particle<T> *lhs = pnew->begin ();
@@ -33,8 +33,8 @@ void drift (const ParticleBase<T,Np>& old, const real dt,
 template <typename T, int Np>
 void kick (const GlobalVectorField<T>& E,
            const GlobalVectorField<T>& B,
-           const ParticleBase<T,Np>& old, const real dt,
-                 ParticleBase<T,Np> *pnew)
+           const Particles<T,Np>& old, const real dt,
+                 Particles<T,Np> *pnew)
 {
     using namespace config;
     
@@ -101,11 +101,11 @@ void kick (const GlobalVectorField<T>& E,
 }
 
 /* Explicit instantiation */
-template void drift (const ParticleBase<real,mpar>&, const real,
-                           ParticleBase<real,mpar>*);
+template void drift (const Particles<real,mpar>&, const real,
+                           Particles<real,mpar>*);
 
 template void kick (const GlobalVectorField<real>&,
                     const GlobalVectorField<real>&,
-                    const ParticleBase<real,mpar>&, const real dt,
-                          ParticleBase<real,mpar>*);
+                    const Particles<real,mpar>&, const real dt,
+                          Particles<real,mpar>*);
 
