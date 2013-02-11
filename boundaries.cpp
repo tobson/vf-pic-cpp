@@ -86,6 +86,7 @@ void BoundaryCondition<T>::operator() (GlobalVectorField<T>& global)
     {
         boundaryConditionZ (global);
     }
+    barrier.wait ();
 }
 
 template <typename T, int N>
