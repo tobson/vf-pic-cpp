@@ -178,6 +178,7 @@ public:
     {
         return *components[j];
     }
+    using Base::operator=;
 };
 
 template <typename T, int N1, int N2>
@@ -204,6 +205,7 @@ public:
         
         return os;
     }
+    using Base::operator=;
 };
 
 template <typename T, int N1, int N2>
@@ -220,6 +222,7 @@ public:
           new Scalar (global.z, ithread))
     {
     }
+    using Base::operator=;
 };
 
 template <typename T>
