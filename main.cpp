@@ -93,11 +93,14 @@ void iteration (GlobalVariables<real>& global, Barrier& barrier, const int ithre
         
         curl (A, &B); // Better use information from previous time step
         
-        faraday (A, E, dt, &A); // No need to set bc's for A if they are set for E and initial A
+        faraday (A, E, dt, &A);
+        boundaryCondition (A);
         
         curl (A, &H);
         
         average (B, H, &B);
+
+        boundaryCondition (global.E);
         boundaryCondition (global.B);
         
         kick (global.E, global.B, particles, dt, &particles);
@@ -113,7 +116,6 @@ void iteration (GlobalVariables<real>& global, Barrier& barrier, const int ithre
         ohm (H, J, rho, ruu, &D);
         
         extrapolate (E, D, &E);
-        boundaryCondition (global.E);
 
         /* Corrector step */
 
@@ -124,8 +126,11 @@ void iteration (GlobalVariables<real>& global, Barrier& barrier, const int ithre
         curl (A2, &H);
 
         average (B, H, &B);
+
+        boundaryCondition (global.E);
         boundaryCondition (global.B);
 
+        particles2 = particles;
         // Careful: Does this work with shear?
         kick (global.E, global.B, particles, dt, &particles2);
         
@@ -139,7 +144,6 @@ void iteration (GlobalVariables<real>& global, Barrier& barrier, const int ithre
         ohm (H, J, rho, ruu, &D2);
 
         average (D, D2, &E);
-        boundaryCondition (global.E);
     }
     printf ("Hi, I'm thread %d!\n", ithread);
 }
