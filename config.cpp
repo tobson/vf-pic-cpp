@@ -33,7 +33,7 @@ long long nt = 1000;
 /* Physics */
 real rho0 = 1.0;
 real cs0 = 1.0;
-real em = 0.0;
+real em = 1.0;
 
 /* Shearing sheet */
 real Omega = 0.0;
