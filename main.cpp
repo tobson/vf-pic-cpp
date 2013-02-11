@@ -58,10 +58,10 @@ void initialCondition (GlobalVectorField<real>& A,
     A = real (0);
     E = real (0);
     
-    BoundaryCondition<real> boundaryCondition;
-    
-    boundaryCondition (A);
-    boundaryCondition (E);
+    boundaryConditionX (A);
+    boundaryConditionX (E);
+    boundaryConditionZ (A);
+    boundaryConditionZ (E);
 }
 
 void iteration (GlobalVariables<real>& global, Barrier& barrier, const int ithread, int niter)

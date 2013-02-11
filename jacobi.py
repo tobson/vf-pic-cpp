@@ -36,13 +36,16 @@ plt.clf()
 fig, axes = plt.subplots (3, 4, num=1)
 
 axes[0,0].imshow (phi1,aspect="auto")
-for j in range (3): axes[0,j+1].imshow (A1[j,:,:],aspect="auto")
+#for j in range (3): axes[0,j+1].imshow (A1[j,:,:],aspect="auto")
+for j in range (3): axes[0,j+1].imshow (np.roll (A1[j,:,:], cfg.nx/2, axis=1),aspect="auto")
 
 axes[1,0].imshow (phi2,aspect="auto")
-for j in range (3): axes[1,j+1].imshow (A2[j,:,:],aspect="auto")
+#for j in range (3): axes[1,j+1].imshow (A2[j,:,:],aspect="auto")
+for j in range (3): axes[1,j+1].imshow (np.roll (A1[j,:,:], cfg.nx/2, axis=1),aspect="auto")
 
 axes[2,0].imshow (phi1 - phi2,aspect="auto")
-for j in range (3): axes[2,j+1].imshow (A1[j,:,:] - A2[j,:,:],aspect="auto")
+#for j in range (3): axes[2,j+1].imshow (A1[j,:,:] - A2[j,:,:],aspect="auto")
+for j in range (3): axes[2,j+1].imshow (np.roll (A1[j,:,:] - A2[j,:,:], cfg.nx/2, axis=1),aspect="auto")
 
 for axis in axes.flatten ():
     axis.set_xticklabels ("")

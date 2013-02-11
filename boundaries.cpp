@@ -47,12 +47,6 @@ void boundaryConditionZ (GlobalVectorField<T>& vector)
 }
 
 template <typename T>
-BoundaryCondition<T>::BoundaryCondition ():
-nobarrier (1), barrier (nobarrier), ithread (0)
-{
-}
-
-template <typename T>
 BoundaryCondition<T>::BoundaryCondition (Barrier& barrier, const int ithread):
 nobarrier (1), barrier (barrier), ithread (ithread)
 {
@@ -108,6 +102,8 @@ void boundaryCondition (Particles<T,N>& particles)
 
 template void boundaryConditionX (ScalarField<real,mz,mx>&);
 template void boundaryConditionX (VectorField<real,mz,mx>&);
+template void boundaryConditionX (ScalarField<real,nz,nx>&);
+template void boundaryConditionX (VectorField<real,nz,nx>&);
 template void boundaryConditionZ (GlobalScalarField<real>&);
 template void boundaryConditionZ (GlobalVectorField<real>&);
 

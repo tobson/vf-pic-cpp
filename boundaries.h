@@ -28,7 +28,6 @@ template <typename T>
 class BoundaryCondition
 {
 public:
-    BoundaryCondition ();
     BoundaryCondition (Barrier&, const int);
     void operator() (GlobalScalarField<T>&);
     void operator() (GlobalVectorField<T>&);

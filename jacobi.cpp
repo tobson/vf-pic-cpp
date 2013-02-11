@@ -46,13 +46,14 @@ struct Fields
         
         const GlobalScalarField<real> &x = grid.x;
         const GlobalScalarField<real> &z = grid.z;
-                
+
         for (int k = 1; k <= vfpic::nz; ++k)
         for (int i = 1; i <= vfpic::nx; ++i)
         {
             rho(k,i) = sin(two_pi*ikx*x(k,i))*cos(two_pi*ikz*z(k,i));
         }
-        boundaryCondition(rho);
+        boundaryConditionX (rho);
+        boundaryConditionZ (rho);
 
         phi.fill (0);
         phi0.fill (0);
@@ -68,7 +69,8 @@ struct Fields
             A[j].fill (0);
             A0[j].fill (0);
         }
-        boundaryCondition(J);
+        boundaryConditionX (J);
+        boundaryConditionZ (J);
     }
     NewGlobalScalarField<real> rho, phi, phi0;
     NewGlobalVectorField<real> J, A, A0;
@@ -92,8 +94,10 @@ void iteration (Fields &fields, const int niter)
 
     for (int dummy = 0; dummy < niter; ++dummy)
     {
-        boundaryCondition (phi);
-        boundaryCondition (A);
+        boundaryConditionX (phi);
+        boundaryConditionX (A);
+        boundaryConditionZ (phi);
+        boundaryConditionZ (A);
 
         for (int k = 1; k <= vfpic::nz; ++k)
         for (int i = 1; i <= vfpic::nx; ++i)
@@ -111,9 +115,11 @@ void iteration (Fields &fields, const int niter)
             }
         }
 
-        boundaryCondition (phi0);
-        boundaryCondition (A0);
-
+        boundaryConditionX (phi0);
+        boundaryConditionX (A0);
+        boundaryConditionZ (phi0);
+        boundaryConditionZ (A0);
+        
         for (int k = 1; k <= vfpic::nz; ++k)
         for (int i = 1; i <= vfpic::nx; ++i)
         {
@@ -137,6 +143,8 @@ void iterationThread (Fields &fields, const int niter, const int ithread, Barrie
     const real dx12 = real (1)/(vfpic::dx*vfpic::dx);
     const real dz12 = real (1)/(vfpic::dz*vfpic::dz);
     const real fac = real (0.5)/(dx12 + dz12);
+    
+    BoundaryCondition<real> boundaryCondition (barrier, ithread);
 
     const LocalScalarFieldView<real> rho (fields.rho, ithread);
 
@@ -150,16 +158,8 @@ void iterationThread (Fields &fields, const int niter, const int ithread, Barrie
 
     for (int dummy = 0; dummy < niter; ++dummy)
     {
-        boundaryConditionX (phi);
-        boundaryConditionX (A);
-
-        if (barrier.wait ())
-        {
-            boundaryConditionZ (fields.phi);
-            boundaryConditionZ (fields.A);
-        }
-
-        barrier.wait ();
+        boundaryCondition (fields.phi);
+        boundaryCondition (fields.A);
 
         for (int k = 1; k <= vfpic::mz; ++k)
         for (int i = 1; i <= vfpic::mx; ++i)
@@ -177,16 +177,8 @@ void iterationThread (Fields &fields, const int niter, const int ithread, Barrie
             }
         }
 
-        boundaryConditionX (phi0);
-        boundaryConditionX (A0);
-
-        if (barrier.wait ())
-        {
-            boundaryConditionZ (fields.phi0);
-            boundaryConditionZ (fields.A0);
-        }
-
-        barrier.wait ();
+        boundaryCondition (fields.phi0);
+        boundaryCondition (fields.A0);
 
         for (int k = 1; k <= vfpic::mz; ++k)
         for (int i = 1; i <= vfpic::mx; ++i)
@@ -238,7 +230,7 @@ int main(int argc, const char * argv[])
     std::ofstream myfile;
     myfile.open (srcdir + "/jacobi.dat", std::ios::binary);
 
-    const int niter = 10;
+    const int niter = 1;
 
     {
         Fields fields (grid);
@@ -247,11 +239,16 @@ int main(int argc, const char * argv[])
         iteration (fields, niter);
         auto t2 = std::chrono::high_resolution_clock::now();
         std::cout << "Serial run: " << std::chrono::duration_cast<std::chrono::milliseconds>(t2-t1).count () << " ms" << std::endl;
-
-        boundaryCondition(fields.rho);
-        boundaryCondition(fields.J);
-        boundaryCondition(fields.phi);
-        boundaryCondition(fields.A);
+        
+        boundaryConditionX (fields.rho);
+        boundaryConditionX (fields.J);
+        boundaryConditionX (fields.phi);
+        boundaryConditionX (fields.A);
+        
+        boundaryConditionZ (fields.rho);
+        boundaryConditionZ (fields.J);
+        boundaryConditionZ (fields.phi);
+        boundaryConditionZ (fields.A);
 
         myfile << fields.rho;
         myfile << fields.J;
@@ -275,10 +272,15 @@ int main(int argc, const char * argv[])
         auto t2 = std::chrono::high_resolution_clock::now();
         std::cout << "Parallel run: " << std::chrono::duration_cast<std::chrono::milliseconds>(t2-t1).count () << " ms" << std::endl;
 
-        boundaryCondition(fields.rho);
-        boundaryCondition(fields.J);
-        boundaryCondition(fields.phi);
-        boundaryCondition(fields.A);
+        boundaryConditionX (fields.rho);
+        boundaryConditionX (fields.J);
+        boundaryConditionX (fields.phi);
+        boundaryConditionX (fields.A);
+        
+        boundaryConditionZ (fields.rho);
+        boundaryConditionZ (fields.J);
+        boundaryConditionZ (fields.phi);
+        boundaryConditionZ (fields.A);
 
         myfile << fields.rho;
         myfile << fields.J;
@@ -287,6 +289,12 @@ int main(int argc, const char * argv[])
     }
 
     myfile.close ();
+    
+    Barrier dummy (1);
+    std::cout << dummy.wait () << std::endl;
+    std::cout << dummy.wait () << std::endl;
+    std::cout << dummy.wait () << std::endl;
+    std::cout << dummy.wait () << std::endl;
 
     return 0;
 }
