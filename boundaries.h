@@ -25,6 +25,11 @@ template <typename T>
 void boundaryConditionZ (GlobalVectorField<T>&);
 
 template <typename T>
+void boundaryCondition (GlobalScalarField<T>&);
+template <typename T>
+void boundaryCondition (GlobalVectorField<T>&);
+
+template <typename T>
 class BoundaryCondition
 {
 public:
@@ -32,7 +37,6 @@ public:
     void operator() (GlobalScalarField<T>&);
     void operator() (GlobalVectorField<T>&);
 private:
-    Barrier nobarrier;
     Barrier& barrier;
     const int ithread;
 };

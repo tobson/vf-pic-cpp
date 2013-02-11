@@ -52,8 +52,7 @@ struct Fields
         {
             rho(k,i) = sin(two_pi*ikx*x(k,i))*cos(two_pi*ikz*z(k,i));
         }
-        boundaryConditionX (rho);
-        boundaryConditionZ (rho);
+        boundaryCondition (rho);
 
         phi.fill (0);
         phi0.fill (0);
@@ -69,8 +68,7 @@ struct Fields
             A[j].fill (0);
             A0[j].fill (0);
         }
-        boundaryConditionX (J);
-        boundaryConditionZ (J);
+        boundaryCondition (J);
     }
     NewGlobalScalarField<real> rho, phi, phi0;
     NewGlobalVectorField<real> J, A, A0;
@@ -94,10 +92,8 @@ void iteration (Fields &fields, const int niter)
 
     for (int dummy = 0; dummy < niter; ++dummy)
     {
-        boundaryConditionX (phi);
-        boundaryConditionX (A);
-        boundaryConditionZ (phi);
-        boundaryConditionZ (A);
+        boundaryCondition (phi);
+        boundaryCondition (A);
 
         for (int k = 1; k <= vfpic::nz; ++k)
         for (int i = 1; i <= vfpic::nx; ++i)
@@ -115,10 +111,8 @@ void iteration (Fields &fields, const int niter)
             }
         }
 
-        boundaryConditionX (phi0);
-        boundaryConditionX (A0);
-        boundaryConditionZ (phi0);
-        boundaryConditionZ (A0);
+        boundaryCondition (phi0);
+        boundaryCondition (A0);
         
         for (int k = 1; k <= vfpic::nz; ++k)
         for (int i = 1; i <= vfpic::nx; ++i)
@@ -240,15 +234,10 @@ int main(int argc, const char * argv[])
         auto t2 = std::chrono::high_resolution_clock::now();
         std::cout << "Serial run: " << std::chrono::duration_cast<std::chrono::milliseconds>(t2-t1).count () << " ms" << std::endl;
         
-        boundaryConditionX (fields.rho);
-        boundaryConditionX (fields.J);
-        boundaryConditionX (fields.phi);
-        boundaryConditionX (fields.A);
-        
-        boundaryConditionZ (fields.rho);
-        boundaryConditionZ (fields.J);
-        boundaryConditionZ (fields.phi);
-        boundaryConditionZ (fields.A);
+        boundaryCondition (fields.rho);
+        boundaryCondition (fields.J);
+        boundaryCondition (fields.phi);
+        boundaryCondition (fields.A);
 
         myfile << fields.rho;
         myfile << fields.J;
@@ -272,15 +261,10 @@ int main(int argc, const char * argv[])
         auto t2 = std::chrono::high_resolution_clock::now();
         std::cout << "Parallel run: " << std::chrono::duration_cast<std::chrono::milliseconds>(t2-t1).count () << " ms" << std::endl;
 
-        boundaryConditionX (fields.rho);
-        boundaryConditionX (fields.J);
-        boundaryConditionX (fields.phi);
-        boundaryConditionX (fields.A);
-        
-        boundaryConditionZ (fields.rho);
-        boundaryConditionZ (fields.J);
-        boundaryConditionZ (fields.phi);
-        boundaryConditionZ (fields.A);
+        boundaryCondition (fields.rho);
+        boundaryCondition (fields.J);
+        boundaryCondition (fields.phi);
+        boundaryCondition (fields.A);
 
         myfile << fields.rho;
         myfile << fields.J;

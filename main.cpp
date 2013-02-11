@@ -58,10 +58,8 @@ void initialCondition (GlobalVectorField<real>& A,
     A = real (0);
     E = real (0);
     
-    boundaryConditionX (A);
-    boundaryConditionX (E);
-    boundaryConditionZ (A);
-    boundaryConditionZ (E);
+    boundaryCondition (A);
+    boundaryCondition (E);
 }
 
 void iteration (GlobalVariables<real>& global, Barrier& barrier, const int ithread, int niter)
@@ -84,7 +82,7 @@ void iteration (GlobalVariables<real>& global, Barrier& barrier, const int ithre
     LocalScalarFieldView<real> rho (global.rho, ithread);
     LocalVectorFieldView<real> ruu (global.ruu, ithread);
     
-    BoundaryCondition<real> boundaryCondition (barrier, ithread);
+    BoundaryCondition<real> boundCond (barrier, ithread);
     Deposit<real,vfpic::mpar> deposit (barrier, ithread);
     Ohm<real,vfpic::mz,vfpic::mx> ohm;
     
@@ -95,17 +93,17 @@ void iteration (GlobalVariables<real>& global, Barrier& barrier, const int ithre
         /* Predictor step */
         
         faraday (&A, E, dt);
-        boundaryCondition (global.A);
+        boundCond (global.A);
         
         curl (A, &H);
         curlcurl (A, &J);
                 
         average (H2, H, &B);
 
-        /* It would be nice if boundaryCondition::operator()
+        /* It would be nice if boundCond::operator()
            would be a variadic function */
-        boundaryCondition (global.E);
-        boundaryCondition (global.B);
+        boundCond (global.E);
+        boundCond (global.B);
         
         kick (global.E, global.B, &particles, dt);
         
@@ -129,15 +127,15 @@ void iteration (GlobalVariables<real>& global, Barrier& barrier, const int ithre
         /* Corrector step */
 
         faraday (&A2, E, dt);
-        boundaryCondition (global.A2);
+        boundCond (global.A2);
 
         curl (A2, &H);
         curlcurl (A2, &J);
 
         average (H2, H, &B);
 
-        boundaryCondition (global.E);
-        boundaryCondition (global.B);
+        boundCond (global.E);
+        boundCond (global.B);
 
         kick (global.E, global.B, &particles2, dt);
         
