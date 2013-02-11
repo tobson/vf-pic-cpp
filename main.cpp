@@ -65,7 +65,7 @@ void initialCondition (GlobalVectorField<real>& A,
 void iteration (GlobalVariables<real>& global, Barrier& barrier, const int ithread, int niter)
 {
     using config::dt;
-    global.A = global.A2;
+
     LocalVectorFieldView<real> A  (global.A , ithread);
     LocalVectorFieldView<real> A2 (global.A2, ithread);
     
@@ -103,13 +103,13 @@ void iteration (GlobalVariables<real>& global, Barrier& barrier, const int ithre
         boundaryCondition (global.E);
         boundaryCondition (global.B);
         
-        kick (global.E, global.B, particles, dt, &particles);
+        kick (global.E, global.B, &particles, dt);
         
-        drift (particles, 0.5*dt, &particles);
+        drift (&particles, 0.5*dt);
         
         deposit (particles, &global.rho, &global.ruu);
         
-        drift (particles, 0.5*dt, &particles);
+        drift (&particles, 0.5*dt);
 
         curlcurl (A, &J);
 
@@ -123,21 +123,19 @@ void iteration (GlobalVariables<real>& global, Barrier& barrier, const int ithre
         A2 = A;
         particles2 = particles;
 
-        curl (A2, &B); // Better use information from predictor step
-        
         faraday (&A2, E, dt);
         boundaryCondition (A2);
 
-        curl (A2, &H);
+        curl (A2, &B);
 
         average (B, H, &B);
 
         boundaryCondition (global.E);
         boundaryCondition (global.B);
 
-        kick (global.E, global.B, particles2, dt, &particles2);
+        kick (global.E, global.B, &particles2, dt);
         
-        drift (particles2, 0.5*dt, &particles2);
+        drift (&particles2, 0.5*dt);
         
         deposit (particles2, &global.rho, &global.ruu);
 

@@ -13,28 +13,25 @@
 using namespace vfpic;
 
 template <typename T, int Np>
-void drift (const Particles<T,Np>& old, const real dt,
-                  Particles<T,Np> *pnew)
+void drift (Particles<T,Np> *particles, const real dt)
 {
-    const Particle<T> *rhs = old.begin ();
-    Particle<T> *lhs = pnew->begin ();
+    Particle<T> *p = particles->begin ();
     
     for (int dummy = 0; dummy < Np; ++dummy)
     {
-        lhs->x = rhs->x + rhs->vx*dt;
-        lhs->z = rhs->z + rhs->vz*dt;
+        p->x = p->x + p->vx*dt;
+        p->z = p->z + p->vz*dt;
 
-        ++lhs; ++rhs;
+        ++p;
     }
 
-    boundaryCondition (*pnew);
+    boundaryCondition (*particles);
 }
 
 template <typename T, int Np>
 void kick (const GlobalVectorField<T>& E,
            const GlobalVectorField<T>& B,
-           const Particles<T,Np>& old, const real dt,
-                 Particles<T,Np> *pnew)
+           Particles<T,Np> *particles, const real dt)
 {
     using namespace config;
     
@@ -44,13 +41,12 @@ void kick (const GlobalVectorField<T>& E,
     
     const real emdt2 = half*em*dt;
 
-    const Particle<T> *rhs = old.begin ();
-    Particle<T> *lhs = pnew->begin ();
+    Particle<T> *p = particles->begin ();
 
     for (int dummy = 0; dummy < Np; ++dummy)
     {
-        const real xdx = (rhs->x - x0)/dx + half;
-        const real zdz = (rhs->z - z0)/dz + half;
+        const real xdx = (p->x - x0)/dx + half;
+        const real zdz = (p->z - z0)/dz + half;
         
         const int i0 (xdx);
         const int k0 (zdz);
@@ -82,9 +78,9 @@ void kick (const GlobalVectorField<T>& E,
         by *= emdt2;
         bz *= emdt2;
         
-        const real vmx = rhs->vx + ex;
-        const real vmy = rhs->vy + ey;
-        const real vmz = rhs->vz + ez;
+        const real vmx = p->vx + ex;
+        const real vmy = p->vy + ey;
+        const real vmz = p->vz + ez;
         
         const real vpx = vmx + (vmy*bz - vmz*by);
         const real vpy = vmy + (vmz*bx - vmx*bz);
@@ -92,20 +88,18 @@ void kick (const GlobalVectorField<T>& E,
         
         const real fac = two/(one + bx*bx + by*by + bz*bz);
         
-        lhs->vx = vmx + (vpy*bz - vpz*by)*fac + ex;
-        lhs->vy = vmy + (vpz*bx - vpx*bz)*fac + ey;
-        lhs->vz = vmz + (vpx*by - vpy*bx)*fac + ez;
+        p->vx = vmx + (vpy*bz - vpz*by)*fac + ex;
+        p->vy = vmy + (vpz*bx - vpx*bz)*fac + ey;
+        p->vz = vmz + (vpx*by - vpy*bx)*fac + ez;
         
-        ++lhs; ++rhs;
+        ++p;
     }
 }
 
 /* Explicit instantiation */
-template void drift (const Particles<real,mpar>&, const real,
-                           Particles<real,mpar>*);
+template void drift (Particles<real,mpar>*, const real);
 
 template void kick (const GlobalVectorField<real>&,
                     const GlobalVectorField<real>&,
-                    const Particles<real,mpar>&, const real dt,
-                          Particles<real,mpar>*);
+                    Particles<real,mpar>*, const real);
 

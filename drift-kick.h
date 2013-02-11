@@ -13,10 +13,10 @@
 #include "vector-field.h"
 
 template <typename T, int Np>
-void drift (const Particles<T,Np>&, const real, Particles<T,Np>*);
+void drift (Particles<T,Np>*, const real);
 
 template <typename T, int Np>
 void kick (const GlobalVectorField<T>&, const GlobalVectorField<T>&,
-           const Particles<T,Np>&, const real, Particles<T,Np>*);
+           Particles<T,Np>*, const real);
 
 #endif /* defined(__vf_pic__drift_kick__) */
