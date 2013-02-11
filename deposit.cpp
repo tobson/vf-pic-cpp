@@ -34,7 +34,7 @@ void Deposit<T,Np>::operator() (const Particles<T,Np>& particles,
     
     const Particle<T> *p = particles.begin ();
     
-    for (int dummy = 0; dummy <= Np; ++dummy)
+    for (int dummy = 0; dummy < Np; ++dummy)
     {
         const T xdx = (p->x - x0)/dx + half;
         const T zdz = (p->z - z0)/dz + half;
