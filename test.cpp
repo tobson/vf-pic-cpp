@@ -45,12 +45,16 @@ int main(int argc, const char * argv[])
         vec.push_back (LocalScalarFieldView<float> (b,0));
     }
 
+//    static_assert (std::is_move_constructible<VectorField<float,vfpic::mz,vfpic::mx>>::value, "");
+    static_assert (std::is_move_constructible<VectorTemplate<ScalarFieldView,float,vfpic::mz,vfpic::mx>>::value, "");
+    static_assert (std::is_move_constructible<LocalVectorFieldView<float>>::value, "");
+    if (false)
     {
         NewGlobalVectorField<float> a,b;
         a = b;
-        GlobalVectorField<float> c (std::move (a));
+        NewGlobalVectorField<float> c (std::move (a));
         std::vector<LocalVectorFieldView<float>> vec;
-        vec.push_back (LocalVectorFieldView<float> (a,0));
+//        vec.push_back (LocalVectorFieldView<float> (a,0));
 //        vec.push_back (LocalVectorFieldView<float> (b,0));
 //        LocalVectorField<real> d;
 //        vec[0].x (3,7) = 3.2;
@@ -59,10 +63,10 @@ int main(int argc, const char * argv[])
 
     if (false)
     {
-        GlobalParticleArray<float> a,b;
-        std::vector<LocalParticleArrayView<float>> vec;
-        vec.push_back (LocalParticleArrayView<float> (a,0));
-        vec.push_back (LocalParticleArrayView<float> (b,0));
+        NewGlobalParticles<float> a,b;
+        std::vector<LocalParticlesView<float>> vec;
+//        vec.push_back (LocalParticlesView<float> (a,0));
+//        vec.push_back (LocalParticlesView<float> (b,0));
     }
 
     std::cout << "Hello, World! My name is " << argv[0] << ".\n";

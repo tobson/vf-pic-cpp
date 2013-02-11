@@ -65,7 +65,7 @@ void initialCondition (GlobalVectorField<real>& A,
 void iteration (GlobalVariables<real>& global, Barrier& barrier, const int ithread, int niter)
 {
     using config::dt;
-    
+    global.A = global.A2;
     LocalVectorFieldView<real> A  (global.A , ithread);
     LocalVectorFieldView<real> A2 (global.A2, ithread);
     
@@ -93,7 +93,7 @@ void iteration (GlobalVariables<real>& global, Barrier& barrier, const int ithre
         
         curl (A, &B); // Better use information from previous time step
         
-        faraday (A, E, dt, &A);
+        faraday (&A, E, dt);
         boundaryCondition (A);
         
         curl (A, &H);
@@ -118,10 +118,14 @@ void iteration (GlobalVariables<real>& global, Barrier& barrier, const int ithre
         extrapolate (E, D, &E);
 
         /* Corrector step */
-
-        curl (A, &B); // Better use information from predictor step
         
-        faraday (A, E, dt, &A2);
+        /* Make copy of dynamice variables */
+        A2 = A;
+        particles2 = particles;
+
+        curl (A2, &B); // Better use information from predictor step
+        
+        faraday (&A2, E, dt);
         boundaryCondition (A2);
 
         curl (A2, &H);
@@ -131,11 +135,8 @@ void iteration (GlobalVariables<real>& global, Barrier& barrier, const int ithre
         boundaryCondition (global.E);
         boundaryCondition (global.B);
 
-        particles2 = particles;
-        // Careful: Does this work with shear?
-        kick (global.E, global.B, particles, dt, &particles2);
+        kick (global.E, global.B, particles2, dt, &particles2);
         
-        // Positions of particles2 probably aren't right
         drift (particles2, 0.5*dt, &particles2);
         
         deposit (particles2, &global.rho, &global.ruu);
