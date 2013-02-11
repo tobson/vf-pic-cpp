@@ -58,6 +58,8 @@ void initialCondition (GlobalVectorField<real>& A,
     A = real (0);
     E = real (0);
     
+    BoundaryCondition<real> boundaryCondition;
+    
     boundaryCondition (A);
     boundaryCondition (E);
 }
@@ -72,8 +74,9 @@ void iteration (GlobalVariables<real>& global, Barrier& barrier, const int ithre
     LocalParticlesView<real> particles  (global.particles , ithread);
     LocalParticlesView<real> particles2 (global.particles2, ithread);
     
-    NewLocalVectorField<real> D;
-    NewLocalVectorField<real> D2;
+    NewLocalVectorField<real> D, D2;
+    NewLocalVectorField<real> H, H2;
+    NewLocalVectorField<real> J;
 
     LocalVectorFieldView<real> E (global.E, ithread);
     LocalVectorFieldView<real> B (global.B, ithread);
@@ -81,25 +84,26 @@ void iteration (GlobalVariables<real>& global, Barrier& barrier, const int ithre
     LocalScalarFieldView<real> rho (global.rho, ithread);
     LocalVectorFieldView<real> ruu (global.ruu, ithread);
     
-    NewLocalVectorField<real> J, H;
-    
     BoundaryCondition<real> boundaryCondition (barrier, ithread);
     Deposit<real,vfpic::mpar> deposit (barrier, ithread);
     Ohm<real,vfpic::mz,vfpic::mx> ohm;
+    
+    curl (A, &H2);
     
     for (int it = 0; it < niter; ++it)
     {
         /* Predictor step */
         
-        curl (A, &B); // Better use information from previous time step
-        
         faraday (&A, E, dt);
-        boundaryCondition (A);
+        boundaryCondition (global.A);
         
         curl (A, &H);
-        
-        average (B, H, &B);
+        curlcurl (A, &J);
+                
+        average (H2, H, &B);
 
+        /* It would be nice if boundaryCondition::operator()
+           would be a variadic function */
         boundaryCondition (global.E);
         boundaryCondition (global.B);
         
@@ -111,24 +115,26 @@ void iteration (GlobalVariables<real>& global, Barrier& barrier, const int ithre
         
         drift (&particles, 0.5*dt);
 
-        curlcurl (A, &J);
-
         ohm (H, J, rho, ruu, &D);
         
         extrapolate (E, D, &E);
-
-        /* Corrector step */
+        
+        /* Save for next time step */
+        H2 = H;
         
         /* Make copy of dynamice variables */
         A2 = A;
         particles2 = particles;
 
+        /* Corrector step */
+
         faraday (&A2, E, dt);
-        boundaryCondition (A2);
+        boundaryCondition (global.A2);
 
-        curl (A2, &B);
+        curl (A2, &H);
+        curlcurl (A2, &J);
 
-        average (B, H, &B);
+        average (H2, H, &B);
 
         boundaryCondition (global.E);
         boundaryCondition (global.B);
@@ -138,8 +144,6 @@ void iteration (GlobalVariables<real>& global, Barrier& barrier, const int ithre
         drift (&particles2, 0.5*dt);
         
         deposit (particles2, &global.rho, &global.ruu);
-
-        curlcurl (A2, &J);
         
         ohm (H, J, rho, ruu, &D2);
 
