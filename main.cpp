@@ -122,6 +122,7 @@ void iteration (GlobalVariables<real>& global, Barrier& barrier, const int ithre
         curl (A, &B); // Better use information from predictor step
         
         faraday (A, E, dt, &A2);
+        boundaryCondition (A2);
 
         curl (A2, &H);
 
