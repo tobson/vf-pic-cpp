@@ -36,6 +36,14 @@ protected:
         components.push_back (std::unique_ptr<Scalar> (py));
         components.push_back (std::unique_ptr<Scalar> (pz));
     }
+    VectorField& operator= (const VectorField& other)
+    {
+        x = other.x;
+        y = other.y;
+        z = other.z;
+        
+        return *this;
+    }
 private:
     using FieldOp = std::mem_fun1_t<Scalar&,Scalar,const Scalar&>;
     using ValueOp = std::mem_fun1_t<Scalar&,Scalar,const T&>;
@@ -156,10 +164,7 @@ private:
 public:
     VectorTemplate& operator= (const VectorTemplate& other)
     {
-        x = other.x;
-        y = other.y;
-        z = other.z;
-        
+        Base::operator= (other);
         return *this;
     }
     VectorTemplate (VectorTemplate&& other) noexcept:
