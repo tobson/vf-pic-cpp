@@ -93,14 +93,10 @@ void BoundaryCondition<T>::operator() (GlobalVectorField<T>& global)
 template <typename T, int N>
 void boundaryCondition (Particles<T,N> *particles)
 {
-    using config::x0;
-    using config::z0;
+    using namespace config;
     
-    using config::Lx;
-    using config::Lz;
-    
-    const T Lx1 = T (1)/Lx;
-    const T Lz1 = T (1)/Lz;
+    const T Lx1 = 1.0/Lx;
+    const T Lz1 = 1.0/Lz;
     
     Particle<T> *p = particles->begin ();
     
