@@ -26,7 +26,6 @@ protected:
     {
     }
 public:
-    virtual ~ScalarField () noexcept = default;
     /* Index operators */
     inline T& operator() (int i1, int i2)
     {
@@ -225,15 +224,5 @@ using NewLocalScalarField = NewScalarField<T,vfpic::mz,vfpic::mx>;
 
 template <typename T>
 using LocalScalarFieldView = ScalarFieldView<T,vfpic::mz,vfpic::mx>;
-
-//template <typename T>
-//struct LocalScalarFieldView: public LocalScalarField<T>
-//{
-//    LocalScalarFieldView (LocalScalarField<T>& global, const int ithread):
-//    LocalScalarField<T> (&global(ithread*vfpic::mz,0))
-//    {
-//    }
-//    using LocalScalarField<T>::operator=;
-//};
 
 #endif
