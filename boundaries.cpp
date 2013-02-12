@@ -75,6 +75,7 @@ void BoundaryCondition<T>::operator() (GlobalScalarField<T>& global)
     {
         boundaryConditionZ (global);
     }
+    barrier.wait ();
 }
 
 template <typename T>
