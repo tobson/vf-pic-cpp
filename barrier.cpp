@@ -7,7 +7,6 @@
 //
 
 #include "barrier.h"
-#include "param.h"
 
 #include <thread>
 
