@@ -6,18 +6,21 @@
 //  Copyright (c) 2013 Tobias Heinemann. All rights reserved.
 //
 
+#include "config.h"
 #include "global.h"
 
 namespace vfpic
 {
-static_assert (nz % nthreads == 0, "Error: 'nz' must be divisible by 'nthreads'.");
-static_assert (npar % nthreads == 0, "Error: 'npar' must be divisible by 'nthreads'.");
+static_assert (nz % nthreads == 0, "");
+static_assert (npar % nthreads == 0, "");
 
 real dx, dz;
 
 void computeVariables ()
 {
-    dx = real (1)/real (nx);
-    dz = real (1)/real (nz);
+    using namespace config;
+    
+    dx = Lx/real (nx);
+    dz = Lz/real (nz);
 }
 }
