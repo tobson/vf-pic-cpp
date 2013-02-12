@@ -91,7 +91,7 @@ void BoundaryCondition<T>::operator() (GlobalVectorField<T>& global)
 }
 
 template <typename T, int N>
-void boundaryCondition (Particles<T,N>& particles)
+void boundaryCondition (Particles<T,N> *particles)
 {
     using config::x0;
     using config::z0;
@@ -102,7 +102,7 @@ void boundaryCondition (Particles<T,N>& particles)
     const T Lx1 = T (1)/Lx;
     const T Lz1 = T (1)/Lz;
     
-    Particle<T> *p = particles.begin ();
+    Particle<T> *p = particles->begin ();
     
     for (int dummy = 0; dummy < N; ++dummy)
     {
@@ -124,5 +124,5 @@ template void boundaryCondition (GlobalVectorField<real>&);
 
 template class BoundaryCondition<real>;
 
-template void boundaryCondition (Particles<real,mpar>&);
+template void boundaryCondition (Particles<real,mpar>*);
 
