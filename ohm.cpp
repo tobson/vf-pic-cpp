@@ -15,19 +15,15 @@ void Ohm<T,Nz,Nx>::operator() (const VectorField<T,Nz,Nx>& B,
                                const VectorField<T,Nz,Nx>& ruu,
                                VectorField<T,Nz,Nx>* E)
 {
-    const T me = T (1)/config::em;
+    const T me = 1.0/config::em;
     
     for (int j = 0; j < 3; ++j)
     {
-        const ScalarField<T,Nz,Nx>& ruj = ruu[j];
-        const ScalarField<T,Nz,Nx>& Jj = J[j];
-        
-        ScalarField<T,Nz,Nx>& Uj = U[j];
-        
         for (int k = 1; k <= Nz; ++k)
         for (int i = 1; i <= Nx; ++i)
         {
-            Uj (k,i) = (ruj (k,i) - me*Jj (k,i))/rho (k,i); // Better multiply with inverse density
+            // Better multiply with inverse density
+            U[j](k,i) = (ruu[j](k,i) - me*J[j](k,i))/rho (k,i);
         }
     }
     for (int k = 1; k <= Nz; ++k)
