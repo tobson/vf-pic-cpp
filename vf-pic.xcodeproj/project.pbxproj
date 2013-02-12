@@ -14,6 +14,7 @@
 		D206FBFD16C1C31C008BD080 /* ohm.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D206FBFB16C1C31C008BD080 /* ohm.cpp */; };
 		D206FC0416C62E3D008BD080 /* faraday.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D206FC0316C62E3D008BD080 /* faraday.cpp */; };
 		D206FC0E16CA13A2008BD080 /* initial-condition.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D206FC0C16CA13A2008BD080 /* initial-condition.cpp */; };
+		D206FC1216CA14D3008BD080 /* drift.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D206FC1016CA14D1008BD080 /* drift.cpp */; };
 		D24BC36D16B64B1A006C64A3 /* global.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D28BAEFD16B5FD0200578956 /* global.cpp */; };
 		D24BC36E16B64B1A006C64A3 /* config.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D28BAF0016B5FDDA00578956 /* config.cpp */; };
 		D24BC37016B64B1A006C64A3 /* barrier.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D28BAF1816B60B3800578956 /* barrier.cpp */; };
@@ -30,7 +31,7 @@
 		D2C6828216BB7EB40023FB36 /* boundaries.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2C6828016BB7EB30023FB36 /* boundaries.cpp */; };
 		D2C6828316BB7EB40023FB36 /* boundaries.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2C6828016BB7EB30023FB36 /* boundaries.cpp */; };
 		D2C6828416BB7EB40023FB36 /* boundaries.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2C6828016BB7EB30023FB36 /* boundaries.cpp */; };
-		D2C6828A16BB9CAC0023FB36 /* drift-kick.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2C6828816BB9CAC0023FB36 /* drift-kick.cpp */; };
+		D2C6828A16BB9CAC0023FB36 /* kick.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2C6828816BB9CAC0023FB36 /* kick.cpp */; };
 		D2E0963816BF83E8003AA5DA /* libconfig++.9.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D2E0963716BF83E8003AA5DA /* libconfig++.9.dylib */; };
 		D2E0963916BF840B003AA5DA /* libconfig++.9.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D2E0963716BF83E8003AA5DA /* libconfig++.9.dylib */; };
 		D2E0963A16BF8421003AA5DA /* libconfig++.9.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D2E0963716BF83E8003AA5DA /* libconfig++.9.dylib */; };
@@ -87,6 +88,8 @@
 		D206FC0316C62E3D008BD080 /* faraday.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = faraday.cpp; sourceTree = "<group>"; };
 		D206FC0C16CA13A2008BD080 /* initial-condition.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "initial-condition.cpp"; sourceTree = "<group>"; };
 		D206FC0D16CA13A2008BD080 /* initial-condition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "initial-condition.h"; sourceTree = "<group>"; };
+		D206FC1016CA14D1008BD080 /* drift.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = drift.cpp; sourceTree = "<group>"; };
+		D206FC1116CA14D2008BD080 /* drift.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = drift.h; sourceTree = "<group>"; };
 		D24BC37716B64B1A006C64A3 /* jacobi */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = jacobi; sourceTree = BUILT_PRODUCTS_DIR; };
 		D24BC37916B64B92006C64A3 /* jacobi.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = jacobi.cpp; sourceTree = "<group>"; };
 		D25C8DB216B89B6600B0A607 /* grid.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = grid.cpp; sourceTree = "<group>"; };
@@ -109,8 +112,8 @@
 		D2C6827E16B9EBA30023FB36 /* diffops.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = diffops.h; sourceTree = "<group>"; };
 		D2C6828016BB7EB30023FB36 /* boundaries.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = boundaries.cpp; sourceTree = "<group>"; };
 		D2C6828116BB7EB40023FB36 /* boundaries.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = boundaries.h; sourceTree = "<group>"; };
-		D2C6828816BB9CAC0023FB36 /* drift-kick.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "drift-kick.cpp"; sourceTree = "<group>"; };
-		D2C6828916BB9CAC0023FB36 /* drift-kick.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "drift-kick.h"; sourceTree = "<group>"; };
+		D2C6828816BB9CAC0023FB36 /* kick.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = kick.cpp; sourceTree = "<group>"; };
+		D2C6828916BB9CAC0023FB36 /* kick.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = kick.h; sourceTree = "<group>"; };
 		D2E0963516BF83C7003AA5DA /* libconfig++.la */ = {isa = PBXFileReference; lastKnownFileType = text; name = "libconfig++.la"; path = "../../macports/lib/libconfig++.la"; sourceTree = "<group>"; };
 		D2E0963716BF83E8003AA5DA /* libconfig++.9.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libconfig++.9.dylib"; path = "../../macports/lib/libconfig++.9.dylib"; sourceTree = "<group>"; };
 		D2F90E4816B734C700ABDA86 /* jacobi.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = jacobi.py; sourceTree = "<group>"; };
@@ -159,18 +162,18 @@
 		D2915FA416B5F56A0084A612 = {
 			isa = PBXGroup;
 			children = (
-				D206FC0C16CA13A2008BD080 /* initial-condition.cpp */,
-				D206FC0D16CA13A2008BD080 /* initial-condition.h */,
 				D2F90E4B16B73ED400ABDA86 /* Makefile */,
 				D28BAF1816B60B3800578956 /* barrier.cpp */,
 				D2C6828016BB7EB30023FB36 /* boundaries.cpp */,
 				D28BAF0016B5FDDA00578956 /* config.cpp */,
 				D20381BC16BE0195008755DC /* deposit.cpp */,
-				D2C6828816BB9CAC0023FB36 /* drift-kick.cpp */,
+				D206FC1016CA14D1008BD080 /* drift.cpp */,
 				D206FC0316C62E3D008BD080 /* faraday.cpp */,
 				D28BAEFD16B5FD0200578956 /* global.cpp */,
 				D25C8DB216B89B6600B0A607 /* grid.cpp */,
+				D206FC0C16CA13A2008BD080 /* initial-condition.cpp */,
 				D24BC37916B64B92006C64A3 /* jacobi.cpp */,
+				D2C6828816BB9CAC0023FB36 /* kick.cpp */,
 				D2915FC816B5F7FE0084A612 /* main.cpp */,
 				D206FBFB16C1C31C008BD080 /* ohm.cpp */,
 				D20381A216BCF25A008755DC /* sse.cpp */,
@@ -181,10 +184,12 @@
 				D28BAF0116B5FDDA00578956 /* config.h */,
 				D20381BD16BE0195008755DC /* deposit.h */,
 				D2C6827E16B9EBA30023FB36 /* diffops.h */,
-				D2C6828916BB9CAC0023FB36 /* drift-kick.h */,
+				D206FC1116CA14D2008BD080 /* drift.h */,
 				D2C6827D16B9DF600023FB36 /* faraday.h */,
 				D28BAEFE16B5FD0200578956 /* global.h */,
 				D25C8DB316B89B6600B0A607 /* grid.h */,
+				D206FC0D16CA13A2008BD080 /* initial-condition.h */,
+				D2C6828916BB9CAC0023FB36 /* kick.h */,
 				D206FC0116C3539F008BD080 /* math-helpers.h */,
 				D206FBFC16C1C31C008BD080 /* ohm.h */,
 				D28BAEFB16B5FB4500578956 /* param.h */,
@@ -356,11 +361,12 @@
 				D28BAF1A16B60B3800578956 /* barrier.cpp in Sources */,
 				D25C8DB416B89B6600B0A607 /* grid.cpp in Sources */,
 				D2C6828216BB7EB40023FB36 /* boundaries.cpp in Sources */,
-				D2C6828A16BB9CAC0023FB36 /* drift-kick.cpp in Sources */,
+				D2C6828A16BB9CAC0023FB36 /* kick.cpp in Sources */,
 				D20381BE16BE0196008755DC /* deposit.cpp in Sources */,
 				D206FBFD16C1C31C008BD080 /* ohm.cpp in Sources */,
 				D206FC0416C62E3D008BD080 /* faraday.cpp in Sources */,
 				D206FC0E16CA13A2008BD080 /* initial-condition.cpp in Sources */,
+				D206FC1216CA14D3008BD080 /* drift.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

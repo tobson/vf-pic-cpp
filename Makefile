@@ -5,7 +5,7 @@ CXXFLAGS += -MMD
 
 all: vf-pic jacobi test
 
-main = barrier.o boundaries.o config.o deposit.o drift-kick.o faraday.o global.o grid.o main.o ohm.o
+main = barrier.o boundaries.o config.o deposit.o drift.o faraday.o global.o grid.o initial-condition.o kick.o main.o ohm.o
 deps := $(deps) $(main:.o=.d)
 vf-pic: $(main)
 	$(CXX) $(LDFLAGS) $(main) $(LDLIBS) -o vf-pic
