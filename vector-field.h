@@ -36,6 +36,7 @@ protected:
         components.push_back (std::unique_ptr<Scalar> (py));
         components.push_back (std::unique_ptr<Scalar> (pz));
     }
+public:
     VectorField& operator= (const VectorField& other)
     {
         x = other.x;
