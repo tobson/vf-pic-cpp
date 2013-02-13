@@ -150,12 +150,12 @@ public:
     Scalar& y;
     Scalar& z;
 private:
-    std::vector<S<T,N1,N2>*> components;
+    std::vector<Scalar*> components;
 protected:
     VectorTemplate (Scalar *px, Scalar *py, Scalar *pz): Base (px, py, pz),
-    x (*static_cast<Scalar*> (Base::components.at (0).get ())),
-    y (*static_cast<Scalar*> (Base::components.at (1).get ())),
-    z (*static_cast<Scalar*> (Base::components.at (2).get ()))
+    x (*px),
+    y (*py),
+    z (*pz)
     {
         components.push_back (&x);
         components.push_back (&y);
