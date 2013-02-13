@@ -25,6 +25,7 @@ protected:
     explicit ScalarField (T *ptr): data (ptr)
     {
     }
+    ScalarField (const ScalarField&) = default;
 public:
     virtual ~ScalarField () noexcept = default;
     /* Index operators */

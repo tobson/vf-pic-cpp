@@ -30,7 +30,9 @@ protected:
     explicit Particles (Particle<T> *ptr): array (ptr)
     {
     }
+    Particles (const Particles&) = default;
 public:
+    virtual ~Particles () noexcept = default;
     inline Particles& operator= (const Particles& other)
     {
         std::copy (other.array, other.array + N, array);

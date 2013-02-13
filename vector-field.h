@@ -27,6 +27,7 @@ public:
     Scalar& z;
 protected:
     std::vector<std::unique_ptr<Scalar>> components;
+
     VectorField (Scalar *px, Scalar *py, Scalar *pz):
     x (*px),
     y (*py),
@@ -36,6 +37,7 @@ protected:
         components.push_back (std::unique_ptr<Scalar> (py));
         components.push_back (std::unique_ptr<Scalar> (pz));
     }
+    virtual ~VectorField () noexcept = default;
 public:
     VectorField& operator= (const VectorField& other)
     {
