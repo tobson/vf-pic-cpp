@@ -20,7 +20,7 @@ namespace config
     using libconfig::Setting;
 
     template <typename T>
-    void lookup (const char *name, T& value)
+    void lookup (const std::string& name, T& value)
     {
         if (input.exists (name))
         {
@@ -38,37 +38,37 @@ namespace config
     }
 
     /* Convenience functions to read variable from configuration file */
-    void readVariable (const char *name, int &value)
+    void readVariable (const std::string& name, int &value)
     {
         lookup (name, value);
         output.getRoot ().add (name, Setting::TypeInt) = value;
     }
 
-    void readVariable (const char *name, long long &value)
+    void readVariable (const std::string& name, long long &value)
     {
         lookup (name, value);
         output.getRoot ().add (name, Setting::TypeInt64) = value;
     }
 
-    void readVariable (const char *name, real &value)
+    void readVariable (const std::string& name, real &value)
     {
         lookup (name, value);
         output.getRoot ().add (name, Setting::TypeFloat) = value;
     }
 
-    void readVariable (const char *name, bool &value)
+    void readVariable (const std::string& name, bool &value)
     {
         lookup (name, value);
         output.getRoot ().add (name, Setting::TypeBoolean) = value;
     }
 
-    void readVariable (const char *name, std::string& value)
+    void readVariable (const std::string& name, std::string& value)
     {
         if (input.exists (name))
         {
             try
             {
-                value = (const char *) input.lookup (name);
+                value = input.lookup (name).c_str ();
             }
             catch (const libconfig::SettingTypeException)
             {
@@ -81,7 +81,7 @@ namespace config
     }
 
     template <typename T, unsigned long N>
-    void readVariable (const char *name, std::array<T,N>& array)
+    void readVariable (const std::string& name, std::array<T,N>& array)
     {
         std::cout << "Oi!\n";
         if (input.exists (name))

@@ -69,11 +69,11 @@ extern bool throwOnCopyConstruct;
 void read (const std::string&);
 
 /* Convenience functions to read variable from configuration file */
-void readVariable (const char *, int &);
-void readVariable (const char *, long long &);
-void readVariable (const char *, real &);
-void readVariable (const char *, bool &);
-void readVariable (const char *, std::string&);
+//void readVariable (std::string&, int &);
+//void readVariable (std::string&, long long &);
+//void readVariable (std::string&, real &);
+//void readVariable (std::string&, bool &);
+//void readVariable (std::string&, std::string&);
 
 /* Write configuration to output file */
 void write (const std::string&);
