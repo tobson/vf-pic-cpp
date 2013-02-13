@@ -157,25 +157,15 @@ protected:
     y (*py),
     z (*pz)
     {
-        components.push_back (&x);
-        components.push_back (&y);
-        components.push_back (&z);
+        components.push_back (px);
+        components.push_back (py);
+        components.push_back (pz);
     }
-private:
-    VectorTemplate () = delete;
-    VectorTemplate (const VectorTemplate& other) = delete;
 public:
     VectorTemplate& operator= (const VectorTemplate& other)
     {
         Base::operator= (other);
         return *this;
-    }
-    VectorTemplate (VectorTemplate&& other) noexcept:
-    x (other.x),
-    y (other.y),
-    z (other.z),
-    components (std::move (other.components))
-    {
     }
     virtual ~VectorTemplate () noexcept = default;
     Scalar& operator[] (int j)
