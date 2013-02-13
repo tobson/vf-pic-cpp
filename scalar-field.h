@@ -26,6 +26,7 @@ protected:
     {
     }
 public:
+    virtual ~ScalarField () noexcept = default;
     /* Index operators */
     inline T& operator() (int i1, int i2)
     {
