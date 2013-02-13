@@ -11,6 +11,7 @@
 
 #include "param.h"
 
+#include <array>
 #include <string>
 
 namespace config
@@ -38,7 +39,7 @@ extern real qshear;
 /* Initial condition */
 extern int ikx;
 extern int ikz;
-extern real B0;
+extern std::array<real,3> B0;
 extern real brms;
 extern real ampl;
 extern bool randomizeSeed;
