@@ -78,7 +78,7 @@ namespace config
                 }
                 else
                 {
-                    std::string msg = "'" + std::string (name) + "' should be an array of length " + std::to_string (N) + ".";
+                    std::string msg = "'" + std::string (name) + "' must be an array of length " + std::to_string (N) + ".";
                     throw std::length_error (msg);
                 }
             }
