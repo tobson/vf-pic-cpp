@@ -39,7 +39,8 @@ extern real qshear;
 /* Initial condition */
 extern int ikx;
 extern int ikz;
-extern std::array<real,3> B0;
+//extern std::array<real,3> B0;
+extern real B0;
 extern real brms;
 extern real ampl;
 extern bool randomizeSeed;
@@ -67,13 +68,6 @@ extern bool throwOnCopyConstruct;
 
 /* Read configuration from input file */
 void read (const std::string&);
-
-/* Convenience functions to read variable from configuration file */
-//void readVariable (std::string&, int &);
-//void readVariable (std::string&, long long &);
-//void readVariable (std::string&, real &);
-//void readVariable (std::string&, bool &);
-//void readVariable (std::string&, std::string&);
 
 /* Write configuration to output file */
 void write (const std::string&);

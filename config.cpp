@@ -116,7 +116,8 @@ namespace config
     /* Initial condition */
     int ikx = 0;
     int ikz = 0;
-    std::array<real,3> B0 = {0.0, 0.0, 0.0};
+//    std::array<real,3> B0 = {0.0, 0.0, 0.0};
+    real B0 = 0.0;
     real brms = 0.0;
     real ampl = 0.0;
     bool randomizeSeed = false;
