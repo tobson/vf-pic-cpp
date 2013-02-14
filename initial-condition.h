@@ -9,11 +9,9 @@
 #ifndef __vf_pic__initial_condition__
 #define __vf_pic__initial_condition__
 
-#include "vector-field.h"
-#include "particles.h"
+#include "grid.h"
+#include "variables.h"
 
-void initialCondition (GlobalVectorField<real>&,
-                       GlobalVectorField<real>&,
-                       GlobalParticles<real>&);
+void initialCondition (const Grid&, GlobalVariables<real>*);
 
 #endif /* defined(__vf_pic__initial_condition__) */

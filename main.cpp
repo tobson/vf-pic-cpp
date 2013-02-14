@@ -20,6 +20,7 @@
 #include "math-helpers.h"
 #include "ohm.h"
 #include "particles.h"
+#include "variables.h"
 #include "vector-field.h"
 
 #include <array>
@@ -30,14 +31,14 @@
 #include <thread>
 #include <vector>
 
-template <typename T>
-struct GlobalVariables
-{
-    NewGlobalVectorField<T> A, A2;
-    NewGlobalParticles<T> particles, particles2;
-    NewGlobalVectorField<T> E, B;
-    NewGlobalScalarField<T> rho; NewGlobalVectorField<T> ruu;
-};
+//template <typename T>
+//struct GlobalVariables
+//{
+//    NewGlobalVectorField<T> A, A2;
+//    NewGlobalParticles<T> particles, particles2;
+//    NewGlobalVectorField<T> E, B;
+//    NewGlobalScalarField<T> rho; NewGlobalVectorField<T> ruu;
+//};
 
 void iteration (GlobalVariables<real>& global, Barrier& barrier, const int ithread, int niter)
 {
@@ -152,7 +153,7 @@ int main (int argc, const char * argv[])
     Grid grid;
     GlobalVariables<real> global;
     
-    initialCondition (global.A, global.E, global.particles);
+    initialCondition (grid, &global);
     
     std::vector<std::thread> threads;
 
