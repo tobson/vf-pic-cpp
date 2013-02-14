@@ -13,14 +13,22 @@
 #include <libconfig.h++>
 #include <iostream>
 
+
 namespace config
 {
     libconfig::Config input, output;
 
     using libconfig::Setting;
 
+    template <typename T> struct TypeMap;
+    template <> struct TypeMap<int>       { static const Setting::Type type = Setting::TypeInt;     };
+    template <> struct TypeMap<long long> { static const Setting::Type type = Setting::TypeInt64;   };
+    template <> struct TypeMap<real>      { static const Setting::Type type = Setting::TypeFloat;   };
+    template <> struct TypeMap<bool>      { static const Setting::Type type = Setting::TypeBoolean; };
+
+    /* Convenience functions to read variable from configuration file */
     template <typename T>
-    void lookup (const std::string& name, T& value)
+    void readVariable (const std::string& name, T& value)
     {
         if (input.exists (name))
         {
@@ -35,31 +43,7 @@ namespace config
                 throw;
             }
         }
-    }
-
-    /* Convenience functions to read variable from configuration file */
-    void readVariable (const std::string& name, int &value)
-    {
-        lookup (name, value);
-        output.getRoot ().add (name, Setting::TypeInt) = value;
-    }
-
-    void readVariable (const std::string& name, long long &value)
-    {
-        lookup (name, value);
-        output.getRoot ().add (name, Setting::TypeInt64) = value;
-    }
-
-    void readVariable (const std::string& name, real &value)
-    {
-        lookup (name, value);
-        output.getRoot ().add (name, Setting::TypeFloat) = value;
-    }
-
-    void readVariable (const std::string& name, bool &value)
-    {
-        lookup (name, value);
-        output.getRoot ().add (name, Setting::TypeBoolean) = value;
+        output.getRoot ().add (name, TypeMap<T>::type) = value;
     }
 
     void readVariable (const std::string& name, std::string& value)
@@ -83,7 +67,6 @@ namespace config
     template <typename T, unsigned long N>
     void readVariable (const std::string& name, std::array<T,N>& array)
     {
-        std::cout << "Oi!\n";
         if (input.exists (name))
         {
             try
