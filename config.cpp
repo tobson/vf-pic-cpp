@@ -88,6 +88,8 @@ namespace config
                 << "' doesn't have the right type." << std::endl;
                 throw;
             }
+            Setting& setting = output.getRoot ().add (name, Setting::TypeArray);
+            for (int n = 0; n < N; ++n) setting.add (TypeMap<T>::type) = array[n];
         }
     }
     
