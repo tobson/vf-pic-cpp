@@ -50,6 +50,12 @@ public:
 private:
     using FieldOp = std::mem_fun1_t<Scalar&,Scalar,const Scalar&>;
     using ValueOp = std::mem_fun1_t<Scalar&,Scalar,const T&>;
+    
+    template <class U, class Dummy> struct SelectDummy { using wrapper = FieldOp; };
+    template <class Dummy> struct SelectDummy<const T&, Dummy> { using wrapper = ValueOp; };
+    template <class Dummy> struct SelectDummy<const std::array<T,3>&, Dummy> { using wrapper = ValueOp; };
+    template <class U> using Select = SelectDummy<U,void>;
+    
     void lift (FieldOp func, const VectorField& other)
     {
         func (&x, other.x);
@@ -62,6 +68,12 @@ private:
         func (&y, other);
         func (&z, other);
     }
+    void lift (ValueOp func, const std::array<T,3>& other)
+    {
+        func (&x, other[0]);
+        func (&y, other[1]);
+        func (&z, other[2]);
+    }
     void lift (ValueOp func, const T& other)
     {
         func (&x, other);
@@ -70,62 +82,38 @@ private:
     }
 public:
     /* Assign */
-    VectorField& operator= (const T& value)
+    template <class U>
+    VectorField& operator= (const U& value)
     {
-        lift (ValueOp (&Scalar::operator=), value);
-        return *this;
-    }
-    VectorField& operator= (const Scalar& other)
-    {
-        lift (FieldOp (&Scalar::operator=), other);
+        lift (typename Select<const U&>::wrapper (&Scalar::operator=), value);
         return *this;
     }
     /* Add to */
-    VectorField& operator+= (const T& value)
-    {
-        lift (ValueOp (&Scalar::operator+=), value);
-        return *this;
-    }
     template <class U>
     VectorField& operator+= (const U& other)
     {
-        lift (FieldOp (&Scalar::operator+=), other);
+        lift (typename Select<const U&>::wrapper (&Scalar::operator+=), other);
         return *this;
     }
     /* Subtract from */
-    inline VectorField& operator-= (const T& value)
-    {
-        lift (ValueOp (&Scalar::operator-=), value);
-        return *this;
-    }
     template <class U>
     inline VectorField& operator-= (const U& other)
     {
-        lift (FieldOp (&Scalar::operator-=), other);
+        lift (typename Select<const U&>::wrapper (&Scalar::operator-=), other);
         return *this;
     }
     /* Multiply with */
-    inline VectorField& operator*= (const T& value)
-    {
-        lift (ValueOp (&Scalar::operator*=), value);
-        return *this;
-    }
     template <class U>
     inline VectorField& operator*= (const U& other)
     {
-        lift (FieldOp (&Scalar::operator*=), other);
+        lift (typename Select<const U&>::wrapper (&Scalar::operator*=), other);
         return *this;
     }
     /* Divide by */
-    inline VectorField& operator/= (const T& value)
-    {
-        lift (ValueOp (&Scalar::operator/=), value);
-        return *this;
-    }
     template <class U>
     inline VectorField& operator/= (const U& other)
     {
-        lift (FieldOp (&Scalar::operator/=), other);
+        lift (typename Select<const U&>::wrapper (&Scalar::operator/=), other);
         return *this;
     }
     /* Index operators */
