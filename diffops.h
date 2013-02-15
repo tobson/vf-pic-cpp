@@ -9,7 +9,7 @@
 #ifndef vf_pic_diffops_h
 #define vf_pic_diffops_h
 
-#include "scalar-field.h"
+#include "vector-field.h"
 
 template <typename T, int Nz, int Nx>
 void curl (const VectorField<T,Nz,Nx>& A, VectorField<T,Nz,Nx>* B)
