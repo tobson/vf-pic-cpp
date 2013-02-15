@@ -99,9 +99,9 @@ void initialCondition (const Grid& grid, GlobalVariables<real> *global)
     }
     boundaryCondition (A);
 
-    global->B[0] = B0*sin (angle);
-    global->B[0] = 0.0;
-    global->B[0] = B0*cos (angle);
+    global->B0.x = B0*sin (angle);
+    global->B0.y = 0.0;
+    global->B0.z = B0*cos (angle);
 
     E = real (0);
     if (ampl > 0.0)

@@ -11,6 +11,7 @@
 
 #include "particles.h"
 #include "scalar-field.h"
+#include "three-vector.h"
 #include "vector-field.h"
 
 template <typename T>
@@ -20,7 +21,7 @@ struct GlobalVariables
     NewGlobalParticles<T> particles, particles2;
     NewGlobalVectorField<T> E, B;
     NewGlobalScalarField<T> rho; NewGlobalVectorField<T> ruu;
-    std::array<T,3> B0;
+    Vector<T> B0;
 };
 
 #endif

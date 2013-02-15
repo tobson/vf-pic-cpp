@@ -10,6 +10,7 @@
 #define vf_pic_vector_field_h
 
 #include "scalar-field.h"
+#include "three-vector.h"
 
 #include <memory>
 #include <vector>
@@ -53,7 +54,7 @@ private:
     
     template <class U, class Dummy> struct SelectDummy { using wrapper = FieldOp; };
     template <class Dummy> struct SelectDummy<const T&, Dummy> { using wrapper = ValueOp; };
-    template <class Dummy> struct SelectDummy<const std::array<T,3>&, Dummy> { using wrapper = ValueOp; };
+    template <class Dummy> struct SelectDummy<const Vector<T>&, Dummy> { using wrapper = ValueOp; };
     template <class U> using Select = SelectDummy<U,void>;
     
     void lift (FieldOp func, const VectorField& other)
@@ -68,11 +69,11 @@ private:
         func (&y, other);
         func (&z, other);
     }
-    void lift (ValueOp func, const std::array<T,3>& other)
+    void lift (ValueOp func, const Vector<T>& other)
     {
-        func (&x, other[0]);
-        func (&y, other[1]);
-        func (&z, other[2]);
+        func (&x, other.x);
+        func (&y, other.y);
+        func (&z, other.z);
     }
     void lift (ValueOp func, const T& other)
     {
