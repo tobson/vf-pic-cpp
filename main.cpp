@@ -64,7 +64,7 @@ void iteration (GlobalVariables<real>& global, Barrier& barrier, const int ithre
     Deposit<real,vfpic::mpar> deposit (barrier, ithread);
     Ohm<real,vfpic::mz,vfpic::mx> ohm;
     
-    curl (A, &H2);
+    curl (A, &H2); H2 += global.B0;
     
     for (int it = 0; it < niter; ++it)
     {
@@ -73,7 +73,7 @@ void iteration (GlobalVariables<real>& global, Barrier& barrier, const int ithre
         faraday (&A, E, dt);
         boundCond (global.A);
         
-        curl (A, &H);
+        curl (A, &H); H += global.B0;
         curlcurl (A, &J);
                 
         average (H2, H, &B);
@@ -107,7 +107,7 @@ void iteration (GlobalVariables<real>& global, Barrier& barrier, const int ithre
         faraday (&A2, E, dt);
         boundCond (global.A2);
 
-        curl (A2, &H);
+        curl (A2, &H); H += global.B0;
         curlcurl (A2, &J);
 
         average (H2, H, &B);
