@@ -25,6 +25,7 @@
 
 #include <array>
 #include <cstdio>
+#include <fstream>
 #include <iostream>
 #include <libconfig.h++>
 #include <random>
@@ -154,6 +155,9 @@ int main (int argc, const char * argv[])
     GlobalVariables<real> global;
     
     initialCondition (grid, &global);
+
+    std::ofstream file;
+    file << global.A << global.E << global.B0 << global.particles;
     
     std::vector<std::thread> threads;
 
@@ -164,6 +168,9 @@ int main (int argc, const char * argv[])
     }
     
     for (auto thread = begin (threads); thread != end (threads); ++thread) thread->join ();
+
+    file << global.A << global.E << global.B0 << global.particles;
+    file.close ();
 
     return 0;
 }

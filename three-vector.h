@@ -10,6 +10,7 @@
 #define vf_pic_three_vector_h
 
 #include <array>
+#include <iostream>
 
 template <typename T>
 union Vector
@@ -36,6 +37,13 @@ public:
     inline const T& at (size_t j) const
     {
         return vec.at (j);
+    }
+    friend std::ostream& operator<< (std::ostream& os, Vector vec)
+    {
+        os << vec.x;
+        os << vec.y;
+        os << vec.z;
+        return os;
     }
 };
 

@@ -108,6 +108,11 @@ public:
         delete[] this->array;
     }
     using Particles<T,N>::operator=;
+    friend std::ostream& operator<< (std::ostream& os, NewParticles& particles)
+    {
+        os.write (reinterpret_cast<char *> (particles.array), N*sizeof (Particle<T>));
+        return os;
+    }
 };
 
 template <typename T>
