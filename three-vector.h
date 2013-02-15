@@ -15,8 +15,7 @@ template <typename T>
 union Vector
 {
 private:
-    static const size_t size = 3;
-    std::array<T,size> vec;
+    std::array<T,3> vec;
 public:
     struct
     {
