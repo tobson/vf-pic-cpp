@@ -14,7 +14,6 @@
 #include "drift.h"
 #include "faraday.h"
 #include "global.h"
-#include "grid.h"
 #include "initial-condition.h"
 #include "kick.h"
 #include "math-helpers.h"
@@ -154,7 +153,7 @@ int main (int argc, const char * argv[])
     Grid grid;
     GlobalVariables<real> global;
     
-    initialCondition (grid, &global);
+    initialCondition (&global);
 
     std::ofstream file;
     file << global.A << global.E << global.B0 << global.particles;

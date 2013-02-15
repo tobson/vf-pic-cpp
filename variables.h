@@ -9,6 +9,7 @@
 #ifndef vf_pic_variables_h
 #define vf_pic_variables_h
 
+#include "grid.h"
 #include "particles.h"
 #include "scalar-field.h"
 #include "three-vector.h"
@@ -22,6 +23,7 @@ struct GlobalVariables
     NewGlobalVectorField<T> E, B;
     NewGlobalScalarField<T> rho; NewGlobalVectorField<T> ruu;
     Vector<T> B0;
+    Grid grid;
 };
 
 #endif

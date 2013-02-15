@@ -9,9 +9,8 @@
 #ifndef __vf_pic__initial_condition__
 #define __vf_pic__initial_condition__
 
-#include "grid.h"
 #include "variables.h"
 
-void initialCondition (const Grid&, GlobalVariables<real>*);
+void initialCondition (GlobalVariables<real>*);
 
 #endif /* defined(__vf_pic__initial_condition__) */

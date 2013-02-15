@@ -31,7 +31,7 @@ template <> double Sqrt (double x)
     return sqrt (x);
 }
 
-void initialCondition (const Grid& grid, GlobalVariables<real> *global)
+void initialCondition (GlobalVariables<real> *global)
 {
     using namespace config;
     using namespace vfpic;
@@ -40,6 +40,8 @@ void initialCondition (const Grid& grid, GlobalVariables<real> *global)
     std::uniform_real_distribution<> uniform;
     std::normal_distribution<> normal;
 
+    const Grid& grid = global->grid;
+    
     GlobalVectorField<real>& A = global->A;
     GlobalVectorField<real>& E = global->E;
     GlobalParticles<real>& particles = global->particles;
@@ -109,7 +111,7 @@ void initialCondition (const Grid& grid, GlobalVariables<real> *global)
         for (int k = 1; k <= nz; ++k)
         for (int i = 1; i <= nx; ++i)
         {
-            const double phi = kx*grid.x (k,i) + kz*grid.z (k,i);
+            const real phi = kx*grid.x (k,i) + kz*grid.z (k,i);
 
             E.x (k,i) += ampl*cos(phi)*cos(angle);
             E.y (k,i) -= ampl*sin(phi);
