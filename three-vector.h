@@ -13,30 +13,28 @@
 #include <iostream>
 
 template <typename T>
-union Vector
+struct Vector
 {
 private:
-    std::array<T,3> vec;
+    std::array<T,3> array;
 public:
-    struct
-    {
-        T x, y, z;
-    };
+    T& x; T& y; T& z;
+    Vector (): x (array.at (0)), y (array.at (1)), z (array.at (2)) {}
     inline T& operator[] (size_t j)
     {
-        return vec[j];
+        return array[j];
     }
     inline const T& operator[] (size_t j) const
     {
-        return vec[j];
+        return array[j];
     }
     inline T& at (size_t j)
     {
-        return vec.at (j);
+        return array.at (j);
     }
     inline const T& at (size_t j) const
     {
-        return vec.at (j);
+        return array.at (j);
     }
     friend std::ostream& operator<< (std::ostream& os, Vector vec)
     {
