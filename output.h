@@ -12,6 +12,14 @@
 #include "barrier.h"
 #include "variables.h"
 
-void output (GlobalVariables<real>&, Barrier& barrier, const long long, const int);
+class Output
+{
+public:
+    Output (Barrier& barrier, const int);
+    void operator() (GlobalVariables<real>&, const long long);
+private:
+    Barrier& barrier;
+    const int ithread;
+};
 
 #endif /* defined(__vf_pic__output__) */

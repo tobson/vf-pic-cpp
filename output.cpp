@@ -14,7 +14,12 @@
 #include "ohm.h"
 #include "output.h"
 
-void output (GlobalVariables<real>& global, Barrier& barrier, const long long it, const int ithread)
+Output::Output (Barrier& barrier, const int ithread):
+barrier (barrier), ithread (ithread)
+{
+}
+
+void Output::operator() (GlobalVariables<real>& global, const long long it)
 {
     using config::dt;
 
@@ -24,11 +29,7 @@ void output (GlobalVariables<real>& global, Barrier& barrier, const long long it
 
     LocalVectorFieldView<real> A2 (global.A2, ithread);
     LocalParticlesView<real> particles2 (global.particles2, ithread);
-
-//    NewLocalVectorField<real> D, D2;
-//    NewLocalVectorField<real> H, H2;
-//    NewLocalVectorField<real> J;
-
+    
     LocalVectorFieldView<real> B (global.B, ithread);
 
     LocalScalarFieldView<real> rho (global.rho, ithread);
@@ -36,8 +37,7 @@ void output (GlobalVariables<real>& global, Barrier& barrier, const long long it
 
     BoundaryCondition<real> boundaryCondition (barrier, ithread);
     Deposit<real,vfpic::mpar> deposit (barrier, ithread);
-//    Ohm<real,vfpic::mz,vfpic::mx> ohm;
-
+    
     A2 = A;
     faraday (&A2, E, 0.5*dt);
     boundaryCondition (A2);

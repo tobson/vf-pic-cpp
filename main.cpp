@@ -46,6 +46,7 @@ void iteration (GlobalVariables<real>& global, Barrier& barrier, const int ithre
 {
     using config::dt;
     using config::nt;
+    using config::itWrite;
 
     /* Create local views of global data. Each thread gets its own chunk */
     LocalVectorFieldView<real> A  (global.A , ithread);
@@ -68,78 +69,103 @@ void iteration (GlobalVariables<real>& global, Barrier& barrier, const int ithre
     /* Construct function objects */
     BoundaryCondition<real> boundCond (barrier, ithread);
     Deposit<real,vfpic::mpar> deposit (barrier, ithread);
+    Output output (barrier, ithread);
     Ohm<real,vfpic::mz,vfpic::mx> ohm;
     
     curl (A, &H2); H2 += global.B0;
 
-    /* Write out initial data */
-    output (global, barrier, 0, ithread);
-    
     for (int it = 0; it < nt; ++it)
     {
-        printf ("Yay! I'm thread %d\n", ithread);
-        /* Predictor step */
+        // Write out data
+        if (it % itWrite == 0)
+        {
+            printf ("it = %d\n", it);
+            output (global, it);
+        }
 
-        printf ("Ax = (%g, %g, %g)\n", A.x (1,6), A.y (1,6), A.z (1,6));
+        /******************
+         * Predictor step *
+         ******************/
+
+        // Advance vector potential from n-1/2 to n+1/2
         faraday (&A, E, dt);
-        printf ("Ax = (%g, %g, %g)\n", A.x (1,6), A.y (1,6), A.z (1,6));
         boundCond (global.A);
 
+        // Compute magnetic field and current at n+1/2
         curl (A, &H); H += global.B0;
         curlcurl (A, &J);
-                
+
+        // Compute magnetic field at n
         average (H2, H, &B);
 
         /* It would be nice if boundCond::operator()
            would be a variadic function */
+        // Set boundary condition, needed for faraday() and kick()
         boundCond (global.E);
         boundCond (global.B);
-        
+
+        // Advance particle velocities from n-1/2 to n+1/2
         kick (global.E, global.B, &particles, dt);
-        
-        drift (&particles, 0.5*dt);
-        
-        deposit (particles, &global.rho, &global.ruu);
-        
+
+        // Advance particle positions to n+1/2
         drift (&particles, 0.5*dt);
 
-        ohm (H, J, rho, ruu, &D);
+        // Compute ion mass density and momentum density at n+1/2
+        deposit (particles, &global.rho, &global.ruu);
         
+        // Advance particle positions to n+1
+        drift (&particles, 0.5*dt);
+
+        // Compute electric field at n+1/2
+        ohm (H, J, rho, ruu, &D);
+
+        // Use trapezoidal rule to estimate electric field at n+1
         extrapolate (E, D, &E);
         
-        /* Save for next time step */
+        /* Save magnetic field at n+1/2 for the next time step */
         H2 = H;
         
         /* Make copy of dynamice variables */
         A2 = A;
         particles2 = particles;
 
-        /* Corrector step */
+        /******************
+         * Corrector step *
+         ******************/
 
+        // Advance vector potential to n+3/2
         faraday (&A2, E, dt);
         boundCond (global.A2);
 
+        // Compute magnetic field and current at n+3/2
         curl (A2, &H); H += global.B0;
         curlcurl (A2, &J);
 
+        // Compute magnetic field at n+1
         average (H2, H, &B);
 
+        // Set boundary condition, needed for faraday() and kick()
         boundCond (global.E);
         boundCond (global.B);
 
+        // Advance particle velocities from n+1/2 to n+3/2
         kick (global.E, global.B, &particles2, dt);
         
+        // Advance particle positions to n+3/2
         drift (&particles2, 0.5*dt);
         
+        // Compute ion mass density and momentum density at n+3/2
         deposit (particles2, &global.rho, &global.ruu);
         
+        // Compute electric field at n+3/2
         ohm (H, J, rho, ruu, &D2);
 
+        // Average to get electric field at n+1
         average (D, D2, &E);
     }
 
     /* Write out final data */
-    output (global, barrier, nt, ithread);
+    output (global, nt);
 }
 
 int main (int argc, const char * argv[])
