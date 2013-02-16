@@ -11,6 +11,26 @@
 
 #include <random>
 
+template <typename T> T Sin (T);
+template <> float Sin (float x)
+{
+    return sinf (x);
+}
+template <> double Sin (double x)
+{
+    return sin (x);
+}
+
+template <typename T> T Cos (T);
+template <> float Cos (float x)
+{
+    return cosf (x);
+}
+template <> double Cos (double x)
+{
+    return cos (x);
+}
+
 template <typename T> T Atan2 (T, T);
 template <> float Atan2 (float x, float y)
 {
@@ -79,9 +99,9 @@ void initialCondition (GlobalVariables<real> *global)
         {
             const real phi = kx*p->x + kz*p->z + 0.5*omega*dt;
             
-            p->vx -= ampl*fac*sin (phi)*cos (angle);
-            p->vy -= ampl*fac*cos (phi);
-            p->vz += ampl*fac*sin (phi)*sin (angle);
+            p->vx -= ampl*fac*Sin (phi)*Cos (angle);
+            p->vy -= ampl*fac*Cos (phi);
+            p->vz += ampl*fac*Sin (phi)*Sin (angle);
         }
     }
     
@@ -93,9 +113,9 @@ void initialCondition (GlobalVariables<real> *global)
         {
             const real phi = kx*grid.x (k,i) + kz*grid.z (k,i) + 0.5*omega*dt;
 
-            A.x (k,i) += ampl*sin(phi)*cos(angle);
-            A.y (k,i) += ampl*cos(phi);
-            A.z (k,i) -= ampl*sin(phi)*sin(angle);
+            A.x (k,i) += ampl*Sin (phi)*Cos (angle);
+            A.y (k,i) += ampl*Cos (phi);
+            A.z (k,i) -= ampl*Sin (phi)*Sin (angle);
         }
         A /= omega;
     }
@@ -113,11 +133,10 @@ void initialCondition (GlobalVariables<real> *global)
         {
             const real phi = kx*grid.x (k,i) + kz*grid.z (k,i);
 
-            E.x (k,i) += ampl*cos(phi)*cos(angle);
-            E.y (k,i) -= ampl*sin(phi);
-            E.z (k,i) -= ampl*cos(phi)*sin(angle);
+            E.x (k,i) += ampl*Cos(phi)*Cos(angle);
+            E.y (k,i) -= ampl*Sin(phi);
+            E.z (k,i) -= ampl*Cos(phi)*Sin(angle);
         }
-        A /= omega;
     }
     boundaryCondition (E);
 }
