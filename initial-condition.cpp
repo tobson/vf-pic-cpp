@@ -44,6 +44,8 @@ void initialCondition (GlobalVariables<real> *global)
     
     for (auto p = particles.begin (); p != particles.end (); ++p)
     {
+        // Use angle here so that 1D in x is exactly the same as 1D in z
+        // Also try uniform grid in particle space
         p->x = x0 + uniform (gen)*Lx;
         p->z = z0 + uniform (gen)*Lz;
         
