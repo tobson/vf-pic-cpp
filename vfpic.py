@@ -6,7 +6,7 @@ class Config:
 
     def __init__ (self, filename = "config.out"):
 
-        from numpy import sqrt
+        from numpy import sqrt, dtype
 
         f = open (filename, "rt")
 
@@ -23,15 +23,19 @@ class Config:
 
         self.npar = self.nx*self.nz*self.npc
 
+        self.dtype = dtype ("f" + str (self.precision))
+
         f.close ()
 
 class Particles (ndarray):
 
     def __new__ (cls, config = None):
-        from numpy import float32
         if not isinstance (config, Config): config = Config ()
-        dtype = [( 'x',float32),( 'z',float32),
-                 ('vx',float32),('vy',float32),('vz',float32)]
+        dtype = [( 'x', config.dtype),
+                 ( 'z', config.dtype),
+                 ('vx', config.dtype),
+                 ('vy', config.dtype),
+                 ('vz', config.dtype)]
         obj = ndarray.__new__ (cls, shape = (config.npar,), dtype = dtype)
         return obj
   
@@ -46,11 +50,9 @@ class Particles (ndarray):
 class ScalarField (ndarray):
 
     def __new__ (cls, config = None):
-        from numpy import float32
         if not isinstance (config, Config): config = Config ()
-        dtype = float32
         shape = (config.nz + 2, config.nx + 2)
-        obj = ndarray.__new__ (cls, shape = shape, dtype = dtype)
+        obj = ndarray.__new__ (cls, shape = shape, dtype = config.dtype)
         return obj
 
     def __array_finalize__ (self, obj):
@@ -68,7 +70,7 @@ class State:
 
     def __init__ (self, config = None):
 
-        from numpy import ndarray, float32
+        from numpy import ndarray
 
         if not isinstance (config, Config): config = Config ()
 
@@ -100,7 +102,7 @@ class State:
 
     def read (self, f):
 
-        from numpy import fromfile, int64, float32
+        from numpy import fromfile, int64
 
         recordsize = 0
 
@@ -153,14 +155,12 @@ class DataFile ():
         self.state = State (config)
 
         self.recordsize = 0
-        print "eof = ", self.eof
 
     def __iter__ (self):
 
         while self.eof - self.f.tell () >= self.recordsize:
 
             self.recordsize = self.state.read (self.f)
-            print "recordsize = ", self.recordsize
 
             yield self.state
 
