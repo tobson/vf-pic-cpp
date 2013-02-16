@@ -12,6 +12,9 @@
 #include "config.h"
 #include "global.h"
 
+#ifdef DEBUG
+#include <cassert>
+#endif
 #include <iostream>
 
 /* Declerations */
@@ -45,10 +48,16 @@ public:
     }
     inline Particle<T>& operator[] (int index)
     {
+#ifdef DEBUG
+        assert (0 <= index < N);
+#endif
         return array[index];
     }
     inline const Particle<T>& operator[] (int index) const
     {
+#ifdef DEBUG
+        assert (0 <= index < N);
+#endif
         return array[index];
     }
     Particle<T> *begin()

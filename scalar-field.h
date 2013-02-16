@@ -13,8 +13,11 @@
 #include "global.h"
 
 #include <algorithm>
-#include <iostream>
 #include <cstdio>
+#ifdef DEBUG
+#include <cassert>
+#endif
+#include <iostream>
 
 /* Declerations */
 
@@ -31,10 +34,16 @@ public:
     /* Index operators */
     inline T& operator() (int i1, int i2)
     {
+#ifdef DEBUG
+        assert (0 <= i1 < N1+2 && 0 <= i2 < N2+2);
+#endif
         return data[i1*(N2 + 2) + i2];
     }
     inline const T& operator() (int i1, int i2) const
     {
+#ifdef DEBUG
+        assert (0 <= i1 < N1+2 && 0 <= i2 < N2+2);
+#endif
         return data[i1*(N2 + 2) + i2];
     }
     /* Assign */
@@ -131,16 +140,6 @@ public:
             (*this)(i1,i2) /= value;
         }
         return *this;
-    }
-    void reciprocal ()
-    {
-        const T one = T (1);
-        
-        for (int i1 = 1; i1 <= N1; ++i1)
-        for (int i2 = 1; i2 <= N2; ++i2)
-        {
-            (*this)(i1,i2) = one/(*this)(i1,i2);
-        }
     }
     void fill (const T& value)
     {
