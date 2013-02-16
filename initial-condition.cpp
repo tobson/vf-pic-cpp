@@ -9,47 +9,8 @@
 #include "boundaries.h"
 #include "initial-condition.h"
 
+#include <cmath>
 #include <random>
-
-template <typename T> T Sin (T);
-template <> float Sin (float x)
-{
-    return sinf (x);
-}
-template <> double Sin (double x)
-{
-    return sin (x);
-}
-
-template <typename T> T Cos (T);
-template <> float Cos (float x)
-{
-    return cosf (x);
-}
-template <> double Cos (double x)
-{
-    return cos (x);
-}
-
-template <typename T> T Atan2 (T, T);
-template <> float Atan2 (float x, float y)
-{
-    return atan2f (x, y);
-}
-template <> double Atan2 (double x, double y)
-{
-    return atan2 (x, y);
-}
-
-template <typename T> T Sqrt (T);
-template <> float Sqrt (float x)
-{
-    return sqrtf (x);
-}
-template <> double Sqrt (double x)
-{
-    return sqrt (x);
-}
 
 void initialCondition (GlobalVariables<real> *global)
 {
@@ -73,13 +34,13 @@ void initialCondition (GlobalVariables<real> *global)
     
     const real k2 = kx*kx + kz*kz;
     
-    const real angle = Atan2 (kx, kz);
+    const real angle = atan2 (kx, kz);
     
     const real Omegac = em*B0;
     
     const real kvA2 = k2*vA2;
     
-    const real omega = (0.5*kvA2/Omegac)*(Sqrt(1.0 + 4.0*Omegac*Omegac/kvA2) + 1.0);
+    const real omega = (0.5*kvA2/Omegac)*(sqrt(1.0 + 4.0*Omegac*Omegac/kvA2) + 1.0);
     
     for (auto p = particles.begin (); p != particles.end (); ++p)
     {
@@ -99,9 +60,9 @@ void initialCondition (GlobalVariables<real> *global)
         {
             const real phi = kx*p->x + kz*p->z + 0.5*omega*dt;
             
-            p->vx -= ampl*fac*Sin (phi)*Cos (angle);
-            p->vy -= ampl*fac*Cos (phi);
-            p->vz += ampl*fac*Sin (phi)*Sin (angle);
+            p->vx -= ampl*fac*sin (phi)*cos (angle);
+            p->vy -= ampl*fac*cos (phi);
+            p->vz += ampl*fac*sin (phi)*sin (angle);
         }
     }
     
@@ -113,9 +74,9 @@ void initialCondition (GlobalVariables<real> *global)
         {
             const real phi = kx*grid.x (k,i) + kz*grid.z (k,i) + 0.5*omega*dt;
 
-            A.x (k,i) += ampl*Sin (phi)*Cos (angle);
-            A.y (k,i) += ampl*Cos (phi);
-            A.z (k,i) -= ampl*Sin (phi)*Sin (angle);
+            A.x (k,i) += ampl*sin (phi)*cos (angle);
+            A.y (k,i) += ampl*cos (phi);
+            A.z (k,i) -= ampl*sin (phi)*sin (angle);
         }
         A /= omega;
     }
@@ -133,9 +94,9 @@ void initialCondition (GlobalVariables<real> *global)
         {
             const real phi = kx*grid.x (k,i) + kz*grid.z (k,i);
 
-            E.x (k,i) += ampl*Cos(phi)*Cos(angle);
-            E.y (k,i) -= ampl*Sin(phi);
-            E.z (k,i) -= ampl*Cos(phi)*Sin(angle);
+            E.x (k,i) += ampl*cos(phi)*cos(angle);
+            E.y (k,i) -= ampl*sin(phi);
+            E.z (k,i) -= ampl*cos(phi)*sin(angle);
         }
     }
     boundaryCondition (E);
