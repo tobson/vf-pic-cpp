@@ -15,6 +15,8 @@
 #include "three-vector.h"
 #include "vector-field.h"
 
+#include <fstream>
+
 template <typename T>
 struct GlobalVariables
 {
@@ -24,6 +26,7 @@ struct GlobalVariables
     NewGlobalScalarField<T> rho; NewGlobalVectorField<T> ruu;
     Vector<T> B0;
     Grid grid;
+    std::ofstream datafile;
 };
 
 #endif

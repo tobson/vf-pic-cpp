@@ -20,6 +20,7 @@
 		D24BC37016B64B1A006C64A3 /* barrier.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D28BAF1816B60B3800578956 /* barrier.cpp */; };
 		D24BC37A16B64B92006C64A3 /* jacobi.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D24BC37916B64B92006C64A3 /* jacobi.cpp */; };
 		D25C8DB416B89B6600B0A607 /* grid.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D25C8DB216B89B6600B0A607 /* grid.cpp */; };
+		D270B39E16CEDC1B00DFCE2F /* output.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D270B39C16CEDC1B00DFCE2F /* output.cpp */; };
 		D28BAEFF16B5FD0200578956 /* global.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D28BAEFD16B5FD0200578956 /* global.cpp */; };
 		D28BAF0216B5FDDA00578956 /* config.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D28BAF0016B5FDDA00578956 /* config.cpp */; };
 		D28BAF0A16B604B900578956 /* global.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D28BAEFD16B5FD0200578956 /* global.cpp */; };
@@ -96,6 +97,8 @@
 		D25C8DB316B89B6600B0A607 /* grid.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = grid.h; sourceTree = "<group>"; };
 		D270B39716CCCE8A00DFCE2F /* variables.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = variables.h; sourceTree = "<group>"; };
 		D270B39816CDE6AD00DFCE2F /* three-vector.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "three-vector.h"; sourceTree = "<group>"; };
+		D270B39C16CEDC1B00DFCE2F /* output.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = output.cpp; sourceTree = "<group>"; };
+		D270B39D16CEDC1B00DFCE2F /* output.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = output.h; sourceTree = "<group>"; };
 		D28BAEFB16B5FB4500578956 /* param.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = param.h; sourceTree = "<group>"; };
 		D28BAEFD16B5FD0200578956 /* global.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = global.cpp; sourceTree = "<group>"; };
 		D28BAEFE16B5FD0200578956 /* global.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = global.h; sourceTree = "<group>"; };
@@ -178,6 +181,7 @@
 				D2C6828816BB9CAC0023FB36 /* kick.cpp */,
 				D2915FC816B5F7FE0084A612 /* main.cpp */,
 				D206FBFB16C1C31C008BD080 /* ohm.cpp */,
+				D270B39C16CEDC1B00DFCE2F /* output.cpp */,
 				D20381A216BCF25A008755DC /* sse.cpp */,
 				D28BAF1416B604F200578956 /* test.cpp */,
 				D2E0963716BF83E8003AA5DA /* libconfig++.9.dylib */,
@@ -194,6 +198,7 @@
 				D2C6828916BB9CAC0023FB36 /* kick.h */,
 				D206FC0116C3539F008BD080 /* math-helpers.h */,
 				D206FBFC16C1C31C008BD080 /* ohm.h */,
+				D270B39D16CEDC1B00DFCE2F /* output.h */,
 				D28BAEFB16B5FB4500578956 /* param.h */,
 				D2F90E5216B748E900ABDA86 /* particles.h */,
 				D28BAF0616B601AB00578956 /* scalar-field.h */,
@@ -371,6 +376,7 @@
 				D206FC0416C62E3D008BD080 /* faraday.cpp in Sources */,
 				D206FC0E16CA13A2008BD080 /* initial-condition.cpp in Sources */,
 				D206FC1216CA14D3008BD080 /* drift.cpp in Sources */,
+				D270B39E16CEDC1B00DFCE2F /* output.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

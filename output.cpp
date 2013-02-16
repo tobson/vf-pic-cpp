@@ -1,0 +1,60 @@
+//
+//  output.cpp
+//  vf-pic
+//
+//  Created by Tobias Heinemann on 2/15/13.
+//  Copyright (c) 2013 Tobias Heinemann. All rights reserved.
+//
+
+#include "boundaries.h"
+#include "deposit.h"
+#include "diffops.h"
+#include "faraday.h"
+#include "kick.h"
+#include "ohm.h"
+#include "output.h"
+
+void output (GlobalVariables<real>& global, Barrier& barrier, const long long it, const int ithread)
+{
+    using config::dt;
+
+    const LocalVectorFieldView<real> A (global.A, ithread);
+    const LocalVectorFieldView<real> E (global.E, ithread);
+    const LocalParticlesView<real> particles (global.particles, ithread);
+
+    LocalVectorFieldView<real> A2 (global.A2, ithread);
+    LocalParticlesView<real> particles2 (global.particles2, ithread);
+
+//    NewLocalVectorField<real> D, D2;
+//    NewLocalVectorField<real> H, H2;
+//    NewLocalVectorField<real> J;
+
+    LocalVectorFieldView<real> B (global.B, ithread);
+
+    LocalScalarFieldView<real> rho (global.rho, ithread);
+    LocalVectorFieldView<real> ruu (global.ruu, ithread);
+
+    BoundaryCondition<real> boundaryCondition (barrier, ithread);
+    Deposit<real,vfpic::mpar> deposit (barrier, ithread);
+//    Ohm<real,vfpic::mz,vfpic::mx> ohm;
+
+    A2 = A;
+    faraday (&A2, E, 0.5*dt);
+    boundaryCondition (A2);
+    curl (A2, &B); B += global.B0;
+    particles2 = particles;
+    kick (global.E, global.B, &particles2, 0.5*dt);
+    deposit (particles2, &global.rho, &global.ruu);
+
+    std::ostream& os = global.datafile;
+
+    if (barrier.wait ())
+    {
+        os << global.A2 << global.B << global.E;
+        os << global.particles2;
+        os << global.rho << global.ruu;
+        os << global.grid;
+        os.write (reinterpret_cast<const char *> (&it), sizeof (long long));
+    }
+    barrier.wait ();
+}
