@@ -69,16 +69,17 @@ void initialCondition (GlobalVariables<real> *global)
     A = real (0);
     if (ampl > 0.0)
     {
+        const real fac = ampl/omega;
+        
         for (int k = 1; k <= nz; ++k)
         for (int i = 1; i <= nx; ++i)
         {
             const real phi = kx*grid.x (k,i) + kz*grid.z (k,i) + 0.5*omega*dt;
 
-            A.x (k,i) += ampl*sin (phi)*cos (angle);
-            A.y (k,i) += ampl*cos (phi);
-            A.z (k,i) -= ampl*sin (phi)*sin (angle);
+            A.x (k,i) += fac*sin (phi)*cos (angle);
+            A.y (k,i) += fac*cos (phi);
+            A.z (k,i) -= fac*sin (phi)*sin (angle);
         }
-        A /= omega;
     }
     boundaryCondition (A);
 
