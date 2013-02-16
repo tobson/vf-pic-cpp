@@ -162,6 +162,8 @@ namespace config
             throw;
         }
 
+        input.setAutoConvert (true);
+
         /* Grid */
         readVariable ("x0", x0);
         readVariable ("z0", z0);
