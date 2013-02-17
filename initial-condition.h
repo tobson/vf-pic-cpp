@@ -11,6 +11,6 @@
 
 #include "variables.h"
 
-void initialCondition (GlobalVariables<real>*);
+void initialCondition (GlobalVariables*);
 
 #endif /* defined(__vf_pic__initial_condition__) */

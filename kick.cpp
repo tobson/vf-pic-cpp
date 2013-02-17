@@ -11,20 +11,20 @@
 
 using namespace vfpic;
 
-template <typename T, int Np>
-void kick (const GlobalVectorField<T>& E,
-           const GlobalVectorField<T>& B,
-           Particles<T,Np> *particles, const real dt)
+template <int Np>
+void kick (const GlobalVectorField<real>& E,
+           const GlobalVectorField<real>& B,
+           Particles<Np> *particles, const real dt)
 {
     using namespace config;
     
-    const T half = T (0.5);
-    const T one = T (1);
-    const T two = T (2);
-    
+    const real half = 0.5;
+    const real one = 1.0;
+    const real two = 2.0;
+
     const real emdt2 = half*em*dt;
 
-    Particle<T> *p = particles->begin ();
+    Particle *p = particles->begin ();
 
     for (int dummy = 0; dummy < Np; ++dummy)
     {
@@ -82,5 +82,5 @@ void kick (const GlobalVectorField<T>& E,
 /* Explicit instantiation */
 template void kick (const GlobalVectorField<real>&,
                     const GlobalVectorField<real>&,
-                    Particles<real,mpar>*, const real);
+                    Particles<mpar>*, const real);
 

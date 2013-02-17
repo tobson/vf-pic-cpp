@@ -8,17 +8,18 @@
 
 #include "ohm.h"
 
-template <typename T, int Nz, int Nx>
-void Ohm<T,Nz,Nx>::operator() (const VectorField<T,Nz,Nx>& B,
-                               const VectorField<T,Nz,Nx>& J,
-                               const ScalarField<T,Nz,Nx>& rho,
-                               const VectorField<T,Nz,Nx>& ruu,
-                               VectorField<T,Nz,Nx>* E)
+template <int Nz, int Nx>
+void Ohm<Nz,Nx>::operator() (const VectorField<real,Nz,Nx>& B,
+                             const VectorField<real,Nz,Nx>& J,
+                             const ScalarField<real,Nz,Nx>& rho,
+                             const VectorField<real,Nz,Nx>& ruu,
+                             VectorField<real,Nz,Nx>* E)
 {
-    const T me = 1.0/config::em;
+    const real me = 1.0/config::em;
     
     for (int j = 0; j < 3; ++j)
     {
+        
         for (int k = 1; k <= Nz; ++k)
         for (int i = 1; i <= Nx; ++i)
         {
@@ -35,4 +36,4 @@ void Ohm<T,Nz,Nx>::operator() (const VectorField<T,Nz,Nx>& B,
     }
 }
 
-template class Ohm<real,vfpic::mz,vfpic::mx>;
+template class Ohm<vfpic::mz,vfpic::mx>;

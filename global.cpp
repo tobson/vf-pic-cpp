@@ -11,16 +11,16 @@
 
 namespace vfpic
 {
-static_assert (nz % nthreads == 0, "");
-static_assert (npar % nthreads == 0, "");
+    static_assert (nz % nthreads == 0, "");
+    static_assert (npar % nthreads == 0, "");
 
-real dx, dz;
+    real dx, dz;
 
-void computeVariables ()
-{
-    using namespace config;
-    
-    dx = Lx/real (nx);
-    dz = Lz/real (nz);
-}
+    void computeVariables ()
+    {
+        using namespace config;
+        
+        dx = Lx/real (nx);
+        dz = Lz/real (nz);
+    }
 }

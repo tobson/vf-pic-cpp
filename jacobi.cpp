@@ -138,7 +138,7 @@ void iterationThread (Fields &fields, const int niter, const int ithread, Barrie
     const real dz12 = real (1)/(vfpic::dz*vfpic::dz);
     const real fac = real (0.5)/(dx12 + dz12);
     
-    BoundaryCondition<real> boundaryCondition (barrier, ithread);
+    BoundaryCondition boundaryCondition (barrier, ithread);
 
     const LocalScalarFieldView<real> rho (fields.rho, ithread);
 

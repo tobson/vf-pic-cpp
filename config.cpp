@@ -64,8 +64,8 @@ namespace config
         output.getRoot ().add (name, Setting::TypeString) = value.c_str ();
     }
 
-    template <typename T, unsigned long N>
-    void readVariable (const std::string& name, std::array<T,N>& array)
+    template <unsigned long N>
+    void readVariable (const std::string& name, std::array<real,N>& array)
     {
         if (input.exists (name))
         {
@@ -89,7 +89,7 @@ namespace config
                 throw;
             }
             Setting& setting = output.getRoot ().add (name, Setting::TypeArray);
-            for (int n = 0; n < N; ++n) setting.add (TypeMap<T>::type) = array[n];
+            for (int n = 0; n < N; ++n) setting.add (TypeMap<real>::type) = array[n];
         }
     }
     

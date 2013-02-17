@@ -19,24 +19,24 @@ barrier (barrier), ithread (ithread)
 {
 }
 
-void Output::operator() (GlobalVariables<real>& global, const long long it)
+void Output::operator() (GlobalVariables& global, const long long it)
 {
     using config::dt;
 
     const LocalVectorFieldView<real> A (global.A, ithread);
     const LocalVectorFieldView<real> E (global.E, ithread);
-    const LocalParticlesView<real> particles (global.particles, ithread);
+    const LocalParticlesView particles (global.particles, ithread);
 
     LocalVectorFieldView<real> A2 (global.A2, ithread);
-    LocalParticlesView<real> particles2 (global.particles2, ithread);
+    LocalParticlesView particles2 (global.particles2, ithread);
     
     LocalVectorFieldView<real> B (global.B, ithread);
 
     LocalScalarFieldView<real> rho (global.rho, ithread);
     LocalVectorFieldView<real> ruu (global.ruu, ithread);
 
-    BoundaryCondition<real> boundaryCondition (barrier, ithread);
-    Deposit<real,vfpic::mpar> deposit (barrier, ithread);
+    BoundaryCondition boundaryCondition (barrier, ithread);
+    Deposit<vfpic::mpar> deposit (barrier, ithread);
     
     A2 = A;
     faraday (&A2, E, 0.5*dt);

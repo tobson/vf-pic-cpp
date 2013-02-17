@@ -16,7 +16,7 @@ class Output
 {
 public:
     Output (Barrier& barrier, const int);
-    void operator() (GlobalVariables<real>&, const long long);
+    void operator() (GlobalVariables&, const long long);
 private:
     Barrier& barrier;
     const int ithread;

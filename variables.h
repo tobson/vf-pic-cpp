@@ -17,14 +17,13 @@
 
 #include <fstream>
 
-template <typename T>
 struct GlobalVariables
 {
-    NewGlobalVectorField<T> A, A2;
-    NewGlobalParticles<T> particles, particles2;
-    NewGlobalVectorField<T> E, B;
-    NewGlobalScalarField<T> rho; NewGlobalVectorField<T> ruu;
-    Vector<T> B0;
+    NewGlobalVectorField<real> A, A2;
+    NewGlobalParticles particles, particles2;
+    NewGlobalVectorField<real> E, B;
+    NewGlobalScalarField<real> rho; NewGlobalVectorField<real> ruu;
+    Vector<real> B0;
     Grid grid;
     std::ofstream datafile;
 };

@@ -8,10 +8,10 @@
 
 #include "faraday.h"
 
-template<typename T, int Nz, int Nx>
-void faraday (VectorField<T,Nz,Nx>* pA, const VectorField<T,Nz,Nx>& E, const real dt)
+template<int Nz, int Nx>
+void faraday (VectorField<real,Nz,Nx>* pA, const VectorField<real,Nz,Nx>& E, const real dt)
 {
-    VectorField<T,Nz,Nx>& A = *pA;
+    VectorField<real,Nz,Nx>& A = *pA;
     
     for (int j = 0; j < 3; ++j)
     {

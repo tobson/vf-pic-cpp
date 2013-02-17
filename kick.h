@@ -12,8 +12,8 @@
 #include "particles.h"
 #include "vector-field.h"
 
-template <typename T, int Np>
-void kick (const GlobalVectorField<T>&, const GlobalVectorField<T>&,
-           Particles<T,Np>*, const real);
+template <int Np>
+void kick (const GlobalVectorField<real>&, const GlobalVectorField<real>&,
+           Particles<Np>*, const real);
 
 #endif /* defined(__vf_pic__drift_kick__) */

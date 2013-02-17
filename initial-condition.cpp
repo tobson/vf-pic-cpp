@@ -12,7 +12,7 @@
 #include <cmath>
 #include <random>
 
-void initialCondition (GlobalVariables<real> *global)
+void initialCondition (GlobalVariables *global)
 {
     using namespace config;
     using namespace vfpic;
@@ -25,7 +25,7 @@ void initialCondition (GlobalVariables<real> *global)
     
     GlobalVectorField<real>& A = global->A;
     GlobalVectorField<real>& E = global->E;
-    GlobalParticles<real>& particles = global->particles;
+    GlobalParticles& particles = global->particles;
 
     const real vA2 = B0*B0/rho0;
     

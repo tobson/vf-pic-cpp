@@ -11,10 +11,10 @@
 
 using namespace vfpic;
 
-template <typename T, int Np>
-void drift (Particles<T,Np> *particles, const real dt)
+template <int Np>
+void drift (Particles<Np> *particles, const real dt)
 {
-    Particle<T> *p = particles->begin ();
+    Particle *p = particles->begin ();
     
     for (int dummy = 0; dummy < Np; ++dummy)
     {
@@ -27,4 +27,4 @@ void drift (Particles<T,Np> *particles, const real dt)
     boundaryCondition (particles);
 }
 
-template void drift (Particles<real,mpar>*, const real);
+template void drift (Particles<mpar>*, const real);

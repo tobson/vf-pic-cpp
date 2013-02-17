@@ -14,22 +14,22 @@
 #include "scalar-field.h"
 #include "vector-field.h"
 
-template <typename T, int Np>
+template <int Np>
 class Deposit
 {
 public:
     Deposit (Barrier&, const int);
-    void operator() (const Particles<T,Np>&,
-                     GlobalScalarField<T>*,
-                     GlobalVectorField<T>*);
+    void operator() (const Particles<Np>&,
+                     GlobalScalarField<real>*,
+                     GlobalVectorField<real>*);
 private:
     void addGhosts ();
-    void convert (GlobalScalarField<T>*,
-                  GlobalVectorField<T>*);
+    void convert (GlobalScalarField<real>*,
+                  GlobalVectorField<real>*);
     struct FourMomentum
     {
-        T rho, rux, ruy, ruz;
-        void accumulate (const T&, T&&, T&&, T&&);
+        real rho, rux, ruy, ruz;
+        void accumulate (const real&, real&&, real&&, real&&);
         void operator+= (const FourMomentum&);
     };
     Barrier& barrier;

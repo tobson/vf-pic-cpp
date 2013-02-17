@@ -14,34 +14,29 @@
 #include "scalar-field.h"
 #include "vector-field.h"
 
-template <typename T, int Nz, int Nx>
-void boundaryConditionX (ScalarField<T,Nz,Nx>&);
-template <typename T, int Nz, int Nx>
-void boundaryConditionX (VectorField<T,Nz,Nx>&);
+template <int Nz, int Nx>
+void boundaryConditionX (ScalarField<real,Nz,Nx>&);
+template <int Nz, int Nx>
+void boundaryConditionX (VectorField<real,Nz,Nx>&);
 
-template <typename T>
-void boundaryConditionZ (GlobalScalarField<T>&);
-template <typename T>
-void boundaryConditionZ (GlobalVectorField<T>&);
+void boundaryConditionZ (GlobalScalarField<real>&);
+void boundaryConditionZ (GlobalVectorField<real>&);
 
-template <typename T>
-void boundaryCondition (GlobalScalarField<T>&);
-template <typename T>
-void boundaryCondition (GlobalVectorField<T>&);
+void boundaryCondition (GlobalScalarField<real>&);
+void boundaryCondition (GlobalVectorField<real>&);
 
-template <typename T>
 class BoundaryCondition
 {
 public:
     BoundaryCondition (Barrier&, const int);
-    void operator() (GlobalScalarField<T>&);
-    void operator() (GlobalVectorField<T>&);
+    void operator() (GlobalScalarField<real>&);
+    void operator() (GlobalVectorField<real>&);
 private:
     Barrier& barrier;
     const int ithread;
 };
 
-template <typename T, int N>
-void boundaryCondition (Particles<T,N>*);
+template <int N>
+void boundaryCondition (Particles<N>*);
 
 #endif /* defined(__vf_pic__boundaries__) */

@@ -11,7 +11,7 @@
 
 #include "vector-field.h"
 
-template<typename T, int Nz, int Nx>
-void faraday (VectorField<T,Nz,Nx>*, const VectorField<T,Nz,Nx>&, const real);
+template<int Nz, int Nx>
+void faraday (VectorField<real,Nz,Nx>*, const VectorField<real,Nz,Nx>&, const real);
 
 #endif

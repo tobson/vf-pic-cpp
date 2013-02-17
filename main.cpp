@@ -33,16 +33,7 @@
 #include <thread>
 #include <vector>
 
-//template <typename T>
-//struct GlobalVariables
-//{
-//    NewGlobalVectorField<T> A, A2;
-//    NewGlobalParticles<T> particles, particles2;
-//    NewGlobalVectorField<T> E, B;
-//    NewGlobalScalarField<T> rho; NewGlobalVectorField<T> ruu;
-//};
-
-void iteration (GlobalVariables<real>& global, Barrier& barrier, const int ithread)
+void iteration (GlobalVariables& global, Barrier& barrier, const int ithread)
 {
     using config::dt;
     using config::nt;
@@ -58,8 +49,8 @@ void iteration (GlobalVariables<real>& global, Barrier& barrier, const int ithre
     LocalScalarFieldView<real> rho (global.rho, ithread);
     LocalVectorFieldView<real> ruu (global.ruu, ithread);
 
-    LocalParticlesView<real> particles  (global.particles , ithread);
-    LocalParticlesView<real> particles2 (global.particles2, ithread);
+    LocalParticlesView particles  (global.particles , ithread);
+    LocalParticlesView particles2 (global.particles2, ithread);
 
     /* These variables don't need to be global */
     NewLocalVectorField<real> D, D2;
@@ -67,10 +58,10 @@ void iteration (GlobalVariables<real>& global, Barrier& barrier, const int ithre
     NewLocalVectorField<real> J;
 
     /* Construct function objects */
-    BoundaryCondition<real> boundCond (barrier, ithread);
-    Deposit<real,vfpic::mpar> deposit (barrier, ithread);
+    BoundaryCondition boundCond (barrier, ithread);
+    Deposit<vfpic::mpar> deposit (barrier, ithread);
     Output output (barrier, ithread);
-    Ohm<real,vfpic::mz,vfpic::mx> ohm;
+    Ohm<vfpic::mz,vfpic::mx> ohm;
     
     curl (A, &H2); H2 += global.B0;
 
@@ -190,7 +181,7 @@ int main (int argc, const char * argv[])
     }
     
     Barrier barrier (vfpic::nthreads);
-    GlobalVariables<real> global;
+    GlobalVariables global;
 
     global.datafile.open (srcdir + "/var.dat");
     

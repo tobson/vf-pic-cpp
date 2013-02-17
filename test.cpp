@@ -63,8 +63,8 @@ int main(int argc, const char * argv[])
 
     if (false)
     {
-        NewGlobalParticles<float> a,b;
-        std::vector<LocalParticlesView<float>> vec;
+        NewGlobalParticles a,b;
+        std::vector<LocalParticlesView> vec;
 //        vec.push_back (LocalParticlesView<float> (a,0));
 //        vec.push_back (LocalParticlesView<float> (b,0));
     }

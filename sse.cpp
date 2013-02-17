@@ -100,6 +100,14 @@ int main (int argc, const char * argv[])
 {
     config::verbose = true;
 
+    int pansen = 7;
+    struct
+    {
+        int *edleff;
+    } global;
+    global.edleff = &pansen;
+    printf ("edleff = %d\n", *global.edleff);
+
     NewGlobalVectorField<real> a;
     
     VecField3<real,vfpic::mz,vfpic::mx> v1, v2;

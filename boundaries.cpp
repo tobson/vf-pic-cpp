@@ -10,8 +10,8 @@
 
 using namespace vfpic;
 
-template <typename T, int Nz, int Nx>
-void boundaryConditionX (ScalarField<T,Nz,Nx>& scalar)
+template <int Nz, int Nx>
+void boundaryConditionX (ScalarField<real,Nz,Nx>& scalar)
 {
     for (int k = 1; k <= Nz; ++k)
     {
@@ -20,16 +20,15 @@ void boundaryConditionX (ScalarField<T,Nz,Nx>& scalar)
     }
 }
 
-template <typename T, int Nz, int Nx>
-void boundaryConditionX (VectorField<T,Nz,Nx>& vector)
+template <int Nz, int Nx>
+void boundaryConditionX (VectorField<real,Nz,Nx>& vector)
 {
     boundaryConditionX (vector.x);
     boundaryConditionX (vector.y);
     boundaryConditionX (vector.z);
 }
 
-template <typename T>
-void boundaryConditionZ (GlobalScalarField<T>& scalar)
+void boundaryConditionZ (GlobalScalarField<real>& scalar)
 {
     for (int i = 0; i < nx+2; ++i)
     {
@@ -38,38 +37,33 @@ void boundaryConditionZ (GlobalScalarField<T>& scalar)
     }
 }
 
-template <typename T>
-void boundaryConditionZ (GlobalVectorField<T>& vector)
+void boundaryConditionZ (GlobalVectorField<real>& vector)
 {
     boundaryConditionZ (vector.x);
     boundaryConditionZ (vector.y);
     boundaryConditionZ (vector.z);
 }
 
-template <typename T>
-void boundaryCondition (GlobalScalarField<T>& scalar)
+void boundaryCondition (GlobalScalarField<real>& scalar)
 {
     boundaryConditionX (scalar);
     boundaryConditionZ (scalar);
 }
 
-template <typename T>
-void boundaryCondition (GlobalVectorField<T>& vector)
+void boundaryCondition (GlobalVectorField<real>& vector)
 {
     boundaryConditionX (vector);
     boundaryConditionZ (vector);
 }
 
-template <typename T>
-BoundaryCondition<T>::BoundaryCondition (Barrier& barrier, const int ithread):
+BoundaryCondition::BoundaryCondition (Barrier& barrier, const int ithread):
 barrier (barrier), ithread (ithread)
 {
 }
 
-template <typename T>
-void BoundaryCondition<T>::operator() (GlobalScalarField<T>& global)
+void BoundaryCondition::operator() (GlobalScalarField<real>& global)
 {
-    LocalScalarFieldView<T> local (global, ithread);
+    LocalScalarFieldView<real> local (global, ithread);
     boundaryConditionX (local);
     if (barrier.wait ())
     {
@@ -78,10 +72,9 @@ void BoundaryCondition<T>::operator() (GlobalScalarField<T>& global)
     barrier.wait ();
 }
 
-template <typename T>
-void BoundaryCondition<T>::operator() (GlobalVectorField<T>& global)
+void BoundaryCondition::operator() (GlobalVectorField<real>& global)
 {
-    LocalVectorFieldView<T> local (global, ithread);
+    LocalVectorFieldView<real> local (global, ithread);
     boundaryConditionX (local);
     if (barrier.wait ())
     {
@@ -90,15 +83,15 @@ void BoundaryCondition<T>::operator() (GlobalVectorField<T>& global)
     barrier.wait ();
 }
 
-template <typename T, int N>
-void boundaryCondition (Particles<T,N> *particles)
+template <int N>
+void boundaryCondition (Particles<N> *particles)
 {
     using namespace config;
     
-    const T Lx1 = 1.0/Lx;
-    const T Lz1 = 1.0/Lz;
+    const real Lx1 = 1.0/Lx;
+    const real Lz1 = 1.0/Lz;
     
-    Particle<T> *p = particles->begin ();
+    Particle *p = particles->begin ();
     
     for (int dummy = 0; dummy < N; ++dummy)
     {
@@ -113,12 +106,6 @@ void boundaryCondition (Particles<T,N> *particles)
 
 template void boundaryConditionX (ScalarField<real,mz,mx>&);
 template void boundaryConditionX (VectorField<real,mz,mx>&);
-template void boundaryConditionZ (GlobalScalarField<real>&);
-template void boundaryConditionZ (GlobalVectorField<real>&);
-template void boundaryCondition (GlobalScalarField<real>&);
-template void boundaryCondition (GlobalVectorField<real>&);
 
-template class BoundaryCondition<real>;
-
-template void boundaryCondition (Particles<real,mpar>*);
+template void boundaryCondition (Particles<mpar>*);
 

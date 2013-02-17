@@ -10,34 +10,34 @@
 
 using namespace vfpic;
 
-template <typename T, int Np>
-Deposit<T,Np>::Deposit (Barrier& barrier, const int ithread):
+template <int Np>
+Deposit<Np>::Deposit (Barrier& barrier, const int ithread):
 barrier (barrier), ithread (ithread),
-norm (config::rho0/T (vfpic::npc))
+norm (config::rho0/real (vfpic::npc))
 {
 }
 
-template <typename T, int Np>
-void Deposit<T,Np>::operator() (const Particles<T,Np>& particles,
-                                      GlobalScalarField<T> *rho,
-                                      GlobalVectorField<T> *ruu)
+template <int Np>
+void Deposit<Np>::operator() (const Particles<Np>& particles,
+                              GlobalScalarField<real> *rho,
+                              GlobalVectorField<real> *ruu)
 {
     using namespace config;
 
-    const T zero = T (0);
-    const T one = T (1);
-    const T half = T (0.5);
+    const real zero = 0.0;
+    const real one = 1.0;
+    const real half = 0.5;
     
     static_assert (std::is_pod<FourMomentum>::value, "");
     const FourMomentum fourzero = {zero, zero, zero, zero};
     sources.fill (fourzero);
     
-    const Particle<T> *p = particles.begin ();
+    const Particle *p = particles.begin ();
     
     for (int dummy = 0; dummy < Np; ++dummy)
     {
-        const T xdx = (p->x - x0)/dx + half;
-        const T zdz = (p->z - z0)/dz + half;
+        const real xdx = (p->x - x0)/dx + half;
+        const real zdz = (p->z - z0)/dz + half;
         
         const int i0 (xdx);
         const int k0 (zdz);
@@ -45,13 +45,13 @@ void Deposit<T,Np>::operator() (const Particles<T,Np>& particles,
         const int i1 = i0 + 1;
         const int k1 = k0 + 1;
         
-        const T wx = xdx - T (i0);
-        const T wz = zdz - T (k0);
+        const real wx = xdx - real (i0);
+        const real wz = zdz - real (k0);
         
-        const T w00 = (one - wz)*(one - wx);
-        const T w01 = (one - wz)*       wx ;
-        const T w10 =        wz *(one - wx);
-        const T w11 =        wz *       wx ;
+        const real w00 = (one - wz)*(one - wx);
+        const real w01 = (one - wz)*       wx ;
+        const real w10 =        wz *(one - wx);
+        const real w11 =        wz *       wx ;
         
         sources (k0,i0).accumulate (w00,w00*p->vx,w00*p->vy,w00*p->vz);
         sources (k0,i1).accumulate (w01,w01*p->vx,w01*p->vy,w01*p->vz);
@@ -64,8 +64,8 @@ void Deposit<T,Np>::operator() (const Particles<T,Np>& particles,
     convert (rho, ruu);
 }
 
-template <typename T, int Np>
-void Deposit<T,Np>::addGhosts ()
+template <int Np>
+void Deposit<Np>::addGhosts ()
 {
     for (int i = 0; i < nx+2; ++i)
     {
@@ -79,8 +79,8 @@ void Deposit<T,Np>::addGhosts ()
     }
 }
 
-template <typename T, int Np>
-void Deposit<T,Np>::convert (GlobalScalarField<T> *rho, GlobalVectorField<T> *ruu)
+template <int Np>
+void Deposit<Np>::convert (GlobalScalarField<real> *rho, GlobalVectorField<real> *ruu)
 {
     {
         LocalScalarFieldView<FourMomentum> sources1 (sources, ithread);
@@ -136,9 +136,9 @@ void Deposit<T,Np>::convert (GlobalScalarField<T> *rho, GlobalVectorField<T> *ru
     }
 }
 
-template <typename T, int Np>
-void Deposit<T,Np>::FourMomentum::accumulate
-(const T& _rho, T&& _rux, T&& _ruy, T&& _ruz)
+template <int Np>
+void Deposit<Np>::FourMomentum::accumulate
+(const real& _rho, real&& _rux, real&& _ruy, real&& _ruz)
 {
     rho += _rho;
     rux += _rux;
@@ -146,8 +146,8 @@ void Deposit<T,Np>::FourMomentum::accumulate
     ruz += _ruz;
 }
 
-template <typename T, int Np>
-void Deposit<T,Np>::FourMomentum::operator+= (const FourMomentum& other)
+template <int Np>
+void Deposit<Np>::FourMomentum::operator+= (const FourMomentum& other)
 {
     rho += other.rho;
     rux += other.rux;
@@ -155,4 +155,4 @@ void Deposit<T,Np>::FourMomentum::operator+= (const FourMomentum& other)
     ruz += other.ruz;
 }
 
-template class Deposit<real,vfpic::mpar>;
+template class Deposit<vfpic::mpar>;
