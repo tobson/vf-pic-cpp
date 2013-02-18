@@ -211,19 +211,19 @@ struct ScalarFieldView: public ScalarField<T,N1,N2>
     using ScalarField<T,N1,N2>::operator=;
 };
 
-template <typename T>
+template <typename T = real>
 using GlobalScalarField = ScalarField<T,vfpic::nz,vfpic::nx>;
 
-template <typename T>
+template <typename T = real>
 using LocalScalarField = ScalarField<T,vfpic::mz,vfpic::mx>;
 
-template <typename T>
+template <typename T = real>
 using NewGlobalScalarField = NewScalarField<T,vfpic::nz,vfpic::nx>;
 
-template <typename T>
+template <typename T = real>
 using NewLocalScalarField = NewScalarField<T,vfpic::mz,vfpic::mx>;
 
-template <typename T>
+template <typename T = real>
 using LocalScalarFieldView = ScalarFieldView<T,vfpic::mz,vfpic::mx>;
 
 #endif

@@ -212,19 +212,19 @@ public:
     using Base::operator=;
 };
 
-template <typename T>
+template <typename T = real>
 using GlobalVectorField = VectorField<T,vfpic::nz,vfpic::nx>;
 
-template <typename T>
+template <typename T = real>
 using LocalVectorField = VectorField<T,vfpic::mz,vfpic::mx>;
 
-template <typename T>
+template <typename T = real>
 using NewGlobalVectorField = NewVectorField<T,vfpic::nz,vfpic::nx>;
 
-template <typename T>
+template <typename T = real>
 using NewLocalVectorField = NewVectorField<T,vfpic::mz,vfpic::mx>;
         
-template <typename T>
+template <typename T = real>
 using LocalVectorFieldView = VectorFieldView<T,vfpic::mz,vfpic::mx>;
 
 #endif
