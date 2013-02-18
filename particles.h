@@ -9,13 +9,13 @@
 #ifndef __vf_pic__particle__
 #define __vf_pic__particle__
 
-#include "config.h"
-#include "global.h"
-
 #ifdef DEBUG
 #include <cassert>
 #endif
 #include <iostream>
+
+#include "config.h"
+#include "global.h"
 
 /* Declerations */
 

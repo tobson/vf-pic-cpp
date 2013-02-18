@@ -8,11 +8,10 @@
 
 #include "config.h"
 
-#include "global.h"
-
-#include <libconfig.h++>
 #include <iostream>
+#include <libconfig.h++>
 
+#include "global.h"
 
 namespace config
 {

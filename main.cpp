@@ -6,6 +6,16 @@
 //  Copyright (c) 2013 Tobias Heinemann. All rights reserved.
 //
 
+#include <array>
+#include <cstdio>
+#include <fstream>
+#include <iostream>
+#include <libconfig.h++>
+#include <random>
+#include <stack>
+#include <thread>
+#include <vector>
+
 #include "barrier.h"
 #include "boundaries.h"
 #include "config.h"
@@ -22,16 +32,6 @@
 #include "particles.h"
 #include "variables.h"
 #include "vector-field.h"
-
-#include <array>
-#include <cstdio>
-#include <fstream>
-#include <iostream>
-#include <libconfig.h++>
-#include <random>
-#include <stack>
-#include <thread>
-#include <vector>
 
 void iteration (GlobalVariables& global, Barrier& barrier, const int ithread)
 {

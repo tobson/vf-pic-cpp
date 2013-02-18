@@ -6,11 +6,12 @@
 //  Copyright (c) 2013 Tobias Heinemann. All rights reserved.
 //
 
-#include "boundaries.h"
 #include "initial-condition.h"
 
 #include <cmath>
 #include <random>
+
+#include "boundaries.h"
 
 void initialCondition (GlobalVariables *global)
 {
@@ -42,16 +43,22 @@ void initialCondition (GlobalVariables *global)
     
     const real omega = (0.5*kvA2/Omegac)*(sqrt(1.0 + 4.0*Omegac*Omegac/kvA2) + 1.0);
     
-    for (auto p = particles.begin (); p != particles.end (); ++p)
+    for (int n = 0; n < npar; ++n)
     {
         // Use angle here so that 1D in x is exactly the same as 1D in z
         // Also try uniform grid in particle space
-        p->x = x0 + uniform (gen)*Lx;
-        p->z = z0 + uniform (gen)*Lz;
-        
-        p->vx = cs0*normal (gen);
-        p->vy = cs0*normal (gen);
-        p->vz = cs0*normal (gen);
+//        p->x = x0 + uniform (gen)*Lx;
+//        p->z = z0 + uniform (gen)*Lz;
+
+//        particles[n].x = x0 + (real (n) - 0.5)*Lx/real (npar);
+//        particles[n].z = 0.0;
+
+        particles[n].x = 0.0;
+        particles[n].z = z0 + (real (n) - 0.5)*Lz/real (npar);
+
+        particles[n].vx = cs0*normal (gen);
+        particles[n].vy = cs0*normal (gen);
+        particles[n].vz = cs0*normal (gen);
     }
     
     if (ampl > 0.0)

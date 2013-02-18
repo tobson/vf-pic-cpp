@@ -9,11 +9,11 @@
 #ifndef vf_pic_vector_field_h
 #define vf_pic_vector_field_h
 
-#include "scalar-field.h"
-#include "three-vector.h"
-
 #include <memory>
 #include <vector>
+
+#include "scalar-field.h"
+#include "three-vector.h"
 
 /* Decleration */
 

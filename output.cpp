@@ -6,13 +6,14 @@
 //  Copyright (c) 2013 Tobias Heinemann. All rights reserved.
 //
 
+#include "output.h"
+
 #include "boundaries.h"
 #include "deposit.h"
 #include "diffops.h"
 #include "faraday.h"
 #include "kick.h"
 #include "ohm.h"
-#include "output.h"
 
 Output::Output (Barrier& barrier, const int ithread):
 barrier (barrier), ithread (ithread)

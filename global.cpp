@@ -6,8 +6,9 @@
 //  Copyright (c) 2013 Tobias Heinemann. All rights reserved.
 //
 
-#include "config.h"
 #include "global.h"
+
+#include "config.h"
 
 namespace vfpic
 {

@@ -9,9 +9,9 @@
 #ifndef __vf_pic__global__
 #define __vf_pic__global__
 
-#include "param.h"
-
 #include <cmath>
+
+#include "param.h"
 
 const real pi = real (4)*atan (real (1));
 

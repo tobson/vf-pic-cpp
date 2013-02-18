@@ -6,8 +6,9 @@
 //  Copyright (c) 2013 Tobias Heinemann. All rights reserved.
 //
 
-#include "boundaries.h"
 #include "drift.h"
+
+#include "boundaries.h"
 
 using namespace vfpic;
 

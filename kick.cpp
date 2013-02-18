@@ -7,6 +7,7 @@
 //
 
 #include "kick.h"
+
 #include "global.h"
 
 using namespace vfpic;

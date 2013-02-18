@@ -6,8 +6,9 @@
 //  Copyright (c) 2013 Tobias Heinemann. All rights reserved.
 //
 
-#include "config.h"
 #include "grid.h"
+
+#include "config.h"
 
 Grid::Grid ()
 {

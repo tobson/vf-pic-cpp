@@ -9,10 +9,10 @@
 #ifndef __vf_pic__config__
 #define __vf_pic__config__
 
-#include "param.h"
-
 #include <array>
 #include <string>
+
+#include "param.h"
 
 namespace config
 {

@@ -9,13 +9,13 @@
 #ifndef vf_pic_variables_h
 #define vf_pic_variables_h
 
+#include <fstream>
+
 #include "grid.h"
 #include "particles.h"
 #include "scalar-field.h"
 #include "three-vector.h"
 #include "vector-field.h"
-
-#include <fstream>
 
 struct GlobalVariables
 {

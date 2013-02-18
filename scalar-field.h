@@ -9,15 +9,15 @@
 #ifndef vf_pic_scalar_field_h
 #define vf_pic_scalar_field_h
 
-#include "config.h"
-#include "global.h"
-
 #include <algorithm>
 #include <cstdio>
 #ifdef DEBUG
 #include <cassert>
 #endif
 #include <iostream>
+
+#include "config.h"
+#include "global.h"
 
 /* Declerations */
 
