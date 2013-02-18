@@ -40,7 +40,7 @@ void Output::operator() (GlobalVariables& global, const long long it)
     
     A2 = A;
     faraday (&A2, E, 0.5*dt);
-    boundaryCondition (A2);
+    boundaryCondition (global.A2);
     curl (A2, &B); B += global.B0;
     particles2 = particles;
     kick (global.E, global.B, &particles2, 0.5*dt);
