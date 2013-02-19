@@ -43,24 +43,38 @@ void initialCondition (GlobalVariables *global)
     
     const real omega = (0.5*kvA2/Omegac)*(sqrt(1.0 + 4.0*Omegac*Omegac/kvA2) + 1.0);
     
-    for (int n = 0; n < npar; ++n)
+    if (randomizePositions)
     {
-        // Use angle here so that 1D in x is exactly the same as 1D in z
-        // Also try uniform grid in particle space
-//        p->x = x0 + uniform (gen)*Lx;
-//        p->z = z0 + uniform (gen)*Lz;
-
-//        particles[n].x = x0 + (real (n) - 0.5)*Lx/real (npar);
-//        particles[n].z = 0.0;
-
-        particles[n].x = 0.0;
-        particles[n].z = z0 + (real (n) - 0.5)*Lz/real (npar);
-
-        particles[n].vx = cs0*normal (gen);
-        particles[n].vy = cs0*normal (gen);
-        particles[n].vz = cs0*normal (gen);
+        for (Particle *p = particles.begin (); p != particles.end (); ++p)
+        {
+            p->x = x0 + uniform (gen)*Lx;
+            p->z = z0 + uniform (gen)*Lz;
+        }
     }
-    
+    else
+    {
+        int exponent = int (log2 (real (npc)));
+        if (int (pow (2.0, real (exponent))) != npc)
+        {
+            throw std::runtime_error ("'npc' must be a power of two");
+        }
+        const int npx = nx*int (pow (2.0, exponent/2));
+        const int npz = nz*int (pow (2.0, exponent - exponent/2));
+        for (int k = 0; k < npz; ++k)
+        for (int i = 0; i < npx; ++i)
+        {
+            particles[k*npx + i].x = x0 + (real (i) - 0.5)*Lx/real (npx);
+            particles[k*npx + i].z = z0 + (real (k) - 0.5)*Lz/real (npz);
+        }
+    }
+
+    for (Particle *p = particles.begin (); p != particles.end (); ++p)
+    {
+        p->vx = cs0*normal (gen);
+        p->vy = cs0*normal (gen);
+        p->vz = cs0*normal (gen);
+    }
+
     if (ampl > 0.0)
     {
         const real fac = kvA2/(omega*omega*B0);

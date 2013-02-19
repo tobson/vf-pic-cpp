@@ -120,6 +120,7 @@ namespace config
     real brms = 0.0;
     real ampl = 0.0;
     bool randomizeSeed = false;
+    bool randomizePositions = true;
     std::string initcond;
 
     /* Diagnostics and data I/O */
@@ -190,6 +191,7 @@ namespace config
         readVariable ("brms", brms);
         readVariable ("ampl", ampl);
         readVariable ("randomizeSeed", randomizeSeed);
+        readVariable ("randomizePositions", randomizePositions);
         readVariable ("initcond", initcond);
 
         /* Diagnostics and data I/O */

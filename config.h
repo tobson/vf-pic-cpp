@@ -44,6 +44,7 @@ extern real B0;
 extern real brms;
 extern real ampl;
 extern bool randomizeSeed;
+extern bool randomizePositions;
 extern std::string initcond;
 
 /* Diagnostics and data I/O */
