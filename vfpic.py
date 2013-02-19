@@ -78,6 +78,10 @@ class State:
         self.Ay = ScalarField (config)
         self.Az = ScalarField (config)
 
+        self.Ax2 = ScalarField (config)
+        self.Ay2 = ScalarField (config)
+        self.Az2 = ScalarField (config)
+
         self.Bx = ScalarField (config)
         self.By = ScalarField (config)
         self.Bz = ScalarField (config)
@@ -87,6 +91,7 @@ class State:
         self.Ez = ScalarField (config)
 
         self.particles = Particles (config)
+        self.particles2 = Particles (config)
 
         self.rho = ScalarField (config)
 
@@ -111,6 +116,10 @@ class State:
         recordsize += self.Ay.read (f)
         recordsize += self.Az.read (f)
 
+        recordsize += self.Ax2.read (f)
+        recordsize += self.Ay2.read (f)
+        recordsize += self.Az2.read (f)
+
         recordsize += self.Bx.read (f)
         recordsize += self.By.read (f)
         recordsize += self.Bz.read (f)
@@ -121,6 +130,7 @@ class State:
 
         # Read particles
         recordsize += self.particles.read (f)
+        recordsize += self.particles2.read (f)
 
         # Read sources
         recordsize += self.rho.read (f)
