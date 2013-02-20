@@ -29,13 +29,9 @@
 		D28BAF1A16B60B3800578956 /* barrier.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D28BAF1816B60B3800578956 /* barrier.cpp */; };
 		D28BAF1B16B60B3800578956 /* barrier.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D28BAF1816B60B3800578956 /* barrier.cpp */; };
 		D2915FD316B5F8280084A612 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2915FC816B5F7FE0084A612 /* main.cpp */; };
-		D29BF1DC16D42E8A000BD507 /* libconfig++_clang.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D29BF1DA16D42E89000BD507 /* libconfig++_clang.a */; };
 		D29BF1DD16D42E8A000BD507 /* libyaml-cpp_clang.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D29BF1DB16D42E89000BD507 /* libyaml-cpp_clang.a */; };
-		D29BF1DE16D42EEB000BD507 /* libconfig++_clang.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D29BF1DA16D42E89000BD507 /* libconfig++_clang.a */; };
 		D29BF1DF16D42EEB000BD507 /* libyaml-cpp_clang.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D29BF1DB16D42E89000BD507 /* libyaml-cpp_clang.a */; };
-		D29BF1E016D42F28000BD507 /* libconfig++_clang.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D29BF1DA16D42E89000BD507 /* libconfig++_clang.a */; };
 		D29BF1E116D42F28000BD507 /* libyaml-cpp_clang.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D29BF1DB16D42E89000BD507 /* libyaml-cpp_clang.a */; };
-		D29BF1E216D42F54000BD507 /* libconfig++_clang.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D29BF1DA16D42E89000BD507 /* libconfig++_clang.a */; };
 		D29BF1E316D42F54000BD507 /* libyaml-cpp_clang.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D29BF1DB16D42E89000BD507 /* libyaml-cpp_clang.a */; };
 		D2C6828216BB7EB40023FB36 /* boundaries.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2C6828016BB7EB30023FB36 /* boundaries.cpp */; };
 		D2C6828316BB7EB40023FB36 /* boundaries.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2C6828016BB7EB30023FB36 /* boundaries.cpp */; };
@@ -139,7 +135,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D29BF1E216D42F54000BD507 /* libconfig++_clang.a in Frameworks */,
 				D29BF1E316D42F54000BD507 /* libyaml-cpp_clang.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -148,7 +143,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D29BF1E016D42F28000BD507 /* libconfig++_clang.a in Frameworks */,
 				D29BF1E116D42F28000BD507 /* libyaml-cpp_clang.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -157,7 +151,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D29BF1DE16D42EEB000BD507 /* libconfig++_clang.a in Frameworks */,
 				D29BF1DF16D42EEB000BD507 /* libyaml-cpp_clang.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -166,7 +159,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D29BF1DC16D42E8A000BD507 /* libconfig++_clang.a in Frameworks */,
 				D29BF1DD16D42E8A000BD507 /* libyaml-cpp_clang.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -457,10 +449,7 @@
 					/Users/tobi/macports/include,
 					/Users/tobi/local/include,
 				);
-				LIBRARY_SEARCH_PATHS = (
-					/Users/tobi/macports/lib,
-					/Users/tobi/local/lib,
-				);
+				LIBRARY_SEARCH_PATHS = /Users/tobi/local/lib;
 			};
 			name = Debug;
 		};
@@ -481,10 +470,7 @@
 					/Users/tobi/macports/include,
 					/Users/tobi/local/include,
 				);
-				LIBRARY_SEARCH_PATHS = (
-					/Users/tobi/macports/lib,
-					/Users/tobi/local/lib,
-				);
+				LIBRARY_SEARCH_PATHS = /Users/tobi/local/lib;
 			};
 			name = Release;
 		};
