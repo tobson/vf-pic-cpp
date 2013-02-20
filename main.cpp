@@ -8,9 +8,10 @@
 
 #include <array>
 #include <cstdio>
+#include <ctime>
 #include <fstream>
+#include <iomanip>
 #include <iostream>
-#include <libconfig.h++>
 #include <random>
 #include <stack>
 #include <thread>
@@ -164,22 +165,10 @@ int main (int argc, const char * argv[])
     std::string srcdir = ".";
     if (argc > 1) srcdir = argv[1];
 
-    try
-    {
-        config::read (srcdir + "/config.in");
-        vfpic::computeVariables();
-        config::write (srcdir + "/config.out");
-    }
-    catch (const libconfig::ConfigException& e)
-    {
-        return 1;
-    }
-    catch (const std::exception& e)
-    {
-        std::cout << e.what () << std::endl;
-        return 1;
-    }
-    
+    config::read (srcdir);
+
+    vfpic::computeVariables();
+
     Barrier barrier (vfpic::nthreads);
     GlobalVariables global;
 
@@ -201,7 +190,9 @@ int main (int argc, const char * argv[])
 
     global.datafile.close ();
 
-    printf ("Done!\n");
+    std::time_t now = std::chrono::system_clock::to_time_t (std::chrono::system_clock::now ());
+    std::cout << "Done! Current local time: " << std::put_time(std::localtime(&now), "%c %Z")
+              << std::endl;
 
     return 0;
 }

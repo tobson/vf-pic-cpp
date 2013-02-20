@@ -8,90 +8,15 @@
 
 #include "config.h"
 
+#include <fstream>
 #include <iostream>
 #include <libconfig.h++>
+#include <yaml-cpp/yaml.h>
 
 #include "global.h"
 
 namespace config
 {
-    libconfig::Config input, output;
-
-    using libconfig::Setting;
-
-    template <typename T> struct TypeMap;
-    template <> struct TypeMap<int>       { static const Setting::Type type = Setting::TypeInt;     };
-    template <> struct TypeMap<long long> { static const Setting::Type type = Setting::TypeInt64;   };
-    template <> struct TypeMap<real>      { static const Setting::Type type = Setting::TypeFloat;   };
-    template <> struct TypeMap<bool>      { static const Setting::Type type = Setting::TypeBoolean; };
-
-    /* Convenience functions to read variable from configuration file */
-    template <typename T>
-    void readVariable (const std::string& name, T& value)
-    {
-        if (input.exists (name))
-        {
-            try
-            {
-                value = input.lookup (name);
-            }
-            catch (const libconfig::SettingTypeException)
-            {
-                std::cout << "Error reading config file: Variable '" << name
-                << "' doesn't have the right type." << std::endl;
-                throw;
-            }
-        }
-        output.getRoot ().add (name, TypeMap<T>::type) = value;
-    }
-
-    void readVariable (const std::string& name, std::string& value)
-    {
-        if (input.exists (name))
-        {
-            try
-            {
-                value = input.lookup (name).c_str ();
-            }
-            catch (const libconfig::SettingTypeException)
-            {
-                std::cout << "Error reading config file: Variable '" << name
-                << "' doesn't have the right type." << std::endl;
-                throw;
-            }
-        }
-        output.getRoot ().add (name, Setting::TypeString) = value.c_str ();
-    }
-
-    template <unsigned long N>
-    void readVariable (const std::string& name, std::array<real,N>& array)
-    {
-        if (input.exists (name))
-        {
-            try
-            {
-                Setting& setting = input.lookup (name);
-                if (setting.getLength () == N)
-                {
-                    for (int n = 0; n < N; ++n) array[n] = setting[n];
-                }
-                else
-                {
-                    std::string msg = "'" + std::string (name) + "' must be an array of length " + std::to_string (N) + ".";
-                    throw std::length_error (msg);
-                }
-            }
-            catch (const libconfig::SettingTypeException)
-            {
-                std::cout << "Error reading config file: Variable '" << name
-                << "' doesn't have the right type." << std::endl;
-                throw;
-            }
-            Setting& setting = output.getRoot ().add (name, Setting::TypeArray);
-            for (int n = 0; n < N; ++n) setting.add (TypeMap<real>::type) = array[n];
-        }
-    }
-    
     /* Grid */
     real x0 = -0.5;
     real z0 = -0.5;
@@ -115,7 +40,6 @@ namespace config
     /* Initial condition */
     int ikx = 0;
     int ikz = 0;
-//    std::array<real,3> B0 = {0.0, 0.0, 0.0};
     real B0 = 0.0;
     real brms = 0.0;
     real ampl = 0.0;
@@ -143,26 +67,53 @@ namespace config
     bool verbose = false;
     bool throwOnCopyConstruct = false;
 
-    /* Read configuration from input file */
-    void read (const std::string& filename)
+    struct ReadVariable
     {
-        try
+        ReadVariable (const std::string& srcdir):
+        config (YAML::LoadFile (srcdir + "/input.yaml")),
+        output (srcdir + "/output.yaml")
         {
-            input.readFile (filename.c_str());
-        }
-        catch (const libconfig::FileIOException &fioex)
-        {
-            std::cerr << "I/O error while reading file." << std::endl;
-            throw;
-        }
-        catch (const libconfig::ParseException &pex)
-        {
-            std::cerr << "Parse error at " << pex.getFile () << ":"
-                      << pex.getLine () << " - " << pex.getError () << std::endl;
-            throw;
-        }
+            /* Store precision */
+            config["precision"] = sizeof (real);
 
-        input.setAutoConvert (true);
+            /* Append parameters */
+            config["nx"] = vfpic::nx;
+            config["nz"] = vfpic::nz;
+            config["npc"] = vfpic::npc;
+            config["nthreads"] = vfpic::nthreads;
+            config["alignment"] = vfpic::alignment;
+
+            /* Also append global constants */
+            config["mx"] =  vfpic::mx;
+            config["mz"] = vfpic::mz;
+            config["npar"] = vfpic::npar;
+            config["mpar"] = vfpic::mpar;
+        }
+        template <typename T>
+        void operator() (const std::string& name, T& value)
+        {
+            value = config[name].as<T> (value);
+            config[name] = value;
+        }
+        ~ReadVariable ()
+        {
+            output << YAML::Dump (config) << std::endl;
+            output.close ();
+        }
+        YAML::Node config;
+        std::ofstream output;
+    };
+    
+    template <typename T>
+    void readVariable (YAML::Node& node, const std::string& name, T& value)
+    {
+        value = node[name].as<T> (value);
+        node[name] = value;
+    }
+
+    void read (const std::string& srcdir)
+    {
+        ReadVariable readVariable (srcdir);
 
         /* Grid */
         readVariable ("x0", x0);
@@ -213,37 +164,5 @@ namespace config
         /* Debugging */
         readVariable ("verbose", verbose);
         readVariable ("throwOnCopyConstruct", throwOnCopyConstruct);
-    }
-
-    /* Write configuration to output file */
-    void write (const std::string& filename)
-    {
-        /* Append parameters */
-        {
-            const int precision = sizeof (real);
-            output.getRoot ().add ("precision", Setting::TypeInt) = precision;
-        }
-        output.getRoot ().add ("nx", Setting::TypeInt) = vfpic::nx;
-        output.getRoot ().add ("nz", Setting::TypeInt) = vfpic::nz;
-        output.getRoot ().add ("npc", Setting::TypeInt) = vfpic::npc;
-        output.getRoot ().add ("nthreads", Setting::TypeInt) = vfpic::nthreads;
-        output.getRoot ().add ("alignment", Setting::TypeInt) = vfpic::alignment;
-
-        /* Also append global constants */
-        output.getRoot ().add ("mx", Setting::TypeInt) =  vfpic::mx;
-        output.getRoot ().add ("mz", Setting::TypeInt) = vfpic::mz;
-        output.getRoot ().add ("npar", Setting::TypeInt) = vfpic::npar;
-        output.getRoot ().add ("mpar", Setting::TypeInt) = vfpic::mpar;
-
-        try
-        {
-            output.writeFile (filename.c_str());
-        }
-        catch (const libconfig::FileIOException &fioex)
-        {
-            std::cerr << "I/O error while writing file: " << filename << std::endl;
-
-            throw;
-        }
     }
 }

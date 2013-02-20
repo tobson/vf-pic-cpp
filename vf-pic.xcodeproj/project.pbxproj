@@ -108,7 +108,6 @@
 		D28BAEFE16B5FD0200578956 /* global.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = global.h; sourceTree = "<group>"; };
 		D28BAF0016B5FDDA00578956 /* config.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = config.cpp; sourceTree = "<group>"; };
 		D28BAF0116B5FDDA00578956 /* config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = config.h; sourceTree = "<group>"; };
-		D28BAF0516B600D900578956 /* config.in */ = {isa = PBXFileReference; lastKnownFileType = text; path = config.in; sourceTree = "<group>"; };
 		D28BAF0616B601AB00578956 /* scalar-field.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "scalar-field.h"; sourceTree = "<group>"; };
 		D28BAF1216B604B900578956 /* test */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = test; sourceTree = BUILT_PRODUCTS_DIR; };
 		D28BAF1416B604F200578956 /* test.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = test.cpp; sourceTree = "<group>"; };
@@ -120,6 +119,7 @@
 		D29BD8F716D35951000BD507 /* TODO */ = {isa = PBXFileReference; lastKnownFileType = text; path = TODO; sourceTree = "<group>"; };
 		D29BF1DA16D42E89000BD507 /* libconfig++_clang.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libconfig++_clang.a"; path = "../../local/lib/libconfig++_clang.a"; sourceTree = "<group>"; };
 		D29BF1DB16D42E89000BD507 /* libyaml-cpp_clang.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libyaml-cpp_clang.a"; path = "../../local/lib/libyaml-cpp_clang.a"; sourceTree = "<group>"; };
+		D29BF1E516D45CDB000BD507 /* input.yaml */ = {isa = PBXFileReference; lastKnownFileType = text; path = input.yaml; sourceTree = "<group>"; };
 		D2C6827D16B9DF600023FB36 /* faraday.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = faraday.h; sourceTree = "<group>"; };
 		D2C6827E16B9EBA30023FB36 /* diffops.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = diffops.h; sourceTree = "<group>"; };
 		D2C6828016BB7EB30023FB36 /* boundaries.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = boundaries.cpp; sourceTree = "<group>"; };
@@ -177,6 +177,7 @@
 		D2915FA416B5F56A0084A612 = {
 			isa = PBXGroup;
 			children = (
+				D29BF1E516D45CDB000BD507 /* input.yaml */,
 				D29BF1DA16D42E89000BD507 /* libconfig++_clang.a */,
 				D29BF1DB16D42E89000BD507 /* libyaml-cpp_clang.a */,
 				D29BD8F716D35951000BD507 /* TODO */,
@@ -217,7 +218,6 @@
 				D270B39816CDE6AD00DFCE2F /* three-vector.h */,
 				D270B39716CCCE8A00DFCE2F /* variables.h */,
 				D28BAF1716B608BC00578956 /* vector-field.h */,
-				D28BAF0516B600D900578956 /* config.in */,
 				D2E0963516BF83C7003AA5DA /* libconfig++.la */,
 				D2F90E4C16B73FE300ABDA86 /* local.mk */,
 				D2F90E4816B734C700ABDA86 /* jacobi.py */,

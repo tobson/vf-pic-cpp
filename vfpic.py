@@ -4,28 +4,19 @@ from numpy import ndarray
 
 class Config:
 
-    def __init__ (self, filename = "config.out"):
+    def __init__ (self, filename = "output.yaml"):
 
-        from numpy import sqrt, dtype
+        from numpy import dtype
+        from yaml import load
 
-        f = open (filename, "rt")
+        self.__dict__.update (**load (open (filename).read ()))
 
-        for line in f.readlines ():
-            
-            varname, value = line.split("=")
-            value = value.strip().lower()
-            if value.find("false") >= 0: value = "False"
-            if value.find("true" ) >= 0: value = "True"
-            exec ("self." + varname.strip() + "=" + value)
-
-        self.dx = self.Lx/self.nx
-        self.dz = self.Lz/self.nz
+        self.dx = self.Lx/float (self.nx)
+        self.dz = self.Lz/float (self.nz)
 
         self.npar = self.nx*self.nz*self.npc
 
         self.dtype = dtype ("f" + str (self.precision))
-
-        f.close ()
 
 class Particles (ndarray):
 

@@ -69,9 +69,6 @@ extern bool throwOnCopyConstruct;
 
 /* Read configuration from input file */
 void read (const std::string&);
-
-/* Write configuration to output file */
-void write (const std::string&);
 }
 
 #endif /* defined(__vf_pic__config__) */
