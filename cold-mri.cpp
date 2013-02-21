@@ -137,6 +137,14 @@ int main (int argc, const char * argv[])
         }
     }
 
+    if (qshear != 0.0)
+    {
+        for (auto p = particles.begin (); p != particles.end (); ++p)
+        {
+            p->vy += Sshear*p->x;
+        }
+    }
+
     Grid grid;
 
     NewGlobalVectorField<real> A;
@@ -162,7 +170,6 @@ int main (int argc, const char * argv[])
     B.y = 0.0;
     B.z = B0;
 
-    const real S = -qshear*Omega;
     NewGlobalVectorField<real> E;
     if (ampl > 0.0)
     {
@@ -174,8 +181,8 @@ int main (int argc, const char * argv[])
             const std::complex<real> Ax = +by*exp (phase)/(I*kz);
             const std::complex<real> Ay = -bx*exp (phase)/(I*kz);
 
-            const std::complex<real> Ex = -gamma*Ax - S*Ay;
-            const std::complex<real> Ey = -gamma*Ay       ;
+            const std::complex<real> Ex = -gamma*Ax - Sshear*Ay;
+            const std::complex<real> Ey = -gamma*Ay;
 
             E.x (k,i) = ampl*std::real (Ex);
             E.y (k,i) = ampl*std::real (Ey);
