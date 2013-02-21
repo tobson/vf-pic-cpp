@@ -36,10 +36,15 @@ public:
     {
         return array.at (j);
     }
-    friend std::ostream& operator<< (std::ostream& os, Vector vec)
+    friend std::ostream& operator<< (std::ostream& os, const Vector vec)
     {
         os.write (reinterpret_cast<char*> (&vec.x), 3*sizeof (T));
         return os;
+    }
+    friend std::istream& operator>> (std::istream& is, Vector vec)
+    {
+        is.read (reinterpret_cast<char*> (&vec.x), 3*sizeof (T));
+        return is;
     }
 };
 

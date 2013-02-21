@@ -116,10 +116,15 @@ public:
         delete[] this->array;
     }
     using Particles<N>::operator=;
-    friend std::ostream& operator<< (std::ostream& os, NewParticles& particles)
+    friend std::ostream& operator<< (std::ostream& os, const NewParticles& particles)
     {
         os.write (reinterpret_cast<char *> (particles.array), N*sizeof (Particle));
         return os;
+    }
+    friend std::istream& operator>> (std::istream& is, NewParticles& particles)
+    {
+        is.read (reinterpret_cast<char *> (particles.array), N*sizeof (Particle));
+        return is;
     }
 };
 

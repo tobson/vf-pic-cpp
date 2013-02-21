@@ -196,6 +196,11 @@ struct NewScalarField: public ScalarField<T,N1,N2>
         os.write (reinterpret_cast<char *> (scalar.data), size*sizeof (T));
         return os;
     }
+    friend std::istream& operator>> (std::istream& is, NewScalarField& scalar)
+    {
+        is.read (reinterpret_cast<char *> (scalar.data), size*sizeof (T));
+        return is;
+    }
 };
 
 template <typename T, int N1, int N2>

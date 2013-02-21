@@ -192,6 +192,14 @@ public:
         
         return os;
     }
+    friend std::istream& operator>> (std::istream& is, NewVectorField& vector)
+    {
+        is >> vector.x;
+        is >> vector.y;
+        is >> vector.z;
+
+        return is;
+    }
     using Base::operator=;
 };
 
