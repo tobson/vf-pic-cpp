@@ -38,9 +38,7 @@ public:
     }
     friend std::ostream& operator<< (std::ostream& os, Vector vec)
     {
-        os << vec.x;
-        os << vec.y;
-        os << vec.z;
+        os.write (reinterpret_cast<char*> (&vec.x), 3*sizeof (T));
         return os;
     }
 };
