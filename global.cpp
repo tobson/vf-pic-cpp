@@ -16,6 +16,7 @@ namespace vfpic
     static_assert (npar % nthreads == 0, "");
 
     real dx, dz;
+    real Sshear;
 
     void computeVariables ()
     {
@@ -23,5 +24,7 @@ namespace vfpic
         
         dx = Lx/real (nx);
         dz = Lz/real (nz);
+
+        Sshear = -qshear*Omega;
     }
 }

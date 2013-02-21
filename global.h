@@ -24,6 +24,7 @@ const int npar = nx*nz*npc;
 const int mpar = npar/nthreads;
 
 extern real dx, dz;
+extern real Sshear;
 
 void computeVariables ();
 }
