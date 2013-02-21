@@ -172,7 +172,7 @@ int main (int argc, const char * argv[])
     Barrier barrier (vfpic::nthreads);
     GlobalVariables global;
 
-    global.datafile.open (srcdir + "/var.dat");
+    global.datafile.open (srcdir + "/var.dat", std::ios::binary);
     
     initialCondition (&global);
 
