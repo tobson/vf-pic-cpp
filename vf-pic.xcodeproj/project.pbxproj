@@ -33,6 +33,13 @@
 		D29BF1DF16D42EEB000BD507 /* libyaml-cpp_clang.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D29BF1DB16D42E89000BD507 /* libyaml-cpp_clang.a */; };
 		D29BF1E116D42F28000BD507 /* libyaml-cpp_clang.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D29BF1DB16D42E89000BD507 /* libyaml-cpp_clang.a */; };
 		D29BF1E316D42F54000BD507 /* libyaml-cpp_clang.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D29BF1DB16D42E89000BD507 /* libyaml-cpp_clang.a */; };
+		D29BF1F516D6AF74000BD507 /* global.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D28BAEFD16B5FD0200578956 /* global.cpp */; };
+		D29BF1F616D6AF74000BD507 /* config.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D28BAF0016B5FDDA00578956 /* config.cpp */; };
+		D29BF1F816D6AF74000BD507 /* grid.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D25C8DB216B89B6600B0A607 /* grid.cpp */; };
+		D29BF1F916D6AF74000BD507 /* boundaries.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2C6828016BB7EB30023FB36 /* boundaries.cpp */; };
+		D29BF20216D6AF74000BD507 /* libyaml-cpp_clang.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D29BF1DB16D42E89000BD507 /* libyaml-cpp_clang.a */; };
+		D29BF20A16D6B018000BD507 /* cold-mri.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D29BF20816D6B018000BD507 /* cold-mri.cpp */; };
+		D29BF20B16D6B106000BD507 /* barrier.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D28BAF1816B60B3800578956 /* barrier.cpp */; };
 		D2C6828216BB7EB40023FB36 /* boundaries.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2C6828016BB7EB30023FB36 /* boundaries.cpp */; };
 		D2C6828316BB7EB40023FB36 /* boundaries.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2C6828016BB7EB30023FB36 /* boundaries.cpp */; };
 		D2C6828416BB7EB40023FB36 /* boundaries.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2C6828016BB7EB30023FB36 /* boundaries.cpp */; };
@@ -68,6 +75,15 @@
 			runOnlyForDeploymentPostprocessing = 1;
 		};
 		D2915FCD16B5F8170084A612 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+		D29BF20316D6AF74000BD507 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = /usr/share/man/man1/;
@@ -116,6 +132,8 @@
 		D29BF1DA16D42E89000BD507 /* libconfig++_clang.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libconfig++_clang.a"; path = "../../local/lib/libconfig++_clang.a"; sourceTree = "<group>"; };
 		D29BF1DB16D42E89000BD507 /* libyaml-cpp_clang.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libyaml-cpp_clang.a"; path = "../../local/lib/libyaml-cpp_clang.a"; sourceTree = "<group>"; };
 		D29BF1E516D45CDB000BD507 /* input.yaml */ = {isa = PBXFileReference; lastKnownFileType = text; path = input.yaml; sourceTree = "<group>"; };
+		D29BF20716D6AF74000BD507 /* cold-mri */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "cold-mri"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D29BF20816D6B018000BD507 /* cold-mri.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "cold-mri.cpp"; sourceTree = "<group>"; };
 		D2C6827D16B9DF600023FB36 /* faraday.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = faraday.h; sourceTree = "<group>"; };
 		D2C6827E16B9EBA30023FB36 /* diffops.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = diffops.h; sourceTree = "<group>"; };
 		D2C6828016BB7EB30023FB36 /* boundaries.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = boundaries.cpp; sourceTree = "<group>"; };
@@ -163,12 +181,21 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		D29BF20116D6AF74000BD507 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D29BF20216D6AF74000BD507 /* libyaml-cpp_clang.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
 		D2915FA416B5F56A0084A612 = {
 			isa = PBXGroup;
 			children = (
+				D29BF20816D6B018000BD507 /* cold-mri.cpp */,
 				D29BF1E516D45CDB000BD507 /* input.yaml */,
 				D29BF1DA16D42E89000BD507 /* libconfig++_clang.a */,
 				D29BF1DB16D42E89000BD507 /* libyaml-cpp_clang.a */,
@@ -225,6 +252,7 @@
 				D28BAF1216B604B900578956 /* test */,
 				D24BC37716B64B1A006C64A3 /* jacobi */,
 				D20381A116BCF1FD008755DC /* sse */,
+				D29BF20716D6AF74000BD507 /* cold-mri */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -300,6 +328,23 @@
 			productReference = D2915FD116B5F8170084A612 /* vf-pic */;
 			productType = "com.apple.product-type.tool";
 		};
+		D29BF1F216D6AF74000BD507 /* cold-mri */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D29BF20416D6AF74000BD507 /* Build configuration list for PBXNativeTarget "cold-mri" */;
+			buildPhases = (
+				D29BF1F316D6AF74000BD507 /* Sources */,
+				D29BF20116D6AF74000BD507 /* Frameworks */,
+				D29BF20316D6AF74000BD507 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "cold-mri";
+			productName = "vf-pic";
+			productReference = D29BF20716D6AF74000BD507 /* cold-mri */;
+			productType = "com.apple.product-type.tool";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -325,6 +370,7 @@
 				D28BAF0716B604B900578956 /* test */,
 				D24BC36B16B64B1A006C64A3 /* jacobi */,
 				D203819416BCF1FD008755DC /* sse */,
+				D29BF1F216D6AF74000BD507 /* cold-mri */,
 			);
 		};
 /* End PBXProject section */
@@ -381,6 +427,19 @@
 				D206FC0E16CA13A2008BD080 /* initial-condition.cpp in Sources */,
 				D206FC1216CA14D3008BD080 /* drift.cpp in Sources */,
 				D270B39E16CEDC1B00DFCE2F /* output.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D29BF1F316D6AF74000BD507 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D29BF20B16D6B106000BD507 /* barrier.cpp in Sources */,
+				D29BF1F516D6AF74000BD507 /* global.cpp in Sources */,
+				D29BF1F616D6AF74000BD507 /* config.cpp in Sources */,
+				D29BF1F816D6AF74000BD507 /* grid.cpp in Sources */,
+				D29BF1F916D6AF74000BD507 /* boundaries.cpp in Sources */,
+				D29BF20A16D6B018000BD507 /* cold-mri.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -488,6 +547,20 @@
 			};
 			name = Release;
 		};
+		D29BF20516D6AF74000BD507 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "cold-mri";
+			};
+			name = Debug;
+		};
+		D29BF20616D6AF74000BD507 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "cold-mri";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -532,6 +605,15 @@
 			buildConfigurations = (
 				D2915FCF16B5F8170084A612 /* Debug */,
 				D2915FD016B5F8170084A612 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D29BF20416D6AF74000BD507 /* Build configuration list for PBXNativeTarget "cold-mri" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D29BF20516D6AF74000BD507 /* Debug */,
+				D29BF20616D6AF74000BD507 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
