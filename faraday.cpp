@@ -11,8 +11,8 @@
 template<int Nz, int Nx>
 void faraday (VectorField<real,Nz,Nx>* pA, const VectorField<real,Nz,Nx>& E, const real dt)
 {
-    using config::Omega;
-    using config::qshear;
+    using vfpic::Sshear;
+    using vfpic::lshear;
 
     VectorField<real,Nz,Nx>& A = *pA;
 
