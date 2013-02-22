@@ -17,16 +17,17 @@ const real pi = real (4)*atan (real (1));
 
 namespace vfpic
 {
-const int mx = nx;
-const int mz = nz/nthreads;
+    const int mx = nx;
+    const int mz = nz/nthreads;
 
-const int npar = nx*nz*npc;
-const int mpar = npar/nthreads;
+    const int npar = nx*nz*npc;
+    const int mpar = npar/nthreads;
 
-extern real dx, dz;
-extern real Sshear;
+    extern real dx, dz;
+    extern bool lshear;
+    extern real Sshear;
 
-void computeVariables ();
+    void computeVariables ();
 }
 
 #endif /* defined(__vf_pic__global__) */
