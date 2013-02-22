@@ -165,7 +165,7 @@ int main (int argc, const char * argv[])
         }
     }
 
-    if (qshear != 0.0)
+    if (lshear)
     {
         for (auto p = particles.begin (); p != particles.end (); ++p)
         {

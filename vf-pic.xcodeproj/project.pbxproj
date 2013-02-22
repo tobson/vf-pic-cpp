@@ -195,14 +195,13 @@
 		D2915FA416B5F56A0084A612 = {
 			isa = PBXGroup;
 			children = (
-				D29BF20816D6B018000BD507 /* cold-mri.cpp */,
-				D29BF1E516D45CDB000BD507 /* input.yaml */,
+				D2F90E4B16B73ED400ABDA86 /* Makefile */,
+				D29BD8F716D35951000BD507 /* TODO */,
 				D29BF1DA16D42E89000BD507 /* libconfig++_clang.a */,
 				D29BF1DB16D42E89000BD507 /* libyaml-cpp_clang.a */,
-				D29BD8F716D35951000BD507 /* TODO */,
-				D2F90E4B16B73ED400ABDA86 /* Makefile */,
 				D28BAF1816B60B3800578956 /* barrier.cpp */,
 				D2C6828016BB7EB30023FB36 /* boundaries.cpp */,
+				D29BF20816D6B018000BD507 /* cold-mri.cpp */,
 				D28BAF0016B5FDDA00578956 /* config.cpp */,
 				D20381BC16BE0195008755DC /* deposit.cpp */,
 				D206FC1016CA14D1008BD080 /* drift.cpp */,
@@ -241,6 +240,7 @@
 				D2F90E4C16B73FE300ABDA86 /* local.mk */,
 				D2F90E4816B734C700ABDA86 /* jacobi.py */,
 				D2F90E4A16B7375900ABDA86 /* vfpic.py */,
+				D29BF1E516D45CDB000BD507 /* input.yaml */,
 				D2915FB016B5F56A0084A612 /* Products */,
 			);
 			sourceTree = "<group>";

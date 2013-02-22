@@ -62,7 +62,7 @@ void kick (const GlobalVectorField<real>& E,
         by *= emdt2;
         bz *= emdt2;
 
-        if (qshear != real (0.0))
+        if (lshear)
         {
             bz += Omega*dt;
             

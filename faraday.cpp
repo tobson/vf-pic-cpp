@@ -16,7 +16,7 @@ void faraday (VectorField<real,Nz,Nx>* pA, const VectorField<real,Nz,Nx>& E, con
 
     VectorField<real,Nz,Nx>& A = *pA;
 
-    if (qshear != real (0.0))
+    if (lshear)
     {
         for (int k = 1; k <= Nz; ++k)
         for (int i = 1; i <= Nx; ++i)

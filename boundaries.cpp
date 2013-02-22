@@ -93,7 +93,7 @@ void boundaryCondition (Particles<N> *particles)
     
     Particle *p = particles->begin ();
 
-    if (qshear != 0.0)
+    if (lshear)
     {
         for (int dummy = 0; dummy < N; ++dummy)
         {
