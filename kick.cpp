@@ -61,7 +61,15 @@ void kick (const GlobalVectorField<real>& E,
         bx *= emdt2;
         by *= emdt2;
         bz *= emdt2;
-        
+
+        if (qshear != real (0.0))
+        {
+            bz += Omega*dt;
+            
+            ex -= Sshear*p->x*bz;
+            ez += Sshear*p->x*bx;
+        }
+
         const real vmx = p->vx + ex;
         const real vmy = p->vy + ey;
         const real vmz = p->vz + ez;

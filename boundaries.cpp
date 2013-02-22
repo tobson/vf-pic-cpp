@@ -92,13 +92,31 @@ void boundaryCondition (Particles<N> *particles)
     const real Lz1 = 1.0/Lz;
     
     Particle *p = particles->begin ();
-    
-    for (int dummy = 0; dummy < N; ++dummy)
+
+    if (qshear != 0.0)
     {
-        p->x -= floor ((p->x - x0)*Lx1)*Lx;
-        p->z -= floor ((p->z - z0)*Lz1)*Lz;
-        
-        ++p;
+        for (int dummy = 0; dummy < N; ++dummy)
+        {
+            const real i = floor ((p->x - x0)*Lx1);
+            const real k = floor ((p->z - z0)*Lz1);
+
+            p->x -= i*Lx;
+            p->z -= k*Lz;
+
+            p->vy -= i*Sshear*Lx;
+
+            ++p;
+        }
+    }
+    else
+    {
+        for (int dummy = 0; dummy < N; ++dummy)
+        {
+            p->x -= floor ((p->x - x0)*Lx1)*Lx;
+            p->z -= floor ((p->z - z0)*Lz1)*Lz;
+
+            ++p;
+        }
     }
 }
 

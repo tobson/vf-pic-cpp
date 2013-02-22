@@ -52,11 +52,13 @@ void Deposit<Np>::operator() (const Particles<Np>& particles,
         const real w01 = (one - wz)*       wx ;
         const real w10 =        wz *(one - wx);
         const real w11 =        wz *       wx ;
-        
-        sources (k0,i0).accumulate (w00,w00*p->vx,w00*p->vy,w00*p->vz);
-        sources (k0,i1).accumulate (w01,w01*p->vx,w01*p->vy,w01*p->vz);
-        sources (k1,i0).accumulate (w10,w10*p->vx,w10*p->vy,w10*p->vz);
-        sources (k1,i1).accumulate (w11,w11*p->vx,w11*p->vy,w11*p->vz);
+
+        const real uy = p->vy - Sshear*p->x; // Fluctuating azimuthal velocity
+
+        sources (k0,i0).accumulate (w00,w00*p->vx,w00*uy,w00*p->vz);
+        sources (k0,i1).accumulate (w01,w01*p->vx,w01*uy,w01*p->vz);
+        sources (k1,i0).accumulate (w10,w10*p->vx,w10*uy,w10*p->vz);
+        sources (k1,i1).accumulate (w11,w11*p->vx,w11*uy,w11*p->vz);
         
         ++p;
     }
