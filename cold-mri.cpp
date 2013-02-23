@@ -19,6 +19,27 @@
 #include "vector-field.h"
 #include "three-vector.h"
 
+typedef Eigen::Matrix<std::complex<real>,4,4> Matrix;
+
+struct EigenSolver: public Eigen::ComplexEigenSolver<Matrix>
+{
+    EigenSolver (const real kvA)
+    {
+        using namespace config;
+
+        const real tau = 1.0/(em*B0);
+        const std::complex<real> I (0,1);
+        Matrix M;
+        
+        M << 0.0               , 2.0*Omega, I*kvA                     , 0.0         ,
+             (qshear-2.0)*Omega, 0.0      , 0.0                       , I*kvA       ,
+             I*kvA             , 0.0      , 0.0                       , -kvA*kvA*tau,
+             0.0               , I*kvA    , kvA*kvA*tau - qshear*Omega, 0.0         ;
+
+        this->compute (M);
+    }
+};
+
 int main (int argc, const char * argv[])
 {
     using namespace config;
@@ -34,14 +55,15 @@ int main (int argc, const char * argv[])
     realMatrix M;
 
     const real OmegaC = em*B0;
-//    if (OmegaC <= 2.*Omega) throw std::runtime_error ("Cyclotron frequency must at least be twice as big as the Kepler frequency");
-    const real tau = 1./OmegaC;
-    const real kvm = Omega*sqrt (2.*qshear/(1-2.*Omega*tau));
-    const real kvo = Omega*sqrt (((4.-qshear)*qshear)/(2.*(4.-qshear)*Omega*tau + 4));
-    const real kvg = (2.*pi/Lz)*round (kvo*Lz/(2.*pi));
-
     const real vA = sqrt(B0*B0/rho0);
 
+//    if (OmegaC <= 2.*Omega) throw std::runtime_error ("Cyclotron frequency must at least be twice as big as the Kepler frequency");
+    const real tau = 1.0/OmegaC;
+    const real kvm = Omega*sqrt (2.0*qshear/(1.0 - 2.0*Omega*tau));
+    const real kvo = Omega*sqrt (((4.0 - qshear)*qshear)/(2.0*(4.0 - qshear)*Omega*tau + 4.0));
+    const real kvg = (2.0*pi*vA/Lz)*round (kvo*Lz/(2.0*pi*vA));
+
+    std::cout << "Lowest non-zero wave number: kz = " << 2.0*pi/Lz << std::endl;
     std::cout << "Highest resolved wave number: kz = " << pi/dz << std::endl;
     std::cout << "Highest unstable wave number: kz = " << kvm/vA << std::endl;
     std::cout << "Most unstable wave number: kz = " << kvo/vA << std::endl;
@@ -50,40 +72,24 @@ int main (int argc, const char * argv[])
     const std::complex<real> I (0,1);
 
     {
-        const real kvA = vA*pi/dz;
-        M << 0                , 2.*Omega, I*kvA                     , 0           ,
-        (qshear-2.)*Omega, 0       , 0                         , I*kvA       ,
-        I*kvA            , 0       , 0                         , -kvA*kvA*tau,
-        0                , I*kvA   , kvA*kvA*tau - qshear*Omega, 0           ;
-        Eigen::ComplexEigenSolver<realMatrix> eigenSolver (M);
+        EigenSolver eig (kvo);
+    }
+
+    {
+        EigenSolver eigenSolver (vA*pi/dz);
         Eigen::Matrix<std::complex<real>,4,1> evals = eigenSolver.eigenvalues ();
 
         real maxval = -1.;
-        real eval;
         for (int n = 0; n < 4; ++n)
         {
-            eval = abs (std::real (evals (n)));
-            if (eval > maxval)
-            {
-                maxval = eval;
-            }
-            eval = abs (std::imag (evals (n)));
-            if (eval > maxval)
-            {
-                maxval = eval;
-            }
+            maxval = std::max<real> (maxval, abs (std::real (evals (n))));
+            maxval = std::max<real> (maxval, abs (std::imag (evals (n))));
         }
         std::cout << "Highest frequency on the grid: " << maxval << std::endl;
         std::cout << "Corresponding time step: " << pi/maxval << std::endl;
     }
 
-    const real kvA = kvg;
-    M << 0                , 2.*Omega, I*kvA                     , 0           ,
-    (qshear-2.)*Omega, 0       , 0                         , I*kvA       ,
-    I*kvA            , 0       , 0                         , -kvA*kvA*tau,
-    0                , I*kvA   , kvA*kvA*tau - qshear*Omega, 0           ;
-
-    Eigen::ComplexEigenSolver<realMatrix> eigenSolver (M);
+    EigenSolver eigenSolver (kvg);
     Eigen::Matrix<std::complex<real>,4,1> evals = eigenSolver.eigenvalues ();
     Eigen::Matrix<std::complex<real>,4,4> evecs = eigenSolver.eigenvectors ();
 
@@ -101,7 +107,7 @@ int main (int argc, const char * argv[])
 
     const std::complex<real> gamma = evals (nmax);
     const Eigen::Matrix<std::complex<real>,4,1> evec = evecs.col (nmax);
-    std::cout << "gamma = " << gamma << std::endl;
+    printf ("gamma = %.15f\n", std::real (gamma));
     std::cout << "Inverse cyclotron frequency = " << 1.0/OmegaC << std::endl;
 
     const std::complex<real> ux = evec(0);
@@ -148,7 +154,7 @@ int main (int argc, const char * argv[])
         p->vz = cs0*normal (gen);
     }
 
-    const real kz = kvA/vA;
+    const real kz = kvg/vA;
 
     if (ampl > 0.0)
     {
