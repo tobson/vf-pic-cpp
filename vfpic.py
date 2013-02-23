@@ -61,6 +61,21 @@ class ScalarField (ndarray):
     def trim (self):
         return self[1:-1,1:-1]
 
+class Grid ():
+
+    def __init__ (self, cfg = None):
+
+        from numpy import meshgrid, arange
+
+        if not isinstance (cfg, Config): cfg = Config ()
+
+        self.x = ScalarField (cfg)
+        self.z = ScalarField (cfg)
+
+        self.x[...], self.z[...] = \
+            meshgrid (cfg.x0 + (arange (cfg.nx + 2) - 0.5)*cfg.Lx/cfg.nx,
+                      cfg.z0 + (arange (cfg.nz + 2) - 0.5)*cfg.Lz/cfg.nz)
+
 class State:
 
     def __init__ (self, cfg = None):
