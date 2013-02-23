@@ -52,7 +52,7 @@ void Output::operator() (GlobalVariables& global, const long long it)
     if (barrier.wait ())
     {
         os << global.A << global.A2 << global.B << global.E;
-        os << global.particles << global.particles2;
+        if (config::writeParticles) os << global.particles << global.particles2;
         os << global.rho << global.ruu;
         os << global.grid;
         os.write (reinterpret_cast<const char *> (&it), sizeof (long long));

@@ -2,32 +2,36 @@
 
 from numpy import ndarray
 
-class Config:
+class Config (dict):
 
     def __init__ (self, filename = "output.yaml"):
 
         from numpy import dtype
         from yaml import load
 
-        self.__dict__.update (**load (open (filename).read ()))
+        self.update (load (open (filename).read ()))
 
-        self.dx = self.Lx/float (self.nx)
-        self.dz = self.Lz/float (self.nz)
+        self["dx"] = self["Lx"]/float (self["nx"])
+        self["dz"] = self["Lz"]/float (self["nz"])
 
-        self.npar = self.nx*self.nz*self.npc
+        self["npar"] = self["nx"]*self["nz"]*self["npc"]
 
-        self.dtype = dtype ("f" + str (self.precision))
+        self["rtype"] = dtype ("f" + str (  self["precision"]))
+        self["ctype"] = dtype ("c" + str (2*self["precision"]))
+
+        # Allow e.g. cfg["dx"] to be accessed through cfg.dx
+        self.__dict__.update (self)
 
 class Particles (ndarray):
 
-    def __new__ (cls, config = None):
-        if not isinstance (config, Config): config = Config ()
-        dtype = [( 'x', config.dtype),
-                 ( 'z', config.dtype),
-                 ('vx', config.dtype),
-                 ('vy', config.dtype),
-                 ('vz', config.dtype)]
-        obj = ndarray.__new__ (cls, shape = (config.npar,), dtype = dtype)
+    def __new__ (cls, cfg = None):
+        if not isinstance (cfg, Config): cfg = Config ()
+        dtype = [( 'x', cfg.rtype),
+                 ( 'z', cfg.rtype),
+                 ('vx', cfg.rtype),
+                 ('vy', cfg.rtype),
+                 ('vz', cfg.rtype)]
+        obj = ndarray.__new__ (cls, shape = (cfg.npar,), dtype = dtype)
         return obj
   
     def __array_finalize__ (self, obj):
@@ -35,15 +39,15 @@ class Particles (ndarray):
   
     def read (self, f):
         from numpy import fromfile
-        self[...] = fromfile (f, self.dtype, self.size)
+        self[...] = fromfile (f, self.rtype, self.size)
         return self.size*self.itemsize
 
 class ScalarField (ndarray):
 
-    def __new__ (cls, config = None):
-        if not isinstance (config, Config): config = Config ()
-        shape = (config.nz + 2, config.nx + 2)
-        obj = ndarray.__new__ (cls, shape = shape, dtype = config.dtype)
+    def __new__ (cls, cfg = None):
+        if not isinstance (cfg, Config): cfg = Config ()
+        shape = (cfg.nz + 2, cfg.nx + 2)
+        obj = ndarray.__new__ (cls, shape = shape, dtype = cfg.rtype)
         return obj
 
     def __array_finalize__ (self, obj):
@@ -59,39 +63,40 @@ class ScalarField (ndarray):
 
 class State:
 
-    def __init__ (self, config = None):
+    def __init__ (self, cfg = None):
 
         from numpy import ndarray
 
-        if not isinstance (config, Config): config = Config ()
+        if not isinstance (cfg, Config): cfg = Config ()
+        self.readParticles = cfg.writeParticles;
 
-        self.Ax = ScalarField (config)
-        self.Ay = ScalarField (config)
-        self.Az = ScalarField (config)
+        self.Ax = ScalarField (cfg)
+        self.Ay = ScalarField (cfg)
+        self.Az = ScalarField (cfg)
 
-        self.Ax2 = ScalarField (config)
-        self.Ay2 = ScalarField (config)
-        self.Az2 = ScalarField (config)
+        self.Ax2 = ScalarField (cfg)
+        self.Ay2 = ScalarField (cfg)
+        self.Az2 = ScalarField (cfg)
 
-        self.Bx = ScalarField (config)
-        self.By = ScalarField (config)
-        self.Bz = ScalarField (config)
+        self.Bx = ScalarField (cfg)
+        self.By = ScalarField (cfg)
+        self.Bz = ScalarField (cfg)
 
-        self.Ex = ScalarField (config)
-        self.Ey = ScalarField (config)
-        self.Ez = ScalarField (config)
+        self.Ex = ScalarField (cfg)
+        self.Ey = ScalarField (cfg)
+        self.Ez = ScalarField (cfg)
 
-        self.particles = Particles (config)
-        self.particles2 = Particles (config)
+        self.particles = Particles (cfg)
+        self.particles2 = Particles (cfg)
 
-        self.rho = ScalarField (config)
+        self.rho = ScalarField (cfg)
 
-        self.rux = ScalarField (config)
-        self.ruy = ScalarField (config)
-        self.ruz = ScalarField (config)
+        self.rux = ScalarField (cfg)
+        self.ruy = ScalarField (cfg)
+        self.ruz = ScalarField (cfg)
         
-        self.x = ScalarField (config)
-        self.z = ScalarField (config)
+        self.x = ScalarField (cfg)
+        self.z = ScalarField (cfg)
         
         self.it = 0
         #self.t = 0.0
@@ -120,8 +125,9 @@ class State:
         recordsize += self.Ez.read (f)
 
         # Read particles
-        recordsize += self.particles.read (f)
-        recordsize += self.particles2.read (f)
+        if self.readParticles:
+          recordsize += self.particles.read (f)
+          recordsize += self.particles2.read (f)
 
         # Read sources
         recordsize += self.rho.read (f)
@@ -142,9 +148,9 @@ class State:
 
 class DataFile ():
 
-    def __init__ (self, config = None, filename = "data/var.dat"):
+    def __init__ (self, cfg = None, filename = "data/var.dat"):
 
-        if not isinstance (config, Config): config = Config ()
+        if not isinstance (cfg, Config): cfg = Config ()
 
         self.f = open (filename)
 
@@ -153,7 +159,7 @@ class DataFile ():
         self.eof = self.f.tell ()
         self.f.seek (0)
 
-        self.state = State (config)
+        self.state = State (cfg)
 
         self.recordsize = 0
 
@@ -167,4 +173,7 @@ class DataFile ():
 
     def __del__ (self):
 
+        print "pos = ", self.f.tell()
+        print "eof = ", self.eof
+        print "recordsize = ", self.recordsize
         self.f.close ()
