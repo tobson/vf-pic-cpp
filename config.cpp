@@ -54,6 +54,7 @@ namespace config
     bool writeSources = false;
     bool writeData = true;
     bool writeDiagnostics = true;
+    bool writeParticles = true;
 
     bool overwriteSnapshots = false;
 
@@ -152,6 +153,7 @@ namespace config
         readVariable ("writeSources", writeSources);
         readVariable ("writeData", writeData);
         readVariable ("writeDiagnostics", writeDiagnostics);
+        readVariable ("writeParticles", writeParticles);
 
         readVariable ("overwriteSnapshots", overwriteSnapshots);
 

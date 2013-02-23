@@ -54,6 +54,7 @@ extern int itPrint;
 extern bool writeSources;
 extern bool writeData;
 extern bool writeDiagnostics;
+extern bool writeParticles;
 
 extern bool overwriteSnapshots;
 
