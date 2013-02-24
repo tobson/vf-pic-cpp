@@ -160,7 +160,7 @@ int main (int argc, const char * argv[])
     {
         for (auto p = particles.begin (); p != particles.end (); ++p)
         {
-            const std::complex<real> phase = I*kz*p->z - 0.5*dt*gamma;
+            const std::complex<real> phase = I*kz*p->z - real (0.5)*dt*gamma;
 
             const std::complex<real> vx = ux*exp (phase);
             const std::complex<real> vy = uy*exp (phase);
@@ -187,7 +187,7 @@ int main (int argc, const char * argv[])
         for (int k = 1; k <= nz; ++k)
         for (int i = 1; i <= nx; ++i)
         {
-            const std::complex<real> phase = I*kz*grid.z (k,i) - 0.5*dt*gamma;
+            const std::complex<real> phase = I*kz*grid.z (k,i) - real (0.5)*dt*gamma;
 
             const std::complex<real> Ax = +by*exp (phase)/(I*kz);
             const std::complex<real> Ay = -bx*exp (phase)/(I*kz);
