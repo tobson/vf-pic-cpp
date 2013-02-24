@@ -129,7 +129,6 @@
 		D2915FC816B5F7FE0084A612 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		D2915FD116B5F8170084A612 /* vf-pic */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "vf-pic"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D29BD8F716D35951000BD507 /* TODO */ = {isa = PBXFileReference; lastKnownFileType = text; path = TODO; sourceTree = "<group>"; };
-		D29BF1DA16D42E89000BD507 /* libconfig++_clang.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libconfig++_clang.a"; path = "../../local/lib/libconfig++_clang.a"; sourceTree = "<group>"; };
 		D29BF1DB16D42E89000BD507 /* libyaml-cpp_clang.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libyaml-cpp_clang.a"; path = "../../local/lib/libyaml-cpp_clang.a"; sourceTree = "<group>"; };
 		D29BF1E516D45CDB000BD507 /* input.yaml */ = {isa = PBXFileReference; lastKnownFileType = text; path = input.yaml; sourceTree = "<group>"; };
 		D29BF20716D6AF74000BD507 /* cold-mri */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "cold-mri"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -199,7 +198,6 @@
 				D29BF20C16D97E0B000BD507 /* cold-mri.py */,
 				D2F90E4B16B73ED400ABDA86 /* Makefile */,
 				D29BD8F716D35951000BD507 /* TODO */,
-				D29BF1DA16D42E89000BD507 /* libconfig++_clang.a */,
 				D29BF1DB16D42E89000BD507 /* libyaml-cpp_clang.a */,
 				D28BAF1816B60B3800578956 /* barrier.cpp */,
 				D2C6828016BB7EB30023FB36 /* boundaries.cpp */,
