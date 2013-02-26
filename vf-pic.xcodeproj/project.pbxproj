@@ -124,7 +124,6 @@
 		D2915FC816B5F7FE0084A612 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		D2915FD116B5F8170084A612 /* vf-pic */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "vf-pic"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D29BD8F716D35951000BD507 /* TODO */ = {isa = PBXFileReference; lastKnownFileType = text; path = TODO; sourceTree = "<group>"; };
-		D29BF1E516D45CDB000BD507 /* input.yaml */ = {isa = PBXFileReference; lastKnownFileType = text; path = input.yaml; sourceTree = "<group>"; };
 		D29BF20716D6AF74000BD507 /* cold-mri */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "cold-mri"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D29BF20816D6B018000BD507 /* cold-mri.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "cold-mri.cpp"; sourceTree = "<group>"; };
 		D29BF20C16D97E0B000BD507 /* cold-mri.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = "cold-mri.py"; sourceTree = "<group>"; };
@@ -228,7 +227,6 @@
 				D2F90E4C16B73FE300ABDA86 /* local.mk */,
 				D2F90E4816B734C700ABDA86 /* jacobi.py */,
 				D2F90E4A16B7375900ABDA86 /* vfpic.py */,
-				D29BF1E516D45CDB000BD507 /* input.yaml */,
 				D2915FB016B5F56A0084A612 /* Products */,
 			);
 			sourceTree = "<group>";
