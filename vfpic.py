@@ -4,15 +4,33 @@ from numpy import ndarray
 
 class Config (dict):
 
-    def __init__ (self, filename = "output.yaml"):
+    def __init__ (self, filename = "output.cfg"):
 
         from numpy import dtype
-        from yaml import load
+        from ConfigParser import SafeConfigParser
+        from ast import literal_eval
 
-        self.update (load (open (filename).read ()))
+        parser = SafeConfigParser ()
+        parser.optionxform = str
 
-        self["dx"] = self["Lx"]/float (self["nx"])
-        self["dz"] = self["Lz"]/float (self["nz"])
+        parser.read ("output.cfg")
+
+        for section in parser.sections ():
+
+          for item in parser.items (section):
+
+            key, string = item
+
+            try:
+              self[key] = literal_eval (string)
+            except:
+              try:
+                self[key] = parser.getboolean (section, key)
+              except:
+                self[key] = string
+
+        self["dx"] = self["Lx"]/self["nx"]
+        self["dz"] = self["Lz"]/self["nz"]
 
         self["npar"] = self["nx"]*self["nz"]*self["npc"]
 
