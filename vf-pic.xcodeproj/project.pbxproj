@@ -29,15 +29,10 @@
 		D28BAF1A16B60B3800578956 /* barrier.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D28BAF1816B60B3800578956 /* barrier.cpp */; };
 		D28BAF1B16B60B3800578956 /* barrier.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D28BAF1816B60B3800578956 /* barrier.cpp */; };
 		D2915FD316B5F8280084A612 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2915FC816B5F7FE0084A612 /* main.cpp */; };
-		D29BF1DD16D42E8A000BD507 /* libyaml-cpp_clang.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D29BF1DB16D42E89000BD507 /* libyaml-cpp_clang.a */; };
-		D29BF1DF16D42EEB000BD507 /* libyaml-cpp_clang.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D29BF1DB16D42E89000BD507 /* libyaml-cpp_clang.a */; };
-		D29BF1E116D42F28000BD507 /* libyaml-cpp_clang.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D29BF1DB16D42E89000BD507 /* libyaml-cpp_clang.a */; };
-		D29BF1E316D42F54000BD507 /* libyaml-cpp_clang.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D29BF1DB16D42E89000BD507 /* libyaml-cpp_clang.a */; };
 		D29BF1F516D6AF74000BD507 /* global.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D28BAEFD16B5FD0200578956 /* global.cpp */; };
 		D29BF1F616D6AF74000BD507 /* config.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D28BAF0016B5FDDA00578956 /* config.cpp */; };
 		D29BF1F816D6AF74000BD507 /* grid.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D25C8DB216B89B6600B0A607 /* grid.cpp */; };
 		D29BF1F916D6AF74000BD507 /* boundaries.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2C6828016BB7EB30023FB36 /* boundaries.cpp */; };
-		D29BF20216D6AF74000BD507 /* libyaml-cpp_clang.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D29BF1DB16D42E89000BD507 /* libyaml-cpp_clang.a */; };
 		D29BF20A16D6B018000BD507 /* cold-mri.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D29BF20816D6B018000BD507 /* cold-mri.cpp */; };
 		D29BF20B16D6B106000BD507 /* barrier.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D28BAF1816B60B3800578956 /* barrier.cpp */; };
 		D2C6828216BB7EB40023FB36 /* boundaries.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2C6828016BB7EB30023FB36 /* boundaries.cpp */; };
@@ -129,7 +124,6 @@
 		D2915FC816B5F7FE0084A612 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		D2915FD116B5F8170084A612 /* vf-pic */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "vf-pic"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D29BD8F716D35951000BD507 /* TODO */ = {isa = PBXFileReference; lastKnownFileType = text; path = TODO; sourceTree = "<group>"; };
-		D29BF1DB16D42E89000BD507 /* libyaml-cpp_clang.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libyaml-cpp_clang.a"; path = "../../local/lib/libyaml-cpp_clang.a"; sourceTree = "<group>"; };
 		D29BF1E516D45CDB000BD507 /* input.yaml */ = {isa = PBXFileReference; lastKnownFileType = text; path = input.yaml; sourceTree = "<group>"; };
 		D29BF20716D6AF74000BD507 /* cold-mri */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "cold-mri"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D29BF20816D6B018000BD507 /* cold-mri.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "cold-mri.cpp"; sourceTree = "<group>"; };
@@ -153,7 +147,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D29BF1E316D42F54000BD507 /* libyaml-cpp_clang.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -161,7 +154,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D29BF1E116D42F28000BD507 /* libyaml-cpp_clang.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -169,7 +161,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D29BF1DF16D42EEB000BD507 /* libyaml-cpp_clang.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -177,7 +168,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D29BF1DD16D42E8A000BD507 /* libyaml-cpp_clang.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -185,7 +175,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D29BF20216D6AF74000BD507 /* libyaml-cpp_clang.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -198,7 +187,6 @@
 				D29BF20C16D97E0B000BD507 /* cold-mri.py */,
 				D2F90E4B16B73ED400ABDA86 /* Makefile */,
 				D29BD8F716D35951000BD507 /* TODO */,
-				D29BF1DB16D42E89000BD507 /* libyaml-cpp_clang.a */,
 				D28BAF1816B60B3800578956 /* barrier.cpp */,
 				D2C6828016BB7EB30023FB36 /* boundaries.cpp */,
 				D29BF20816D6B018000BD507 /* cold-mri.cpp */,
