@@ -1,5 +1,3 @@
-config.in
-config.out
 local.mk
 param.h
 vf-pic.xcodeproj/project.xcworkspace
@@ -9,10 +7,11 @@ jacobi
 test
 vf-pic
 sse
+cold-mri
 
 *.d
 *.o
 *.pyc
 *.dat
 *.swp
-*.yaml
+*.cfg
