@@ -8,8 +8,6 @@
 
 #include "boundaries.h"
 
-#include "problem.h"
-
 using namespace vfpic;
 
 template <int Nz, int Nx>
