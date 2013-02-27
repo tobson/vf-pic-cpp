@@ -181,6 +181,12 @@ int main (int argc, const char * argv[])
     else
     {
         std::ifstream is (srcdir + "/initial.dat");
+        if (is.fail ())
+        {
+            std::cerr << "No initial condition specified and no data file"
+            << " present. Aborting...\n";
+            return 1;
+        }
         is.seekg (0, std::ios::end);
         long long eof = is.tellg ();
         is.seekg (0, std::ios::beg);
