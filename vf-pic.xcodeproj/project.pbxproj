@@ -39,6 +39,10 @@
 		D2C6828316BB7EB40023FB36 /* boundaries.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2C6828016BB7EB30023FB36 /* boundaries.cpp */; };
 		D2C6828416BB7EB40023FB36 /* boundaries.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2C6828016BB7EB30023FB36 /* boundaries.cpp */; };
 		D2C6828A16BB9CAC0023FB36 /* kick.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2C6828816BB9CAC0023FB36 /* kick.cpp */; };
+		D2DD55F616DDF75F0003D699 /* problem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2DD55F416DDF75F0003D699 /* problem.cpp */; };
+		D2DD55F716DDFE0A0003D699 /* problem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2DD55F416DDF75F0003D699 /* problem.cpp */; };
+		D2DD55F816DDFE360003D699 /* problem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2DD55F416DDF75F0003D699 /* problem.cpp */; };
+		D2DD55F916DDFE4B0003D699 /* problem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2DD55F416DDF75F0003D699 /* problem.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -133,6 +137,8 @@
 		D2C6828116BB7EB40023FB36 /* boundaries.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = boundaries.h; path = src/boundaries.h; sourceTree = SOURCE_ROOT; };
 		D2C6828816BB9CAC0023FB36 /* kick.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = kick.cpp; path = src/kick.cpp; sourceTree = SOURCE_ROOT; };
 		D2C6828916BB9CAC0023FB36 /* kick.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = kick.h; path = src/kick.h; sourceTree = SOURCE_ROOT; };
+		D2DD55F416DDF75F0003D699 /* problem.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = problem.cpp; sourceTree = "<group>"; };
+		D2DD55F516DDF75F0003D699 /* problem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = problem.h; sourceTree = "<group>"; };
 		D2E0963516BF83C7003AA5DA /* libconfig++.la */ = {isa = PBXFileReference; lastKnownFileType = text; name = "libconfig++.la"; path = "../../macports/lib/libconfig++.la"; sourceTree = "<group>"; };
 		D2F90E4816B734C700ABDA86 /* jacobi.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = jacobi.py; sourceTree = "<group>"; };
 		D2F90E4A16B7375900ABDA86 /* vfpic.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = vfpic.py; sourceTree = "<group>"; };
@@ -247,6 +253,8 @@
 				D270B39816CDE6AD00DFCE2F /* three-vector.h */,
 				D270B39716CCCE8A00DFCE2F /* variables.h */,
 				D28BAF1716B608BC00578956 /* vector-field.h */,
+				D2DD55F416DDF75F0003D699 /* problem.cpp */,
+				D2DD55F516DDF75F0003D699 /* problem.h */,
 			);
 			path = src;
 			sourceTree = "<group>";
@@ -384,6 +392,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D2DD55F816DDFE360003D699 /* problem.cpp in Sources */,
 				D24BC36D16B64B1A006C64A3 /* global.cpp in Sources */,
 				D24BC36E16B64B1A006C64A3 /* config.cpp in Sources */,
 				D24BC37016B64B1A006C64A3 /* barrier.cpp in Sources */,
@@ -396,6 +405,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D2DD55F916DDFE4B0003D699 /* problem.cpp in Sources */,
 				D28BAF0A16B604B900578956 /* global.cpp in Sources */,
 				D28BAF0B16B604B900578956 /* config.cpp in Sources */,
 				D28BAF1516B604F200578956 /* test.cpp in Sources */,
@@ -421,6 +431,7 @@
 				D206FC0E16CA13A2008BD080 /* initial-condition.cpp in Sources */,
 				D206FC1216CA14D3008BD080 /* drift.cpp in Sources */,
 				D270B39E16CEDC1B00DFCE2F /* output.cpp in Sources */,
+				D2DD55F616DDF75F0003D699 /* problem.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -428,6 +439,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D2DD55F716DDFE0A0003D699 /* problem.cpp in Sources */,
 				D29BF20B16D6B106000BD507 /* barrier.cpp in Sources */,
 				D29BF1F516D6AF74000BD507 /* global.cpp in Sources */,
 				D29BF1F616D6AF74000BD507 /* config.cpp in Sources */,

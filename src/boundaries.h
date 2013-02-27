@@ -11,7 +11,6 @@
 
 #include "barrier.h"
 #include "particles.h"
-#include "scalar-field.h"
 #include "vector-field.h"
 
 template <int Nz, int Nx>
