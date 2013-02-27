@@ -13,10 +13,10 @@
 #include "particles.h"
 #include "vector-field.h"
 
-template <int Nz, int Nx>
-void boundaryConditionX (ScalarField<real,Nz,Nx>&);
-template <int Nz, int Nx>
-void boundaryConditionX (VectorField<real,Nz,Nx>&);
+template <int Nz>
+void boundaryConditionX (ScalarField<real,Nz,vfpic::nx>&);
+template <int Nz>
+void boundaryConditionX (VectorField<real,Nz,vfpic::nx>&);
 
 void boundaryConditionZ (GlobalScalarField<real>&);
 void boundaryConditionZ (GlobalVectorField<real>&);

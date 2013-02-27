@@ -22,17 +22,17 @@ void boundaryConditionZ (GlobalScalarField<real>& scalar)
     }
 }
 
-template <int Nz, int Nx>
-void boundaryConditionX (ScalarField<real,Nz,Nx>& scalar)
+template <int Nz>
+void boundaryConditionX (ScalarField<real,Nz,nx>& scalar)
 {
     for (int k = 1; k <= Nz; ++k)
     {
-        scalar (k,0   ) = scalar (k,Nx);
-        scalar (k,Nx+1) = scalar (k,1 );
+        scalar (k,0   ) = scalar (k,nx);
+        scalar (k,nx+1) = scalar (k,1 );
     }
 }
 template void boundaryConditionX (LocalScalarField<real>&);
-template void boundaryConditionX (std::conditional<nthreads==1,ScalarField<real,nz,0>,
+template void boundaryConditionX (std::conditional<nthreads==1,ScalarField<real,0,nx>,
                                   GlobalScalarField<real>>::type&);
 
 template <int N>

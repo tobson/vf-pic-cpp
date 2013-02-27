@@ -10,8 +10,8 @@
 
 using namespace vfpic;
 
-template <int Nz, int Nx>
-void boundaryConditionX (VectorField<real,Nz,Nx>& vector)
+template <int Nz>
+void boundaryConditionX (VectorField<real,Nz,vfpic::nx>& vector)
 {
     boundaryConditionX (vector.x);
     boundaryConditionX (vector.y);
@@ -66,7 +66,7 @@ void BoundaryCondition::operator() (GlobalVectorField<real>& global)
 
 /* Explicit instantiation */
 
-template void boundaryConditionX (VectorField<real,mz,mx>&);
-template void boundaryConditionX (std::conditional<nthreads==1,VectorField<real,nz,0>,
+template void boundaryConditionX (LocalVectorField<real>&);
+template void boundaryConditionX (std::conditional<nthreads==1,VectorField<real,0,nx>,
                                   GlobalVectorField<real>>::type&);
 
