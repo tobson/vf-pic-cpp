@@ -69,4 +69,6 @@ void BoundaryCondition::operator() (GlobalVectorField<real>& global)
 /* Explicit instantiation */
 
 template void boundaryConditionX (VectorField<real,mz,mx>&);
-template void boundaryConditionX (VectorField<real,nz,nx>&);
+template void boundaryConditionX (std::conditional<nthreads==1,VectorField<real,nz,0>,
+                                  GlobalVectorField<real>>::type&);
+

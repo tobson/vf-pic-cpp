@@ -32,7 +32,8 @@ void boundaryConditionX (ScalarField<real,Nz,Nx>& scalar)
     }
 }
 template void boundaryConditionX (LocalScalarField<real>&);
-template void boundaryConditionX (GlobalScalarField<real>&);
+template void boundaryConditionX (std::conditional<nthreads==1,ScalarField<real,nz,0>,
+                                  GlobalScalarField<real>>::type&);
 
 template <int N>
 void boundaryCondition (Particles<N> *particles)
@@ -71,4 +72,4 @@ void boundaryCondition (Particles<N> *particles)
     }
 }
 template void boundaryCondition (LocalParticles*);
-template void boundaryCondition (GlobalParticles*);
+template void boundaryCondition (std::conditional<nthreads==1,Particles<0>,GlobalParticles>::type*);
