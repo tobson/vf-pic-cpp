@@ -169,7 +169,6 @@ namespace config
                     key.erase (0, key.find_first_not_of ("\t "));
                     if (key.empty ()) throw MissingKey (lineNumber);
                     key.erase (key.find_last_not_of ("\t ") + 1);
-                    std::cout << "key = " << key << std::endl;
 
                     contents[section][key] = value;
                 }
@@ -227,16 +226,6 @@ namespace config
 
     void Config::save (const char *filename)
     {
-        for (auto c = contents.begin (); c != contents.end (); ++c)
-        {
-            std::string section = c->first;
-            stringmap<std::string> keys = c->second;
-            std::cout << "[" << section << "]" << std::endl;
-            for (auto k = keys.begin (); k != keys.end (); ++k)
-            {
-                std::cout << k->first << " = " << k->second << std::endl;
-            }
-        }
         std::ofstream file (filename);
         for (auto& section: contents)
         {
