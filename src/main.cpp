@@ -173,33 +173,14 @@ int main (int argc, const char * argv[])
     GlobalVariables global;
 
     global.datafile.open (srcdir + "/var.dat", std::ios::binary);
+    
+    std::cout << "# of hardware threads: " << std::thread::hardware_concurrency()
+              << std::endl;
+    
+    // Initialize
+    initialCondition (&global);
 
-    if (config::initcond != "")
-    {
-        initialCondition (&global);
-    }
-    else
-    {
-        std::ifstream is (srcdir + "/initial.dat");
-        if (is.fail ())
-        {
-            std::cerr << "No initial condition specified and no data file"
-            << " present. Aborting...\n";
-            return 1;
-        }
-        is.seekg (0, std::ios::end);
-        long long eof = is.tellg ();
-        is.seekg (0, std::ios::beg);
-        is >> global.A >> global.E >> global.B0 >> global.particles;
-        if (eof != is.tellg ())
-        {
-            is.close ();
-            throw std::runtime_error ("Initial state read incorrectly.");
-        }
-        is.close ();
-     }
-
-    /* Iterate */
+    // Evolve in time
     std::vector<std::thread> threads;
     for (int ithread = 0; ithread < vfpic::nthreads; ++ithread)
     {
