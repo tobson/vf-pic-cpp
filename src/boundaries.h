@@ -24,6 +24,12 @@ void boundaryConditionZ (GlobalVectorField<real>&);
 void boundaryCondition (GlobalScalarField<real>&);
 void boundaryCondition (GlobalVectorField<real>&);
 
+template <int Nz>
+void periodicBoundaryConditionX (ScalarField<real,Nz,vfpic::nx>&);
+void periodicBoundaryConditionZ (GlobalScalarField<real>&);
+template <int N>
+void periodicBoundaryCondition (Particles<N>*);
+
 class BoundaryCondition
 {
 public:

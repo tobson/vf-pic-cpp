@@ -8,68 +8,30 @@
 
 #include "problem.h"
 
+#include "boundaries.h"
 #include "scalar-field.h"
 #include "particles.h"
 
 using namespace vfpic;
 
-void boundaryConditionZ (GlobalScalarField<real>& scalar)
-{
-    for (int i = 0; i < nx+2; ++i)
-    {
-        scalar (0   ,i) = scalar (nz,i);
-        scalar (nz+1,i) = scalar (1 ,i);
-    }
-}
-
 template <int Nz>
 void boundaryConditionX (ScalarField<real,Nz,nx>& scalar)
 {
-    for (int k = 1; k <= Nz; ++k)
-    {
-        scalar (k,0   ) = scalar (k,nx);
-        scalar (k,nx+1) = scalar (k,1 );
-    }
+    periodicBoundaryConditionX (scalar);
 }
 template void boundaryConditionX (LocalScalarField<real>&);
 template void boundaryConditionX (std::conditional<nthreads==1,ScalarField<real,0,nx>,
                                   GlobalScalarField<real>>::type&);
 
+void boundaryConditionZ (GlobalScalarField<real>& scalar)
+{
+    periodicBoundaryConditionZ (scalar);
+}
+
 template <int N>
 void boundaryCondition (Particles<N> *particles)
 {
-    using namespace config;
-
-    const real Lx1 = 1.0/Lx;
-    const real Lz1 = 1.0/Lz;
-
-    Particle *p = particles->begin ();
-
-    if (lshear)
-    {
-        for (int dummy = 0; dummy < N; ++dummy)
-        {
-            const real i = floor ((p->x - x0)*Lx1);
-            const real k = floor ((p->z - z0)*Lz1);
-
-            p->x -= i*Lx;
-            p->z -= k*Lz;
-
-            p->vy -= i*Sshear*Lx;
-
-            ++p;
-        }
-    }
-    else
-    {
-        for (int dummy = 0; dummy < N; ++dummy)
-        {
-            p->x -= floor ((p->x - x0)*Lx1)*Lx;
-            p->z -= floor ((p->z - z0)*Lz1)*Lz;
-            
-            ++p;
-        }
-    }
+    periodicBoundaryCondition (particles);
 }
 template void boundaryCondition (LocalParticles*);
 template void boundaryCondition (std::conditional<nthreads==1,Particles<0>,GlobalParticles>::type*);
