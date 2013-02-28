@@ -7,11 +7,9 @@ jacobi
 test
 vf-pic
 sse
-cold-mri
 
 *.d
 *.o
 *.pyc
 *.dat
 *.swp
-*.cfg
