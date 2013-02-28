@@ -30,6 +30,9 @@ void periodicBoundaryConditionZ (GlobalScalarField<real>&);
 template <int N>
 void periodicBoundaryCondition (Particles<N>*);
 
+template <int N>
+void shearingPeriodicBoundaryCondition (Particles<N>*);
+
 class BoundaryCondition
 {
 public:

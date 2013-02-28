@@ -65,34 +65,42 @@ void periodicBoundaryCondition (Particles<N> *particles)
     
     Particle *p = particles->begin ();
     
-    if (lshear)
+    for (int dummy = 0; dummy < N; ++dummy)
     {
-        for (int dummy = 0; dummy < N; ++dummy)
-        {
-            const real i = floor ((p->x - x0)*Lx1);
-            const real k = floor ((p->z - z0)*Lz1);
-            
-            p->x -= i*Lx;
-            p->z -= k*Lz;
-            
-            p->vy -= i*Sshear*Lx;
-            
-            ++p;
-        }
-    }
-    else
-    {
-        for (int dummy = 0; dummy < N; ++dummy)
-        {
-            p->x -= floor ((p->x - x0)*Lx1)*Lx;
-            p->z -= floor ((p->z - z0)*Lz1)*Lz;
-            
-            ++p;
-        }
+        p->x -= floor ((p->x - x0)*Lx1)*Lx;
+        p->z -= floor ((p->z - z0)*Lz1)*Lz;
+        
+        ++p;
     }
 }
 template void periodicBoundaryCondition (LocalParticles*);
 template void periodicBoundaryCondition (std::conditional<nthreads==1,Particles<0>,GlobalParticles>::type*);
+
+template <int N>
+void shearingPeriodicBoundaryCondition (Particles<N> *particles)
+{
+    using namespace config;
+    
+    const real Lx1 = 1.0/Lx;
+    const real Lz1 = 1.0/Lz;
+    
+    Particle *p = particles->begin ();
+    
+    for (int dummy = 0; dummy < N; ++dummy)
+    {
+        const real i = floor ((p->x - x0)*Lx1);
+        const real k = floor ((p->z - z0)*Lz1);
+        
+        p->x -= i*Lx;
+        p->z -= k*Lz;
+        
+        p->vy -= i*Sshear*Lx;
+        
+        ++p;
+    }
+}
+template void shearingPeriodicBoundaryCondition (LocalParticles*);
+template void shearingPeriodicBoundaryCondition (std::conditional<nthreads==1,Particles<0>,GlobalParticles>::type*);
 
 BoundaryCondition::BoundaryCondition (Barrier& barrier, const int ithread):
 barrier (barrier), ithread (ithread)
