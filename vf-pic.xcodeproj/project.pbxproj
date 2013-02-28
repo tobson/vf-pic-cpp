@@ -8,41 +8,49 @@
 
 /* Begin PBXBuildFile section */
 		D20381A416BCF25A008755DC /* sse.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D20381A216BCF25A008755DC /* sse.cpp */; };
-		D20381BE16BE0196008755DC /* deposit.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D20381BC16BE0195008755DC /* deposit.cpp */; };
 		D20381BF16BE2121008755DC /* global.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D28BAEFD16B5FD0200578956 /* global.cpp */; };
 		D20381C016BE212F008755DC /* config.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D28BAF0016B5FDDA00578956 /* config.cpp */; };
-		D206FBFD16C1C31C008BD080 /* ohm.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D206FBFB16C1C31C008BD080 /* ohm.cpp */; };
-		D206FC0416C62E3D008BD080 /* faraday.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D206FC0316C62E3D008BD080 /* faraday.cpp */; };
-		D206FC0E16CA13A2008BD080 /* initial-condition.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D206FC0C16CA13A2008BD080 /* initial-condition.cpp */; };
-		D206FC1216CA14D3008BD080 /* drift.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D206FC1016CA14D1008BD080 /* drift.cpp */; };
 		D24BC36D16B64B1A006C64A3 /* global.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D28BAEFD16B5FD0200578956 /* global.cpp */; };
 		D24BC36E16B64B1A006C64A3 /* config.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D28BAF0016B5FDDA00578956 /* config.cpp */; };
 		D24BC37016B64B1A006C64A3 /* barrier.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D28BAF1816B60B3800578956 /* barrier.cpp */; };
 		D24BC37A16B64B92006C64A3 /* jacobi.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D24BC37916B64B92006C64A3 /* jacobi.cpp */; };
-		D25C8DB416B89B6600B0A607 /* grid.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D25C8DB216B89B6600B0A607 /* grid.cpp */; };
-		D270B39E16CEDC1B00DFCE2F /* output.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D270B39C16CEDC1B00DFCE2F /* output.cpp */; };
-		D28BAEFF16B5FD0200578956 /* global.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D28BAEFD16B5FD0200578956 /* global.cpp */; };
-		D28BAF0216B5FDDA00578956 /* config.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D28BAF0016B5FDDA00578956 /* config.cpp */; };
 		D28BAF0A16B604B900578956 /* global.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D28BAEFD16B5FD0200578956 /* global.cpp */; };
 		D28BAF0B16B604B900578956 /* config.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D28BAF0016B5FDDA00578956 /* config.cpp */; };
 		D28BAF1516B604F200578956 /* test.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D28BAF1416B604F200578956 /* test.cpp */; };
-		D28BAF1A16B60B3800578956 /* barrier.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D28BAF1816B60B3800578956 /* barrier.cpp */; };
 		D28BAF1B16B60B3800578956 /* barrier.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D28BAF1816B60B3800578956 /* barrier.cpp */; };
-		D2915FD316B5F8280084A612 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2915FC816B5F7FE0084A612 /* main.cpp */; };
-		D29BF1F516D6AF74000BD507 /* global.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D28BAEFD16B5FD0200578956 /* global.cpp */; };
-		D29BF1F616D6AF74000BD507 /* config.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D28BAF0016B5FDDA00578956 /* config.cpp */; };
-		D29BF1F816D6AF74000BD507 /* grid.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D25C8DB216B89B6600B0A607 /* grid.cpp */; };
-		D29BF1F916D6AF74000BD507 /* boundaries.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2C6828016BB7EB30023FB36 /* boundaries.cpp */; };
-		D29BF20A16D6B018000BD507 /* cold-mri.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D29BF20816D6B018000BD507 /* cold-mri.cpp */; };
-		D29BF20B16D6B106000BD507 /* barrier.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D28BAF1816B60B3800578956 /* barrier.cpp */; };
-		D2C6828216BB7EB40023FB36 /* boundaries.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2C6828016BB7EB30023FB36 /* boundaries.cpp */; };
+		D2ABD94716DEEFC4000D369B /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2915FC816B5F7FE0084A612 /* main.cpp */; };
+		D2ABD94816DEEFC4000D369B /* global.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D28BAEFD16B5FD0200578956 /* global.cpp */; };
+		D2ABD94916DEEFC4000D369B /* config.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D28BAF0016B5FDDA00578956 /* config.cpp */; };
+		D2ABD94A16DEEFC4000D369B /* barrier.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D28BAF1816B60B3800578956 /* barrier.cpp */; };
+		D2ABD94B16DEEFC4000D369B /* grid.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D25C8DB216B89B6600B0A607 /* grid.cpp */; };
+		D2ABD94C16DEEFC4000D369B /* boundaries.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2C6828016BB7EB30023FB36 /* boundaries.cpp */; };
+		D2ABD94D16DEEFC4000D369B /* kick.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2C6828816BB9CAC0023FB36 /* kick.cpp */; };
+		D2ABD94E16DEEFC4000D369B /* deposit.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D20381BC16BE0195008755DC /* deposit.cpp */; };
+		D2ABD94F16DEEFC4000D369B /* ohm.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D206FBFB16C1C31C008BD080 /* ohm.cpp */; };
+		D2ABD95016DEEFC4000D369B /* faraday.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D206FC0316C62E3D008BD080 /* faraday.cpp */; };
+		D2ABD95116DEEFC4000D369B /* drift.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D206FC1016CA14D1008BD080 /* drift.cpp */; };
+		D2ABD95216DEEFC4000D369B /* output.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D270B39C16CEDC1B00DFCE2F /* output.cpp */; };
+		D2ABD95916DEF010000D369B /* problem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2F7CF8716DEEF0300F064CF /* problem.cpp */; };
+		D2ABD95C16DEF4F2000D369B /* problem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2ABD95A16DEF4F2000D369B /* problem.cpp */; };
+		D2ABD95D16DEF4F2000D369B /* problem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2ABD95A16DEF4F2000D369B /* problem.cpp */; };
+		D2ABD95E16DEF4F2000D369B /* problem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2ABD95A16DEF4F2000D369B /* problem.cpp */; };
+		D2ABD95F16DEF65D000D369B /* boundaries.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2C6828016BB7EB30023FB36 /* boundaries.cpp */; };
+		D2ABD96016DEF665000D369B /* barrier.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D28BAF1816B60B3800578956 /* barrier.cpp */; };
 		D2C6828316BB7EB40023FB36 /* boundaries.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2C6828016BB7EB30023FB36 /* boundaries.cpp */; };
 		D2C6828416BB7EB40023FB36 /* boundaries.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2C6828016BB7EB30023FB36 /* boundaries.cpp */; };
-		D2C6828A16BB9CAC0023FB36 /* kick.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2C6828816BB9CAC0023FB36 /* kick.cpp */; };
-		D2DD55F616DDF75F0003D699 /* problem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2DD55F416DDF75F0003D699 /* problem.cpp */; };
-		D2DD55F716DDFE0A0003D699 /* problem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2DD55F416DDF75F0003D699 /* problem.cpp */; };
-		D2DD55F816DDFE360003D699 /* problem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2DD55F416DDF75F0003D699 /* problem.cpp */; };
-		D2DD55F916DDFE4B0003D699 /* problem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2DD55F416DDF75F0003D699 /* problem.cpp */; };
+		D2F7CF7016DEE31500F064CF /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2915FC816B5F7FE0084A612 /* main.cpp */; };
+		D2F7CF7116DEE31500F064CF /* global.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D28BAEFD16B5FD0200578956 /* global.cpp */; };
+		D2F7CF7216DEE31500F064CF /* config.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D28BAF0016B5FDDA00578956 /* config.cpp */; };
+		D2F7CF7316DEE31500F064CF /* barrier.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D28BAF1816B60B3800578956 /* barrier.cpp */; };
+		D2F7CF7416DEE31500F064CF /* grid.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D25C8DB216B89B6600B0A607 /* grid.cpp */; };
+		D2F7CF7516DEE31500F064CF /* boundaries.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2C6828016BB7EB30023FB36 /* boundaries.cpp */; };
+		D2F7CF7616DEE31500F064CF /* kick.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2C6828816BB9CAC0023FB36 /* kick.cpp */; };
+		D2F7CF7716DEE31500F064CF /* deposit.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D20381BC16BE0195008755DC /* deposit.cpp */; };
+		D2F7CF7816DEE31500F064CF /* ohm.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D206FBFB16C1C31C008BD080 /* ohm.cpp */; };
+		D2F7CF7916DEE31500F064CF /* faraday.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D206FC0316C62E3D008BD080 /* faraday.cpp */; };
+		D2F7CF7B16DEE31500F064CF /* drift.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D206FC1016CA14D1008BD080 /* drift.cpp */; };
+		D2F7CF7C16DEE31500F064CF /* output.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D270B39C16CEDC1B00DFCE2F /* output.cpp */; };
+		D2F7CF8416DEE32700F064CF /* problem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2F7CF6C16DEE24500F064CF /* problem.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -73,7 +81,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 1;
 		};
-		D2915FCD16B5F8170084A612 /* CopyFiles */ = {
+		D2ABD95416DEEFC4000D369B /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = /usr/share/man/man1/;
@@ -82,7 +90,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 1;
 		};
-		D29BF20316D6AF74000BD507 /* CopyFiles */ = {
+		D2F7CF7F16DEE31500F064CF /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = /usr/share/man/man1/;
@@ -102,7 +110,6 @@
 		D206FBFC16C1C31C008BD080 /* ohm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ohm.h; path = src/ohm.h; sourceTree = SOURCE_ROOT; };
 		D206FC0116C3539F008BD080 /* math-helpers.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "math-helpers.h"; path = "src/math-helpers.h"; sourceTree = SOURCE_ROOT; };
 		D206FC0316C62E3D008BD080 /* faraday.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = faraday.cpp; path = src/faraday.cpp; sourceTree = SOURCE_ROOT; };
-		D206FC0C16CA13A2008BD080 /* initial-condition.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = "initial-condition.cpp"; path = "src/initial-condition.cpp"; sourceTree = SOURCE_ROOT; };
 		D206FC0D16CA13A2008BD080 /* initial-condition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "initial-condition.h"; path = "src/initial-condition.h"; sourceTree = SOURCE_ROOT; };
 		D206FC1016CA14D1008BD080 /* drift.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = drift.cpp; path = src/drift.cpp; sourceTree = SOURCE_ROOT; };
 		D206FC1116CA14D2008BD080 /* drift.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = drift.h; path = src/drift.h; sourceTree = SOURCE_ROOT; };
@@ -126,20 +133,25 @@
 		D28BAF1816B60B3800578956 /* barrier.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = barrier.cpp; path = src/barrier.cpp; sourceTree = SOURCE_ROOT; };
 		D28BAF1916B60B3800578956 /* barrier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = barrier.h; path = src/barrier.h; sourceTree = SOURCE_ROOT; };
 		D2915FC816B5F7FE0084A612 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = src/main.cpp; sourceTree = SOURCE_ROOT; };
-		D2915FD116B5F8170084A612 /* vf-pic */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "vf-pic"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D29BD8F716D35951000BD507 /* TODO */ = {isa = PBXFileReference; lastKnownFileType = text; path = TODO; sourceTree = "<group>"; };
-		D29BF20716D6AF74000BD507 /* cold-mri */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "cold-mri"; sourceTree = BUILT_PRODUCTS_DIR; };
-		D29BF20816D6B018000BD507 /* cold-mri.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = "cold-mri.cpp"; path = "src/cold-mri.cpp"; sourceTree = SOURCE_ROOT; };
 		D29BF20C16D97E0B000BD507 /* cold-mri.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = "cold-mri.py"; sourceTree = "<group>"; };
+		D2ABD95816DEEFC5000D369B /* cold-mri copy */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "cold-mri copy"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D2ABD95A16DEF4F2000D369B /* problem.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = problem.cpp; sourceTree = "<group>"; };
+		D2ABD95B16DEF4F2000D369B /* problem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = problem.h; sourceTree = "<group>"; };
 		D2C6827D16B9DF600023FB36 /* faraday.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = faraday.h; path = src/faraday.h; sourceTree = SOURCE_ROOT; };
 		D2C6827E16B9EBA30023FB36 /* diffops.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = diffops.h; path = src/diffops.h; sourceTree = SOURCE_ROOT; };
 		D2C6828016BB7EB30023FB36 /* boundaries.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = boundaries.cpp; path = src/boundaries.cpp; sourceTree = SOURCE_ROOT; };
 		D2C6828116BB7EB40023FB36 /* boundaries.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = boundaries.h; path = src/boundaries.h; sourceTree = SOURCE_ROOT; };
 		D2C6828816BB9CAC0023FB36 /* kick.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = kick.cpp; path = src/kick.cpp; sourceTree = SOURCE_ROOT; };
 		D2C6828916BB9CAC0023FB36 /* kick.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = kick.h; path = src/kick.h; sourceTree = SOURCE_ROOT; };
-		D2DD55F416DDF75F0003D699 /* problem.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = problem.cpp; sourceTree = "<group>"; };
-		D2DD55F516DDF75F0003D699 /* problem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = problem.h; sourceTree = "<group>"; };
 		D2E0963516BF83C7003AA5DA /* libconfig++.la */ = {isa = PBXFileReference; lastKnownFileType = text; name = "libconfig++.la"; path = "../../macports/lib/libconfig++.la"; sourceTree = "<group>"; };
+		D2F7CF6C16DEE24500F064CF /* problem.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = problem.cpp; sourceTree = "<group>"; };
+		D2F7CF6D16DEE24500F064CF /* problem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = problem.h; sourceTree = "<group>"; };
+		D2F7CF8316DEE31500F064CF /* vf-pic copy */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "vf-pic copy"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D2F7CF8516DEECD000F064CF /* problem.cfg */ = {isa = PBXFileReference; lastKnownFileType = text; path = problem.cfg; sourceTree = "<group>"; };
+		D2F7CF8716DEEF0300F064CF /* problem.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = problem.cpp; sourceTree = "<group>"; };
+		D2F7CF8816DEEF0300F064CF /* problem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = problem.h; sourceTree = "<group>"; };
+		D2F7CF8916DEEF2900F064CF /* problem.cfg */ = {isa = PBXFileReference; lastKnownFileType = text; path = problem.cfg; sourceTree = "<group>"; };
 		D2F90E4816B734C700ABDA86 /* jacobi.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = jacobi.py; sourceTree = "<group>"; };
 		D2F90E4A16B7375900ABDA86 /* vfpic.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = vfpic.py; sourceTree = "<group>"; };
 		D2F90E4B16B73ED400ABDA86 /* Makefile */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
@@ -169,14 +181,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		D2915FCC16B5F8170084A612 /* Frameworks */ = {
+		D2ABD95316DEEFC4000D369B /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		D29BF20116D6AF74000BD507 /* Frameworks */ = {
+		D2F7CF7E16DEE31500F064CF /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -189,6 +201,7 @@
 		D2915FA416B5F56A0084A612 = {
 			isa = PBXGroup;
 			children = (
+				D2F7CF6816DEE1B400F064CF /* problems */,
 				D2DD55E816DD91380003D699 /* src */,
 				D29BF20C16D97E0B000BD507 /* cold-mri.py */,
 				D2F90E4B16B73ED400ABDA86 /* Makefile */,
@@ -204,11 +217,11 @@
 		D2915FB016B5F56A0084A612 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				D2915FD116B5F8170084A612 /* vf-pic */,
 				D28BAF1216B604B900578956 /* test */,
 				D24BC37716B64B1A006C64A3 /* jacobi */,
 				D20381A116BCF1FD008755DC /* sse */,
-				D29BF20716D6AF74000BD507 /* cold-mri */,
+				D2F7CF8316DEE31500F064CF /* vf-pic copy */,
+				D2ABD95816DEEFC5000D369B /* cold-mri copy */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -218,14 +231,12 @@
 			children = (
 				D28BAF1816B60B3800578956 /* barrier.cpp */,
 				D2C6828016BB7EB30023FB36 /* boundaries.cpp */,
-				D29BF20816D6B018000BD507 /* cold-mri.cpp */,
 				D28BAF0016B5FDDA00578956 /* config.cpp */,
 				D20381BC16BE0195008755DC /* deposit.cpp */,
 				D206FC1016CA14D1008BD080 /* drift.cpp */,
 				D206FC0316C62E3D008BD080 /* faraday.cpp */,
 				D28BAEFD16B5FD0200578956 /* global.cpp */,
 				D25C8DB216B89B6600B0A607 /* grid.cpp */,
-				D206FC0C16CA13A2008BD080 /* initial-condition.cpp */,
 				D24BC37916B64B92006C64A3 /* jacobi.cpp */,
 				D2C6828816BB9CAC0023FB36 /* kick.cpp */,
 				D2915FC816B5F7FE0084A612 /* main.cpp */,
@@ -253,10 +264,39 @@
 				D270B39816CDE6AD00DFCE2F /* three-vector.h */,
 				D270B39716CCCE8A00DFCE2F /* variables.h */,
 				D28BAF1716B608BC00578956 /* vector-field.h */,
-				D2DD55F416DDF75F0003D699 /* problem.cpp */,
-				D2DD55F516DDF75F0003D699 /* problem.h */,
+				D2ABD95A16DEF4F2000D369B /* problem.cpp */,
+				D2ABD95B16DEF4F2000D369B /* problem.h */,
 			);
 			path = src;
+			sourceTree = "<group>";
+		};
+		D2F7CF6816DEE1B400F064CF /* problems */ = {
+			isa = PBXGroup;
+			children = (
+				D2F7CF8616DEEEB600F064CF /* circular-wave */,
+				D2F7CF6916DEE1E200F064CF /* cold-mri */,
+			);
+			path = problems;
+			sourceTree = "<group>";
+		};
+		D2F7CF6916DEE1E200F064CF /* cold-mri */ = {
+			isa = PBXGroup;
+			children = (
+				D2F7CF6C16DEE24500F064CF /* problem.cpp */,
+				D2F7CF6D16DEE24500F064CF /* problem.h */,
+				D2F7CF8516DEECD000F064CF /* problem.cfg */,
+			);
+			path = "cold-mri";
+			sourceTree = "<group>";
+		};
+		D2F7CF8616DEEEB600F064CF /* circular-wave */ = {
+			isa = PBXGroup;
+			children = (
+				D2F7CF8716DEEF0300F064CF /* problem.cpp */,
+				D2F7CF8816DEEF0300F064CF /* problem.h */,
+				D2F7CF8916DEEF2900F064CF /* problem.cfg */,
+			);
+			path = "circular-wave";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -313,30 +353,30 @@
 			productReference = D28BAF1216B604B900578956 /* test */;
 			productType = "com.apple.product-type.tool";
 		};
-		D2915FC916B5F8170084A612 /* vf-pic */ = {
+		D2ABD94416DEEFC4000D369B /* circular-wave */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D2915FCE16B5F8170084A612 /* Build configuration list for PBXNativeTarget "vf-pic" */;
+			buildConfigurationList = D2ABD95516DEEFC4000D369B /* Build configuration list for PBXNativeTarget "circular-wave" */;
 			buildPhases = (
-				D2915FCA16B5F8170084A612 /* Sources */,
-				D2915FCC16B5F8170084A612 /* Frameworks */,
-				D2915FCD16B5F8170084A612 /* CopyFiles */,
+				D2ABD94516DEEFC4000D369B /* Sources */,
+				D2ABD95316DEEFC4000D369B /* Frameworks */,
+				D2ABD95416DEEFC4000D369B /* CopyFiles */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = "vf-pic";
+			name = "circular-wave";
 			productName = "vf-pic";
-			productReference = D2915FD116B5F8170084A612 /* vf-pic */;
+			productReference = D2ABD95816DEEFC5000D369B /* cold-mri copy */;
 			productType = "com.apple.product-type.tool";
 		};
-		D29BF1F216D6AF74000BD507 /* cold-mri */ = {
+		D2F7CF6E16DEE31500F064CF /* cold-mri */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D29BF20416D6AF74000BD507 /* Build configuration list for PBXNativeTarget "cold-mri" */;
+			buildConfigurationList = D2F7CF8016DEE31500F064CF /* Build configuration list for PBXNativeTarget "cold-mri" */;
 			buildPhases = (
-				D29BF1F316D6AF74000BD507 /* Sources */,
-				D29BF20116D6AF74000BD507 /* Frameworks */,
-				D29BF20316D6AF74000BD507 /* CopyFiles */,
+				D2F7CF6F16DEE31500F064CF /* Sources */,
+				D2F7CF7E16DEE31500F064CF /* Frameworks */,
+				D2F7CF7F16DEE31500F064CF /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -344,7 +384,7 @@
 			);
 			name = "cold-mri";
 			productName = "vf-pic";
-			productReference = D29BF20716D6AF74000BD507 /* cold-mri */;
+			productReference = D2F7CF8316DEE31500F064CF /* vf-pic copy */;
 			productType = "com.apple.product-type.tool";
 		};
 /* End PBXNativeTarget section */
@@ -368,11 +408,11 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				D2915FC916B5F8170084A612 /* vf-pic */,
 				D28BAF0716B604B900578956 /* test */,
 				D24BC36B16B64B1A006C64A3 /* jacobi */,
 				D203819416BCF1FD008755DC /* sse */,
-				D29BF1F216D6AF74000BD507 /* cold-mri */,
+				D2F7CF6E16DEE31500F064CF /* cold-mri */,
+				D2ABD94416DEEFC4000D369B /* circular-wave */,
 			);
 		};
 /* End PBXProject section */
@@ -382,9 +422,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D2ABD96016DEF665000D369B /* barrier.cpp in Sources */,
+				D2ABD95F16DEF65D000D369B /* boundaries.cpp in Sources */,
 				D20381C016BE212F008755DC /* config.cpp in Sources */,
 				D20381BF16BE2121008755DC /* global.cpp in Sources */,
 				D20381A416BCF25A008755DC /* sse.cpp in Sources */,
+				D2ABD95E16DEF4F2000D369B /* problem.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -392,12 +435,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D2DD55F816DDFE360003D699 /* problem.cpp in Sources */,
 				D24BC36D16B64B1A006C64A3 /* global.cpp in Sources */,
 				D24BC36E16B64B1A006C64A3 /* config.cpp in Sources */,
 				D24BC37016B64B1A006C64A3 /* barrier.cpp in Sources */,
 				D24BC37A16B64B92006C64A3 /* jacobi.cpp in Sources */,
 				D2C6828416BB7EB40023FB36 /* boundaries.cpp in Sources */,
+				D2ABD95D16DEF4F2000D369B /* problem.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -405,47 +448,52 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D2DD55F916DDFE4B0003D699 /* problem.cpp in Sources */,
 				D28BAF0A16B604B900578956 /* global.cpp in Sources */,
 				D28BAF0B16B604B900578956 /* config.cpp in Sources */,
 				D28BAF1516B604F200578956 /* test.cpp in Sources */,
 				D28BAF1B16B60B3800578956 /* barrier.cpp in Sources */,
 				D2C6828316BB7EB40023FB36 /* boundaries.cpp in Sources */,
+				D2ABD95C16DEF4F2000D369B /* problem.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		D2915FCA16B5F8170084A612 /* Sources */ = {
+		D2ABD94516DEEFC4000D369B /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D2915FD316B5F8280084A612 /* main.cpp in Sources */,
-				D28BAEFF16B5FD0200578956 /* global.cpp in Sources */,
-				D28BAF0216B5FDDA00578956 /* config.cpp in Sources */,
-				D28BAF1A16B60B3800578956 /* barrier.cpp in Sources */,
-				D25C8DB416B89B6600B0A607 /* grid.cpp in Sources */,
-				D2C6828216BB7EB40023FB36 /* boundaries.cpp in Sources */,
-				D2C6828A16BB9CAC0023FB36 /* kick.cpp in Sources */,
-				D20381BE16BE0196008755DC /* deposit.cpp in Sources */,
-				D206FBFD16C1C31C008BD080 /* ohm.cpp in Sources */,
-				D206FC0416C62E3D008BD080 /* faraday.cpp in Sources */,
-				D206FC0E16CA13A2008BD080 /* initial-condition.cpp in Sources */,
-				D206FC1216CA14D3008BD080 /* drift.cpp in Sources */,
-				D270B39E16CEDC1B00DFCE2F /* output.cpp in Sources */,
-				D2DD55F616DDF75F0003D699 /* problem.cpp in Sources */,
+				D2ABD95916DEF010000D369B /* problem.cpp in Sources */,
+				D2ABD94716DEEFC4000D369B /* main.cpp in Sources */,
+				D2ABD94816DEEFC4000D369B /* global.cpp in Sources */,
+				D2ABD94916DEEFC4000D369B /* config.cpp in Sources */,
+				D2ABD94A16DEEFC4000D369B /* barrier.cpp in Sources */,
+				D2ABD94B16DEEFC4000D369B /* grid.cpp in Sources */,
+				D2ABD94C16DEEFC4000D369B /* boundaries.cpp in Sources */,
+				D2ABD94D16DEEFC4000D369B /* kick.cpp in Sources */,
+				D2ABD94E16DEEFC4000D369B /* deposit.cpp in Sources */,
+				D2ABD94F16DEEFC4000D369B /* ohm.cpp in Sources */,
+				D2ABD95016DEEFC4000D369B /* faraday.cpp in Sources */,
+				D2ABD95116DEEFC4000D369B /* drift.cpp in Sources */,
+				D2ABD95216DEEFC4000D369B /* output.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		D29BF1F316D6AF74000BD507 /* Sources */ = {
+		D2F7CF6F16DEE31500F064CF /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D2DD55F716DDFE0A0003D699 /* problem.cpp in Sources */,
-				D29BF20B16D6B106000BD507 /* barrier.cpp in Sources */,
-				D29BF1F516D6AF74000BD507 /* global.cpp in Sources */,
-				D29BF1F616D6AF74000BD507 /* config.cpp in Sources */,
-				D29BF1F816D6AF74000BD507 /* grid.cpp in Sources */,
-				D29BF1F916D6AF74000BD507 /* boundaries.cpp in Sources */,
-				D29BF20A16D6B018000BD507 /* cold-mri.cpp in Sources */,
+				D2F7CF8416DEE32700F064CF /* problem.cpp in Sources */,
+				D2F7CF7016DEE31500F064CF /* main.cpp in Sources */,
+				D2F7CF7116DEE31500F064CF /* global.cpp in Sources */,
+				D2F7CF7216DEE31500F064CF /* config.cpp in Sources */,
+				D2F7CF7316DEE31500F064CF /* barrier.cpp in Sources */,
+				D2F7CF7416DEE31500F064CF /* grid.cpp in Sources */,
+				D2F7CF7516DEE31500F064CF /* boundaries.cpp in Sources */,
+				D2F7CF7616DEE31500F064CF /* kick.cpp in Sources */,
+				D2F7CF7716DEE31500F064CF /* deposit.cpp in Sources */,
+				D2F7CF7816DEE31500F064CF /* ohm.cpp in Sources */,
+				D2F7CF7916DEE31500F064CF /* faraday.cpp in Sources */,
+				D2F7CF7B16DEE31500F064CF /* drift.cpp in Sources */,
+				D2F7CF7C16DEE31500F064CF /* output.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -545,31 +593,31 @@
 			};
 			name = Release;
 		};
-		D2915FCF16B5F8170084A612 /* Debug */ = {
+		D2ABD95616DEEFC4000D369B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				PRODUCT_NAME = "vf-pic";
+				PRODUCT_NAME = "cold-mri copy";
 			};
 			name = Debug;
 		};
-		D2915FD016B5F8170084A612 /* Release */ = {
+		D2ABD95716DEEFC4000D369B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				PRODUCT_NAME = "vf-pic";
+				PRODUCT_NAME = "cold-mri copy";
 			};
 			name = Release;
 		};
-		D29BF20516D6AF74000BD507 /* Debug */ = {
+		D2F7CF8116DEE31500F064CF /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				PRODUCT_NAME = "cold-mri";
+				PRODUCT_NAME = "vf-pic copy";
 			};
 			name = Debug;
 		};
-		D29BF20616D6AF74000BD507 /* Release */ = {
+		D2F7CF8216DEE31500F064CF /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				PRODUCT_NAME = "cold-mri";
+				PRODUCT_NAME = "vf-pic copy";
 			};
 			name = Release;
 		};
@@ -612,20 +660,20 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D2915FCE16B5F8170084A612 /* Build configuration list for PBXNativeTarget "vf-pic" */ = {
+		D2ABD95516DEEFC4000D369B /* Build configuration list for PBXNativeTarget "circular-wave" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				D2915FCF16B5F8170084A612 /* Debug */,
-				D2915FD016B5F8170084A612 /* Release */,
+				D2ABD95616DEEFC4000D369B /* Debug */,
+				D2ABD95716DEEFC4000D369B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D29BF20416D6AF74000BD507 /* Build configuration list for PBXNativeTarget "cold-mri" */ = {
+		D2F7CF8016DEE31500F064CF /* Build configuration list for PBXNativeTarget "cold-mri" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				D29BF20516D6AF74000BD507 /* Debug */,
-				D29BF20616D6AF74000BD507 /* Release */,
+				D2F7CF8116DEE31500F064CF /* Debug */,
+				D2F7CF8216DEE31500F064CF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

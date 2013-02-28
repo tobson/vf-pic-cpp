@@ -10,8 +10,8 @@
 
 #include <random>
 
-#include "boundaries.h"
-#include "initial-condition.h"
+#include "../../src/boundaries.h"
+#include "../../src/initial-condition.h"
 
 using namespace vfpic;
 
@@ -41,13 +41,31 @@ void initialCondition (GlobalVariables *global)
 {
     using namespace config;
     
-    GlobalParticles& particles = global->particles;
-    
     std::mt19937 gen;
     std::uniform_real_distribution<> uniform;
     std::normal_distribution<> normal;
     
-    // Particle positions
+    const Grid& grid = global->grid;
+    
+    GlobalVectorField<real>& A = global->A;
+    GlobalVectorField<real>& E = global->E;
+    GlobalParticles& particles = global->particles;
+    
+    const real vA2 = B0*B0/rho0;
+    
+    const real kx = 2.0*pi*real (ikx)/Lx;
+    const real kz = 2.0*pi*real (ikz)/Lz;
+    
+    const real k2 = kx*kx + kz*kz;
+    
+    const real angle = atan2 (kx, kz);
+    
+    const real Omegac = em*B0;
+    
+    const real kvA2 = k2*vA2;
+    
+    const real omega = (0.5*kvA2/Omegac)*(sqrt(1.0 + 4.0*Omegac*Omegac/kvA2) + 1.0);
+    
     if (randomizePositions)
     {
         for (Particle *p = particles.begin (); p != particles.end (); ++p)
@@ -65,7 +83,6 @@ void initialCondition (GlobalVariables *global)
         }
         const int npx = nx*int (pow (2.0, exponent/2));
         const int npz = nz*int (pow (2.0, exponent - exponent/2));
-        
         for (int k = 0; k < npz; ++k)
             for (int i = 0; i < npx; ++i)
             {
@@ -74,24 +91,40 @@ void initialCondition (GlobalVariables *global)
             }
     }
     
-    // Particle velocities
+    const real fac = kvA2/(omega*omega*B0);
+    
     for (auto p = particles.begin (); p != particles.end (); ++p)
     {
-        p->vx = cs0*normal (gen);
-        p->vy = cs0*normal (gen);
-        p->vz = cs0*normal (gen);
+        const real phi = kx*p->x + kz*p->z + 0.5*omega*dt;
+        
+        p->vx = -ampl*fac*sin (phi)*cos (angle);
+        p->vy = -ampl*fac*cos (phi);
+        p->vz = +ampl*fac*sin (phi)*sin (angle);
     }
-
-    // Vector potential
-    global->A = real (0);
-    boundaryCondition (global->A);
     
-    // Electric field
-    global->E = real (0);
-    boundaryCondition (global->E);
+    for (int k = 1; k <= nz; ++k)
+    for (int i = 1; i <= nx; ++i)
+    {
+        const real phi = kx*grid.x (k,i) + kz*grid.z (k,i) + 0.5*omega*dt;
+        
+        A.x (k,i) = +(ampl/omega)*sin (phi)*cos (angle);
+        A.y (k,i) = +(ampl/omega)*cos (phi);
+        A.z (k,i) = -(ampl/omega)*sin (phi)*sin (angle);
+    }
+    boundaryCondition (A);
     
-    // Background magnetic field
-    global->B0.x = 0.0;
+    for (int k = 1; k <= nz; ++k)
+    for (int i = 1; i <= nx; ++i)
+    {
+        const real phi = kx*grid.x (k,i) + kz*grid.z (k,i);
+        
+        E.x (k,i) += ampl*cos(phi)*cos(angle);
+        E.y (k,i) -= ampl*sin(phi);
+        E.z (k,i) -= ampl*cos(phi)*sin(angle);
+    }
+    boundaryCondition (E);
+    
+    global->B0.x = B0*sin (angle);
     global->B0.y = 0.0;
-    global->B0.z = 0.0;
+    global->B0.z = B0*cos (angle);
 }

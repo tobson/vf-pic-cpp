@@ -9,6 +9,4 @@
 #ifndef __vf_pic__problem__
 #define __vf_pic__problem__
 
-#include <iostream>
-
 #endif /* defined(__vf_pic__problem__) */
