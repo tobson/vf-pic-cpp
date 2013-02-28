@@ -78,7 +78,6 @@ namespace config
         using stringmap = std::map<std::string,T>;
         stringmap<stringmap<std::string>> contents;
     public:
-        void parse (const char*);
         void parse (std::ifstream&);
         template <typename T>
         T get (const std::string&, const std::string&);

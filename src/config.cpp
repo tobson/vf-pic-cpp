@@ -114,13 +114,6 @@ namespace config
     bool verbose = false;
     bool throwOnCopyConstruct = false;
 
-    void Config::parse (const char *filename)
-    {
-        std::ifstream file (filename);
-        parse (file);
-        file.close ();
-    }
-
     void Config::parse (std::ifstream& file)
     {
         const std::string whitespace (" \t");
@@ -303,8 +296,14 @@ namespace config
         Config cfg;
         std::string filename;
         
-        filename = srcdir + "/input.cfg";
-        cfg.parse (filename.c_str ());
+        filename = srcdir + "/problem.cfg";
+        std::ifstream file (filename);
+        if (file.fail ())
+        {
+            throw std::runtime_error ("Failed to open '" + filename + "'\n");
+        }
+        cfg.parse (file);
+        file.close ();
 
         /* Grid */
         cfg.get ("vfpic", "x0", x0);
