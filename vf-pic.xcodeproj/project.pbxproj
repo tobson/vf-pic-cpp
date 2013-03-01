@@ -129,7 +129,6 @@
 		D2C6828116BB7EB40023FB36 /* boundaries.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = boundaries.h; path = src/boundaries.h; sourceTree = SOURCE_ROOT; };
 		D2C6828816BB9CAC0023FB36 /* kick.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = kick.cpp; path = src/kick.cpp; sourceTree = SOURCE_ROOT; };
 		D2C6828916BB9CAC0023FB36 /* kick.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = kick.h; path = src/kick.h; sourceTree = SOURCE_ROOT; };
-		D2E0963516BF83C7003AA5DA /* libconfig++.la */ = {isa = PBXFileReference; lastKnownFileType = text; name = "libconfig++.la"; path = "../../macports/lib/libconfig++.la"; sourceTree = "<group>"; };
 		D2F7CF8316DEE31500F064CF /* cold-mri */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "cold-mri"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2F7CF8516DEECD000F064CF /* problem.cfg */ = {isa = PBXFileReference; lastKnownFileType = text; path = problem.cfg; sourceTree = "<group>"; };
 		D2F7CF8916DEEF2900F064CF /* problem.cfg */ = {isa = PBXFileReference; lastKnownFileType = text; path = problem.cfg; sourceTree = "<group>"; };
@@ -186,7 +185,6 @@
 			children = (
 				D2F90E4B16B73ED400ABDA86 /* Makefile */,
 				D29BD8F716D35951000BD507 /* TODO */,
-				D2E0963516BF83C7003AA5DA /* libconfig++.la */,
 				D2F90E4C16B73FE300ABDA86 /* local.mk */,
 				D29BF20C16D97E0B000BD507 /* cold-mri.py */,
 				D2F90E4816B734C700ABDA86 /* jacobi.py */,
