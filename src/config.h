@@ -71,7 +71,7 @@ namespace config
     extern bool throwOnCopyConstruct;
 
     /* Configuration class */
-    class Config
+    class ConfigParser
     {
     private:
         template <typename T>

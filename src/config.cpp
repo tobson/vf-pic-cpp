@@ -114,7 +114,7 @@ namespace config
     bool verbose = false;
     bool throwOnCopyConstruct = false;
 
-    void Config::parse (std::ifstream& file)
+    void ConfigParser::parse (std::ifstream& file)
     {
         const std::string whitespace (" \t");
         std::string line, section;
@@ -171,7 +171,7 @@ namespace config
     }
 
     template <typename T>
-    T Config::get (const std::string& section, const std::string& key)
+    T ConfigParser::get (const std::string& section, const std::string& key)
     {
         auto s = contents.find (section);
         if (s != contents.end ())
@@ -199,7 +199,7 @@ namespace config
     }
     
     template <typename T>
-    void Config::get (const std::string& section, const std::string& key, T& value)
+    void ConfigParser::get (const std::string& section, const std::string& key, T& value)
     {
         try
         {
@@ -212,24 +212,24 @@ namespace config
     }
 
     template <typename T>
-    void Config::set (const std::string& section, const std::string& key, const T value)
+    void ConfigParser::set (const std::string& section, const std::string& key, const T value)
     {
         contents[section][key] = toString (value);
     }
 
-    void Config::save (const char *filename)
+    void ConfigParser::save (const char *filename)
     {
         std::ofstream file (filename);
         stream (file);
         file.close ();
     }
 
-    void Config::print ()
+    void ConfigParser::print ()
     {
         stream (std::cout);
     }
 
-    void Config::stream (std::ostream &os)
+    void ConfigParser::stream (std::ostream &os)
     {
         for (auto& section: contents)
         {
@@ -241,50 +241,50 @@ namespace config
         }
     }
 
-    const char *Config::ParseError::what () const noexcept
+    const char *ConfigParser::ParseError::what () const noexcept
     {
         return msg.c_str ();
     }
-    Config::MissingBracket::MissingBracket (const unsigned line)
+    ConfigParser::MissingBracket::MissingBracket (const unsigned line)
     {
         std::stringstream ss;
         ss << "Error at line " << line << ": Missing ']'";
         this->msg = ss.str ();
     }
-    Config::DoubleAssignment::DoubleAssignment (const unsigned line)
+    ConfigParser::DoubleAssignment::DoubleAssignment (const unsigned line)
     {
         std::stringstream ss;
         ss << "Error at line " << line << ": Double assignment";
         this->msg = ss.str ();
     }
-    Config::MissingKey::MissingKey (const unsigned line)
+    ConfigParser::MissingKey::MissingKey (const unsigned line)
     {
         std::stringstream ss;
         ss << "Error at line " << line << ": Key is missing";
         this->msg = ss.str ();
     }
-    Config::MissingValue::MissingValue (const unsigned line)
+    ConfigParser::MissingValue::MissingValue (const unsigned line)
     {
         std::stringstream ss;
         ss << "Error at line " << line << ": Value is missing";
         this->msg = ss.str ();
     }
-    Config::NoAssignment::NoAssignment (const unsigned line)
+    ConfigParser::NoAssignment::NoAssignment (const unsigned line)
     {
         std::stringstream ss;
         ss << "Error at line " << line << ": Not an assignment";
         this->msg = ss.str ();
     }
 
-    const char *Config::NotFound::what () const noexcept
+    const char *ConfigParser::NotFound::what () const noexcept
     {
         return msg.c_str ();
     }
-    Config::KeyNotFound::KeyNotFound (const std::string& key)
+    ConfigParser::KeyNotFound::KeyNotFound (const std::string& key)
     {
         this->msg = "Key '" + key + "' not found";
     }
-    Config::SectionNotFound::SectionNotFound (const std::string& section)
+    ConfigParser::SectionNotFound::SectionNotFound (const std::string& section)
     {
         this->msg = "Section '" + section + "' not found";
     }
@@ -303,7 +303,7 @@ namespace config
 
     void read (const std::string& srcdir)
     {
-        Config cfg;
+        ConfigParser cfg;
         std::string filename;
         
         filename = srcdir + "/problem.cfg";
@@ -384,5 +384,6 @@ namespace config
 
         filename = srcdir + "/output.cfg";
         cfg.save (filename.c_str ());
+        cfg.print ();
     }
 }
