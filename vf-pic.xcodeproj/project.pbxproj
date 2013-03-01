@@ -7,17 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		D20381A416BCF25A008755DC /* sse.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D20381A216BCF25A008755DC /* sse.cpp */; };
-		D20381BF16BE2121008755DC /* global.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D28BAEFD16B5FD0200578956 /* global.cpp */; };
-		D20381C016BE212F008755DC /* config.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D28BAF0016B5FDDA00578956 /* config.cpp */; };
 		D24BC36D16B64B1A006C64A3 /* global.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D28BAEFD16B5FD0200578956 /* global.cpp */; };
 		D24BC36E16B64B1A006C64A3 /* config.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D28BAF0016B5FDDA00578956 /* config.cpp */; };
 		D24BC37016B64B1A006C64A3 /* barrier.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D28BAF1816B60B3800578956 /* barrier.cpp */; };
-		D24BC37A16B64B92006C64A3 /* jacobi.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D24BC37916B64B92006C64A3 /* jacobi.cpp */; };
-		D28BAF0A16B604B900578956 /* global.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D28BAEFD16B5FD0200578956 /* global.cpp */; };
-		D28BAF0B16B604B900578956 /* config.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D28BAF0016B5FDDA00578956 /* config.cpp */; };
-		D28BAF1516B604F200578956 /* test.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D28BAF1416B604F200578956 /* test.cpp */; };
-		D28BAF1B16B60B3800578956 /* barrier.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D28BAF1816B60B3800578956 /* barrier.cpp */; };
 		D2ABD94716DEEFC4000D369B /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2915FC816B5F7FE0084A612 /* main.cpp */; };
 		D2ABD94816DEEFC4000D369B /* global.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D28BAEFD16B5FD0200578956 /* global.cpp */; };
 		D2ABD94916DEEFC4000D369B /* config.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D28BAF0016B5FDDA00578956 /* config.cpp */; };
@@ -30,14 +22,12 @@
 		D2ABD95016DEEFC4000D369B /* faraday.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D206FC0316C62E3D008BD080 /* faraday.cpp */; };
 		D2ABD95116DEEFC4000D369B /* drift.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D206FC1016CA14D1008BD080 /* drift.cpp */; };
 		D2ABD95216DEEFC4000D369B /* output.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D270B39C16CEDC1B00DFCE2F /* output.cpp */; };
-		D2ABD96016DEF665000D369B /* barrier.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D28BAF1816B60B3800578956 /* barrier.cpp */; };
-		D2AF714F16DFE2A400F34A67 /* periodic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D25D22B916DFE028001A44F4 /* periodic.cpp */; };
 		D2AF715016DFE7D200F34A67 /* periodic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D25D22B916DFE028001A44F4 /* periodic.cpp */; };
 		D2AF715316DFF2B600F34A67 /* shearing-periodic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2AF715116DFED5700F34A67 /* shearing-periodic.cpp */; };
 		D2AF715816E02E4900F34A67 /* circular-wave.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2AF715516E02DCB00F34A67 /* circular-wave.cpp */; };
 		D2AF715B16E02F4A00F34A67 /* cold-mri.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2AF715916E02EC400F34A67 /* cold-mri.cpp */; };
 		D2AF715C16E030C800F34A67 /* periodic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D25D22B916DFE028001A44F4 /* periodic.cpp */; };
-		D2C6828316BB7EB40023FB36 /* boundaries.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2C6828016BB7EB30023FB36 /* boundaries.cpp */; };
+		D2AF716116E052F800F34A67 /* jacobi.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2AF716016E052F800F34A67 /* jacobi.cpp */; };
 		D2C6828416BB7EB40023FB36 /* boundaries.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2C6828016BB7EB30023FB36 /* boundaries.cpp */; };
 		D2F7CF7016DEE31500F064CF /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2915FC816B5F7FE0084A612 /* main.cpp */; };
 		D2F7CF7116DEE31500F064CF /* global.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D28BAEFD16B5FD0200578956 /* global.cpp */; };
@@ -54,25 +44,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		D203819D16BCF1FD008755DC /* CopyFiles */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = /usr/share/man/man1/;
-			dstSubfolderSpec = 0;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 1;
-		};
 		D24BC37316B64B1A006C64A3 /* CopyFiles */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = /usr/share/man/man1/;
-			dstSubfolderSpec = 0;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 1;
-		};
-		D28BAF0E16B604B900578956 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = /usr/share/man/man1/;
@@ -102,8 +74,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		D20381A116BCF1FD008755DC /* sse */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = sse; sourceTree = BUILT_PRODUCTS_DIR; };
-		D20381A216BCF25A008755DC /* sse.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = sse.cpp; path = src/sse.cpp; sourceTree = SOURCE_ROOT; };
 		D20381BC16BE0195008755DC /* deposit.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = deposit.cpp; path = src/deposit.cpp; sourceTree = SOURCE_ROOT; };
 		D20381BD16BE0195008755DC /* deposit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = deposit.h; path = src/deposit.h; sourceTree = SOURCE_ROOT; };
 		D206FBFB16C1C31C008BD080 /* ohm.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ohm.cpp; path = src/ohm.cpp; sourceTree = SOURCE_ROOT; };
@@ -114,7 +84,6 @@
 		D206FC1016CA14D1008BD080 /* drift.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = drift.cpp; path = src/drift.cpp; sourceTree = SOURCE_ROOT; };
 		D206FC1116CA14D2008BD080 /* drift.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = drift.h; path = src/drift.h; sourceTree = SOURCE_ROOT; };
 		D24BC37716B64B1A006C64A3 /* jacobi */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = jacobi; sourceTree = BUILT_PRODUCTS_DIR; };
-		D24BC37916B64B92006C64A3 /* jacobi.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = jacobi.cpp; path = src/jacobi.cpp; sourceTree = SOURCE_ROOT; };
 		D25C8DB216B89B6600B0A607 /* grid.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = grid.cpp; path = src/grid.cpp; sourceTree = SOURCE_ROOT; };
 		D25C8DB316B89B6600B0A607 /* grid.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = grid.h; path = src/grid.h; sourceTree = SOURCE_ROOT; };
 		D25D22B916DFE028001A44F4 /* periodic.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = periodic.cpp; sourceTree = "<group>"; };
@@ -122,24 +91,26 @@
 		D270B39816CDE6AD00DFCE2F /* three-vector.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "three-vector.h"; path = "src/three-vector.h"; sourceTree = SOURCE_ROOT; };
 		D270B39C16CEDC1B00DFCE2F /* output.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = output.cpp; path = src/output.cpp; sourceTree = SOURCE_ROOT; };
 		D270B39D16CEDC1B00DFCE2F /* output.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = output.h; path = src/output.h; sourceTree = SOURCE_ROOT; };
-		D28BAEFB16B5FB4500578956 /* param.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = param.h; path = src/param.h; sourceTree = SOURCE_ROOT; };
 		D28BAEFD16B5FD0200578956 /* global.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = global.cpp; path = src/global.cpp; sourceTree = SOURCE_ROOT; };
 		D28BAEFE16B5FD0200578956 /* global.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = global.h; path = src/global.h; sourceTree = SOURCE_ROOT; };
 		D28BAF0016B5FDDA00578956 /* config.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = config.cpp; path = src/config.cpp; sourceTree = SOURCE_ROOT; };
 		D28BAF0116B5FDDA00578956 /* config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = config.h; path = src/config.h; sourceTree = SOURCE_ROOT; };
 		D28BAF0616B601AB00578956 /* scalar-field.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "scalar-field.h"; path = "src/scalar-field.h"; sourceTree = SOURCE_ROOT; };
-		D28BAF1216B604B900578956 /* test */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = test; sourceTree = BUILT_PRODUCTS_DIR; };
-		D28BAF1416B604F200578956 /* test.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = test.cpp; path = src/test.cpp; sourceTree = SOURCE_ROOT; };
 		D28BAF1716B608BC00578956 /* vector-field.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "vector-field.h"; path = "src/vector-field.h"; sourceTree = SOURCE_ROOT; };
 		D28BAF1816B60B3800578956 /* barrier.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = barrier.cpp; path = src/barrier.cpp; sourceTree = SOURCE_ROOT; };
 		D28BAF1916B60B3800578956 /* barrier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = barrier.h; path = src/barrier.h; sourceTree = SOURCE_ROOT; };
 		D2915FC816B5F7FE0084A612 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = src/main.cpp; sourceTree = SOURCE_ROOT; };
 		D29BD8F716D35951000BD507 /* TODO */ = {isa = PBXFileReference; lastKnownFileType = text; path = TODO; sourceTree = "<group>"; };
 		D29BF20C16D97E0B000BD507 /* cold-mri.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = "cold-mri.py"; sourceTree = "<group>"; };
-		D2ABD95816DEEFC5000D369B /* cold-mri copy */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "cold-mri copy"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D2ABD95816DEEFC5000D369B /* circular-wave */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "circular-wave"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2AF715116DFED5700F34A67 /* shearing-periodic.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = "shearing-periodic.cpp"; sourceTree = "<group>"; };
 		D2AF715516E02DCB00F34A67 /* circular-wave.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "circular-wave.cpp"; sourceTree = "<group>"; };
 		D2AF715916E02EC400F34A67 /* cold-mri.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = "cold-mri.cpp"; sourceTree = "<group>"; };
+		D2AF715D16E0375800F34A67 /* param.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = param.h; sourceTree = "<group>"; };
+		D2AF715E16E0379E00F34A67 /* param.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = param.h; sourceTree = "<group>"; };
+		D2AF716016E052F800F34A67 /* jacobi.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = jacobi.cpp; sourceTree = "<group>"; };
+		D2AF716216E053A400F34A67 /* param.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = param.h; sourceTree = "<group>"; };
+		D2AF716316E053E300F34A67 /* problem.cfg */ = {isa = PBXFileReference; lastKnownFileType = text; path = problem.cfg; sourceTree = "<group>"; };
 		D2C6827D16B9DF600023FB36 /* faraday.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = faraday.h; path = src/faraday.h; sourceTree = SOURCE_ROOT; };
 		D2C6827E16B9EBA30023FB36 /* diffops.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = diffops.h; path = src/diffops.h; sourceTree = SOURCE_ROOT; };
 		D2C6828016BB7EB30023FB36 /* boundaries.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = boundaries.cpp; path = src/boundaries.cpp; sourceTree = SOURCE_ROOT; };
@@ -147,7 +118,7 @@
 		D2C6828816BB9CAC0023FB36 /* kick.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = kick.cpp; path = src/kick.cpp; sourceTree = SOURCE_ROOT; };
 		D2C6828916BB9CAC0023FB36 /* kick.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = kick.h; path = src/kick.h; sourceTree = SOURCE_ROOT; };
 		D2E0963516BF83C7003AA5DA /* libconfig++.la */ = {isa = PBXFileReference; lastKnownFileType = text; name = "libconfig++.la"; path = "../../macports/lib/libconfig++.la"; sourceTree = "<group>"; };
-		D2F7CF8316DEE31500F064CF /* vf-pic copy */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "vf-pic copy"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D2F7CF8316DEE31500F064CF /* cold-mri */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "cold-mri"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2F7CF8516DEECD000F064CF /* problem.cfg */ = {isa = PBXFileReference; lastKnownFileType = text; path = problem.cfg; sourceTree = "<group>"; };
 		D2F7CF8916DEEF2900F064CF /* problem.cfg */ = {isa = PBXFileReference; lastKnownFileType = text; path = problem.cfg; sourceTree = "<group>"; };
 		D2F90E4816B734C700ABDA86 /* jacobi.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = jacobi.py; sourceTree = "<group>"; };
@@ -158,21 +129,7 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		D203819B16BCF1FD008755DC /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		D24BC37116B64B1A006C64A3 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		D28BAF0C16B604B900578956 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -224,11 +181,9 @@
 		D2915FB016B5F56A0084A612 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				D28BAF1216B604B900578956 /* test */,
 				D24BC37716B64B1A006C64A3 /* jacobi */,
-				D20381A116BCF1FD008755DC /* sse */,
-				D2F7CF8316DEE31500F064CF /* vf-pic copy */,
-				D2ABD95816DEEFC5000D369B /* cold-mri copy */,
+				D2F7CF8316DEE31500F064CF /* cold-mri */,
+				D2ABD95816DEEFC5000D369B /* circular-wave */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -240,6 +195,16 @@
 				D2AF715916E02EC400F34A67 /* cold-mri.cpp */,
 			);
 			path = "initial-conditions";
+			sourceTree = "<group>";
+		};
+		D2AF715F16E0528E00F34A67 /* jacobi */ = {
+			isa = PBXGroup;
+			children = (
+				D2AF716016E052F800F34A67 /* jacobi.cpp */,
+				D2AF716216E053A400F34A67 /* param.h */,
+				D2AF716316E053E300F34A67 /* problem.cfg */,
+			);
+			path = jacobi;
 			sourceTree = "<group>";
 		};
 		D2DD55E816DD91380003D699 /* src */ = {
@@ -255,13 +220,10 @@
 				D206FC0316C62E3D008BD080 /* faraday.cpp */,
 				D28BAEFD16B5FD0200578956 /* global.cpp */,
 				D25C8DB216B89B6600B0A607 /* grid.cpp */,
-				D24BC37916B64B92006C64A3 /* jacobi.cpp */,
 				D2C6828816BB9CAC0023FB36 /* kick.cpp */,
 				D2915FC816B5F7FE0084A612 /* main.cpp */,
 				D206FBFB16C1C31C008BD080 /* ohm.cpp */,
 				D270B39C16CEDC1B00DFCE2F /* output.cpp */,
-				D20381A216BCF25A008755DC /* sse.cpp */,
-				D28BAF1416B604F200578956 /* test.cpp */,
 				D28BAF1916B60B3800578956 /* barrier.h */,
 				D2C6828116BB7EB40023FB36 /* boundaries.h */,
 				D28BAF0116B5FDDA00578956 /* config.h */,
@@ -276,7 +238,6 @@
 				D206FC0116C3539F008BD080 /* math-helpers.h */,
 				D206FBFC16C1C31C008BD080 /* ohm.h */,
 				D270B39D16CEDC1B00DFCE2F /* output.h */,
-				D28BAEFB16B5FB4500578956 /* param.h */,
 				D2F90E5216B748E900ABDA86 /* particles.h */,
 				D28BAF0616B601AB00578956 /* scalar-field.h */,
 				D270B39816CDE6AD00DFCE2F /* three-vector.h */,
@@ -289,6 +250,7 @@
 		D2F7CF6816DEE1B400F064CF /* problems */ = {
 			isa = PBXGroup;
 			children = (
+				D2AF715F16E0528E00F34A67 /* jacobi */,
 				D2F7CF8616DEEEB600F064CF /* circular-wave */,
 				D2F7CF6916DEE1E200F064CF /* cold-mri */,
 			);
@@ -299,6 +261,7 @@
 			isa = PBXGroup;
 			children = (
 				D2F7CF8516DEECD000F064CF /* problem.cfg */,
+				D2AF715E16E0379E00F34A67 /* param.h */,
 			);
 			path = "cold-mri";
 			sourceTree = "<group>";
@@ -307,6 +270,7 @@
 			isa = PBXGroup;
 			children = (
 				D2F7CF8916DEEF2900F064CF /* problem.cfg */,
+				D2AF715D16E0375800F34A67 /* param.h */,
 			);
 			path = "circular-wave";
 			sourceTree = "<group>";
@@ -314,23 +278,6 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		D203819416BCF1FD008755DC /* sse */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = D203819E16BCF1FD008755DC /* Build configuration list for PBXNativeTarget "sse" */;
-			buildPhases = (
-				D203819516BCF1FD008755DC /* Sources */,
-				D203819B16BCF1FD008755DC /* Frameworks */,
-				D203819D16BCF1FD008755DC /* CopyFiles */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = sse;
-			productName = "vf-pic";
-			productReference = D20381A116BCF1FD008755DC /* sse */;
-			productType = "com.apple.product-type.tool";
-		};
 		D24BC36B16B64B1A006C64A3 /* jacobi */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = D24BC37416B64B1A006C64A3 /* Build configuration list for PBXNativeTarget "jacobi" */;
@@ -348,23 +295,6 @@
 			productReference = D24BC37716B64B1A006C64A3 /* jacobi */;
 			productType = "com.apple.product-type.tool";
 		};
-		D28BAF0716B604B900578956 /* test */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = D28BAF0F16B604B900578956 /* Build configuration list for PBXNativeTarget "test" */;
-			buildPhases = (
-				D28BAF0816B604B900578956 /* Sources */,
-				D28BAF0C16B604B900578956 /* Frameworks */,
-				D28BAF0E16B604B900578956 /* CopyFiles */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = test;
-			productName = "vf-pic";
-			productReference = D28BAF1216B604B900578956 /* test */;
-			productType = "com.apple.product-type.tool";
-		};
 		D2ABD94416DEEFC4000D369B /* circular-wave */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = D2ABD95516DEEFC4000D369B /* Build configuration list for PBXNativeTarget "circular-wave" */;
@@ -379,7 +309,7 @@
 			);
 			name = "circular-wave";
 			productName = "vf-pic";
-			productReference = D2ABD95816DEEFC5000D369B /* cold-mri copy */;
+			productReference = D2ABD95816DEEFC5000D369B /* circular-wave */;
 			productType = "com.apple.product-type.tool";
 		};
 		D2F7CF6E16DEE31500F064CF /* cold-mri */ = {
@@ -396,7 +326,7 @@
 			);
 			name = "cold-mri";
 			productName = "vf-pic";
-			productReference = D2F7CF8316DEE31500F064CF /* vf-pic copy */;
+			productReference = D2F7CF8316DEE31500F064CF /* cold-mri */;
 			productType = "com.apple.product-type.tool";
 		};
 /* End PBXNativeTarget section */
@@ -420,9 +350,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				D28BAF0716B604B900578956 /* test */,
 				D24BC36B16B64B1A006C64A3 /* jacobi */,
-				D203819416BCF1FD008755DC /* sse */,
 				D2F7CF6E16DEE31500F064CF /* cold-mri */,
 				D2ABD94416DEEFC4000D369B /* circular-wave */,
 			);
@@ -430,17 +358,6 @@
 /* End PBXProject section */
 
 /* Begin PBXSourcesBuildPhase section */
-		D203819516BCF1FD008755DC /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				D2ABD96016DEF665000D369B /* barrier.cpp in Sources */,
-				D20381C016BE212F008755DC /* config.cpp in Sources */,
-				D20381BF16BE2121008755DC /* global.cpp in Sources */,
-				D20381A416BCF25A008755DC /* sse.cpp in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		D24BC36C16B64B1A006C64A3 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -449,21 +366,8 @@
 				D24BC36D16B64B1A006C64A3 /* global.cpp in Sources */,
 				D24BC36E16B64B1A006C64A3 /* config.cpp in Sources */,
 				D24BC37016B64B1A006C64A3 /* barrier.cpp in Sources */,
-				D24BC37A16B64B92006C64A3 /* jacobi.cpp in Sources */,
 				D2C6828416BB7EB40023FB36 /* boundaries.cpp in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		D28BAF0816B604B900578956 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				D2AF714F16DFE2A400F34A67 /* periodic.cpp in Sources */,
-				D28BAF0A16B604B900578956 /* global.cpp in Sources */,
-				D28BAF0B16B604B900578956 /* config.cpp in Sources */,
-				D28BAF1516B604F200578956 /* test.cpp in Sources */,
-				D28BAF1B16B60B3800578956 /* barrier.cpp in Sources */,
-				D2C6828316BB7EB40023FB36 /* boundaries.cpp in Sources */,
+				D2AF716116E052F800F34A67 /* jacobi.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -512,26 +416,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
-		D203819F16BCF1FD008755DC /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ICC_LANG_ANSI = "c++0x";
-				PRODUCT_NAME = sse;
-			};
-			name = Debug;
-		};
-		D20381A016BCF1FD008755DC /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ICC_LANG_ANSI = "c++0x";
-				PRODUCT_NAME = sse;
-			};
-			name = Release;
-		};
 		D24BC37516B64B1A006C64A3 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				PRODUCT_NAME = jacobi;
+				USER_HEADER_SEARCH_PATHS = "src problems/jacobi";
 			};
 			name = Debug;
 		};
@@ -539,20 +428,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				PRODUCT_NAME = jacobi;
-			};
-			name = Release;
-		};
-		D28BAF1016B604B900578956 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				PRODUCT_NAME = test;
-			};
-			name = Debug;
-		};
-		D28BAF1116B604B900578956 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				PRODUCT_NAME = test;
+				USER_HEADER_SEARCH_PATHS = "src problems/jacobi";
 			};
 			name = Release;
 		};
@@ -573,11 +449,8 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				HEADER_SEARCH_PATHS = (
-					/Users/tobi/macports/include,
-					/Users/tobi/local/include,
-				);
-				LIBRARY_SEARCH_PATHS = /Users/tobi/local/lib;
+				USER_HEADER_SEARCH_PATHS = src;
+				USE_HEADERMAP = No;
 			};
 			name = Debug;
 		};
@@ -597,68 +470,53 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				HEADER_SEARCH_PATHS = (
-					/Users/tobi/macports/include,
-					/Users/tobi/local/include,
-				);
-				LIBRARY_SEARCH_PATHS = /Users/tobi/local/lib;
+				USER_HEADER_SEARCH_PATHS = src;
+				USE_HEADERMAP = No;
 			};
 			name = Release;
 		};
 		D2ABD95616DEEFC4000D369B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				PRODUCT_NAME = "cold-mri copy";
+				PRODUCT_NAME = "circular-wave";
+				USER_HEADER_SEARCH_PATHS = "src problems/circular-wave";
 			};
 			name = Debug;
 		};
 		D2ABD95716DEEFC4000D369B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				PRODUCT_NAME = "cold-mri copy";
+				PRODUCT_NAME = "circular-wave";
+				USER_HEADER_SEARCH_PATHS = "src problems/circular-wave";
 			};
 			name = Release;
 		};
 		D2F7CF8116DEE31500F064CF /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				PRODUCT_NAME = "vf-pic copy";
+				HEADER_SEARCH_PATHS = /Users/tobi/macports/include;
+				PRODUCT_NAME = "cold-mri";
+				USER_HEADER_SEARCH_PATHS = "src problems/cold-mri";
 			};
 			name = Debug;
 		};
 		D2F7CF8216DEE31500F064CF /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				PRODUCT_NAME = "vf-pic copy";
+				HEADER_SEARCH_PATHS = /Users/tobi/macports/include;
+				PRODUCT_NAME = "cold-mri";
+				USER_HEADER_SEARCH_PATHS = "src problems/cold-mri";
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		D203819E16BCF1FD008755DC /* Build configuration list for PBXNativeTarget "sse" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				D203819F16BCF1FD008755DC /* Debug */,
-				D20381A016BCF1FD008755DC /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		D24BC37416B64B1A006C64A3 /* Build configuration list for PBXNativeTarget "jacobi" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D24BC37516B64B1A006C64A3 /* Debug */,
 				D24BC37616B64B1A006C64A3 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		D28BAF0F16B604B900578956 /* Build configuration list for PBXNativeTarget "test" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				D28BAF1016B604B900578956 /* Debug */,
-				D28BAF1116B604B900578956 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
