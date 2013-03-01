@@ -86,6 +86,8 @@ namespace config
         template <typename T>
         void set (const std::string&, const std::string&, const T);
         void save (const char*);
+        void print ();
+        void stream (std::ostream&);
         class ParseError: public std::exception
         {
         public:

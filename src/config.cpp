@@ -220,15 +220,25 @@ namespace config
     void Config::save (const char *filename)
     {
         std::ofstream file (filename);
+        stream (file);
+        file.close ();
+    }
+
+    void Config::print ()
+    {
+        stream (std::cout);
+    }
+
+    void Config::stream (std::ostream &os)
+    {
         for (auto& section: contents)
         {
-            file << "[" << section.first << "]" << std::endl;
+            os << "[" << section.first << "]" << std::endl;
             for (auto& key: section.second)
             {
-                file << key.first << " = " << key.second << std::endl;
+                os << key.first << " = " << key.second << std::endl;
             }
         }
-        file.close ();
     }
 
     const char *Config::ParseError::what () const noexcept
