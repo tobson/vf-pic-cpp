@@ -46,6 +46,8 @@ struct Fields
         const GlobalScalarField<real> &x = grid.x;
         const GlobalScalarField<real> &z = grid.z;
 
+        BoundaryConditions boundaryCondition;
+
         for (int k = 1; k <= vfpic::nz; ++k)
         for (int i = 1; i <= vfpic::nx; ++i)
         {
@@ -88,6 +90,8 @@ void iteration (Fields &fields, const int niter)
 
     GlobalVectorField<real>& A = fields.A;
     GlobalVectorField<real>& A0 = fields.A0;
+
+    BoundaryConditions boundaryCondition;
 
     for (int dummy = 0; dummy < niter; ++dummy)
     {
@@ -137,7 +141,7 @@ void iterationThread (Fields &fields, const int niter, const int ithread, Barrie
     const real dz12 = real (1)/(vfpic::dz*vfpic::dz);
     const real fac = real (0.5)/(dx12 + dz12);
     
-    BoundaryCondition boundaryCondition (barrier, ithread);
+    BoundaryConditionsThreaded boundaryCondition (barrier, ithread);
 
     const LocalScalarFieldView<real> rho (fields.rho, ithread);
 
@@ -214,7 +218,8 @@ int main(int argc, const char * argv[])
         iteration (fields, niter);
         auto t2 = std::chrono::high_resolution_clock::now();
         std::cout << "Serial run: " << std::chrono::duration_cast<std::chrono::milliseconds>(t2-t1).count () << " ms" << std::endl;
-        
+
+        BoundaryConditions boundaryCondition;
         boundaryCondition (fields.rho);
         boundaryCondition (fields.J);
         boundaryCondition (fields.phi);
@@ -242,6 +247,7 @@ int main(int argc, const char * argv[])
         auto t2 = std::chrono::high_resolution_clock::now();
         std::cout << "Parallel run: " << std::chrono::duration_cast<std::chrono::milliseconds>(t2-t1).count () << " ms" << std::endl;
 
+        BoundaryConditions boundaryCondition;
         boundaryCondition (fields.rho);
         boundaryCondition (fields.J);
         boundaryCondition (fields.phi);

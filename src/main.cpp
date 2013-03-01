@@ -59,7 +59,7 @@ void iteration (GlobalVariables& global, Barrier& barrier, const int ithread)
     NewLocalVectorField<real> J;
 
     /* Construct function objects */
-    BoundaryCondition boundCond (barrier, ithread);
+    BoundaryConditionsThreaded boundCond (barrier, ithread);
     Deposit<vfpic::mpar> deposit (barrier, ithread);
     Output output (barrier, ithread);
     Ohm<vfpic::mz,vfpic::mx> ohm;

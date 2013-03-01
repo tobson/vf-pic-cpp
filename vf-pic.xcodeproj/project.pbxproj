@@ -30,12 +30,13 @@
 		D2ABD95016DEEFC4000D369B /* faraday.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D206FC0316C62E3D008BD080 /* faraday.cpp */; };
 		D2ABD95116DEEFC4000D369B /* drift.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D206FC1016CA14D1008BD080 /* drift.cpp */; };
 		D2ABD95216DEEFC4000D369B /* output.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D270B39C16CEDC1B00DFCE2F /* output.cpp */; };
-		D2ABD95916DEF010000D369B /* problem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2F7CF8716DEEF0300F064CF /* problem.cpp */; };
-		D2ABD95C16DEF4F2000D369B /* problem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2ABD95A16DEF4F2000D369B /* problem.cpp */; };
-		D2ABD95D16DEF4F2000D369B /* problem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2ABD95A16DEF4F2000D369B /* problem.cpp */; };
-		D2ABD95E16DEF4F2000D369B /* problem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2ABD95A16DEF4F2000D369B /* problem.cpp */; };
-		D2ABD95F16DEF65D000D369B /* boundaries.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2C6828016BB7EB30023FB36 /* boundaries.cpp */; };
 		D2ABD96016DEF665000D369B /* barrier.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D28BAF1816B60B3800578956 /* barrier.cpp */; };
+		D2AF714F16DFE2A400F34A67 /* periodic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D25D22B916DFE028001A44F4 /* periodic.cpp */; };
+		D2AF715016DFE7D200F34A67 /* periodic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D25D22B916DFE028001A44F4 /* periodic.cpp */; };
+		D2AF715316DFF2B600F34A67 /* shearing-periodic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2AF715116DFED5700F34A67 /* shearing-periodic.cpp */; };
+		D2AF715816E02E4900F34A67 /* circular-wave.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2AF715516E02DCB00F34A67 /* circular-wave.cpp */; };
+		D2AF715B16E02F4A00F34A67 /* cold-mri.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2AF715916E02EC400F34A67 /* cold-mri.cpp */; };
+		D2AF715C16E030C800F34A67 /* periodic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D25D22B916DFE028001A44F4 /* periodic.cpp */; };
 		D2C6828316BB7EB40023FB36 /* boundaries.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2C6828016BB7EB30023FB36 /* boundaries.cpp */; };
 		D2C6828416BB7EB40023FB36 /* boundaries.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2C6828016BB7EB30023FB36 /* boundaries.cpp */; };
 		D2F7CF7016DEE31500F064CF /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2915FC816B5F7FE0084A612 /* main.cpp */; };
@@ -50,7 +51,6 @@
 		D2F7CF7916DEE31500F064CF /* faraday.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D206FC0316C62E3D008BD080 /* faraday.cpp */; };
 		D2F7CF7B16DEE31500F064CF /* drift.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D206FC1016CA14D1008BD080 /* drift.cpp */; };
 		D2F7CF7C16DEE31500F064CF /* output.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D270B39C16CEDC1B00DFCE2F /* output.cpp */; };
-		D2F7CF8416DEE32700F064CF /* problem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2F7CF6C16DEE24500F064CF /* problem.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -117,6 +117,7 @@
 		D24BC37916B64B92006C64A3 /* jacobi.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = jacobi.cpp; path = src/jacobi.cpp; sourceTree = SOURCE_ROOT; };
 		D25C8DB216B89B6600B0A607 /* grid.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = grid.cpp; path = src/grid.cpp; sourceTree = SOURCE_ROOT; };
 		D25C8DB316B89B6600B0A607 /* grid.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = grid.h; path = src/grid.h; sourceTree = SOURCE_ROOT; };
+		D25D22B916DFE028001A44F4 /* periodic.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = periodic.cpp; sourceTree = "<group>"; };
 		D270B39716CCCE8A00DFCE2F /* variables.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = variables.h; path = src/variables.h; sourceTree = SOURCE_ROOT; };
 		D270B39816CDE6AD00DFCE2F /* three-vector.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "three-vector.h"; path = "src/three-vector.h"; sourceTree = SOURCE_ROOT; };
 		D270B39C16CEDC1B00DFCE2F /* output.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = output.cpp; path = src/output.cpp; sourceTree = SOURCE_ROOT; };
@@ -136,8 +137,9 @@
 		D29BD8F716D35951000BD507 /* TODO */ = {isa = PBXFileReference; lastKnownFileType = text; path = TODO; sourceTree = "<group>"; };
 		D29BF20C16D97E0B000BD507 /* cold-mri.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = "cold-mri.py"; sourceTree = "<group>"; };
 		D2ABD95816DEEFC5000D369B /* cold-mri copy */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "cold-mri copy"; sourceTree = BUILT_PRODUCTS_DIR; };
-		D2ABD95A16DEF4F2000D369B /* problem.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = problem.cpp; sourceTree = "<group>"; };
-		D2ABD95B16DEF4F2000D369B /* problem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = problem.h; sourceTree = "<group>"; };
+		D2AF715116DFED5700F34A67 /* shearing-periodic.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = "shearing-periodic.cpp"; sourceTree = "<group>"; };
+		D2AF715516E02DCB00F34A67 /* circular-wave.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "circular-wave.cpp"; sourceTree = "<group>"; };
+		D2AF715916E02EC400F34A67 /* cold-mri.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = "cold-mri.cpp"; sourceTree = "<group>"; };
 		D2C6827D16B9DF600023FB36 /* faraday.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = faraday.h; path = src/faraday.h; sourceTree = SOURCE_ROOT; };
 		D2C6827E16B9EBA30023FB36 /* diffops.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = diffops.h; path = src/diffops.h; sourceTree = SOURCE_ROOT; };
 		D2C6828016BB7EB30023FB36 /* boundaries.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = boundaries.cpp; path = src/boundaries.cpp; sourceTree = SOURCE_ROOT; };
@@ -145,12 +147,8 @@
 		D2C6828816BB9CAC0023FB36 /* kick.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = kick.cpp; path = src/kick.cpp; sourceTree = SOURCE_ROOT; };
 		D2C6828916BB9CAC0023FB36 /* kick.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = kick.h; path = src/kick.h; sourceTree = SOURCE_ROOT; };
 		D2E0963516BF83C7003AA5DA /* libconfig++.la */ = {isa = PBXFileReference; lastKnownFileType = text; name = "libconfig++.la"; path = "../../macports/lib/libconfig++.la"; sourceTree = "<group>"; };
-		D2F7CF6C16DEE24500F064CF /* problem.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = problem.cpp; sourceTree = "<group>"; };
-		D2F7CF6D16DEE24500F064CF /* problem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = problem.h; sourceTree = "<group>"; };
 		D2F7CF8316DEE31500F064CF /* vf-pic copy */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "vf-pic copy"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2F7CF8516DEECD000F064CF /* problem.cfg */ = {isa = PBXFileReference; lastKnownFileType = text; path = problem.cfg; sourceTree = "<group>"; };
-		D2F7CF8716DEEF0300F064CF /* problem.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = problem.cpp; sourceTree = "<group>"; };
-		D2F7CF8816DEEF0300F064CF /* problem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = problem.h; sourceTree = "<group>"; };
 		D2F7CF8916DEEF2900F064CF /* problem.cfg */ = {isa = PBXFileReference; lastKnownFileType = text; path = problem.cfg; sourceTree = "<group>"; };
 		D2F90E4816B734C700ABDA86 /* jacobi.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = jacobi.py; sourceTree = "<group>"; };
 		D2F90E4A16B7375900ABDA86 /* vfpic.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = vfpic.py; sourceTree = "<group>"; };
@@ -198,6 +196,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D25D22B816DFDFFC001A44F4 /* boundary-conditions */ = {
+			isa = PBXGroup;
+			children = (
+				D25D22B916DFE028001A44F4 /* periodic.cpp */,
+				D2AF715116DFED5700F34A67 /* shearing-periodic.cpp */,
+			);
+			path = "boundary-conditions";
+			sourceTree = "<group>";
+		};
 		D2915FA416B5F56A0084A612 = {
 			isa = PBXGroup;
 			children = (
@@ -226,9 +233,20 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		D2AF715416E02D8000F34A67 /* initial-conditions */ = {
+			isa = PBXGroup;
+			children = (
+				D2AF715516E02DCB00F34A67 /* circular-wave.cpp */,
+				D2AF715916E02EC400F34A67 /* cold-mri.cpp */,
+			);
+			path = "initial-conditions";
+			sourceTree = "<group>";
+		};
 		D2DD55E816DD91380003D699 /* src */ = {
 			isa = PBXGroup;
 			children = (
+				D2AF715416E02D8000F34A67 /* initial-conditions */,
+				D25D22B816DFDFFC001A44F4 /* boundary-conditions */,
 				D28BAF1816B60B3800578956 /* barrier.cpp */,
 				D2C6828016BB7EB30023FB36 /* boundaries.cpp */,
 				D28BAF0016B5FDDA00578956 /* config.cpp */,
@@ -264,8 +282,6 @@
 				D270B39816CDE6AD00DFCE2F /* three-vector.h */,
 				D270B39716CCCE8A00DFCE2F /* variables.h */,
 				D28BAF1716B608BC00578956 /* vector-field.h */,
-				D2ABD95A16DEF4F2000D369B /* problem.cpp */,
-				D2ABD95B16DEF4F2000D369B /* problem.h */,
 			);
 			path = src;
 			sourceTree = "<group>";
@@ -282,8 +298,6 @@
 		D2F7CF6916DEE1E200F064CF /* cold-mri */ = {
 			isa = PBXGroup;
 			children = (
-				D2F7CF6C16DEE24500F064CF /* problem.cpp */,
-				D2F7CF6D16DEE24500F064CF /* problem.h */,
 				D2F7CF8516DEECD000F064CF /* problem.cfg */,
 			);
 			path = "cold-mri";
@@ -292,8 +306,6 @@
 		D2F7CF8616DEEEB600F064CF /* circular-wave */ = {
 			isa = PBXGroup;
 			children = (
-				D2F7CF8716DEEF0300F064CF /* problem.cpp */,
-				D2F7CF8816DEEF0300F064CF /* problem.h */,
 				D2F7CF8916DEEF2900F064CF /* problem.cfg */,
 			);
 			path = "circular-wave";
@@ -423,11 +435,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				D2ABD96016DEF665000D369B /* barrier.cpp in Sources */,
-				D2ABD95F16DEF65D000D369B /* boundaries.cpp in Sources */,
 				D20381C016BE212F008755DC /* config.cpp in Sources */,
 				D20381BF16BE2121008755DC /* global.cpp in Sources */,
 				D20381A416BCF25A008755DC /* sse.cpp in Sources */,
-				D2ABD95E16DEF4F2000D369B /* problem.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -435,12 +445,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D2AF715C16E030C800F34A67 /* periodic.cpp in Sources */,
 				D24BC36D16B64B1A006C64A3 /* global.cpp in Sources */,
 				D24BC36E16B64B1A006C64A3 /* config.cpp in Sources */,
 				D24BC37016B64B1A006C64A3 /* barrier.cpp in Sources */,
 				D24BC37A16B64B92006C64A3 /* jacobi.cpp in Sources */,
 				D2C6828416BB7EB40023FB36 /* boundaries.cpp in Sources */,
-				D2ABD95D16DEF4F2000D369B /* problem.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -448,12 +458,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D2AF714F16DFE2A400F34A67 /* periodic.cpp in Sources */,
 				D28BAF0A16B604B900578956 /* global.cpp in Sources */,
 				D28BAF0B16B604B900578956 /* config.cpp in Sources */,
 				D28BAF1516B604F200578956 /* test.cpp in Sources */,
 				D28BAF1B16B60B3800578956 /* barrier.cpp in Sources */,
 				D2C6828316BB7EB40023FB36 /* boundaries.cpp in Sources */,
-				D2ABD95C16DEF4F2000D369B /* problem.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -461,7 +471,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D2ABD95916DEF010000D369B /* problem.cpp in Sources */,
+				D2AF715816E02E4900F34A67 /* circular-wave.cpp in Sources */,
+				D2AF715016DFE7D200F34A67 /* periodic.cpp in Sources */,
 				D2ABD94716DEEFC4000D369B /* main.cpp in Sources */,
 				D2ABD94816DEEFC4000D369B /* global.cpp in Sources */,
 				D2ABD94916DEEFC4000D369B /* config.cpp in Sources */,
@@ -481,7 +492,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D2F7CF8416DEE32700F064CF /* problem.cpp in Sources */,
+				D2AF715B16E02F4A00F34A67 /* cold-mri.cpp in Sources */,
+				D2AF715316DFF2B600F34A67 /* shearing-periodic.cpp in Sources */,
 				D2F7CF7016DEE31500F064CF /* main.cpp in Sources */,
 				D2F7CF7116DEE31500F064CF /* global.cpp in Sources */,
 				D2F7CF7216DEE31500F064CF /* config.cpp in Sources */,

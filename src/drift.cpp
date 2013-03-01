@@ -24,8 +24,9 @@ void drift (Particles<Np> *particles, const real dt)
         
         ++p;
     }
-    
-    boundaryCondition (particles);
+
+    BoundaryConditions boundCond;
+    boundCond (*particles);
 }
 
-template void drift (Particles<mpar>*, const real);
+template void drift (LocalParticles*, const real);

@@ -36,7 +36,7 @@ void Output::operator() (GlobalVariables& global, const long long it)
     LocalScalarFieldView<real> rho (global.rho, ithread);
     LocalVectorFieldView<real> ruu (global.ruu, ithread);
 
-    BoundaryCondition boundaryCondition (barrier, ithread);
+    BoundaryConditionsThreaded boundaryCondition (barrier, ithread);
     Deposit<vfpic::mpar> deposit (barrier, ithread);
     
     A2 = A;

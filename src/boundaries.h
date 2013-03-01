@@ -13,38 +13,37 @@
 #include "particles.h"
 #include "vector-field.h"
 
-template <int Nz>
-void boundaryConditionX (ScalarField<real,Nz,vfpic::nx>&);
-template <int Nz>
-void boundaryConditionX (VectorField<real,Nz,vfpic::nx>&);
+// Problem dependend implementation
+struct ProblemSpecificBoundaryConditions
+{
+    template <int Nz>
+    void X (ScalarField<real,Nz,vfpic::nx>&);
+    void Z (GlobalScalarField<real>&);
+    template <int N>
+    void operator() (Particles<N>&);
+};
 
-void boundaryConditionZ (GlobalScalarField<real>&);
-void boundaryConditionZ (GlobalVectorField<real>&);
+struct BoundaryConditions: public ProblemSpecificBoundaryConditions
+{
+    using ProblemSpecificBoundaryConditions::X;
+    using ProblemSpecificBoundaryConditions::Z;
+    using ProblemSpecificBoundaryConditions::operator();
+    template <int Nz>
+    void X (VectorField<real,Nz,vfpic::nx>&);
+    void Z (GlobalVectorField<real>&);
+    void operator() (GlobalScalarField<real>&);
+    void operator() (GlobalVectorField<real>&);
+};
 
-void boundaryCondition (GlobalScalarField<real>&);
-void boundaryCondition (GlobalVectorField<real>&);
-
-template <int Nz>
-void periodicBoundaryConditionX (ScalarField<real,Nz,vfpic::nx>&);
-void periodicBoundaryConditionZ (GlobalScalarField<real>&);
-template <int N>
-void periodicBoundaryCondition (Particles<N>*);
-
-template <int N>
-void shearingPeriodicBoundaryCondition (Particles<N>*);
-
-class BoundaryCondition
+class BoundaryConditionsThreaded: public BoundaryConditions
 {
 public:
-    BoundaryCondition (Barrier&, const int);
+    BoundaryConditionsThreaded (Barrier&, const int);
     void operator() (GlobalScalarField<real>&);
     void operator() (GlobalVectorField<real>&);
 private:
     Barrier& barrier;
     const int ithread;
 };
-
-template <int N>
-void boundaryCondition (Particles<N>*);
 
 #endif /* defined(__vf_pic__boundaries__) */
