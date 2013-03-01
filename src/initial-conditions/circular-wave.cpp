@@ -61,11 +61,11 @@ void initialCondition (GlobalVariables *global)
         const int npx = nx*int (pow (2.0, exponent/2));
         const int npz = nz*int (pow (2.0, exponent - exponent/2));
         for (int k = 0; k < npz; ++k)
-            for (int i = 0; i < npx; ++i)
-            {
-                particles[k*npx + i].x = x0 + (real (i) - 0.5)*Lx/real (npx);
-                particles[k*npx + i].z = z0 + (real (k) - 0.5)*Lz/real (npz);
-            }
+        for (int i = 0; i < npx; ++i)
+        {
+            particles[k*npx + i].x = x0 + (real (i) - 0.5)*Lx/real (npx);
+            particles[k*npx + i].z = z0 + (real (k) - 0.5)*Lz/real (npz);
+        }
     }
 
     const real fac = kvA2/(omega*omega*B0);
@@ -80,25 +80,25 @@ void initialCondition (GlobalVariables *global)
     }
 
     for (int k = 1; k <= nz; ++k)
-        for (int i = 1; i <= nx; ++i)
-        {
-            const real phi = kx*grid.x (k,i) + kz*grid.z (k,i) + 0.5*omega*dt;
+    for (int i = 1; i <= nx; ++i)
+    {
+        const real phi = kx*grid.x (k,i) + kz*grid.z (k,i) + 0.5*omega*dt;
 
-            A.x (k,i) = +(ampl/omega)*sin (phi)*cos (angle);
-            A.y (k,i) = +(ampl/omega)*cos (phi);
-            A.z (k,i) = -(ampl/omega)*sin (phi)*sin (angle);
-        }
+        A.x (k,i) = +(ampl/omega)*sin (phi)*cos (angle);
+        A.y (k,i) = +(ampl/omega)*cos (phi);
+        A.z (k,i) = -(ampl/omega)*sin (phi)*sin (angle);
+    }
     boundCond (A);
 
     for (int k = 1; k <= nz; ++k)
-        for (int i = 1; i <= nx; ++i)
-        {
-            const real phi = kx*grid.x (k,i) + kz*grid.z (k,i);
+    for (int i = 1; i <= nx; ++i)
+    {
+        const real phi = kx*grid.x (k,i) + kz*grid.z (k,i);
 
-            E.x (k,i) += ampl*cos(phi)*cos(angle);
-            E.y (k,i) -= ampl*sin(phi);
-            E.z (k,i) -= ampl*cos(phi)*sin(angle);
-        }
+        E.x (k,i) = +ampl*cos(phi)*cos(angle);
+        E.y (k,i) = -ampl*sin(phi);
+        E.z (k,i) = -ampl*cos(phi)*sin(angle);
+    }
     boundCond (E);
 
     global->B0.x = B0*sin (angle);
