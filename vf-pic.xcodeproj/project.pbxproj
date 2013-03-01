@@ -28,6 +28,7 @@
 		D2AF715B16E02F4A00F34A67 /* cold-mri.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2AF715916E02EC400F34A67 /* cold-mri.cpp */; };
 		D2AF715C16E030C800F34A67 /* periodic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D25D22B916DFE028001A44F4 /* periodic.cpp */; };
 		D2AF716116E052F800F34A67 /* jacobi.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2AF716016E052F800F34A67 /* jacobi.cpp */; };
+		D2AF716B16E0645700F34A67 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2AF716A16E0645700F34A67 /* main.cpp */; };
 		D2C6828416BB7EB40023FB36 /* boundaries.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2C6828016BB7EB30023FB36 /* boundaries.cpp */; };
 		D2F7CF7016DEE31500F064CF /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2915FC816B5F7FE0084A612 /* main.cpp */; };
 		D2F7CF7116DEE31500F064CF /* global.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D28BAEFD16B5FD0200578956 /* global.cpp */; };
@@ -54,6 +55,15 @@
 			runOnlyForDeploymentPostprocessing = 1;
 		};
 		D2ABD95416DEEFC4000D369B /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+		D2AF716616E0645700F34A67 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = /usr/share/man/man1/;
@@ -111,6 +121,8 @@
 		D2AF716016E052F800F34A67 /* jacobi.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = jacobi.cpp; sourceTree = "<group>"; };
 		D2AF716216E053A400F34A67 /* param.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = param.h; sourceTree = "<group>"; };
 		D2AF716316E053E300F34A67 /* problem.cfg */ = {isa = PBXFileReference; lastKnownFileType = text; path = problem.cfg; sourceTree = "<group>"; };
+		D2AF716816E0645700F34A67 /* test */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = test; sourceTree = BUILT_PRODUCTS_DIR; };
+		D2AF716A16E0645700F34A67 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		D2C6827D16B9DF600023FB36 /* faraday.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = faraday.h; path = src/faraday.h; sourceTree = SOURCE_ROOT; };
 		D2C6827E16B9EBA30023FB36 /* diffops.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = diffops.h; path = src/diffops.h; sourceTree = SOURCE_ROOT; };
 		D2C6828016BB7EB30023FB36 /* boundaries.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = boundaries.cpp; path = src/boundaries.cpp; sourceTree = SOURCE_ROOT; };
@@ -143,6 +155,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		D2AF716516E0645700F34A67 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D2F7CF7E16DEE31500F064CF /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -165,16 +184,17 @@
 		D2915FA416B5F56A0084A612 = {
 			isa = PBXGroup;
 			children = (
-				D2F7CF6816DEE1B400F064CF /* problems */,
-				D2DD55E816DD91380003D699 /* src */,
-				D29BF20C16D97E0B000BD507 /* cold-mri.py */,
 				D2F90E4B16B73ED400ABDA86 /* Makefile */,
 				D29BD8F716D35951000BD507 /* TODO */,
 				D2E0963516BF83C7003AA5DA /* libconfig++.la */,
 				D2F90E4C16B73FE300ABDA86 /* local.mk */,
+				D29BF20C16D97E0B000BD507 /* cold-mri.py */,
 				D2F90E4816B734C700ABDA86 /* jacobi.py */,
 				D2F90E4A16B7375900ABDA86 /* vfpic.py */,
+				D2F7CF6816DEE1B400F064CF /* problems */,
 				D2915FB016B5F56A0084A612 /* Products */,
+				D2DD55E816DD91380003D699 /* src */,
+				D2AF716916E0645700F34A67 /* test */,
 			);
 			sourceTree = "<group>";
 		};
@@ -184,6 +204,7 @@
 				D24BC37716B64B1A006C64A3 /* jacobi */,
 				D2F7CF8316DEE31500F064CF /* cold-mri */,
 				D2ABD95816DEEFC5000D369B /* circular-wave */,
+				D2AF716816E0645700F34A67 /* test */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -205,6 +226,14 @@
 				D2AF716316E053E300F34A67 /* problem.cfg */,
 			);
 			path = jacobi;
+			sourceTree = "<group>";
+		};
+		D2AF716916E0645700F34A67 /* test */ = {
+			isa = PBXGroup;
+			children = (
+				D2AF716A16E0645700F34A67 /* main.cpp */,
+			);
+			path = test;
 			sourceTree = "<group>";
 		};
 		D2DD55E816DD91380003D699 /* src */ = {
@@ -312,6 +341,23 @@
 			productReference = D2ABD95816DEEFC5000D369B /* circular-wave */;
 			productType = "com.apple.product-type.tool";
 		};
+		D2AF716716E0645700F34A67 /* test */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D2AF716E16E0645700F34A67 /* Build configuration list for PBXNativeTarget "test" */;
+			buildPhases = (
+				D2AF716416E0645700F34A67 /* Sources */,
+				D2AF716516E0645700F34A67 /* Frameworks */,
+				D2AF716616E0645700F34A67 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = test;
+			productName = test;
+			productReference = D2AF716816E0645700F34A67 /* test */;
+			productType = "com.apple.product-type.tool";
+		};
 		D2F7CF6E16DEE31500F064CF /* cold-mri */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = D2F7CF8016DEE31500F064CF /* Build configuration list for PBXNativeTarget "cold-mri" */;
@@ -353,6 +399,7 @@
 				D24BC36B16B64B1A006C64A3 /* jacobi */,
 				D2F7CF6E16DEE31500F064CF /* cold-mri */,
 				D2ABD94416DEEFC4000D369B /* circular-wave */,
+				D2AF716716E0645700F34A67 /* test */,
 			);
 		};
 /* End PBXProject section */
@@ -389,6 +436,14 @@
 				D2ABD95016DEEFC4000D369B /* faraday.cpp in Sources */,
 				D2ABD95116DEEFC4000D369B /* drift.cpp in Sources */,
 				D2ABD95216DEEFC4000D369B /* output.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D2AF716416E0645700F34A67 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D2AF716B16E0645700F34A67 /* main.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -491,6 +546,47 @@
 			};
 			name = Release;
 		};
+		D2AF716F16E0645700F34A67 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		D2AF717016E0645700F34A67 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
 		D2F7CF8116DEE31500F064CF /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -538,6 +634,14 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		D2AF716E16E0645700F34A67 /* Build configuration list for PBXNativeTarget "test" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D2AF716F16E0645700F34A67 /* Debug */,
+				D2AF717016E0645700F34A67 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 		D2F7CF8016DEE31500F064CF /* Build configuration list for PBXNativeTarget "cold-mri" */ = {
 			isa = XCConfigurationList;
