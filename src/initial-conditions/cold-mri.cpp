@@ -123,11 +123,11 @@ void initialCondition (GlobalVariables *global)
         const int npz = nz*int (pow (2.0, exponent - exponent/2));
 
         for (int k = 0; k < npz; ++k)
-            for (int i = 0; i < npx; ++i)
-            {
-                particles[k*npx + i].x = x0 + (real (i) - 0.5)*Lx/real (npx);
-                particles[k*npx + i].z = z0 + (real (k) - 0.5)*Lz/real (npz);
-            }
+        for (int i = 0; i < npx; ++i)
+        {
+            particles[k*npx + i].x = x0 + (real (i) - 0.5)*Lx/real (npx);
+            particles[k*npx + i].z = z0 + (real (k) - 0.5)*Lz/real (npz);
+        }
     }
 
     const real kz = kvg/vA;
@@ -164,26 +164,26 @@ void initialCondition (GlobalVariables *global)
     GlobalVectorField<real>& A = global->A;
 
     for (int k = 1; k <= nz; ++k)
-        for (int i = 1; i <= nx; ++i)
-        {
-            const std::complex<real> phase = I*kz*grid.z (k,i) - real (0.5)*dt*gamma;
+    for (int i = 1; i <= nx; ++i)
+    {
+        const std::complex<real> phase = I*kz*grid.z (k,i) - real (0.5)*dt*gamma;
 
-            A.x (k,i) = ampl*std::real (Ax*exp (phase));
-            A.y (k,i) = ampl*std::real (Ay*exp (phase));
-            A.z (k,i) = 0.0;
-        }
+        A.x (k,i) = ampl*std::real (Ax*exp (phase));
+        A.y (k,i) = ampl*std::real (Ay*exp (phase));
+        A.z (k,i) = 0.0;
+    }
     boundCond (A);
 
     GlobalVectorField<real>& E = global->E;
     for (int k = 1; k <= nz; ++k)
-        for (int i = 1; i <= nx; ++i)
-        {
-            const std::complex<real> phase = I*kz*grid.z (k,i);
+    for (int i = 1; i <= nx; ++i)
+    {
+        const std::complex<real> phase = I*kz*grid.z (k,i);
 
-            E.x (k,i) = ampl*std::real (Ex*exp (phase));
-            E.y (k,i) = ampl*std::real (Ey*exp (phase));
-            E.z (k,i) = 0.0;
-        }
+        E.x (k,i) = ampl*std::real (Ex*exp (phase));
+        E.y (k,i) = ampl*std::real (Ey*exp (phase));
+        E.z (k,i) = 0.0;
+    }
     boundCond (E);
 
     // Define operator= (real) for Vector class
