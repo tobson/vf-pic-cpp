@@ -165,7 +165,10 @@ int main (int argc, const char * argv[])
     std::string srcdir = ".";
     if (argc > 1) srcdir = argv[1];
 
-    config::read (srcdir);
+    Config cfg;
+    cfg.read (srcdir + "/problem.cfg");
+    cfg.write (srcdir + "/output.cfg");
+    cfg.print ();
 
     vfpic::computeVariables();
 

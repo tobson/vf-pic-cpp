@@ -69,81 +69,78 @@ namespace config
     /* Debugging */
     extern bool verbose;
     extern bool throwOnCopyConstruct;
-
-    /* Configuration class */
-    class ConfigParser
-    {
-    private:
-        template <typename T>
-        using stringmap = std::map<std::string,T>;
-        stringmap<stringmap<std::string>> contents;
-    public:
-        void parse (std::ifstream&);
-        template <typename T>
-        T get (const std::string&, const std::string&);
-        template <typename T>
-        void get (const std::string&, const std::string&, T&);
-        template <typename T>
-        void set (const std::string&, const std::string&, const T);
-        void save (const char*);
-        void print ();
-        void stream (std::ostream&);
-        class ParseError: public std::exception
-        {
-        public:
-            virtual const char *what () const noexcept;
-        protected:
-            std::string msg;
-        };
-        struct MissingBracket: public ParseError
-        {
-            explicit MissingBracket (const unsigned);
-        };
-        struct DoubleAssignment: public ParseError
-        {
-            explicit DoubleAssignment (const unsigned);
-        };
-        struct MissingKey: public ParseError
-        {
-            explicit MissingKey (const unsigned);
-        };
-        struct MissingValue: public ParseError
-        {
-            explicit MissingValue (const unsigned);
-        };
-        struct NoAssignment: public ParseError
-        {
-            explicit NoAssignment (const unsigned);
-        };
-        class NotFound: public std::exception
-        {
-        public:
-            virtual const char *what () const noexcept;
-        protected:
-            std::string msg;
-        };
-        struct KeyNotFound: public NotFound
-        {
-            explicit KeyNotFound (const std::string&);
-        };
-        struct SectionNotFound: public NotFound
-        {
-            explicit SectionNotFound (const std::string&);
-        };
-    };
-
-    template <typename T>
-    class ConversionError: public std::exception
-    {
-    public:
-        ConversionError (const T);
-        virtual const char *what () const noexcept;
-    private:
-        const T value;
-    };
-    
-    /* Read configuration from input file */
-    void read (const std::string&);
 }
+
+class ConfigParser
+{
+private:
+    template <typename T>
+    using stringmap = std::map<std::string,T>;
+    stringmap<stringmap<std::string>> contents;
+public:
+    template <typename T>
+    T get (const std::string&, const std::string&);
+    template <typename T>
+    void get (const std::string&, const std::string&, T&);
+    template <typename T>
+    void set (const std::string&, const std::string&, const T);
+    friend std::istream& operator>> (std::istream&, ConfigParser&);
+    friend std::ostream& operator<< (std::ostream&, ConfigParser&);
+    class ParseError: public std::exception
+    {
+    public:
+        virtual const char *what () const noexcept;
+    protected:
+        std::string msg;
+    };
+    struct MissingBracket: public ParseError
+    {
+        explicit MissingBracket (const unsigned);
+    };
+    struct DoubleAssignment: public ParseError
+    {
+        explicit DoubleAssignment (const unsigned);
+    };
+    struct MissingKey: public ParseError
+    {
+        explicit MissingKey (const unsigned);
+    };
+    struct MissingValue: public ParseError
+    {
+        explicit MissingValue (const unsigned);
+    };
+    struct NoAssignment: public ParseError
+    {
+        explicit NoAssignment (const unsigned);
+    };
+    class NotFound: public std::exception
+    {
+    public:
+        virtual const char *what () const noexcept;
+    protected:
+        std::string msg;
+    };
+    struct KeyNotFound: public NotFound
+    {
+        explicit KeyNotFound (const std::string&);
+    };
+    struct SectionNotFound: public NotFound
+    {
+        explicit SectionNotFound (const std::string&);
+    };
+};
+
+class Config
+{
+public:
+    void read (const std::string&);
+    friend std::istream& operator>> (std::istream&, Config&);
+    void write (const std::string&);
+    void print ();
+    friend std::ostream& operator<< (std::ostream&, Config&);
+private:
+    ConfigParser parser;
+};
+
 
 #endif /* defined(__vf_pic__config__) */
