@@ -1,12 +1,8 @@
-local.mk
-param.h
 vf-pic.xcodeproj/project.xcworkspace
 vf-pic.xcodeproj/xcuserdata
 
-jacobi
-test
-vf-pic
-sse
+local.mk
+output.cfg
 
 *.d
 *.o
