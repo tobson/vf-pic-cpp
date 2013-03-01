@@ -56,6 +56,7 @@ void Output::operator() (GlobalVariables& global, const long long it)
         os << global.rho << global.ruu;
         os << global.grid;
         os.write (reinterpret_cast<const char *> (&it), sizeof (long long));
+        os.flush ();
     }
     barrier.wait ();
 }
