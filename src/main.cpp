@@ -71,7 +71,7 @@ void iteration (GlobalVariables& global, Barrier& barrier, const int ithread)
         // Write out data
         if (it % itWrite == 0)
         {
-            printf ("it = %d\n", it);
+            if (ithread == 0) std::cout << "it = " << it << std::endl;
             output (global, it);
         }
 
