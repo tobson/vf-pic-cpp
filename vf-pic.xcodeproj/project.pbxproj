@@ -7,6 +7,20 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D20AF13216E15E6300D0B031 /* shearing-periodic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2AF715116DFED5700F34A67 /* shearing-periodic.cpp */; };
+		D20AF13316E15E6300D0B031 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2915FC816B5F7FE0084A612 /* main.cpp */; };
+		D20AF13416E15E6300D0B031 /* global.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D28BAEFD16B5FD0200578956 /* global.cpp */; };
+		D20AF13516E15E6300D0B031 /* config.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D28BAF0016B5FDDA00578956 /* config.cpp */; };
+		D20AF13616E15E6300D0B031 /* barrier.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D28BAF1816B60B3800578956 /* barrier.cpp */; };
+		D20AF13716E15E6300D0B031 /* grid.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D25C8DB216B89B6600B0A607 /* grid.cpp */; };
+		D20AF13816E15E6300D0B031 /* boundaries.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2C6828016BB7EB30023FB36 /* boundaries.cpp */; };
+		D20AF13916E15E6300D0B031 /* kick.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2C6828816BB9CAC0023FB36 /* kick.cpp */; };
+		D20AF13A16E15E6300D0B031 /* deposit.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D20381BC16BE0195008755DC /* deposit.cpp */; };
+		D20AF13B16E15E6300D0B031 /* ohm.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D206FBFB16C1C31C008BD080 /* ohm.cpp */; };
+		D20AF13C16E15E6300D0B031 /* faraday.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D206FC0316C62E3D008BD080 /* faraday.cpp */; };
+		D20AF13D16E15E6300D0B031 /* drift.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D206FC1016CA14D1008BD080 /* drift.cpp */; };
+		D20AF13E16E15E6300D0B031 /* output.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D270B39C16CEDC1B00DFCE2F /* output.cpp */; };
+		D20AF14516E15E8200D0B031 /* noise.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D20AF12A16E15ADE00D0B031 /* noise.cpp */; };
 		D24BC36D16B64B1A006C64A3 /* global.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D28BAEFD16B5FD0200578956 /* global.cpp */; };
 		D24BC36E16B64B1A006C64A3 /* config.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D28BAF0016B5FDDA00578956 /* config.cpp */; };
 		D24BC37016B64B1A006C64A3 /* barrier.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D28BAF1816B60B3800578956 /* barrier.cpp */; };
@@ -45,6 +59,15 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		D20AF14016E15E6300D0B031 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
 		D24BC37316B64B1A006C64A3 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -93,6 +116,10 @@
 		D206FC0D16CA13A2008BD080 /* initial-condition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "initial-condition.h"; path = "src/initial-condition.h"; sourceTree = SOURCE_ROOT; };
 		D206FC1016CA14D1008BD080 /* drift.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = drift.cpp; path = src/drift.cpp; sourceTree = SOURCE_ROOT; };
 		D206FC1116CA14D2008BD080 /* drift.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = drift.h; path = src/drift.h; sourceTree = SOURCE_ROOT; };
+		D20AF12A16E15ADE00D0B031 /* noise.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = noise.cpp; sourceTree = "<group>"; };
+		D20AF12D16E15E0900D0B031 /* param.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = param.h; sourceTree = "<group>"; };
+		D20AF12E16E15E1900D0B031 /* problem.cfg */ = {isa = PBXFileReference; lastKnownFileType = text; path = problem.cfg; sourceTree = "<group>"; };
+		D20AF14416E15E6300D0B031 /* cold-mri-noise */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "cold-mri-noise"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D24BC37716B64B1A006C64A3 /* jacobi */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = jacobi; sourceTree = BUILT_PRODUCTS_DIR; };
 		D25C8DB216B89B6600B0A607 /* grid.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = grid.cpp; path = src/grid.cpp; sourceTree = SOURCE_ROOT; };
 		D25C8DB316B89B6600B0A607 /* grid.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = grid.h; path = src/grid.h; sourceTree = SOURCE_ROOT; };
@@ -140,6 +167,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		D20AF13F16E15E6300D0B031 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D24BC37116B64B1A006C64A3 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -171,6 +205,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D20AF12C16E15DE900D0B031 /* cold-mri-noise */ = {
+			isa = PBXGroup;
+			children = (
+				D20AF12D16E15E0900D0B031 /* param.h */,
+				D20AF12E16E15E1900D0B031 /* problem.cfg */,
+			);
+			path = "cold-mri-noise";
+			sourceTree = "<group>";
+		};
 		D25D22B816DFDFFC001A44F4 /* boundary-conditions */ = {
 			isa = PBXGroup;
 			children = (
@@ -203,6 +246,7 @@
 				D2F7CF8316DEE31500F064CF /* cold-mri */,
 				D2ABD95816DEEFC5000D369B /* circular-wave */,
 				D2AF716816E0645700F34A67 /* test */,
+				D20AF14416E15E6300D0B031 /* cold-mri-noise */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -212,6 +256,7 @@
 			children = (
 				D2AF715516E02DCB00F34A67 /* circular-wave.cpp */,
 				D2AF715916E02EC400F34A67 /* cold-mri.cpp */,
+				D20AF12A16E15ADE00D0B031 /* noise.cpp */,
 			);
 			path = "initial-conditions";
 			sourceTree = "<group>";
@@ -277,6 +322,7 @@
 		D2F7CF6816DEE1B400F064CF /* problems */ = {
 			isa = PBXGroup;
 			children = (
+				D20AF12C16E15DE900D0B031 /* cold-mri-noise */,
 				D2AF715F16E0528E00F34A67 /* jacobi */,
 				D2F7CF8616DEEEB600F064CF /* circular-wave */,
 				D2F7CF6916DEE1E200F064CF /* cold-mri */,
@@ -305,6 +351,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		D20AF12F16E15E6300D0B031 /* cold-mri-noise */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D20AF14116E15E6300D0B031 /* Build configuration list for PBXNativeTarget "cold-mri-noise" */;
+			buildPhases = (
+				D20AF13016E15E6300D0B031 /* Sources */,
+				D20AF13F16E15E6300D0B031 /* Frameworks */,
+				D20AF14016E15E6300D0B031 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "cold-mri-noise";
+			productName = "vf-pic";
+			productReference = D20AF14416E15E6300D0B031 /* cold-mri-noise */;
+			productType = "com.apple.product-type.tool";
+		};
 		D24BC36B16B64B1A006C64A3 /* jacobi */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = D24BC37416B64B1A006C64A3 /* Build configuration list for PBXNativeTarget "jacobi" */;
@@ -398,11 +461,33 @@
 				D2F7CF6E16DEE31500F064CF /* cold-mri */,
 				D2ABD94416DEEFC4000D369B /* circular-wave */,
 				D2AF716716E0645700F34A67 /* test */,
+				D20AF12F16E15E6300D0B031 /* cold-mri-noise */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXSourcesBuildPhase section */
+		D20AF13016E15E6300D0B031 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D20AF14516E15E8200D0B031 /* noise.cpp in Sources */,
+				D20AF13216E15E6300D0B031 /* shearing-periodic.cpp in Sources */,
+				D20AF13316E15E6300D0B031 /* main.cpp in Sources */,
+				D20AF13416E15E6300D0B031 /* global.cpp in Sources */,
+				D20AF13516E15E6300D0B031 /* config.cpp in Sources */,
+				D20AF13616E15E6300D0B031 /* barrier.cpp in Sources */,
+				D20AF13716E15E6300D0B031 /* grid.cpp in Sources */,
+				D20AF13816E15E6300D0B031 /* boundaries.cpp in Sources */,
+				D20AF13916E15E6300D0B031 /* kick.cpp in Sources */,
+				D20AF13A16E15E6300D0B031 /* deposit.cpp in Sources */,
+				D20AF13B16E15E6300D0B031 /* ohm.cpp in Sources */,
+				D20AF13C16E15E6300D0B031 /* faraday.cpp in Sources */,
+				D20AF13D16E15E6300D0B031 /* drift.cpp in Sources */,
+				D20AF13E16E15E6300D0B031 /* output.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D24BC36C16B64B1A006C64A3 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -469,6 +554,24 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
+		D20AF14216E15E6300D0B031 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				HEADER_SEARCH_PATHS = /Users/tobi/macports/include;
+				PRODUCT_NAME = "cold-mri-noise";
+				USER_HEADER_SEARCH_PATHS = "src problems/cold-mri-noise";
+			};
+			name = Debug;
+		};
+		D20AF14316E15E6300D0B031 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				HEADER_SEARCH_PATHS = /Users/tobi/macports/include;
+				PRODUCT_NAME = "cold-mri-noise";
+				USER_HEADER_SEARCH_PATHS = "src problems/cold-mri-noise";
+			};
+			name = Release;
+		};
 		D24BC37516B64B1A006C64A3 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -496,6 +599,7 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				GCC_OPTIMIZATION_LEVEL = 3;
 				"GCC_PREPROCESSOR_DEFINITIONS[arch=*]" = DEBUG;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -518,6 +622,7 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				GCC_OPTIMIZATION_LEVEL = 3;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
@@ -606,6 +711,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		D20AF14116E15E6300D0B031 /* Build configuration list for PBXNativeTarget "cold-mri-noise" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D20AF14216E15E6300D0B031 /* Debug */,
+				D20AF14316E15E6300D0B031 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		D24BC37416B64B1A006C64A3 /* Build configuration list for PBXNativeTarget "jacobi" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -640,6 +754,7 @@
 				D2AF717016E0645700F34A67 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		D2F7CF8016DEE31500F064CF /* Build configuration list for PBXNativeTarget "cold-mri" */ = {
 			isa = XCConfigurationList;
