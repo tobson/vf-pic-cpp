@@ -181,7 +181,7 @@ class State:
 
 class DataFile ():
 
-    def __init__ (self, cfg = None, filename = "data/var.dat"):
+    def __init__ (self, filename = "var.dat", cfg = None):
 
         if not isinstance (cfg, Config): cfg = Config ()
 
