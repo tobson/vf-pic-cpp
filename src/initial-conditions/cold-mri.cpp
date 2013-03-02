@@ -7,6 +7,7 @@
 //
 
 #include <eigen3/Eigen/Eigenvalues>
+#include <iomanip>
 #include <iostream>
 #include <random>
 
@@ -49,12 +50,17 @@ void initialCondition (GlobalVariables *global)
     const real kvm = Omega*sqrt (2.0*qshear/(1.0 - 2.0*Omega*tau));
     const real kvo = Omega*sqrt (((4.0 - qshear)*qshear)/(2.0*(4.0 - qshear)*Omega*tau + 4.0));
     const real kvg = (2.0*pi*vA/Lz)*round (kvo*Lz/(2.0*pi*vA));
+    const real k1 = 2.0*pi/Lz;
 
-    std::cout << "Lowest non-zero wave number: kz = " << 2.0*pi/Lz << std::endl;
+    std::streamsize precision = std::cout.precision ();
+//    std::cout << std::fixed << std::scientific << std::boolalpha;
+//    std::cout << std::setprecision (std::numeric_limits<real>::digits10 + 1);
+    std::cout << "Lowest non-zero wave number: kz = " << k1 << std::endl;
     std::cout << "Highest resolved wave number: kz = " << pi/dz << std::endl;
-    std::cout << "Highest unstable wave number: kz = " << kvm/vA << std::endl;
-    std::cout << "Most unstable wave number: kz = " << kvo/vA << std::endl;
-    std::cout << "Most unstable wave number on grid: kz = " << kvg/vA << std::endl;
+    std::cout << "Highest unstable wave number: kz = " << kvm/(k1*vA) << " k1" << std::endl;
+    std::cout << "Most unstable wave number: kz = " << kvo/(k1*vA) << " k1" << std::endl;;
+    std::cout << "Most unstable wave number on grid: kz = " << kvg/(k1*vA) << " k1" << std::endl;
+    std::cout.precision (precision);
 
     const std::complex<real> I (0,1);
 
