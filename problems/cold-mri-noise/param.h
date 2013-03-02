@@ -16,9 +16,9 @@ namespace vfpic
 const int nx = 64;
 const int nz = 256;
 
-const int npc = 256;
+const int npc = 64;
 
-const int nthreads = 16;
+const int nthreads = 4;
 
 const int alignment = 16;
 }
