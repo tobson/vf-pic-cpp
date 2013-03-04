@@ -10,10 +10,11 @@
 #include "particles.h"
 #include "scalar-field.h"
 
+using namespace vfpic;
+
 template <int Nz>
-void ProblemSpecificBoundaryConditions::X (ScalarField<real,Nz,vfpic::nx>& scalar)
+void ProblemSpecificBoundaryConditions::X (ScalarField<real,Nz,nx>& scalar)
 {
-    using namespace vfpic;
     for (int k = 1; k <= Nz; ++k)
     {
         scalar (k,0   ) = scalar (k,nx);
@@ -21,11 +22,10 @@ void ProblemSpecificBoundaryConditions::X (ScalarField<real,Nz,vfpic::nx>& scala
     }
 }
 template void ProblemSpecificBoundaryConditions::X (GlobalScalarField<real>&);
-template void ProblemSpecificBoundaryConditions::X (LocalScalarField<real>&);
+template void ProblemSpecificBoundaryConditions::X (std::conditional<nz==mz,ScalarField<real,0,nx>,LocalScalarField<real>>::type&);
 
 void ProblemSpecificBoundaryConditions::Z (GlobalScalarField<real>& scalar)
 {
-    using namespace vfpic;
     for (int i = 0; i < nx+2; ++i)
     {
         scalar (0   ,i) = scalar (nz,i);
@@ -37,7 +37,6 @@ template <int N>
 void ProblemSpecificBoundaryConditions::operator() (Particles<N>& particles)
 {
     using namespace config;
-    using namespace vfpic;
 
     const real Lx1 = 1.0/Lx;
     const real Lz1 = 1.0/Lz;
@@ -58,4 +57,4 @@ void ProblemSpecificBoundaryConditions::operator() (Particles<N>& particles)
     }
 }
 template void ProblemSpecificBoundaryConditions::operator() (GlobalParticles&);
-template void ProblemSpecificBoundaryConditions::operator() (LocalParticles&);
+template void ProblemSpecificBoundaryConditions::operator() (std::conditional<nz==mz,Particles<0>,LocalParticles>::type&);

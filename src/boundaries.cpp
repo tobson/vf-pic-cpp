@@ -19,7 +19,7 @@ void BoundaryConditions::X (VectorField<real,Nz,nx>& vector)
     X (vector.z);
 }
 template void BoundaryConditions::X (GlobalVectorField<real>&);
-template void BoundaryConditions::X (LocalVectorField<real>&);
+template void BoundaryConditions::X (std::conditional<mz==nz,VectorField<real,0,nx>,LocalVectorField<real>>::type&);
 
 void BoundaryConditions::Z (GlobalVectorField<real>& vector)
 {
