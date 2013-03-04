@@ -120,6 +120,10 @@
 		D20AF12D16E15E0900D0B031 /* param.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = param.h; sourceTree = "<group>"; };
 		D20AF12E16E15E1900D0B031 /* problem.cfg */ = {isa = PBXFileReference; lastKnownFileType = text; path = problem.cfg; sourceTree = "<group>"; };
 		D20AF14416E15E6300D0B031 /* cold-mri-noise */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "cold-mri-noise"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D218892A16E46572006800C5 /* growth-rate.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = "growth-rate.py"; sourceTree = "<group>"; };
+		D218892B16E465B1006800C5 /* circular-wave.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = "circular-wave.py"; sourceTree = "<group>"; };
+		D218892C16E465C9006800C5 /* growth-rate.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = "growth-rate.py"; sourceTree = "<group>"; };
+		D218892D16E465C9006800C5 /* mode.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = mode.py; sourceTree = "<group>"; };
 		D24BC37716B64B1A006C64A3 /* jacobi */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = jacobi; sourceTree = BUILT_PRODUCTS_DIR; };
 		D25C8DB216B89B6600B0A607 /* grid.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = grid.cpp; path = src/grid.cpp; sourceTree = SOURCE_ROOT; };
 		D25C8DB316B89B6600B0A607 /* grid.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = grid.h; path = src/grid.h; sourceTree = SOURCE_ROOT; };
@@ -208,6 +212,8 @@
 		D20AF12C16E15DE900D0B031 /* cold-mri-noise */ = {
 			isa = PBXGroup;
 			children = (
+				D218892C16E465C9006800C5 /* growth-rate.py */,
+				D218892D16E465C9006800C5 /* mode.py */,
 				D20AF12D16E15E0900D0B031 /* param.h */,
 				D20AF12E16E15E1900D0B031 /* problem.cfg */,
 			);
@@ -333,6 +339,7 @@
 		D2F7CF6916DEE1E200F064CF /* cold-mri */ = {
 			isa = PBXGroup;
 			children = (
+				D218892A16E46572006800C5 /* growth-rate.py */,
 				D2F7CF8516DEECD000F064CF /* problem.cfg */,
 				D2AF715E16E0379E00F34A67 /* param.h */,
 			);
@@ -342,6 +349,7 @@
 		D2F7CF8616DEEEB600F064CF /* circular-wave */ = {
 			isa = PBXGroup;
 			children = (
+				D218892B16E465B1006800C5 /* circular-wave.py */,
 				D2F7CF8916DEEF2900F064CF /* problem.cfg */,
 				D2AF715D16E0375800F34A67 /* param.h */,
 			);
