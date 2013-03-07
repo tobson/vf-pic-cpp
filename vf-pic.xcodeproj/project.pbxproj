@@ -21,6 +21,22 @@
 		D20AF13D16E15E6300D0B031 /* drift.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D206FC1016CA14D1008BD080 /* drift.cpp */; };
 		D20AF13E16E15E6300D0B031 /* output.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D270B39C16CEDC1B00DFCE2F /* output.cpp */; };
 		D20AF14516E15E8200D0B031 /* noise.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D20AF12A16E15ADE00D0B031 /* noise.cpp */; };
+		D218893316E6E1B1006800C5 /* periodic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D25D22B916DFE028001A44F4 /* periodic.cpp */; };
+		D218893416E6E1B1006800C5 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2915FC816B5F7FE0084A612 /* main.cpp */; };
+		D218893516E6E1B1006800C5 /* global.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D28BAEFD16B5FD0200578956 /* global.cpp */; };
+		D218893616E6E1B1006800C5 /* config.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D28BAF0016B5FDDA00578956 /* config.cpp */; };
+		D218893716E6E1B1006800C5 /* barrier.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D28BAF1816B60B3800578956 /* barrier.cpp */; };
+		D218893816E6E1B1006800C5 /* grid.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D25C8DB216B89B6600B0A607 /* grid.cpp */; };
+		D218893916E6E1B1006800C5 /* boundaries.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2C6828016BB7EB30023FB36 /* boundaries.cpp */; };
+		D218893A16E6E1B1006800C5 /* kick.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2C6828816BB9CAC0023FB36 /* kick.cpp */; };
+		D218893B16E6E1B1006800C5 /* deposit.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D20381BC16BE0195008755DC /* deposit.cpp */; };
+		D218893C16E6E1B1006800C5 /* ohm.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D206FBFB16C1C31C008BD080 /* ohm.cpp */; };
+		D218893D16E6E1B1006800C5 /* faraday.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D206FC0316C62E3D008BD080 /* faraday.cpp */; };
+		D218893E16E6E1B1006800C5 /* drift.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D206FC1016CA14D1008BD080 /* drift.cpp */; };
+		D218893F16E6E1B1006800C5 /* output.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D270B39C16CEDC1B00DFCE2F /* output.cpp */; };
+		D218894916E6E29E006800C5 /* warm-circular-wave.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D218892E16E6E166006800C5 /* warm-circular-wave.cpp */; };
+		D218894D16E6E785006800C5 /* Faddeeva.cc in Sources */ = {isa = PBXBuildFile; fileRef = D218894B16E6E785006800C5 /* Faddeeva.cc */; };
+		D218894E16E6E796006800C5 /* Faddeeva.cc in Sources */ = {isa = PBXBuildFile; fileRef = D218894B16E6E785006800C5 /* Faddeeva.cc */; };
 		D24BC36D16B64B1A006C64A3 /* global.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D28BAEFD16B5FD0200578956 /* global.cpp */; };
 		D24BC36E16B64B1A006C64A3 /* config.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D28BAF0016B5FDDA00578956 /* config.cpp */; };
 		D24BC37016B64B1A006C64A3 /* barrier.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D28BAF1816B60B3800578956 /* barrier.cpp */; };
@@ -60,6 +76,15 @@
 
 /* Begin PBXCopyFilesBuildPhase section */
 		D20AF14016E15E6300D0B031 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+		D218894116E6E1B1006800C5 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = /usr/share/man/man1/;
@@ -124,6 +149,14 @@
 		D218892B16E465B1006800C5 /* circular-wave.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = "circular-wave.py"; sourceTree = "<group>"; };
 		D218892C16E465C9006800C5 /* growth-rate.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = "growth-rate.py"; sourceTree = "<group>"; };
 		D218892D16E465C9006800C5 /* mode.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = mode.py; sourceTree = "<group>"; };
+		D218892E16E6E166006800C5 /* warm-circular-wave.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = "warm-circular-wave.cpp"; sourceTree = "<group>"; };
+		D218894516E6E1B1006800C5 /* warm-circular-wave */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "warm-circular-wave"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D218894716E6E27A006800C5 /* param.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = param.h; sourceTree = "<group>"; };
+		D218894816E6E27A006800C5 /* problem.cfg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = problem.cfg; sourceTree = "<group>"; };
+		D218894B16E6E785006800C5 /* Faddeeva.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Faddeeva.cc; sourceTree = "<group>"; };
+		D218894C16E6E785006800C5 /* Faddeeva.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Faddeeva.hh; sourceTree = "<group>"; };
+		D218894F16E8817E006800C5 /* mode.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = mode.py; sourceTree = "<group>"; };
+		D218895016E8817E006800C5 /* video.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = video.py; sourceTree = "<group>"; };
 		D24BC37716B64B1A006C64A3 /* jacobi */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = jacobi; sourceTree = BUILT_PRODUCTS_DIR; };
 		D25C8DB216B89B6600B0A607 /* grid.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = grid.cpp; path = src/grid.cpp; sourceTree = SOURCE_ROOT; };
 		D25C8DB316B89B6600B0A607 /* grid.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = grid.h; path = src/grid.h; sourceTree = SOURCE_ROOT; };
@@ -178,6 +211,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		D218894016E6E1B1006800C5 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D24BC37116B64B1A006C64A3 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -220,6 +260,26 @@
 			path = "cold-mri-noise";
 			sourceTree = "<group>";
 		};
+		D218894616E6E1F7006800C5 /* warm-circular-wave */ = {
+			isa = PBXGroup;
+			children = (
+				D218894F16E8817E006800C5 /* mode.py */,
+				D218895016E8817E006800C5 /* video.py */,
+				D218894716E6E27A006800C5 /* param.h */,
+				D218894816E6E27A006800C5 /* problem.cfg */,
+			);
+			path = "warm-circular-wave";
+			sourceTree = "<group>";
+		};
+		D218894A16E6E759006800C5 /* external */ = {
+			isa = PBXGroup;
+			children = (
+				D218894B16E6E785006800C5 /* Faddeeva.cc */,
+				D218894C16E6E785006800C5 /* Faddeeva.hh */,
+			);
+			path = external;
+			sourceTree = "<group>";
+		};
 		D25D22B816DFDFFC001A44F4 /* boundary-conditions */ = {
 			isa = PBXGroup;
 			children = (
@@ -253,6 +313,7 @@
 				D2ABD95816DEEFC5000D369B /* circular-wave */,
 				D2AF716816E0645700F34A67 /* test */,
 				D20AF14416E15E6300D0B031 /* cold-mri-noise */,
+				D218894516E6E1B1006800C5 /* warm-circular-wave */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -263,6 +324,7 @@
 				D2AF715516E02DCB00F34A67 /* circular-wave.cpp */,
 				D2AF715916E02EC400F34A67 /* cold-mri.cpp */,
 				D20AF12A16E15ADE00D0B031 /* noise.cpp */,
+				D218892E16E6E166006800C5 /* warm-circular-wave.cpp */,
 			);
 			path = "initial-conditions";
 			sourceTree = "<group>";
@@ -288,6 +350,7 @@
 		D2DD55E816DD91380003D699 /* src */ = {
 			isa = PBXGroup;
 			children = (
+				D218894A16E6E759006800C5 /* external */,
 				D2AF715416E02D8000F34A67 /* initial-conditions */,
 				D25D22B816DFDFFC001A44F4 /* boundary-conditions */,
 				D28BAF1816B60B3800578956 /* barrier.cpp */,
@@ -328,6 +391,7 @@
 		D2F7CF6816DEE1B400F064CF /* problems */ = {
 			isa = PBXGroup;
 			children = (
+				D218894616E6E1F7006800C5 /* warm-circular-wave */,
 				D20AF12C16E15DE900D0B031 /* cold-mri-noise */,
 				D2AF715F16E0528E00F34A67 /* jacobi */,
 				D2F7CF8616DEEEB600F064CF /* circular-wave */,
@@ -374,6 +438,23 @@
 			name = "cold-mri-noise";
 			productName = "vf-pic";
 			productReference = D20AF14416E15E6300D0B031 /* cold-mri-noise */;
+			productType = "com.apple.product-type.tool";
+		};
+		D218893016E6E1B1006800C5 /* warm-circular-wave */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D218894216E6E1B1006800C5 /* Build configuration list for PBXNativeTarget "warm-circular-wave" */;
+			buildPhases = (
+				D218893116E6E1B1006800C5 /* Sources */,
+				D218894016E6E1B1006800C5 /* Frameworks */,
+				D218894116E6E1B1006800C5 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "warm-circular-wave";
+			productName = "vf-pic";
+			productReference = D218894516E6E1B1006800C5 /* warm-circular-wave */;
 			productType = "com.apple.product-type.tool";
 		};
 		D24BC36B16B64B1A006C64A3 /* jacobi */ = {
@@ -470,6 +551,7 @@
 				D2ABD94416DEEFC4000D369B /* circular-wave */,
 				D2AF716716E0645700F34A67 /* test */,
 				D20AF12F16E15E6300D0B031 /* cold-mri-noise */,
+				D218893016E6E1B1006800C5 /* warm-circular-wave */,
 			);
 		};
 /* End PBXProject section */
@@ -496,6 +578,28 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		D218893116E6E1B1006800C5 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D218894E16E6E796006800C5 /* Faddeeva.cc in Sources */,
+				D218894916E6E29E006800C5 /* warm-circular-wave.cpp in Sources */,
+				D218893316E6E1B1006800C5 /* periodic.cpp in Sources */,
+				D218893416E6E1B1006800C5 /* main.cpp in Sources */,
+				D218893516E6E1B1006800C5 /* global.cpp in Sources */,
+				D218893616E6E1B1006800C5 /* config.cpp in Sources */,
+				D218893716E6E1B1006800C5 /* barrier.cpp in Sources */,
+				D218893816E6E1B1006800C5 /* grid.cpp in Sources */,
+				D218893916E6E1B1006800C5 /* boundaries.cpp in Sources */,
+				D218893A16E6E1B1006800C5 /* kick.cpp in Sources */,
+				D218893B16E6E1B1006800C5 /* deposit.cpp in Sources */,
+				D218893C16E6E1B1006800C5 /* ohm.cpp in Sources */,
+				D218893D16E6E1B1006800C5 /* faraday.cpp in Sources */,
+				D218893E16E6E1B1006800C5 /* drift.cpp in Sources */,
+				D218893F16E6E1B1006800C5 /* output.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D24BC36C16B64B1A006C64A3 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -506,6 +610,7 @@
 				D24BC37016B64B1A006C64A3 /* barrier.cpp in Sources */,
 				D2C6828416BB7EB40023FB36 /* boundaries.cpp in Sources */,
 				D2AF716116E052F800F34A67 /* jacobi.cpp in Sources */,
+				D218894D16E6E785006800C5 /* Faddeeva.cc in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -577,6 +682,22 @@
 				HEADER_SEARCH_PATHS = /Users/tobi/macports/include;
 				PRODUCT_NAME = "cold-mri-noise";
 				USER_HEADER_SEARCH_PATHS = "src problems/cold-mri-noise";
+			};
+			name = Release;
+		};
+		D218894316E6E1B1006800C5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "warm-circular-wave";
+				USER_HEADER_SEARCH_PATHS = "src problems/warm-circular-wave";
+			};
+			name = Debug;
+		};
+		D218894416E6E1B1006800C5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "warm-circular-wave";
+				USER_HEADER_SEARCH_PATHS = "src problems/warm-circular-wave";
 			};
 			name = Release;
 		};
@@ -724,6 +845,15 @@
 			buildConfigurations = (
 				D20AF14216E15E6300D0B031 /* Debug */,
 				D20AF14316E15E6300D0B031 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D218894216E6E1B1006800C5 /* Build configuration list for PBXNativeTarget "warm-circular-wave" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D218894316E6E1B1006800C5 /* Debug */,
+				D218894416E6E1B1006800C5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
