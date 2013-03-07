@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 from numpy import ndarray
+from collections import OrderedDict
 
 class Config (dict):
 
@@ -94,45 +95,50 @@ class Grid ():
             meshgrid (cfg.x0 + (arange (cfg.nx + 2) - 0.5)*cfg.Lx/cfg.nx,
                       cfg.z0 + (arange (cfg.nz + 2) - 0.5)*cfg.Lz/cfg.nz)
 
-class State:
+class State (OrderedDict):
 
     def __init__ (self, cfg = None):
 
         from numpy import ndarray
 
+        super (State, self).__init__ ()
+
         if not isinstance (cfg, Config): cfg = Config ()
+
         self.readParticles = cfg.writeParticles;
 
-        self.Ax = ScalarField (cfg)
-        self.Ay = ScalarField (cfg)
-        self.Az = ScalarField (cfg)
+        self["Ax"] = ScalarField (cfg)
+        self["Ay"] = ScalarField (cfg)
+        self["Az"] = ScalarField (cfg)
 
-        self.Ax2 = ScalarField (cfg)
-        self.Ay2 = ScalarField (cfg)
-        self.Az2 = ScalarField (cfg)
+        self["Ax2"] = ScalarField (cfg)
+        self["Ay2"] = ScalarField (cfg)
+        self["Az2"] = ScalarField (cfg)
 
-        self.Bx = ScalarField (cfg)
-        self.By = ScalarField (cfg)
-        self.Bz = ScalarField (cfg)
+        self["Bx"] = ScalarField (cfg)
+        self["By"] = ScalarField (cfg)
+        self["Bz"] = ScalarField (cfg)
 
-        self.Ex = ScalarField (cfg)
-        self.Ey = ScalarField (cfg)
-        self.Ez = ScalarField (cfg)
+        self["Ex"] = ScalarField (cfg)
+        self["Ey"] = ScalarField (cfg)
+        self["Ez"] = ScalarField (cfg)
 
-        self.particles = Particles (cfg)
-        self.particles2 = Particles (cfg)
+        if self.readParticles:
+          self["particles"] = Particles (cfg)
+          self["particles2"] = Particles (cfg)
 
-        self.rho = ScalarField (cfg)
+        self["rho"] = ScalarField (cfg)
 
-        self.rux = ScalarField (cfg)
-        self.ruy = ScalarField (cfg)
-        self.ruz = ScalarField (cfg)
+        self["rux"] = ScalarField (cfg)
+        self["ruy"] = ScalarField (cfg)
+        self["ruz"] = ScalarField (cfg)
         
-        self.x = ScalarField (cfg)
-        self.z = ScalarField (cfg)
+        self["x"] = ScalarField (cfg)
+        self["z"] = ScalarField (cfg)
+
+        self.__dict__.update (self)
         
         self.it = 0
-        #self.t = 0.0
 
     def read (self, f):
 
@@ -140,38 +146,8 @@ class State:
 
         recordsize = 0
 
-        # Read fields
-        recordsize += self.Ax.read (f)
-        recordsize += self.Ay.read (f)
-        recordsize += self.Az.read (f)
-
-        recordsize += self.Ax2.read (f)
-        recordsize += self.Ay2.read (f)
-        recordsize += self.Az2.read (f)
-
-        recordsize += self.Bx.read (f)
-        recordsize += self.By.read (f)
-        recordsize += self.Bz.read (f)
-
-        recordsize += self.Ex.read (f)
-        recordsize += self.Ey.read (f)
-        recordsize += self.Ez.read (f)
-
-        # Read particles
-        if self.readParticles:
-          recordsize += self.particles.read (f)
-          recordsize += self.particles2.read (f)
-
-        # Read sources
-        recordsize += self.rho.read (f)
-
-        recordsize += self.rux.read (f)
-        recordsize += self.ruy.read (f)
-        recordsize += self.ruz.read (f)
-        
-        # Read grid
-        recordsize += self.x.read (f)
-        recordsize += self.z.read (f)
+        # Read the various fields
+        for key, value in self.items (): recordsize += value.read (f)
 
         # Read time
         self.it, = fromfile (f, dtype = int64, count = 1)
