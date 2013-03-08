@@ -43,6 +43,7 @@ void Output::operator() (GlobalVariables& global, const long long it)
     faraday (&A2, E, 0.5*dt);
     boundaryCondition (global.A2);
     curl (A2, &B); B += global.B0;
+    boundaryCondition (global.B);
     particles2 = particles;
     kick (global.E, global.B, &particles2, 0.5*dt);
     deposit (particles2, &global.rho, &global.ruu);
