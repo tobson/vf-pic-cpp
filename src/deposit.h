@@ -23,7 +23,6 @@ public:
                      GlobalScalarField<real>*,
                      GlobalVectorField<real>*);
 private:
-    void addGhosts ();
     void convert (GlobalScalarField<real>*,
                   GlobalVectorField<real>*);
     struct FourMomentum

@@ -62,13 +62,7 @@ void Deposit<Np>::operator() (const Particles<Np>& particles,
         
         ++p;
     }
-    addGhosts ();
-    convert (rho, ruu);
-}
-
-template <int Np>
-void Deposit<Np>::addGhosts ()
-{
+    // Add ghost zones
     for (int i = 0; i < nx+2; ++i)
     {
         sources (nz,i) += sources (0   ,i);
@@ -79,6 +73,7 @@ void Deposit<Np>::addGhosts ()
         sources (k,nx) += sources (k,0   );
         sources (k,1 ) += sources (k,nx+1);
     }
+    convert (rho, ruu);
 }
 
 template <int Np>
