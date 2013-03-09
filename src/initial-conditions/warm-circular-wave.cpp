@@ -12,6 +12,7 @@
 #include <random>
 
 #include "boundaries.h"
+#include "remove-mean-momentum.h"
 #include "three-vector.h"
 #include "variables.h"
 #include "external/Faddeeva.hh"
@@ -142,6 +143,8 @@ void initialCondition (GlobalVariables *global)
         p->vy += std::real (Uvec.y*exp (I*phi));
         p->vz += std::real (Uvec.z*exp (I*phi));
     }
+    
+    removeMeanMomentum (particles);
 
     for (int k = 1; k <= nz; ++k)
     for (int i = 1; i <= nx; ++i)
