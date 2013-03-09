@@ -58,7 +58,7 @@ class Particles (ndarray):
   
     def read (self, f):
         from numpy import fromfile
-        self[...] = fromfile (f, self.rtype, self.size)
+        self[...] = fromfile (f, self.dtype, self.size)
         return self.size*self.itemsize
 
 class ScalarField (ndarray):
