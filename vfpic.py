@@ -105,8 +105,6 @@ class State (OrderedDict):
 
         if not isinstance (cfg, Config): cfg = Config ()
 
-        self.readParticles = cfg.writeParticles;
-
         self["Ax"] = ScalarField (cfg)
         self["Ay"] = ScalarField (cfg)
         self["Az"] = ScalarField (cfg)
@@ -119,7 +117,7 @@ class State (OrderedDict):
         self["Ey"] = ScalarField (cfg)
         self["Ez"] = ScalarField (cfg)
 
-        if self.readParticles: self["particles"] = Particles (cfg)
+        if cfg.writeParticles: self["particles"] = Particles (cfg)
 
         self["rho"] = ScalarField (cfg)
 
