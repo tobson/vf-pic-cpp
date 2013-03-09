@@ -111,10 +111,6 @@ class State (OrderedDict):
         self["Ay"] = ScalarField (cfg)
         self["Az"] = ScalarField (cfg)
 
-        self["Ax2"] = ScalarField (cfg)
-        self["Ay2"] = ScalarField (cfg)
-        self["Az2"] = ScalarField (cfg)
-
         self["Bx"] = ScalarField (cfg)
         self["By"] = ScalarField (cfg)
         self["Bz"] = ScalarField (cfg)
@@ -123,9 +119,7 @@ class State (OrderedDict):
         self["Ey"] = ScalarField (cfg)
         self["Ez"] = ScalarField (cfg)
 
-        if self.readParticles:
-          self["particles"] = Particles (cfg)
-          self["particles2"] = Particles (cfg)
+        if self.readParticles: self["particles"] = Particles (cfg)
 
         self["rho"] = ScalarField (cfg)
 
