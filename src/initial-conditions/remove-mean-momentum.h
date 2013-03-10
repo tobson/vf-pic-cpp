@@ -9,7 +9,7 @@
 #ifndef __vf_pic__remove_mean_momentum__
 #define __vf_pic__remove_mean_momentum__
 
-#include "particles.h"
+#include "../particles.h"
 
 void removeMeanMomentum (GlobalParticles&);
 

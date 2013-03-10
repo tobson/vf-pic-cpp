@@ -11,11 +11,11 @@
 #include <iostream>
 #include <random>
 
-#include "boundaries.h"
+#include "../boundaries.h"
 #include "remove-mean-momentum.h"
-#include "three-vector.h"
-#include "variables.h"
-#include "external/Faddeeva.hh"
+#include "../three-vector.h"
+#include "../variables.h"
+#include "../external/Faddeeva.hh"
 
 typedef std::complex<real> complex;
 
