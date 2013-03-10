@@ -1,0 +1,19 @@
+#!/bin/bash
+
+VFPIC=${HOME}/projects/vf-pic
+BUILD=${PWD}/build
+
+SRC=${VFPIC}/src
+
+mkdir -p ${BUILD}
+
+for dir in $(find ${SRC} -type d); do
+  mkdir -p ${dir/${SRC}/${BUILD}}
+done
+
+for file in $(find ${SRC} -name "*.cpp" -or -name "*.h" -or -name "*.hh" -or -name "*.cc"); do
+  ln -sf ${file} ${file/${SRC}/${BUILD}}
+done
+
+ln -sf ${SRC}/Makefile ${BUILD}/Makefile
+ln -sf ${PWD}/param.h ${BUILD}/param.h
