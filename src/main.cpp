@@ -160,6 +160,78 @@ void iteration (GlobalVariables& global, Barrier& barrier, const int ithread)
     output (global, nt);
 }
 
+void computeSelfConsistentElectricField (GlobalVariables& global, Barrier& barrier, const int ithread)
+{
+    using namespace config;
+    using namespace vfpic;
+    
+    /* Create local views of global data. Each thread gets its own chunk */
+    const LocalVectorFieldView<real> A  (global.A , ithread);
+    LocalVectorFieldView<real> A2 (global.A2, ithread);
+
+    LocalVectorFieldView<real> E (global.E, ithread);
+    LocalVectorFieldView<real> B (global.B, ithread);
+
+    LocalScalarFieldView<real> rho (global.rho, ithread);
+    LocalVectorFieldView<real> ruu (global.ruu, ithread);
+
+    const LocalParticlesView particles  (global.particles , ithread);
+    LocalParticlesView particles2 (global.particles2, ithread);
+
+    /* These variables don't need to be global */
+    NewLocalVectorField<real> D, J;
+
+    /* Construct function objects */
+    BoundaryConditionsThreaded boundCond (barrier, ithread);
+    Deposit<mpar> deposit (barrier, ithread);
+    Output output (barrier, ithread);
+    Ohm<mz,mx> ohm;
+
+    // Make copy of dynamic variables
+    for (;;)
+    {
+        A2 = A;
+        particles2 = particles;
+
+        // Evolve copy of vector potential to n+1/2 first and then average to get it at n
+        faraday (&A2, E, dt);
+        average (A, A2, &A2);
+        boundCond (global.A2);
+
+        // Compute magnetic field and current at n
+        curl (A2, &B); B += global.B0;
+        curlcurl (A2, &J);
+
+        // Get velocities at n
+        kick (global.E, global.B, &particles2, 0.5*dt);
+
+        // Compute ion mass density and momentum density at n
+        deposit (particles2, &global.rho, &global.ruu);
+
+        // Compute electric field at n
+        ohm (B, J, rho, ruu, &D);
+
+        // Difference of old and new electric field
+        A2 = E; A2 -= D; A2 *= real (0.5);
+        // Average of old and new electric field
+        average (E, D, &B);
+        if (barrier.wait())
+        {
+            const real relerr = global.A2.rms ()/global.B.rms();
+            global.A2[0](0,0) = relerr;
+        }
+        barrier.wait ();
+        const real threshold = std::numeric_limits<real>::epsilon();
+        std::cout << "relerr = " << global.A2[0](0,0) << ", threshold = " << threshold << std::endl;
+
+        if (global.A2[0](0,0) < threshold) break;
+
+        // Update electric field
+        E = D;
+        boundCond (global.E);
+    }
+}
+
 int main (int argc, const char * argv[])
 {
     std::string srcdir = ".";
@@ -182,6 +254,21 @@ int main (int argc, const char * argv[])
     
     // Initialize
     initialCondition (&global);
+
+    // Compute self-consistent electric field
+    if (true) // if (config::iterateInitialElectricField)
+    {
+        std::vector<std::thread> threads;
+        for (int ithread = 0; ithread < vfpic::nthreads; ++ithread)
+        {
+            std::thread thread (computeSelfConsistentElectricField, std::ref (global), std::ref (barrier), ithread);
+            threads.push_back (std::move (thread));
+        }
+        for (auto thread = threads.begin (); thread != threads.end (); ++thread)
+        {
+            thread->join ();
+        }
+    }
 
     // Evolve in time
     std::vector<std::thread> threads;
