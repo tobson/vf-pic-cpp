@@ -197,9 +197,7 @@ int main (int argc, const char * argv[])
 
     global.datafile.close ();
 
-    std::time_t now = std::chrono::system_clock::to_time_t (std::chrono::system_clock::now ());
-    std::cout << "Done! Current local time: " << std::put_time(std::localtime(&now), "%c %Z")
-              << std::endl;
+    std::cout << "Done!" << std::endl;
 
     return 0;
 }
