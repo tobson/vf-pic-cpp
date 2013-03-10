@@ -1,29 +1,21 @@
--include local.mk
-
 CXXFLAGS += -std=c++11
 CXXFLAGS += -MMD
 
-all: vf-pic jacobi test
+BUILD = $(PWD)/build
 
-main = barrier.o boundaries.o config.o deposit.o drift.o faraday.o global.o grid.o initial-condition.o kick.o main.o ohm.o output.o
-deps := $(deps) $(main:.o=.d)
-vf-pic: $(main)
-	$(CXX) $(LDFLAGS) $(main) $(LDLIBS) -o vf-pic
+common = main global config barrier grid boundaries kick \
+	 deposit ohm faraday drift output \
+	 initial-conditions/remove-mean-momentum \
+	 initial-conditions/$(INITIAL) \
+	 boundary-conditions/$(BOUNDARY) \
+	 external/$(EXTERNAL)
 
-jacobi = barrier.o boundaries.o config.o global.o jacobi.o
-deps := $(deps) $(jacobi:.o=.d)
-jacobi: $(jacobi)
-	$(CXX) $(LDFLAGS) $(jacobi) $(LDLIBS) -o jacobi
+objects = $(addprefix $(BUILD)/, $(addsuffix .o, $(common)))
 
-test = config.o global.o test.o
-deps := $(deps) $(test:.o=.d)
-test: $(test)
-	$(CXX) $(LDFLAGS) $(test) $(LDLIBS) -o test
+deps := $(objects:.o=.d)
 
-sse = config.o global.o sse.o
-deps := $(deps) $(sse:.o=.d)
-sse: $(sse)
-	$(CXX) $(LDFLAGS) $(sse) $(LDLIBS) -o sse
+vf-pic: $(objects)
+	$(CXX) $(LDFLAGS) $(objects) $(LOADLIBES) $(LDLIBS) -o vf-pic
 
 -include $(deps)
 
@@ -31,6 +23,4 @@ sse: $(sse)
 	$(CXX) -S $(CXXFLAGS) $<
 
 clean:
-	rm -f byers jacobi test sse
-	rm -f *.o *.d
-	rm -rf *.dSYM
+	rm -f vf-pic $(objects) $(deps)
