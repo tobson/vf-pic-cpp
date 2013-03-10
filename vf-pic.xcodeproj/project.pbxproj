@@ -161,6 +161,7 @@
 		D24BC37716B64B1A006C64A3 /* jacobi */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = jacobi; sourceTree = BUILT_PRODUCTS_DIR; };
 		D257D92616EC2EC50023E828 /* misc.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = misc.cpp; sourceTree = "<group>"; };
 		D257D92716EC2EC50023E828 /* misc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = misc.h; sourceTree = "<group>"; };
+		D257D92A16EC30B90023E828 /* Makefile */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
 		D25C8DB216B89B6600B0A607 /* grid.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = grid.cpp; path = src/grid.cpp; sourceTree = SOURCE_ROOT; };
 		D25C8DB316B89B6600B0A607 /* grid.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = grid.h; path = src/grid.h; sourceTree = SOURCE_ROOT; };
 		D25D22B916DFE028001A44F4 /* periodic.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = periodic.cpp; sourceTree = "<group>"; };
@@ -349,6 +350,7 @@
 		D2DD55E816DD91380003D699 /* src */ = {
 			isa = PBXGroup;
 			children = (
+				D257D92A16EC30B90023E828 /* Makefile */,
 				D218894A16E6E759006800C5 /* external */,
 				D2AF715416E02D8000F34A67 /* initial-conditions */,
 				D25D22B816DFDFFC001A44F4 /* boundary-conditions */,

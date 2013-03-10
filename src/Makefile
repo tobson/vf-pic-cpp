@@ -4,8 +4,7 @@ CXXFLAGS += -MMD
 BUILD = $(PWD)/build
 
 common = main global config barrier grid boundaries kick \
-	 deposit ohm faraday drift output \
-	 initial-conditions/remove-mean-momentum \
+	 deposit ohm faraday drift output misc \
 	 initial-conditions/$(INITIAL) \
 	 boundary-conditions/$(BOUNDARY) \
 	 external/$(EXTERNAL)
