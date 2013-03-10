@@ -145,6 +145,22 @@ public:
     {
         std::fill (data, data + size, value);
     }
+    const real variance () const
+    {
+        real sum = 0.0;
+        for (int i1 = 1; i1 <= N1; ++i1)
+        for (int i2 = 1; i2 <= N2; ++i2)
+        {
+            real element = (*this) (i1,i2);
+            sum += element*element;
+        }
+        return sum/real (N1*N2);
+    }
+    const real rms () const
+    {
+        return sqrt (this->variance ());
+    }
+
 protected:
     T *data;
     static const unsigned long size = (N1 + 2)*(N2 + 2);

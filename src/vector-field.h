@@ -126,6 +126,14 @@ public:
     {
         return *components[j];
     }
+    const real variance () const
+    {
+        return x.variance () + y.variance () + z.variance ();
+    }
+    const real rms () const
+    {
+        return sqrt (this->variance());
+    }
 };
 
 template <template <typename, int, int> class S, typename T, int N1, int N2>
