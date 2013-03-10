@@ -40,7 +40,7 @@
 		D24BC36D16B64B1A006C64A3 /* global.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D28BAEFD16B5FD0200578956 /* global.cpp */; };
 		D24BC36E16B64B1A006C64A3 /* config.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D28BAF0016B5FDDA00578956 /* config.cpp */; };
 		D24BC37016B64B1A006C64A3 /* barrier.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D28BAF1816B60B3800578956 /* barrier.cpp */; };
-		D273BD5D16EAAC6900A2E274 /* remove-mean-momentum.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D273BD5B16EAAC6900A2E274 /* remove-mean-momentum.cpp */; };
+		D257D92816EC2EC50023E828 /* misc.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D257D92616EC2EC50023E828 /* misc.cpp */; };
 		D2ABD94716DEEFC4000D369B /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2915FC816B5F7FE0084A612 /* main.cpp */; };
 		D2ABD94816DEEFC4000D369B /* global.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D28BAEFD16B5FD0200578956 /* global.cpp */; };
 		D2ABD94916DEEFC4000D369B /* config.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D28BAF0016B5FDDA00578956 /* config.cpp */; };
@@ -159,6 +159,8 @@
 		D218894F16E8817E006800C5 /* mode.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = mode.py; sourceTree = "<group>"; };
 		D218895016E8817E006800C5 /* video.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = video.py; sourceTree = "<group>"; };
 		D24BC37716B64B1A006C64A3 /* jacobi */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = jacobi; sourceTree = BUILT_PRODUCTS_DIR; };
+		D257D92616EC2EC50023E828 /* misc.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = misc.cpp; sourceTree = "<group>"; };
+		D257D92716EC2EC50023E828 /* misc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = misc.h; sourceTree = "<group>"; };
 		D25C8DB216B89B6600B0A607 /* grid.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = grid.cpp; path = src/grid.cpp; sourceTree = SOURCE_ROOT; };
 		D25C8DB316B89B6600B0A607 /* grid.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = grid.h; path = src/grid.h; sourceTree = SOURCE_ROOT; };
 		D25D22B916DFE028001A44F4 /* periodic.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = periodic.cpp; sourceTree = "<group>"; };
@@ -166,8 +168,6 @@
 		D270B39816CDE6AD00DFCE2F /* three-vector.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "three-vector.h"; path = "src/three-vector.h"; sourceTree = SOURCE_ROOT; };
 		D270B39C16CEDC1B00DFCE2F /* output.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = output.cpp; path = src/output.cpp; sourceTree = SOURCE_ROOT; };
 		D270B39D16CEDC1B00DFCE2F /* output.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = output.h; path = src/output.h; sourceTree = SOURCE_ROOT; };
-		D273BD5B16EAAC6900A2E274 /* remove-mean-momentum.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "remove-mean-momentum.cpp"; sourceTree = "<group>"; };
-		D273BD5C16EAAC6900A2E274 /* remove-mean-momentum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "remove-mean-momentum.h"; sourceTree = "<group>"; };
 		D28BAEFD16B5FD0200578956 /* global.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = global.cpp; path = src/global.cpp; sourceTree = SOURCE_ROOT; };
 		D28BAEFE16B5FD0200578956 /* global.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = global.h; path = src/global.h; sourceTree = SOURCE_ROOT; };
 		D28BAF0016B5FDDA00578956 /* config.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = config.cpp; path = src/config.cpp; sourceTree = SOURCE_ROOT; };
@@ -324,8 +324,6 @@
 				D2AF715916E02EC400F34A67 /* cold-mri.cpp */,
 				D20AF12A16E15ADE00D0B031 /* noise.cpp */,
 				D218892E16E6E166006800C5 /* warm-circular-wave.cpp */,
-				D273BD5B16EAAC6900A2E274 /* remove-mean-momentum.cpp */,
-				D273BD5C16EAAC6900A2E274 /* remove-mean-momentum.h */,
 			);
 			path = "initial-conditions";
 			sourceTree = "<group>";
@@ -385,6 +383,8 @@
 				D270B39816CDE6AD00DFCE2F /* three-vector.h */,
 				D270B39716CCCE8A00DFCE2F /* variables.h */,
 				D28BAF1716B608BC00578956 /* vector-field.h */,
+				D257D92616EC2EC50023E828 /* misc.cpp */,
+				D257D92716EC2EC50023E828 /* misc.h */,
 			);
 			path = src;
 			sourceTree = "<group>";
@@ -598,7 +598,7 @@
 				D218893D16E6E1B1006800C5 /* faraday.cpp in Sources */,
 				D218893E16E6E1B1006800C5 /* drift.cpp in Sources */,
 				D218893F16E6E1B1006800C5 /* output.cpp in Sources */,
-				D273BD5D16EAAC6900A2E274 /* remove-mean-momentum.cpp in Sources */,
+				D257D92816EC2EC50023E828 /* misc.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
