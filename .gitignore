@@ -3,6 +3,7 @@ vf-pic.xcodeproj/xcuserdata
 
 local.mk
 output.cfg
+build
 
 *.d
 *.o
