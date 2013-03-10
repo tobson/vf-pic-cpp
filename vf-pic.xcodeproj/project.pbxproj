@@ -201,7 +201,6 @@
 		D2F7CF8916DEEF2900F064CF /* problem.cfg */ = {isa = PBXFileReference; lastKnownFileType = text; path = problem.cfg; sourceTree = "<group>"; };
 		D2F90E4816B734C700ABDA86 /* jacobi.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = jacobi.py; sourceTree = "<group>"; };
 		D2F90E4A16B7375900ABDA86 /* vfpic.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = vfpic.py; sourceTree = "<group>"; };
-		D2F90E4B16B73ED400ABDA86 /* Makefile */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
 		D2F90E4C16B73FE300ABDA86 /* local.mk */ = {isa = PBXFileReference; lastKnownFileType = text; path = local.mk; sourceTree = "<group>"; };
 		D2F90E5216B748E900ABDA86 /* particles.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = particles.h; path = src/particles.h; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
@@ -295,7 +294,6 @@
 		D2915FA416B5F56A0084A612 = {
 			isa = PBXGroup;
 			children = (
-				D2F90E4B16B73ED400ABDA86 /* Makefile */,
 				D29BD8F716D35951000BD507 /* TODO */,
 				D2F90E4C16B73FE300ABDA86 /* local.mk */,
 				D29BF20C16D97E0B000BD507 /* cold-mri.py */,
