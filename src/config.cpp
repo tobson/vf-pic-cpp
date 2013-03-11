@@ -49,8 +49,8 @@ namespace config
     std::string initcond;
 
     /* Diagnostics and data I/O */
-    int itWrite = 1;
-    int itPrint = 1;
+    int itWrite = 0;
+    int itDiag = 0;
 
     bool writeSources = false;
     bool writeData = true;
@@ -343,7 +343,7 @@ std::istream& operator>> (std::istream& is, Config& cfg)
 
     /* Diagnostics and data I/O */
     parser.get ("vfpic", "itWrite", itWrite);
-    parser.get ("vfpic", "itPrint", itPrint);
+    parser.get ("vfpic", "itDiag", itDiag);
 
     parser.get ("vfpic", "writeSources", writeSources);
     parser.get ("vfpic", "writeData", writeData);

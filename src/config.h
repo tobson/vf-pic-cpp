@@ -51,7 +51,7 @@ namespace config
 
     /* Diagnostics and data I/O */
     extern int itWrite;
-    extern int itPrint;
+    extern int itDiag;
 
     extern bool writeSources;
     extern bool writeData;
