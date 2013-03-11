@@ -172,7 +172,7 @@ void computeSelfConsistentElectricField (GlobalVariables& global, Barrier& barri
     
     /* Create local views of global data. Each thread gets its own chunk */
     const LocalVectorFieldView<real> A  (global.A , ithread);
-    LocalVectorFieldView<real> A2 (global.A2, ithread);
+          LocalVectorFieldView<real> A2 (global.A2, ithread);
 
     LocalVectorFieldView<real> E (global.E, ithread);
     LocalVectorFieldView<real> B (global.B, ithread);
@@ -181,7 +181,7 @@ void computeSelfConsistentElectricField (GlobalVariables& global, Barrier& barri
     LocalVectorFieldView<real> ruu (global.ruu, ithread);
 
     const LocalParticlesView particles  (global.particles , ithread);
-    LocalParticlesView particles2 (global.particles2, ithread);
+          LocalParticlesView particles2 (global.particles2, ithread);
 
     /* These variables don't need to be global */
     NewLocalVectorField<real> D, J;
@@ -192,15 +192,17 @@ void computeSelfConsistentElectricField (GlobalVariables& global, Barrier& barri
     Output output (barrier, ithread);
     Ohm<mz,mx> ohm;
 
+    // Threshold for relative error
+    const real threshold = std::numeric_limits<real>::epsilon();
+
     // Make copy of dynamic variables
     for (;;)
     {
         A2 = A;
         particles2 = particles;
 
-        // Evolve copy of vector potential to n+1/2 first and then average to get it at n
-        faraday (&A2, E, dt);
-        average (A, A2, &A2);
+        // Evolve copy of vector potential to n
+        faraday (&A2, E, 0.5*dt);
         boundCond (global.A2);
 
         // Compute magnetic field and current at n
@@ -224,10 +226,9 @@ void computeSelfConsistentElectricField (GlobalVariables& global, Barrier& barri
         {
             const real relerr = global.A2.rms ()/global.B.rms();
             global.A2[0](0,0) = relerr;
+            std::cout << "relerr = " << relerr << ", threshold = " << threshold << std::endl;
         }
         barrier.wait ();
-        const real threshold = std::numeric_limits<real>::epsilon();
-        std::cout << "relerr = " << global.A2[0](0,0) << ", threshold = " << threshold << std::endl;
 
         if (global.A2[0](0,0) < threshold) break;
 
