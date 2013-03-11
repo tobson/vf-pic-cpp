@@ -229,6 +229,12 @@ struct ScalarFieldView: public ScalarField<T,N1,N2>
         using vfpic::nthreads;
         static_assert (M1 == nthreads*N1 && M2 == N2, "");
     }
+    template <int M1, int M2>
+    ScalarFieldView (const ScalarField<T,M1,M2>& global, const int ithread):
+    ScalarField<T,N1,N2> (const_cast<T*> (&global(ithread*N1,0)))
+    {
+        static_assert (M1 == vfpic::nthreads*N1 && M2 == N2, "");
+    }
     using ScalarField<T,N1,N2>::operator=;
 };
 

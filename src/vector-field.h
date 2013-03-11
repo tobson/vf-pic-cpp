@@ -225,6 +225,13 @@ public:
           new Scalar (global.z, ithread))
     {
     }
+    template <int M1, int M2>
+    VectorFieldView (const VectorField<T,M1,M2>& global, int ithread):
+    Base (new Scalar (global.x, ithread),
+          new Scalar (global.y, ithread),
+          new Scalar (global.z, ithread))
+    {
+    }
     using Base::operator=;
 };
 

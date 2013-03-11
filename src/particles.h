@@ -142,6 +142,11 @@ struct LocalParticlesView: public Particles<vfpic::mpar>
     Particles<vfpic::mpar>(&array[ithread*vfpic::mpar])
     {
     }
+    // This is basically a hack. The resulting view should be const as well, but isn't
+    LocalParticlesView (const NewGlobalParticles& array, int ithread):
+    Particles<vfpic::mpar>(const_cast<Particle*>(&array[ithread*vfpic::mpar]))
+    {
+    }
 };
 
 #endif /* defined(__vf_pic__particle__) */
