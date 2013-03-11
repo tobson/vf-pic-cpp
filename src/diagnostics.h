@@ -27,7 +27,7 @@ struct Diagnostics
     Diagnostics (const std::string&);
     ~Diagnostics ();
     void operator() (const GlobalVariables&, const LocalVectorField<real>&,
-                     Barrier&, const int);
+                     const long long, Barrier&, const int);
 };
 
 #endif /* defined(__vf_pic__diagnostics__) */

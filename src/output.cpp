@@ -58,6 +58,7 @@ void Output::operator() (GlobalVariables& global, const long long it)
         os << global.grid;
         os.write (reinterpret_cast<const char *> (&it), sizeof (long long));
         os.flush ();
+        std::cout << "it = " << it << ": Snapshot written" << std::endl;
     }
     barrier.wait ();
 }

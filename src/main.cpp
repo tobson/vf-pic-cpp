@@ -38,9 +38,8 @@
 void iteration (GlobalVariables& global, Diagnostics& diagnostics,
                 Barrier& barrier, const int ithread)
 {
-    using config::dt;
-    using config::nt;
-    using config::itWrite;
+    using namespace config;
+    using namespace vfpic;
 
     /* Create local views of global data. Each thread gets its own chunk */
     LocalVectorFieldView<real> A  (global.A , ithread);
@@ -62,20 +61,16 @@ void iteration (GlobalVariables& global, Diagnostics& diagnostics,
 
     /* Construct function objects */
     BoundaryConditionsThreaded boundCond (barrier, ithread);
-    Deposit<vfpic::mpar> deposit (barrier, ithread);
+    Deposit<mpar> deposit (barrier, ithread);
     Output output (barrier, ithread);
-    Ohm<vfpic::mz,vfpic::mx> ohm;
+    Ohm<mz,mx> ohm;
     
     curl (A, &H2); H2 += global.B0;
 
     for (int it = 0; it < nt; ++it)
     {
         // Write out data
-        if (it % itWrite == 0)
-        {
-            if (ithread == 0) std::cout << "it = " << it << std::endl;
-            output (global, it);
-        }
+        if (itWrite > 0) if (it % itWrite == 0) output (global, it);
 
         /******************
          * Predictor step *
@@ -108,7 +103,8 @@ void iteration (GlobalVariables& global, Diagnostics& diagnostics,
         deposit (particles, &global.rho, &global.ruu);
         
         // Diagnostics at n+1/2
-        diagnostics (global, H, barrier, ithread);
+        if (itDiag > 0)
+            if (it % itDiag == 0) diagnostics (global, H, it, barrier, ithread);
 
         // Advance particle positions to n+1
         drift (&particles, 0.5*dt);

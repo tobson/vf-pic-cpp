@@ -52,7 +52,7 @@ Diagnostics::~Diagnostics ()
 }
 
 void Diagnostics::operator() (const GlobalVariables& global,
-                              const LocalVectorField<real>& H,
+                              const LocalVectorField<real>& H, const long long it,
                               Barrier& barrier, const int ithread)
 {
     const LocalParticlesView particles (global.particles, ithread);
@@ -113,6 +113,7 @@ void Diagnostics::operator() (const GlobalVariables& global,
         }
         file << std::endl;
         file.flush ();
+        std::cout << "it = " << it << ": Diagnostics written" << std::endl;
     }
     barrier.wait ();
 }
