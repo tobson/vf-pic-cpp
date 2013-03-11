@@ -41,6 +41,8 @@
 		D24BC36E16B64B1A006C64A3 /* config.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D28BAF0016B5FDDA00578956 /* config.cpp */; };
 		D24BC37016B64B1A006C64A3 /* barrier.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D28BAF1816B60B3800578956 /* barrier.cpp */; };
 		D257D92816EC2EC50023E828 /* misc.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D257D92616EC2EC50023E828 /* misc.cpp */; };
+		D257D92D16ED33520023E828 /* diagnostics.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D257D92B16ED33520023E828 /* diagnostics.cpp */; };
+		D257D92E16ED4D5E0023E828 /* diagnostics.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D257D92B16ED33520023E828 /* diagnostics.cpp */; };
 		D2ABD94716DEEFC4000D369B /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2915FC816B5F7FE0084A612 /* main.cpp */; };
 		D2ABD94816DEEFC4000D369B /* global.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D28BAEFD16B5FD0200578956 /* global.cpp */; };
 		D2ABD94916DEEFC4000D369B /* config.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D28BAF0016B5FDDA00578956 /* config.cpp */; };
@@ -162,6 +164,8 @@
 		D257D92616EC2EC50023E828 /* misc.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = misc.cpp; sourceTree = "<group>"; };
 		D257D92716EC2EC50023E828 /* misc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = misc.h; sourceTree = "<group>"; };
 		D257D92A16EC30B90023E828 /* Makefile */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
+		D257D92B16ED33520023E828 /* diagnostics.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = diagnostics.cpp; sourceTree = "<group>"; };
+		D257D92C16ED33520023E828 /* diagnostics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = diagnostics.h; sourceTree = "<group>"; };
 		D25C8DB216B89B6600B0A607 /* grid.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = grid.cpp; path = src/grid.cpp; sourceTree = SOURCE_ROOT; };
 		D25C8DB316B89B6600B0A607 /* grid.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = grid.h; path = src/grid.h; sourceTree = SOURCE_ROOT; };
 		D25D22B916DFE028001A44F4 /* periodic.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = periodic.cpp; sourceTree = "<group>"; };
@@ -387,6 +391,8 @@
 				D28BAF1716B608BC00578956 /* vector-field.h */,
 				D257D92616EC2EC50023E828 /* misc.cpp */,
 				D257D92716EC2EC50023E828 /* misc.h */,
+				D257D92B16ED33520023E828 /* diagnostics.cpp */,
+				D257D92C16ED33520023E828 /* diagnostics.h */,
 			);
 			path = src;
 			sourceTree = "<group>";
@@ -601,6 +607,7 @@
 				D218893E16E6E1B1006800C5 /* drift.cpp in Sources */,
 				D218893F16E6E1B1006800C5 /* output.cpp in Sources */,
 				D257D92816EC2EC50023E828 /* misc.cpp in Sources */,
+				D257D92D16ED33520023E828 /* diagnostics.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -622,6 +629,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D257D92E16ED4D5E0023E828 /* diagnostics.cpp in Sources */,
 				D2AF715816E02E4900F34A67 /* circular-wave.cpp in Sources */,
 				D2AF715016DFE7D200F34A67 /* periodic.cpp in Sources */,
 				D2ABD94716DEEFC4000D369B /* main.cpp in Sources */,

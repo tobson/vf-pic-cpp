@@ -21,6 +21,7 @@
 #include "boundaries.h"
 #include "config.h"
 #include "deposit.h"
+#include "diagnostics.h"
 #include "diffops.h"
 #include "drift.h"
 #include "faraday.h"
@@ -34,7 +35,8 @@
 #include "variables.h"
 #include "vector-field.h"
 
-void iteration (GlobalVariables& global, Barrier& barrier, const int ithread)
+void iteration (GlobalVariables& global, Diagnostics& diagnostics,
+                Barrier& barrier, const int ithread)
 {
     using config::dt;
     using config::nt;
@@ -104,6 +106,9 @@ void iteration (GlobalVariables& global, Barrier& barrier, const int ithread)
 
         // Compute ion mass density and momentum density at n+1/2
         deposit (particles, &global.rho, &global.ruu);
+        
+        // Diagnostics at n+1/2
+        diagnostics (global, H, barrier, ithread);
         
         // Advance particle positions to n+1
         drift (&particles, 0.5*dt);
@@ -246,6 +251,7 @@ int main (int argc, const char * argv[])
 
     Barrier barrier (vfpic::nthreads);
     GlobalVariables global;
+    Diagnostics diagnostics (srcdir + "/diag.txt");
 
     global.datafile.open (srcdir + "/var.dat", std::ios::binary);
     
@@ -274,7 +280,7 @@ int main (int argc, const char * argv[])
     std::vector<std::thread> threads;
     for (int ithread = 0; ithread < vfpic::nthreads; ++ithread)
     {
-        std::thread thread (iteration, std::ref (global), std::ref (barrier), ithread);
+        std::thread thread (iteration, std::ref (global), std::ref (diagnostics), std::ref (barrier), ithread);
         threads.push_back (std::move (thread));
     }
     for (auto thread = threads.begin (); thread != threads.end (); ++thread)
