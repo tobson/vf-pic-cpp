@@ -39,7 +39,7 @@ void Output::operator() (GlobalVariables& global, const long long it)
     Deposit<vfpic::mpar> deposit (barrier, ithread);
     
     // Magnetic field at n-1/2
-    curl (A, &B);
+    curl (A, &B); B += global.B0;
     boundaryCondition (global.B);
     // Evolve positions backward in time to n-1/2
     particles2 = particles;
