@@ -109,7 +109,7 @@ void iteration (GlobalVariables& global, Diagnostics& diagnostics,
         
         // Diagnostics at n+1/2
         diagnostics (global, H, barrier, ithread);
-        
+
         // Advance particle positions to n+1
         drift (&particles, 0.5*dt);
 
@@ -171,17 +171,14 @@ void computeSelfConsistentElectricField (GlobalVariables& global, Barrier& barri
     using namespace vfpic;
     
     /* Create local views of global data. Each thread gets its own chunk */
-    const LocalVectorFieldView<real> A  (global.A , ithread);
-          LocalVectorFieldView<real> A2 (global.A2, ithread);
-
+    LocalVectorFieldView<real> A (global.A, ithread);
     LocalVectorFieldView<real> E (global.E, ithread);
     LocalVectorFieldView<real> B (global.B, ithread);
 
     LocalScalarFieldView<real> rho (global.rho, ithread);
     LocalVectorFieldView<real> ruu (global.ruu, ithread);
 
-    const LocalParticlesView particles  (global.particles , ithread);
-          LocalParticlesView particles2 (global.particles2, ithread);
+    LocalParticlesView particles (global.particles, ithread);
 
     /* These variables don't need to be global */
     NewLocalVectorField<real> D, J;
@@ -192,50 +189,30 @@ void computeSelfConsistentElectricField (GlobalVariables& global, Barrier& barri
     Output output (barrier, ithread);
     Ohm<mz,mx> ohm;
 
-    // Threshold for relative error
-    const real threshold = std::numeric_limits<real>::epsilon();
+    // Assume particle positions, particle velocities, and vector potential
+    // are all given at the same time.
 
-    // Make copy of dynamic variables
-    for (;;)
-    {
-        A2 = A;
-        particles2 = particles;
+    // Compute magnetic field and current
+    curl (A, &B); B += global.B0;
+    curlcurl (A, &J);
 
-        // Evolve copy of vector potential to n
-        faraday (&A2, E, 0.5*dt);
-        boundCond (global.A2);
+    // Compute ion mass density and momentum density at n
+    deposit (particles, &global.rho, &global.ruu);
 
-        // Compute magnetic field and current at n
-        curl (A2, &B); B += global.B0;
-        curlcurl (A2, &J);
+    // Compute electric field at n
+    ohm (B, J, rho, ruu, &E);
 
-        // Get velocities at n
-        kick (global.E, global.B, &particles2, 0.5*dt);
+    // Set boundary conditions
+    boundCond (global.E);
+    boundCond (global.B);
 
-        // Compute ion mass density and momentum density at n
-        deposit (particles2, &global.rho, &global.ruu);
+    // Evolve vector potential and particle velocities *back* in time
+    // by a half step
+    faraday (&A, E, -0.5*dt);
+    kick (global.E, global.B, &particles, -0.5*dt);
 
-        // Compute electric field at n
-        ohm (B, J, rho, ruu, &D);
-
-        // Difference of old and new electric field
-        A2 = E; A2 -= D; A2 *= real (0.5);
-        // Average of old and new electric field
-        average (E, D, &B);
-        if (barrier.wait())
-        {
-            const real relerr = global.A2.rms ()/global.B.rms();
-            global.A2[0](0,0) = relerr;
-            std::cout << "relerr = " << relerr << ", threshold = " << threshold << std::endl;
-        }
-        barrier.wait ();
-
-        if (global.A2[0](0,0) < threshold) break;
-
-        // Update electric field
-        E = D;
-        boundCond (global.E);
-    }
+    // Set boundary condition
+    boundCond (global.A);
 }
 
 int main (int argc, const char * argv[])
