@@ -178,3 +178,26 @@ class DataFile ():
         print "eof = ", self.eof
         print "recordsize = ", self.recordsize
         self.f.close ()
+
+class Diagnostics (dict):
+
+    def __init__ (self, names, data):
+
+        nvar = len (names)
+        assert (data.shape[1] == nvar)
+        for ivar in range (nvar):
+            self[names[ivar]] = data[:,ivar].copy ()
+        self.__dict__.update (self)
+
+def readDiagnostics (filename = "diag.txt", cfg = None):
+
+    from numpy import loadtxt
+
+    if not isinstance (cfg, Config): cfg = Config ()
+
+    f = open (filename, "rt")
+    names = f.readline ().lstrip ("# ").rstrip (" \n").split ("\t")
+    data = loadtxt (f)
+    f.close ()
+
+    return Diagnostics (names, data)
