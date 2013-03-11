@@ -23,7 +23,6 @@ void initialCondition (GlobalVariables *global)
     const Grid& grid = global->grid;
 
     GlobalVectorField<real>& A = global->A;
-    GlobalVectorField<real>& E = global->E;
     GlobalParticles& particles = global->particles;
 
     BoundaryConditions boundCond;
@@ -72,7 +71,7 @@ void initialCondition (GlobalVariables *global)
 
     for (auto p = particles.begin (); p != particles.end (); ++p)
     {
-        const real phi = kx*p->x + kz*p->z + 0.5*omega*dt;
+        const real phi = kx*p->x + kz*p->z;
 
         p->vx = -ampl*fac*sin (phi)*cos (angle);
         p->vy = -ampl*fac*cos (phi);
@@ -82,24 +81,13 @@ void initialCondition (GlobalVariables *global)
     for (int k = 1; k <= nz; ++k)
     for (int i = 1; i <= nx; ++i)
     {
-        const real phi = kx*grid.x (k,i) + kz*grid.z (k,i) + 0.5*omega*dt;
+        const real phi = kx*grid.x (k,i) + kz*grid.z (k,i);
 
         A.x (k,i) = +(ampl/omega)*sin (phi)*cos (angle);
         A.y (k,i) = +(ampl/omega)*cos (phi);
         A.z (k,i) = -(ampl/omega)*sin (phi)*sin (angle);
     }
     boundCond (A);
-
-    for (int k = 1; k <= nz; ++k)
-    for (int i = 1; i <= nx; ++i)
-    {
-        const real phi = kx*grid.x (k,i) + kz*grid.z (k,i);
-
-        E.x (k,i) = +ampl*cos(phi)*cos(angle);
-        E.y (k,i) = -ampl*sin(phi);
-        E.z (k,i) = -ampl*cos(phi)*sin(angle);
-    }
-    boundCond (E);
 
     global->B0.x = B0*sin (angle);
     global->B0.y = 0.0;

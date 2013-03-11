@@ -77,7 +77,6 @@ void initialCondition (GlobalVariables *global)
     const Grid& grid = global->grid;
 
     GlobalVectorField<real>& A = global->A;
-    GlobalVectorField<real>& E = global->E;
     GlobalParticles& particles = global->particles;
 
     BoundaryConditions boundCond;
@@ -124,12 +123,6 @@ void initialCondition (GlobalVariables *global)
     for (int j = 0; j < 3; ++j) Avec[j] = Evec[j]/(I*omega);
     for (int j = 0; j < 3; ++j) Uvec[j] = Avec[j]*em*zeta0*Z (zeta1);
 
-    for (int j = 0; j < 3; ++j)
-    {
-        Avec[j] *= exp(0.5*I*omega*dt);
-        Uvec[j] *= exp(0.5*I*omega*dt);
-    }
-
     // Randomize particle positions
     for (Particle *p = particles.begin (); p != particles.end (); ++p)
     {
@@ -163,10 +156,8 @@ void initialCondition (GlobalVariables *global)
         const real phi = kx*grid.x (k,i) + kz*grid.z (k,i);
 
         for (int j = 0; j < 3; ++j) A[j] (k,i) = cos (phi)*std::real (Avec[j]);
-        for (int j = 0; j < 3; ++j) E[j] (k,i) = cos (phi)*std::real (Evec[j]);
     }
     boundCond (A);
-    boundCond (E);
 
     global->B0.x = B0*sin (angle);
     global->B0.y = 0.0;

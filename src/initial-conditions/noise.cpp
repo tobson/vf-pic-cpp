@@ -21,7 +21,6 @@ void initialCondition (GlobalVariables *global)
     std::normal_distribution<> normal;
         
     GlobalVectorField<real>& A = global->A;
-    GlobalVectorField<real>& E = global->E;
     GlobalParticles& particles = global->particles;
     
     BoundaryConditions boundCond;
@@ -66,15 +65,6 @@ void initialCondition (GlobalVariables *global)
         A.z (k,i) = ampl*normal (gen);
     }
     boundCond (A);
-    
-    for (int k = 1; k <= nz; ++k)
-    for (int i = 1; i <= nx; ++i)
-    {
-        E.x (k,i) = ampl*normal (gen);
-        E.y (k,i) = ampl*normal (gen);
-        E.z (k,i) = ampl*normal (gen);
-    }
-    boundCond (E);
     
     global->B0.x = 0.0;
     global->B0.y = 0.0;

@@ -144,13 +144,11 @@ void initialCondition (GlobalVariables *global)
     const std::complex<real> By = evec(3);
     const std::complex<real> Ax = +By/(I*kz);
     const std::complex<real> Ay = -Bx/(I*kz);
-    const std::complex<real> Ex = -gamma*Ax - Sshear*Ay;
-    const std::complex<real> Ey = -gamma*Ay;
 
     // Add wave
     for (auto p = particles.begin (); p != particles.end (); ++p)
     {
-        const std::complex<real> phase = I*kz*p->z - real (0.5)*dt*gamma;
+        const std::complex<real> phase = I*kz*p->z;
 
         p->vx = ampl*std::real (Vx*exp (phase));
         p->vy = ampl*std::real (Vy*exp (phase));
@@ -172,25 +170,13 @@ void initialCondition (GlobalVariables *global)
     for (int k = 1; k <= nz; ++k)
     for (int i = 1; i <= nx; ++i)
     {
-        const std::complex<real> phase = I*kz*grid.z (k,i) - real (0.5)*dt*gamma;
+        const std::complex<real> phase = I*kz*grid.z (k,i);
 
         A.x (k,i) = ampl*std::real (Ax*exp (phase));
         A.y (k,i) = ampl*std::real (Ay*exp (phase));
         A.z (k,i) = 0.0;
     }
     boundCond (A);
-
-    GlobalVectorField<real>& E = global->E;
-    for (int k = 1; k <= nz; ++k)
-    for (int i = 1; i <= nx; ++i)
-    {
-        const std::complex<real> phase = I*kz*grid.z (k,i);
-
-        E.x (k,i) = ampl*std::real (Ex*exp (phase));
-        E.y (k,i) = ampl*std::real (Ey*exp (phase));
-        E.z (k,i) = 0.0;
-    }
-    boundCond (E);
 
     // Define operator= (real) for Vector class
     global->B0.x = 0.0;
