@@ -66,6 +66,9 @@ void Diagnostics::operator() (const GlobalVariables& global,
 
     for (auto iter = map.begin (); iter != map.end (); ++iter) iter->second = 0.0;
 
+#ifdef __INTEL_COMPILER
+#pragma ivdep
+#endif
     for (auto p = particles.begin (); p != particles.end (); ++p)
     {
         map["mvx"] += p->vx;
@@ -82,6 +85,10 @@ void Diagnostics::operator() (const GlobalVariables& global,
     for (int j = 0; j < 3; ++j)
     {
         for (int k = 1; k <= mz; ++k)
+#ifdef __INTEL_COMPILER
+#pragma vector aligned
+#pragma ivdep
+#endif
         for (int i = 1; i <= mx; ++i)
         {
             map["eth"] += pow (ruu[j] (k,i), 2)/rho (k,i);

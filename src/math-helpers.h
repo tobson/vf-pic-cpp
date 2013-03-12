@@ -19,6 +19,10 @@ void extrapolate (const ScalarField<T,Nz,Nx>& start, const ScalarField<T,Nz,Nx>&
     ScalarField<T,Nz,Nx>& end = *pend;
     
     for (int k = 1; k <= Nz; ++k)
+#ifdef __INTEL_COMPILER
+#pragma vector aligned
+#pragma ivdep
+#endif
     for (int i = 1; i <= Nx; ++i)
     {
         end (k,i) = two*mid (k,i) - start (k,i);
@@ -41,6 +45,10 @@ void average (const ScalarField<T,Nz,Nx>& start, const ScalarField<T,Nz,Nx>& end
     ScalarField<T,Nz,Nx>& mid = *pmid;
     
     for (int k = 1; k <= Nz; ++k)
+#ifdef __INTEL_COMPILER
+#pragma vector aligned
+#pragma ivdep
+#endif
     for (int i = 1; i <= Nx; ++i)
     {
         mid (k,i) = half*(start (k,i) + end (k,i));

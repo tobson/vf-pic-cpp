@@ -18,6 +18,10 @@ void curl (const VectorField<T,Nz,Nx>& A, VectorField<T,Nz,Nx>* B)
     const real fz = real (0.5)/vfpic::dz;
 
     for (int k = 1; k <= Nz; ++k)
+#ifdef __INTEL_COMPILER
+#pragma vector aligned
+#pragma ivdep
+#endif
     for (int i = 1; i <= Nx; ++i)
     {
         B->x (k,i) = -fz*(A.y (k+1,i  ) - A.y (k-1,i  ));
@@ -25,6 +29,10 @@ void curl (const VectorField<T,Nz,Nx>& A, VectorField<T,Nz,Nx>* B)
     }
     
     for (int k = 1; k <= Nz; ++k)
+#ifdef __INTEL_COMPILER
+#pragma vector aligned
+#pragma ivdep
+#endif
     for (int i = 1; i <= Nx; ++i)
     {
         B->y (k,i) = fz*(A.x (k+1,i  ) - A.x (k-1,i  ))
@@ -43,6 +51,10 @@ void curlcurl (const VectorField<T,Nz,Nx>& A, VectorField<T,Nz,Nx>* J)
     const real fxz = real (0.25)/(vfpic::dx*vfpic::dz);
     
     for (int k = 1; k <= Nz; ++k)
+#ifdef __INTEL_COMPILER
+#pragma vector aligned
+#pragma ivdep
+#endif
     for (int i = 1; i <= Nx; ++i)
     {
         J->x (k,i) = fxz*(A.z (k+1,i+1) - A.z (k+1,i-1) - A.z (k-1,i+1) + A.z (k-1,i-1));
@@ -53,6 +65,10 @@ void curlcurl (const VectorField<T,Nz,Nx>& A, VectorField<T,Nz,Nx>* J)
     }
     
     for (int k = 1; k <= Nz; ++k)
+#ifdef __INTEL_COMPILER
+#pragma vector aligned
+#pragma ivdep
+#endif
     for (int i = 1; i <= Nx; ++i)
     {
         J->y (k,i) = -fxx*(A.y (k  ,i+1) - two*A.y (k,i) + A.y (k  ,i-1))

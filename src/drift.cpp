@@ -17,6 +17,9 @@ void drift (Particles<Np> *particles, const real dt)
 {
     Particle *p = particles->begin ();
     
+#ifdef __INTEL_COMPILER
+#pragma ivdep
+#endif
     for (int dummy = 0; dummy < Np; ++dummy)
     {
         p->x = p->x + p->vx*dt;

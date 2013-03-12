@@ -27,6 +27,9 @@ void kick (const GlobalVectorField<real>& E,
 
     Particle *p = particles->begin ();
 
+#ifdef __INTEL_COMPILER
+#pragma ivdep
+#endif
     for (int dummy = 0; dummy < Np; ++dummy)
     {
         const real xdx = (p->x - x0)/dx + half;

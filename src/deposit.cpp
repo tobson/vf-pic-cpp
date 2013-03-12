@@ -34,6 +34,9 @@ void Deposit<Np>::operator() (const Particles<Np>& particles,
     
     const Particle *p = particles.begin ();
     
+#ifdef __INTEL_COMPILER
+#pragma ivdep
+#endif
     for (int dummy = 0; dummy < Np; ++dummy)
     {
         const real xdx = (p->x - x0)/dx + half;
@@ -63,11 +66,17 @@ void Deposit<Np>::operator() (const Particles<Np>& particles,
         ++p;
     }
     // Add ghost zones
+#ifdef __INTEL_COMPILER
+#pragma ivdep
+#endif
     for (int i = 0; i < nx+2; ++i)
     {
         sources (nz,i) += sources (0   ,i);
         sources (1 ,i) += sources (nz+1,i);
     }
+#ifdef __INTEL_COMPILER
+#pragma ivdep
+#endif
     for (int k = 1; k <= nz; ++k)
     {
         sources (k,nx) += sources (k,0   );
@@ -90,6 +99,9 @@ void Deposit<Np>::convert (GlobalScalarField<real> *rho, GlobalVectorField<real>
         LocalScalarFieldView<real>& ruz1 = ruu1.z;
 
         for (int k = 1; k <= mz; ++k)
+#ifdef __INTEL_COMPILER
+#pragma ivdep
+#endif
         for (int i = 1; i <= mx; ++i)
         {
             rho1 (k,i) = sources1 (k,i).rho;
@@ -114,6 +126,9 @@ void Deposit<Np>::convert (GlobalScalarField<real> *rho, GlobalVectorField<real>
         LocalScalarFieldView<real>& ruz1 = ruu1.z;
 
         for (int k = 1; k <= mz; ++k)
+#ifdef __INTEL_COMPILER
+#pragma ivdep
+#endif
         for (int i = 1; i <= mx; ++i)
         {
             rho1 (k,i) += sources1 (k,i).rho;

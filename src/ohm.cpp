@@ -21,6 +21,10 @@ void Ohm<Nz,Nx>::operator() (const VectorField<real,Nz,Nx>& B,
     {
         
         for (int k = 1; k <= Nz; ++k)
+#ifdef __INTEL_COMPILER
+#pragma vector aligned
+#pragma ivdep
+#endif
         for (int i = 1; i <= Nx; ++i)
         {
             // Better multiply with inverse density
@@ -28,6 +32,10 @@ void Ohm<Nz,Nx>::operator() (const VectorField<real,Nz,Nx>& B,
         }
     }
     for (int k = 1; k <= Nz; ++k)
+#ifdef __INTEL_COMPILER
+#pragma vector aligned
+#pragma ivdep
+#endif
     for (int i = 1; i <= Nx; ++i)
     {
         E->x (k,i) = U.z (k,i)*B.y (k,i) - U.y (k,i)*B.z (k,i);

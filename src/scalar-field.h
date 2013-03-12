@@ -50,6 +50,10 @@ public:
     inline ScalarField& operator= (const ScalarField& other)
     {
         for (int i1 = 1; i1 <= N1; ++i1)
+#ifdef __INTEL_COMPILER
+#pragma vector aligned
+#pragma ivdep
+#endif
         for (int i2 = 1; i2 <= N2; ++i2)
         {
             (*this)(i1,i2) = other(i1,i2);
@@ -59,6 +63,10 @@ public:
     inline ScalarField& operator= (const T& value)
     {
         for (int i1 = 1; i1 <= N1; ++i1)
+#ifdef __INTEL_COMPILER
+#pragma vector aligned
+#pragma ivdep
+#endif
         for (int i2 = 1; i2 <= N2; ++i2)
         {
             (*this)(i1,i2) = value;
@@ -69,6 +77,10 @@ public:
     inline ScalarField& operator+= (const ScalarField& other)
     {
         for (int i1 = 1; i1 <= N1; ++i1)
+#ifdef __INTEL_COMPILER
+#pragma vector aligned
+#pragma ivdep
+#endif
         for (int i2 = 1; i2 <= N2; ++i2)
         {
             (*this)(i1,i2) += other(i1,i2);
@@ -78,6 +90,10 @@ public:
     inline ScalarField& operator+= (const T& value)
     {
         for (int i1 = 1; i1 <= N1; ++i1)
+#ifdef __INTEL_COMPILER
+#pragma vector aligned
+#pragma ivdep
+#endif
         for (int i2 = 1; i2 <= N2; ++i2)
         {
             (*this)(i1,i2) += value;
@@ -88,6 +104,10 @@ public:
     inline ScalarField& operator-= (const ScalarField& other)
     {
         for (int i1 = 1; i1 <= N1; ++i1)
+#ifdef __INTEL_COMPILER
+#pragma vector aligned
+#pragma ivdep
+#endif
         for (int i2 = 1; i2 <= N2; ++i2)
         {
             (*this)(i1,i2) -= other(i1,i2);
@@ -97,6 +117,10 @@ public:
     inline ScalarField& operator-= (const T& value)
     {
         for (int i1 = 1; i1 <= N1; ++i1)
+#ifdef __INTEL_COMPILER
+#pragma vector aligned
+#pragma ivdep
+#endif
         for (int i2 = 1; i2 <= N2; ++i2)
         {
             (*this)(i1,i2) -= value;
@@ -107,6 +131,10 @@ public:
     inline ScalarField& operator*= (const ScalarField& other)
     {
         for (int i1 = 1; i1 <= N1; ++i1)
+#ifdef __INTEL_COMPILER
+#pragma vector aligned
+#pragma ivdep
+#endif
         for (int i2 = 1; i2 <= N2; ++i2)
         {
             (*this)(i1,i2) *= other(i1,i2);
@@ -116,6 +144,10 @@ public:
     inline ScalarField& operator*= (const T& value)
     {
         for (int i1 = 1; i1 <= N1; ++i1)
+#ifdef __INTEL_COMPILER
+#pragma vector aligned
+#pragma ivdep
+#endif
         for (int i2 = 1; i2 <= N2; ++i2)
         {
             (*this)(i1,i2) *= value;
@@ -126,6 +158,10 @@ public:
     inline ScalarField& operator/= (const ScalarField& other)
     {
         for (int i1 = 1; i1 <= N1; ++i1)
+#ifdef __INTEL_COMPILER
+#pragma vector aligned
+#pragma ivdep
+#endif
         for (int i2 = 1; i2 <= N2; ++i2)
         {
             (*this)(i1,i2) /= other(i1,i2);
@@ -135,6 +171,10 @@ public:
     inline ScalarField& operator/= (const T& value)
     {
         for (int i1 = 1; i1 <= N1; ++i1)
+#ifdef __INTEL_COMPILER
+#pragma vector aligned
+#pragma ivdep
+#endif
         for (int i2 = 1; i2 <= N2; ++i2)
         {
             (*this)(i1,i2) /= value;
@@ -149,6 +189,10 @@ public:
     {
         real sum = 0.0;
         for (int i1 = 1; i1 <= N1; ++i1)
+#ifdef __INTEL_COMPILER
+#pragma vector aligned
+#pragma ivdep
+#endif
         for (int i2 = 1; i2 <= N2; ++i2)
         {
             real element = (*this) (i1,i2);
@@ -169,14 +213,24 @@ protected:
 template <typename T, int N1, int N2>
 struct NewScalarField: public ScalarField<T,N1,N2>
 {
-    NewScalarField (): ScalarField<T,N1,N2> (new T[size])
+    NewScalarField (): ScalarField<T,N1,N2>
+#ifdef __INTEL_COMPILER
+    (reinterpret_cast<T*> (_mm_malloc (size*sizeof (T), vfpic::alignment)))
+#else
+    (new T[size])
+#endif
     {
         if (config::verbose)
         {
             printf ("NewScalarField (Default ctor): Allocated %lu bytes.\n", size*sizeof (T));
         }
     }
-    NewScalarField (const NewScalarField& other): ScalarField<T,N1,N2> (new T[size])
+    NewScalarField (const NewScalarField& other): ScalarField<T,N1,N2>
+#ifdef __INTEL_COMPILER
+    (reinterpret_cast<T*> (_mm_malloc (size*sizeof (T), vfpic::alignment)))
+#else
+    (new T[size])
+#endif
     {
         if (config::verbose)
         {
@@ -199,7 +253,11 @@ struct NewScalarField: public ScalarField<T,N1,N2>
                 printf ("NewScalarField: Deallocating %lu bytes...\n", size*sizeof (T));
             }
         }
+#ifdef __INTEL_COMPILER
+        _mm_free (data);
+#else
         delete[] data;
+#endif
     }
     
     using ScalarField<T,N1,N2>::operator=;

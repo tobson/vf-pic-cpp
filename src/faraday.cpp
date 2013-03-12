@@ -19,6 +19,10 @@ void faraday (VectorField<real,Nz,Nx>* pA, const VectorField<real,Nz,Nx>& E, con
     if (lshear)
     {
         for (int k = 1; k <= Nz; ++k)
+#ifdef __INTEL_COMPILER
+#pragma vector aligned
+#pragma ivdep
+#endif
         for (int i = 1; i <= Nx; ++i)
         {
             A.x(k,i) -= Sshear*dt*(A.y(k,i) - 0.5*dt*E.y(k,i));
@@ -28,6 +32,10 @@ void faraday (VectorField<real,Nz,Nx>* pA, const VectorField<real,Nz,Nx>& E, con
     for (int j = 0; j < 3; ++j)
     {
         for (int k = 1; k <= Nz; ++k)
+#ifdef __INTEL_COMPILER
+#pragma vector aligned
+#pragma ivdep
+#endif
         for (int i = 1; i <= Nx; ++i)
         {
             A[j](k,i) -= dt*E[j](k,i);
