@@ -181,10 +181,15 @@ class DataFile ():
 
 class Diagnostics (dict):
 
-    def __init__ (self, names, data):
+    def __init__ (self, names, data, cfg = None):
+
+        from numpy import arange
+
+        if not isinstance (cfg, Config): cfg = Config ()
 
         nvar = len (names)
         assert (data.shape[1] == nvar)
+        self["t"] = cfg.dt*cfg.itDiag*arange (data.shape[0])
         for ivar in range (nvar):
             self[names[ivar]] = data[:,ivar].copy ()
         self.__dict__.update (self)
