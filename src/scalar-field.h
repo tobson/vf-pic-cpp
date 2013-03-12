@@ -145,7 +145,7 @@ public:
     {
         std::fill (data, data + size, value);
     }
-    const real variance () const
+    real variance () const
     {
         real sum = 0.0;
         for (int i1 = 1; i1 <= N1; ++i1)
@@ -156,7 +156,7 @@ public:
         }
         return sum/real (N1*N2);
     }
-    const real rms () const
+    real rms () const
     {
         return sqrt (this->variance ());
     }

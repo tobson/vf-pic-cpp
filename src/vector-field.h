@@ -126,11 +126,11 @@ public:
     {
         return *components[j];
     }
-    const real variance () const
+    real variance () const
     {
         return x.variance () + y.variance () + z.variance ();
     }
-    const real rms () const
+    real rms () const
     {
         return sqrt (this->variance());
     }
