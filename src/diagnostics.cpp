@@ -29,17 +29,17 @@ Diagnostics::Diagnostics (const std::string& filename): file (filename), header 
     for (int ithread = 0; ithread < nthreads; ++ithread)
     {
         std::map<std::string,real>& map = diag2.at (ithread);
-        for (auto it = map.begin (); it != map.end (); ++it)
+        for (auto iter = map.begin (); iter != map.end (); ++iter)
         {
-            sum[it->first] = 0.0;
+            sum[iter->first] = 0.0;
         }
     }
     header = false;
     file << "# ";
     std::string sep = "";
-    for (auto it = sum.begin (); it != sum.end (); ++it)
+    for (auto iter = sum.begin (); iter != sum.end (); ++iter)
     {
-        file << sep << it->first;
+        file << sep << iter->first;
         sep = "\t";
     }
     file << std::endl;
@@ -64,7 +64,7 @@ void Diagnostics::operator() (const GlobalVariables& global,
     
     std::map<std::string,real>& map = diag2.at (ithread);
 
-    for (auto it = map.begin (); it != map.end (); ++it) it->second = 0.0;
+    for (auto iter = map.begin (); iter != map.end (); ++iter) iter->second = 0.0;
 
     for (auto p = particles.begin (); p != particles.end (); ++p)
     {
@@ -93,22 +93,22 @@ void Diagnostics::operator() (const GlobalVariables& global,
     
     if (barrier.wait ())
     {
-        for (auto it = sum.begin (); it != sum.end (); ++it)
+        for (auto iter = sum.begin (); iter != sum.end (); ++iter)
         {
-            it->second = 0.0;
+            iter->second = 0.0;
         }
         for (int ithread = 0; ithread < nthreads; ++ithread)
         {
             std::map<std::string,real>& map = diag2.at (ithread);
-            for (auto it = map.begin (); it != map.end (); ++it)
+            for (auto iter = map.begin (); iter != map.end (); ++iter)
             {
-                sum[it->first] += it->second;
+                sum[iter->first] += iter->second;
             }
         }
         std::string sep = "";
-        for (auto it = sum.begin (); it != sum.end (); ++it)
+        for (auto iter = sum.begin (); iter != sum.end (); ++iter)
         {
-            file << sep << it->second;
+            file << sep << iter->second;
             sep = "\t";
         }
         file << std::endl;
