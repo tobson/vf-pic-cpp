@@ -13,10 +13,10 @@ typedef double real;
 
 namespace vfpic
 {
-const int nx = 128;
+const int nx = 64;
 const int nz = 1;
 
-const int npc = 8096;
+const int npc = 16384;
 
 const int nthreads = 1;
 
