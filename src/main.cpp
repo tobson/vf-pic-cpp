@@ -198,17 +198,16 @@ void computeSelfConsistentElectricField (GlobalVariables& global, Barrier& barri
     // Compute electric field at n
     ohm (B, J, rho, ruu, &E);
 
+    // Evolve vector potential back in time by a half step
+    faraday (&A, E, -0.5*dt);
+
     // Set boundary conditions
+    boundCond (global.A);
     boundCond (global.E);
     boundCond (global.B);
 
-    // Evolve vector potential and particle velocities *back* in time
-    // by a half step
-    faraday (&A, E, -0.5*dt);
+    // Evolve particle velocities back in time by a half step
     kick (global.E, global.B, &particles, -0.5*dt);
-
-    // Set boundary condition
-    boundCond (global.A);
 }
 
 int main (int argc, const char * argv[])
