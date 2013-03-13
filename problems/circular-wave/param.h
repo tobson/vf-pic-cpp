@@ -10,6 +10,7 @@
 #define vf_pic_param_h
 
 typedef double real;
+typedef unsigned int uint;
 
 namespace vfpic
 {
@@ -18,7 +19,7 @@ const int nz = 128;
 
 const int npc = 256;
 
-const int nthreads = 4;
+const int nthreads = 1;
 
 const int alignment = 16;
 }
