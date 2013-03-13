@@ -12,7 +12,7 @@
 
 using namespace vfpic;
 
-template <int Np>
+template <uint Np>
 void drift (Particles<Np> *particles, const real dt)
 {
     Particle *p = particles->begin ();

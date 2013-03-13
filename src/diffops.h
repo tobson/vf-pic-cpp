@@ -11,7 +11,7 @@
 
 #include "vector-field.h"
 
-template <typename T, int Nz, int Nx>
+template <typename T, uint Nz, uint Nx>
 void curl (const VectorField<T,Nz,Nx>& A, VectorField<T,Nz,Nx>* B)
 {
     const real fx = real (0.5)/vfpic::dx;
@@ -40,7 +40,7 @@ void curl (const VectorField<T,Nz,Nx>& A, VectorField<T,Nz,Nx>* B)
     }
 }
 
-template <typename T, int Nz, int Nx>
+template <typename T, uint Nz, uint Nx>
 void curlcurl (const VectorField<T,Nz,Nx>& A, VectorField<T,Nz,Nx>* J)
 {
     const real two = real (2);

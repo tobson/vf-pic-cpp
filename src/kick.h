@@ -12,7 +12,7 @@
 #include "particles.h"
 #include "vector-field.h"
 
-template <int Np>
+template <uint Np>
 void kick (const GlobalVectorField<real>&, const GlobalVectorField<real>&,
            Particles<Np>*, const real);
 

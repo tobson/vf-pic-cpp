@@ -11,7 +11,7 @@
 
 #include "particles.h"
 
-template <int Np>
+template <uint Np>
 void drift (Particles<Np>*, const real);
 
 #endif /* defined(__vf_pic__drift__) */

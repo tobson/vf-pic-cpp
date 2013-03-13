@@ -11,7 +11,7 @@
 
 #include "vector-field.h"
 
-template<typename T, int Nz, int Nx>
+template<typename T, uint Nz, uint Nx>
 void extrapolate (const ScalarField<T,Nz,Nx>& start, const ScalarField<T,Nz,Nx>& mid, ScalarField<T,Nz,Nx>* pend)
 {
     const real two = real (2);
@@ -29,7 +29,7 @@ void extrapolate (const ScalarField<T,Nz,Nx>& start, const ScalarField<T,Nz,Nx>&
     }
 }
 
-template<typename T, int Nz, int Nx>
+template<typename T, uint Nz, uint Nx>
 void extrapolate (const VectorField<T,Nz,Nx>& start, const VectorField<T,Nz,Nx>& mid, VectorField<T,Nz,Nx>* pend)
 {
     VectorField<T,Nz,Nx>& end = *pend;
@@ -37,7 +37,7 @@ void extrapolate (const VectorField<T,Nz,Nx>& start, const VectorField<T,Nz,Nx>&
     for (int j = 0; j < 3; ++j) extrapolate (start[j], mid[j], &end[j]);
 }
 
-template<typename T, int Nz, int Nx>
+template<typename T, uint Nz, uint Nx>
 void average (const ScalarField<T,Nz,Nx>& start, const ScalarField<T,Nz,Nx>& end, ScalarField<T,Nz,Nx>* pmid)
 {
     const real half = real (0.5);
@@ -55,7 +55,7 @@ void average (const ScalarField<T,Nz,Nx>& start, const ScalarField<T,Nz,Nx>& end
     }
 }
 
-template<typename T, int Nz, int Nx>
+template<typename T, uint Nz, uint Nx>
 void average (const VectorField<T,Nz,Nx>& start, const VectorField<T,Nz,Nx>& end, VectorField<T,Nz,Nx>* pmid)
 {
     VectorField<T,Nz,Nx>& mid = *pmid;

@@ -12,7 +12,7 @@
 
 using namespace vfpic;
 
-template <int Np>
+template <uint Np>
 void kick (const GlobalVectorField<real>& E,
            const GlobalVectorField<real>& B,
            Particles<Np> *particles, const real dt)

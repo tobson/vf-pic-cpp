@@ -21,7 +21,7 @@
 
 /* Declerations */
 
-template <typename T, int N1, int N2>
+template <typename T, uint N1, uint N2>
 class ScalarField
 {
 protected:
@@ -210,7 +210,7 @@ protected:
     static const unsigned long size = (N1 + 2)*(N2 + 2);
 };
 
-template <typename T, int N1, int N2>
+template <typename T, uint N1, uint N2>
 struct NewScalarField: public ScalarField<T,N1,N2>
 {
     NewScalarField (): ScalarField<T,N1,N2>
@@ -277,17 +277,17 @@ struct NewScalarField: public ScalarField<T,N1,N2>
     }
 };
 
-template <typename T, int N1, int N2>
+template <typename T, uint N1, uint N2>
 struct ScalarFieldView: public ScalarField<T,N1,N2>
 {
-    template <int M1, int M2>
+    template <uint M1, uint M2>
     ScalarFieldView (ScalarField<T,M1,M2>& global, const int ithread):
     ScalarField<T,N1,N2> (&global(ithread*N1,0))
     {
         using vfpic::nthreads;
         static_assert (M1 == nthreads*N1 && M2 == N2, "");
     }
-    template <int M1, int M2>
+    template <uint M1, uint M2>
     ScalarFieldView (const ScalarField<T,M1,M2>& global, const int ithread):
     ScalarField<T,N1,N2> (const_cast<T*> (&global(ithread*N1,0)))
     {

@@ -10,7 +10,7 @@
 
 using namespace vfpic;
 
-template<int Nz, int Nx>
+template <uint Nz, uint Nx>
 void faraday (ScalarField<real,Nz,Nx>* pA, const ScalarField<real,Nz,Nx>& E, const real dt)
 {
     ScalarField<real,Nz,Nx>& A = *pA;
@@ -25,7 +25,7 @@ void faraday (ScalarField<real,Nz,Nx>* pA, const ScalarField<real,Nz,Nx>& E, con
         A(k,i) -= dt*E(k,i);
     }
 }
-template<int Nz, int Nx>
+template <uint Nz, uint Nx>
 void faraday (VectorField<real,Nz,Nx>* pA, const VectorField<real,Nz,Nx>& E, const real dt)
 {
     VectorField<real,Nz,Nx>& A = *pA;

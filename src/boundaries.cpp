@@ -11,7 +11,7 @@
 using namespace vfpic;
 
 // Implementation of class BoundaryConditions
-template <int Nz>
+template <uint Nz>
 void BoundaryConditions::X (VectorField<real,Nz,nx>& vector)
 {
     X (vector.x);

@@ -8,7 +8,7 @@
 
 #include "ohm.h"
 
-template <int Nz, int Nx>
+template <uint Nz, uint Nx>
 void computeElectronVelocity (const ScalarField<real,Nz,Nx>& J,
                               const ScalarField<real,Nz,Nx>& rho,
                               const ScalarField<real,Nz,Nx>& ruu,
@@ -30,7 +30,7 @@ void computeElectronVelocity (const ScalarField<real,Nz,Nx>& J,
     }
 }
 
-template <int Nz, int Nx>
+template <uint Nz, uint Nx>
 void Ohm<Nz,Nx>::operator() (const VectorField<real,Nz,Nx>& B,
                              const VectorField<real,Nz,Nx>& J,
                              const ScalarField<real,Nz,Nx>& rho,

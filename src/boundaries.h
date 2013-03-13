@@ -16,10 +16,10 @@
 // Problem dependend implementation
 struct ProblemSpecificBoundaryConditions
 {
-    template <int Nz>
+    template <uint Nz>
     void X (ScalarField<real,Nz,vfpic::nx>&);
     void Z (GlobalScalarField<real>&);
-    template <int N>
+    template <uint N>
     void operator() (Particles<N>&);
 };
 
@@ -28,7 +28,7 @@ struct BoundaryConditions: public ProblemSpecificBoundaryConditions
     using ProblemSpecificBoundaryConditions::X;
     using ProblemSpecificBoundaryConditions::Z;
     using ProblemSpecificBoundaryConditions::operator();
-    template <int Nz>
+    template <uint Nz>
     void X (VectorField<real,Nz,vfpic::nx>&);
     void Z (GlobalVectorField<real>&);
     void operator() (GlobalScalarField<real>&);

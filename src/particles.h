@@ -25,7 +25,7 @@ struct Particle
     real vx, vy, vz;
 };
 
-template <int N>
+template <uint N>
 class Particles
 {
 protected:

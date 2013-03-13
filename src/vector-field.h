@@ -17,7 +17,7 @@
 
 /* Decleration */
 
-template <typename T, int N1, int N2>
+template <typename T, uint N1, uint N2>
 class VectorField
 {
 private:
@@ -136,7 +136,7 @@ public:
     }
 };
 
-template <template <typename, int, int> class S, typename T, int N1, int N2>
+template <template <typename, uint, uint> class S, typename T, uint N1, uint N2>
 class VectorTemplate: public VectorField<T,N1,N2>
 {
 private:
@@ -176,7 +176,7 @@ public:
     using Base::operator=;
 };
 
-template <typename T, int N1, int N2>
+template <typename T, uint N1, uint N2>
 class NewVectorField: public VectorTemplate<NewScalarField,T,N1,N2>
 {
 private:
@@ -211,21 +211,21 @@ public:
     using Base::operator=;
 };
 
-template <typename T, int N1, int N2>
+template <typename T, uint N1, uint N2>
 class VectorFieldView: public VectorTemplate<ScalarFieldView,T,N1,N2>
 {
 private:
     using Scalar = ScalarFieldView<T,N1,N2>;
     using Base = VectorTemplate<ScalarFieldView,T,N1,N2>;
 public:
-    template <int M1, int M2>
+    template <uint M1, uint M2>
     VectorFieldView (VectorField<T,M1,M2>& global, int ithread):
     Base (new Scalar (global.x, ithread),
           new Scalar (global.y, ithread),
           new Scalar (global.z, ithread))
     {
     }
-    template <int M1, int M2>
+    template <uint M1, uint M2>
     VectorFieldView (const VectorField<T,M1,M2>& global, int ithread):
     Base (new Scalar (global.x, ithread),
           new Scalar (global.y, ithread),

@@ -11,7 +11,7 @@
 
 #include "vector-field.h"
 
-template <int Nz, int Nx>
+template <uint Nz, uint Nx>
 class Ohm
 {
 public:
