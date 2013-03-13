@@ -8,12 +8,26 @@
 
 #include "faraday.h"
 
+using namespace vfpic;
+
+template<int Nz, int Nx>
+void faraday (ScalarField<real,Nz,Nx>* pA, const ScalarField<real,Nz,Nx>& E, const real dt)
+{
+    ScalarField<real,Nz,Nx>& A = *pA;
+
+    for (int k = 1; k <= Nz; ++k)
+#ifdef __INTEL_COMPILER
+#pragma vector aligned
+#pragma ivdep
+#endif
+    for (int i = 1; i <= Nx; ++i)
+    {
+        A(k,i) -= dt*E(k,i);
+    }
+}
 template<int Nz, int Nx>
 void faraday (VectorField<real,Nz,Nx>* pA, const VectorField<real,Nz,Nx>& E, const real dt)
 {
-    using vfpic::Sshear;
-    using vfpic::lshear;
-
     VectorField<real,Nz,Nx>& A = *pA;
 
     if (lshear)
@@ -29,23 +43,9 @@ void faraday (VectorField<real,Nz,Nx>* pA, const VectorField<real,Nz,Nx>& E, con
         }
     }
     
-    for (int j = 0; j < 3; ++j)
-    {
-        for (int k = 1; k <= Nz; ++k)
-#ifdef __INTEL_COMPILER
-#pragma vector aligned
-#pragma ivdep
-#endif
-        for (int i = 1; i <= Nx; ++i)
-        {
-            A[j](k,i) -= dt*E[j](k,i);
-        }
-    }
+    for (int j = 0; j < 3; ++j) faraday (&A[j], E[j], dt);
 }
 
 /* Explicit instantiation */
-
-using vfpic::mx;
-using vfpic::mz;
 
 template void faraday (VectorField<real,mz,mx>*, const VectorField<real,mz,mx>&, const real);

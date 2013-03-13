@@ -9,28 +9,36 @@
 #include "ohm.h"
 
 template <int Nz, int Nx>
+void computeElectronVelocity (const ScalarField<real,Nz,Nx>& J,
+                              const ScalarField<real,Nz,Nx>& rho,
+                              const ScalarField<real,Nz,Nx>& ruu,
+                              ScalarField<real,Nz,Nx> *pU)
+{
+    const real me = 1.0/config::em;
+
+    ScalarField<real,Nz,Nx>& U = *pU;
+    
+    for (int k = 1; k <= Nz; ++k)
+#ifdef __INTEL_COMPILER
+#pragma vector aligned
+#pragma ivdep
+#endif
+    for (int i = 1; i <= Nx; ++i)
+    {
+        // Better multiply with inverse density
+        U (k,i) = (ruu (k,i) - me*J (k,i))/rho (k,i);
+    }
+}
+
+template <int Nz, int Nx>
 void Ohm<Nz,Nx>::operator() (const VectorField<real,Nz,Nx>& B,
                              const VectorField<real,Nz,Nx>& J,
                              const ScalarField<real,Nz,Nx>& rho,
                              const VectorField<real,Nz,Nx>& ruu,
                              VectorField<real,Nz,Nx>* E)
 {
-    const real me = 1.0/config::em;
+    for (int j = 0; j < 3; ++j) computeElectronVelocity (J[j], rho, ruu[j], &U[j]);
     
-    for (int j = 0; j < 3; ++j)
-    {
-        
-        for (int k = 1; k <= Nz; ++k)
-#ifdef __INTEL_COMPILER
-#pragma vector aligned
-#pragma ivdep
-#endif
-        for (int i = 1; i <= Nx; ++i)
-        {
-            // Better multiply with inverse density
-            U[j](k,i) = (ruu[j](k,i) - me*J[j](k,i))/rho (k,i);
-        }
-    }
     for (int k = 1; k <= Nz; ++k)
 #ifdef __INTEL_COMPILER
 #pragma vector aligned
