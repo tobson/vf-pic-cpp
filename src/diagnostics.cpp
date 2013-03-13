@@ -59,7 +59,7 @@ void Diagnostics::operator() (const GlobalVariables& global,
     const LocalScalarFieldView<real> rho (global.rho, ithread);
     const LocalVectorFieldView<real> ruu (global.ruu, ithread);
     
-    const real fnorm = 1.0/real (mx*mz);
+    const real fnorm = 1.0/real (nx*nz);
     const real pnorm = fnorm*rho0/real (npc);
     
     std::map<std::string,real>& map = diag2.at (ithread);
