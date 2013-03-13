@@ -15,8 +15,8 @@ Grid::Grid ()
     using namespace config;
     using namespace vfpic;
     
-    for (int k = 0; k < nz + 2; ++k)
-    for (int i = 0; i < nx + 2; ++i)
+    for (uint k = 0; k < nz + 2; ++k)
+    for (uint i = 0; i < nx + 2; ++i)
     {
         x(k,i) = x0 + (real (i) - 0.5)*dx;
         z(k,i) = z0 + (real (k) - 0.5)*dz;

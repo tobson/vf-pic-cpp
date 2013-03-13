@@ -15,7 +15,7 @@
 #include "faraday.h"
 #include "ohm.h"
 
-Output::Output (Barrier& barrier, const int ithread):
+Output::Output (Barrier& barrier, const uint ithread):
 barrier (barrier), ithread (ithread)
 {
 }

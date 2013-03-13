@@ -120,8 +120,8 @@ void initialCondition (GlobalVariables *global)
     Evec.y =  ampl*I;
     Evec.z = -ampl*sin (angle);
 
-    for (int j = 0; j < 3; ++j) Avec[j] = Evec[j]/(I*omega);
-    for (int j = 0; j < 3; ++j) Uvec[j] = Avec[j]*em*zeta0*Z (zeta1);
+    for (uint j = 0; j < 3; ++j) Avec[j] = Evec[j]/(I*omega);
+    for (uint j = 0; j < 3; ++j) Uvec[j] = Avec[j]*em*zeta0*Z (zeta1);
 
     // Randomize particle positions
     for (Particle *p = particles.begin (); p != particles.end (); ++p)
@@ -150,12 +150,12 @@ void initialCondition (GlobalVariables *global)
     
     removeMeanMomentum (particles);
 
-    for (int k = 1; k <= nz; ++k)
-    for (int i = 1; i <= nx; ++i)
+    for (uint k = 1; k <= nz; ++k)
+    for (uint i = 1; i <= nx; ++i)
     {
         const real phi = kx*grid.x (k,i) + kz*grid.z (k,i);
 
-        for (int j = 0; j < 3; ++j) A[j] (k,i) = cos (phi)*std::real (Avec[j]);
+        for (uint j = 0; j < 3; ++j) A[j] (k,i) = cos (phi)*std::real (Avec[j]);
     }
     boundCond (A);
 

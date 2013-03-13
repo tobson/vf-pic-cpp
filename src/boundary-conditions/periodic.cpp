@@ -12,10 +12,10 @@
 
 using namespace vfpic;
 
-template <int Nz>
+template <uint Nz>
 void ProblemSpecificBoundaryConditions::X (ScalarField<real,Nz,nx>& scalar)
 {
-    for (int k = 1; k <= Nz; ++k)
+    for (uint k = 1; k <= Nz; ++k)
     {
         scalar (k,0   ) = scalar (k,nx);
         scalar (k,nx+1) = scalar (k,1 );
@@ -26,14 +26,14 @@ template void ProblemSpecificBoundaryConditions::X (std::conditional<nz==mz,Scal
 
 void ProblemSpecificBoundaryConditions::Z (GlobalScalarField<real>& scalar)
 {
-    for (int i = 0; i < nx+2; ++i)
+    for (uint i = 0; i < nx+2; ++i)
     {
         scalar (0   ,i) = scalar (nz,i);
         scalar (nz+1,i) = scalar (1 ,i);
     }
 }
 
-template <int N>
+template <uint N>
 void ProblemSpecificBoundaryConditions::operator() (Particles<N>& particles)
 {
     using namespace config;
@@ -43,7 +43,7 @@ void ProblemSpecificBoundaryConditions::operator() (Particles<N>& particles)
 
     Particle *p = particles.begin ();
 
-    for (int dummy = 0; dummy < N; ++dummy)
+    for (uint dummy = 0; dummy < N; ++dummy)
     {
         p->x -= floor ((p->x - x0)*Lx1)*Lx;
         p->z -= floor ((p->z - z0)*Lz1)*Lz;

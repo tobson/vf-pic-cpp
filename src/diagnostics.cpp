@@ -16,7 +16,7 @@ using namespace config;
 
 Diagnostics::Diagnostics (const std::string& filename): file (filename), header (true)
 {
-    for (int ithread = 0; ithread < nthreads; ++ithread)
+    for (uint ithread = 0; ithread < nthreads; ++ithread)
     {
         std::map<std::string,real>& map = diag2.at (ithread);
         map["mvx"] = 0.0;
@@ -26,7 +26,7 @@ Diagnostics::Diagnostics (const std::string& filename): file (filename), header 
         map["eth"] = 0.0;
         map["emag"] = 0.0;
     }
-    for (int ithread = 0; ithread < nthreads; ++ithread)
+    for (uint ithread = 0; ithread < nthreads; ++ithread)
     {
         std::map<std::string,real>& map = diag2.at (ithread);
         for (auto iter = map.begin (); iter != map.end (); ++iter)
@@ -53,7 +53,7 @@ Diagnostics::~Diagnostics ()
 
 void Diagnostics::operator() (const GlobalVariables& global,
                               const LocalVectorField<real>& H, const long long it,
-                              Barrier& barrier, const int ithread)
+                              Barrier& barrier, const uint ithread)
 {
     const LocalParticlesView particles (global.particles, ithread);
     const LocalScalarFieldView<real> rho (global.rho, ithread);
@@ -82,14 +82,14 @@ void Diagnostics::operator() (const GlobalVariables& global,
     map["ekin"] *= 0.5*pnorm;
     
     
-    for (int j = 0; j < 3; ++j)
+    for (uint j = 0; j < 3; ++j)
     {
-        for (int k = 1; k <= mz; ++k)
+        for (uint k = 1; k <= mz; ++k)
 #ifdef __INTEL_COMPILER
 #pragma vector aligned
 #pragma ivdep
 #endif
-        for (int i = 1; i <= mx; ++i)
+        for (uint i = 1; i <= mx; ++i)
         {
             map["eth"] += pow (ruu[j] (k,i), 2)/rho (k,i);
             map["emag"] += pow (H[j] (k,i), 2);
@@ -104,7 +104,7 @@ void Diagnostics::operator() (const GlobalVariables& global,
         {
             iter->second = 0.0;
         }
-        for (int ithread = 0; ithread < nthreads; ++ithread)
+        for (uint ithread = 0; ithread < nthreads; ++ithread)
         {
             std::map<std::string,real>& map = diag2.at (ithread);
             for (auto iter = map.begin (); iter != map.end (); ++iter)

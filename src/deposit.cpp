@@ -11,7 +11,7 @@
 using namespace vfpic;
 
 template <int Np>
-Deposit<Np>::Deposit (Barrier& barrier, const int ithread):
+Deposit<Np>::Deposit (Barrier& barrier, const uint ithread):
 barrier (barrier), ithread (ithread),
 norm (config::rho0/real (vfpic::npc))
 {
@@ -42,11 +42,11 @@ void Deposit<Np>::operator() (const Particles<Np>& particles,
         const real xdx = (p->x - x0)/dx + half;
         const real zdz = (p->z - z0)/dz + half;
         
-        const int i0 (xdx);
-        const int k0 (zdz);
+        const uint i0 (xdx);
+        const uint k0 (zdz);
         
-        const int i1 = i0 + 1;
-        const int k1 = k0 + 1;
+        const uint i1 = i0 + 1;
+        const uint k1 = k0 + 1;
         
         const real wx = xdx - real (i0);
         const real wz = zdz - real (k0);
@@ -69,7 +69,7 @@ void Deposit<Np>::operator() (const Particles<Np>& particles,
 #ifdef __INTEL_COMPILER
 #pragma ivdep
 #endif
-    for (int i = 0; i < nx+2; ++i)
+    for (uint i = 0; i < nx+2; ++i)
     {
         sources (nz,i) += sources (0   ,i);
         sources (1 ,i) += sources (nz+1,i);
@@ -77,7 +77,7 @@ void Deposit<Np>::operator() (const Particles<Np>& particles,
 #ifdef __INTEL_COMPILER
 #pragma ivdep
 #endif
-    for (int k = 1; k <= nz; ++k)
+    for (uint k = 1; k <= nz; ++k)
     {
         sources (k,nx) += sources (k,0   );
         sources (k,1 ) += sources (k,nx+1);
@@ -98,11 +98,11 @@ void Deposit<Np>::convert (GlobalScalarField<real> *rho, GlobalVectorField<real>
         LocalScalarFieldView<real>& ruy1 = ruu1.y;
         LocalScalarFieldView<real>& ruz1 = ruu1.z;
 
-        for (int k = 1; k <= mz; ++k)
+        for (uint k = 1; k <= mz; ++k)
 #ifdef __INTEL_COMPILER
 #pragma ivdep
 #endif
-        for (int i = 1; i <= mx; ++i)
+        for (uint i = 1; i <= mx; ++i)
         {
             rho1 (k,i) = sources1 (k,i).rho;
             rux1 (k,i) = sources1 (k,i).rux;
@@ -112,9 +112,9 @@ void Deposit<Np>::convert (GlobalScalarField<real> *rho, GlobalVectorField<real>
         barrier.wait ();
     }
     
-    for (int jthread = ithread + 1; jthread < ithread + nthreads; ++jthread)
+    for (uint jthread = ithread + 1; jthread < ithread + nthreads; ++jthread)
     {
-        const int kthread = jthread % nthreads;
+        const uint kthread = jthread % nthreads;
 
         LocalScalarFieldView<FourMomentum> sources1 (sources, kthread);
 
@@ -125,11 +125,11 @@ void Deposit<Np>::convert (GlobalScalarField<real> *rho, GlobalVectorField<real>
         LocalScalarFieldView<real>& ruy1 = ruu1.y;
         LocalScalarFieldView<real>& ruz1 = ruu1.z;
 
-        for (int k = 1; k <= mz; ++k)
+        for (uint k = 1; k <= mz; ++k)
 #ifdef __INTEL_COMPILER
 #pragma ivdep
 #endif
-        for (int i = 1; i <= mx; ++i)
+        for (uint i = 1; i <= mx; ++i)
         {
             rho1 (k,i) += sources1 (k,i).rho;
             rux1 (k,i) += sources1 (k,i).rux;

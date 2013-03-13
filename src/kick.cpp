@@ -35,11 +35,11 @@ void kick (const GlobalVectorField<real>& E,
         const real xdx = (p->x - x0)/dx + half;
         const real zdz = (p->z - z0)/dz + half;
         
-        const int i0 (xdx);
-        const int k0 (zdz);
+        const uint i0 (xdx);
+        const uint k0 (zdz);
         
-        const int i1 = i0 + 1;
-        const int k1 = k0 + 1;
+        const uint i1 = i0 + 1;
+        const uint k1 = k0 + 1;
         
         const real wx = xdx - real (i0);
         const real wz = zdz - real (k0);

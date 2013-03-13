@@ -15,11 +15,11 @@
 class Output
 {
 public:
-    Output (Barrier& barrier, const int);
+    Output (Barrier& barrier, const uint);
     void operator() (GlobalVariables&, const long long);
 private:
     Barrier& barrier;
-    const int ithread;
+    const uint ithread;
 };
 
 #endif /* defined(__vf_pic__output__) */

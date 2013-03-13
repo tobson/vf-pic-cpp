@@ -36,7 +36,7 @@
 #include "vector-field.h"
 
 void iteration (GlobalVariables& global, Diagnostics& diagnostics,
-                Barrier& barrier, const int ithread)
+                Barrier& barrier, const uint ithread)
 {
     using namespace config;
     using namespace vfpic;
@@ -161,7 +161,7 @@ void iteration (GlobalVariables& global, Diagnostics& diagnostics,
     output (global, nt);
 }
 
-void computeSelfConsistentElectricField (GlobalVariables& global, Barrier& barrier, const int ithread)
+void computeSelfConsistentElectricField (GlobalVariables& global, Barrier& barrier, const uint ithread)
 {
     using namespace config;
     using namespace vfpic;

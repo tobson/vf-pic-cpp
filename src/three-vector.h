@@ -20,19 +20,19 @@ private:
 public:
     T& x; T& y; T& z;
     Vector (): x (array.at (0)), y (array.at (1)), z (array.at (2)) {}
-    inline T& operator[] (size_t j)
+    inline T& operator[] (uint j)
     {
         return array[j];
     }
-    inline const T& operator[] (size_t j) const
+    inline const T& operator[] (uint j) const
     {
         return array[j];
     }
-    inline T& at (size_t j)
+    inline T& at (uint j)
     {
         return array.at (j);
     }
-    inline const T& at (size_t j) const
+    inline const T& at (uint j) const
     {
         return array.at (j);
     }

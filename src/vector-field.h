@@ -118,11 +118,11 @@ public:
         return *this;
     }
     /* Index operators */
-    Scalar& operator[] (int j)
+    Scalar& operator[] (uint j)
     {
         return *components[j];
     }
-    const Scalar& operator[] (int j) const
+    const Scalar& operator[] (uint j) const
     {
         return *components[j];
     }
@@ -165,11 +165,11 @@ public:
         return *this;
     }
     virtual ~VectorTemplate () noexcept = default;
-    Scalar& operator[] (int j)
+    Scalar& operator[] (uint j)
     {
         return *components[j];
     }
-    const Scalar& operator[] (int j) const
+    const Scalar& operator[] (uint j) const
     {
         return *components[j];
     }
@@ -219,14 +219,14 @@ private:
     using Base = VectorTemplate<ScalarFieldView,T,N1,N2>;
 public:
     template <uint M1, uint M2>
-    VectorFieldView (VectorField<T,M1,M2>& global, int ithread):
+    VectorFieldView (VectorField<T,M1,M2>& global, uint ithread):
     Base (new Scalar (global.x, ithread),
           new Scalar (global.y, ithread),
           new Scalar (global.z, ithread))
     {
     }
     template <uint M1, uint M2>
-    VectorFieldView (const VectorField<T,M1,M2>& global, int ithread):
+    VectorFieldView (const VectorField<T,M1,M2>& global, uint ithread):
     Base (new Scalar (global.x, ithread),
           new Scalar (global.y, ithread),
           new Scalar (global.z, ithread))

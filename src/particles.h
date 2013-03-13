@@ -45,14 +45,14 @@ public:
         std::fill (array, array + N, value);
         return *this;
     }
-    inline Particle& operator[] (int index)
+    inline Particle& operator[] (uint index)
     {
 #ifdef DEBUG
         assert (0 <= index < N);
 #endif
         return array[index];
     }
-    inline const Particle& operator[] (int index) const
+    inline const Particle& operator[] (uint index) const
     {
 #ifdef DEBUG
         assert (0 <= index < N);
@@ -138,12 +138,12 @@ using NewLocalParticles = NewParticles<vfpic::mpar>;
 
 struct LocalParticlesView: public Particles<vfpic::mpar>
 {
-    LocalParticlesView (NewGlobalParticles& array, int ithread):
+    LocalParticlesView (NewGlobalParticles& array, uint ithread):
     Particles<vfpic::mpar>(&array[ithread*vfpic::mpar])
     {
     }
     // This is basically a hack. The resulting view should be const as well, but isn't
-    LocalParticlesView (const NewGlobalParticles& array, int ithread):
+    LocalParticlesView (const NewGlobalParticles& array, uint ithread):
     Particles<vfpic::mpar>(const_cast<Particle*>(&array[ithread*vfpic::mpar]))
     {
     }

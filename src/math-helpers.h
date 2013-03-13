@@ -18,12 +18,12 @@ void extrapolate (const ScalarField<T,Nz,Nx>& start, const ScalarField<T,Nz,Nx>&
     
     ScalarField<T,Nz,Nx>& end = *pend;
     
-    for (int k = 1; k <= Nz; ++k)
+    for (uint k = 1; k <= Nz; ++k)
 #ifdef __INTEL_COMPILER
 #pragma vector aligned
 #pragma ivdep
 #endif
-    for (int i = 1; i <= Nx; ++i)
+    for (uint i = 1; i <= Nx; ++i)
     {
         end (k,i) = two*mid (k,i) - start (k,i);
     }
@@ -34,7 +34,7 @@ void extrapolate (const VectorField<T,Nz,Nx>& start, const VectorField<T,Nz,Nx>&
 {
     VectorField<T,Nz,Nx>& end = *pend;
     
-    for (int j = 0; j < 3; ++j) extrapolate (start[j], mid[j], &end[j]);
+    for (uint j = 0; j < 3; ++j) extrapolate (start[j], mid[j], &end[j]);
 }
 
 template<typename T, uint Nz, uint Nx>
@@ -44,12 +44,12 @@ void average (const ScalarField<T,Nz,Nx>& start, const ScalarField<T,Nz,Nx>& end
     
     ScalarField<T,Nz,Nx>& mid = *pmid;
     
-    for (int k = 1; k <= Nz; ++k)
+    for (uint k = 1; k <= Nz; ++k)
 #ifdef __INTEL_COMPILER
 #pragma vector aligned
 #pragma ivdep
 #endif
-    for (int i = 1; i <= Nx; ++i)
+    for (uint i = 1; i <= Nx; ++i)
     {
         mid (k,i) = half*(start (k,i) + end (k,i));
     }
@@ -60,7 +60,7 @@ void average (const VectorField<T,Nz,Nx>& start, const VectorField<T,Nz,Nx>& end
 {
     VectorField<T,Nz,Nx>& mid = *pmid;
     
-    for (int j = 0; j < 3; ++j) average (start[j], end[j], &mid[j]);
+    for (uint j = 0; j < 3; ++j) average (start[j], end[j], &mid[j]);
 }
 
 #endif

@@ -15,12 +15,12 @@ void faraday (ScalarField<real,Nz,Nx>* pA, const ScalarField<real,Nz,Nx>& E, con
 {
     ScalarField<real,Nz,Nx>& A = *pA;
 
-    for (int k = 1; k <= Nz; ++k)
+    for (uint k = 1; k <= Nz; ++k)
 #ifdef __INTEL_COMPILER
 #pragma vector aligned
 #pragma ivdep
 #endif
-    for (int i = 1; i <= Nx; ++i)
+    for (uint i = 1; i <= Nx; ++i)
     {
         A(k,i) -= dt*E(k,i);
     }
@@ -32,18 +32,18 @@ void faraday (VectorField<real,Nz,Nx>* pA, const VectorField<real,Nz,Nx>& E, con
 
     if (lshear)
     {
-        for (int k = 1; k <= Nz; ++k)
+        for (uint k = 1; k <= Nz; ++k)
 #ifdef __INTEL_COMPILER
 #pragma vector aligned
 #pragma ivdep
 #endif
-        for (int i = 1; i <= Nx; ++i)
+        for (uint i = 1; i <= Nx; ++i)
         {
             A.x(k,i) -= Sshear*dt*(A.y(k,i) - 0.5*dt*E.y(k,i));
         }
     }
     
-    for (int j = 0; j < 3; ++j) faraday (&A[j], E[j], dt);
+    for (uint j = 0; j < 3; ++j) faraday (&A[j], E[j], dt);
 }
 
 /* Explicit instantiation */

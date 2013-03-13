@@ -18,7 +18,7 @@ template <int Np>
 class Deposit
 {
 public:
-    Deposit (Barrier&, const int);
+    Deposit (Barrier&, const uint);
     void operator() (const Particles<Np>&,
                      GlobalScalarField<real>*,
                      GlobalVectorField<real>*);
@@ -32,7 +32,7 @@ private:
         void operator+= (const FourMomentum&);
     };
     Barrier& barrier;
-    const int ithread;
+    const uint ithread;
     const real norm;
     NewGlobalScalarField<FourMomentum> sources;
 };

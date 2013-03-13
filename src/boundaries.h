@@ -38,12 +38,12 @@ struct BoundaryConditions: public ProblemSpecificBoundaryConditions
 class BoundaryConditionsThreaded: public BoundaryConditions
 {
 public:
-    BoundaryConditionsThreaded (Barrier&, const int);
+    BoundaryConditionsThreaded (Barrier&, const uint);
     void operator() (GlobalScalarField<real>&);
     void operator() (GlobalVectorField<real>&);
 private:
     Barrier& barrier;
-    const int ithread;
+    const uint ithread;
 };
 
 #endif /* defined(__vf_pic__boundaries__) */

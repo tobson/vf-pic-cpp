@@ -32,14 +32,14 @@ protected:
 public:
     virtual ~ScalarField () noexcept = default;
     /* Index operators */
-    inline T& operator() (int i1, int i2)
+    inline T& operator() (uint i1, uint i2)
     {
 #ifdef DEBUG
         assert (0 <= i1 < N1+2 && 0 <= i2 < N2+2);
 #endif
         return data[i1*(N2 + 2) + i2];
     }
-    inline const T& operator() (int i1, int i2) const
+    inline const T& operator() (uint i1, uint i2) const
     {
 #ifdef DEBUG
         assert (0 <= i1 < N1+2 && 0 <= i2 < N2+2);
@@ -49,12 +49,12 @@ public:
     /* Assign */
     inline ScalarField& operator= (const ScalarField& other)
     {
-        for (int i1 = 1; i1 <= N1; ++i1)
+        for (uint i1 = 1; i1 <= N1; ++i1)
 #ifdef __INTEL_COMPILER
 #pragma vector aligned
 #pragma ivdep
 #endif
-        for (int i2 = 1; i2 <= N2; ++i2)
+        for (uint i2 = 1; i2 <= N2; ++i2)
         {
             (*this)(i1,i2) = other(i1,i2);
         }
@@ -62,12 +62,12 @@ public:
     }
     inline ScalarField& operator= (const T& value)
     {
-        for (int i1 = 1; i1 <= N1; ++i1)
+        for (uint i1 = 1; i1 <= N1; ++i1)
 #ifdef __INTEL_COMPILER
 #pragma vector aligned
 #pragma ivdep
 #endif
-        for (int i2 = 1; i2 <= N2; ++i2)
+        for (uint i2 = 1; i2 <= N2; ++i2)
         {
             (*this)(i1,i2) = value;
         }
@@ -76,12 +76,12 @@ public:
     /* Add to */
     inline ScalarField& operator+= (const ScalarField& other)
     {
-        for (int i1 = 1; i1 <= N1; ++i1)
+        for (uint i1 = 1; i1 <= N1; ++i1)
 #ifdef __INTEL_COMPILER
 #pragma vector aligned
 #pragma ivdep
 #endif
-        for (int i2 = 1; i2 <= N2; ++i2)
+        for (uint i2 = 1; i2 <= N2; ++i2)
         {
             (*this)(i1,i2) += other(i1,i2);
         }
@@ -89,12 +89,12 @@ public:
     }
     inline ScalarField& operator+= (const T& value)
     {
-        for (int i1 = 1; i1 <= N1; ++i1)
+        for (uint i1 = 1; i1 <= N1; ++i1)
 #ifdef __INTEL_COMPILER
 #pragma vector aligned
 #pragma ivdep
 #endif
-        for (int i2 = 1; i2 <= N2; ++i2)
+        for (uint i2 = 1; i2 <= N2; ++i2)
         {
             (*this)(i1,i2) += value;
         }
@@ -103,12 +103,12 @@ public:
     /* Subtract from */
     inline ScalarField& operator-= (const ScalarField& other)
     {
-        for (int i1 = 1; i1 <= N1; ++i1)
+        for (uint i1 = 1; i1 <= N1; ++i1)
 #ifdef __INTEL_COMPILER
 #pragma vector aligned
 #pragma ivdep
 #endif
-        for (int i2 = 1; i2 <= N2; ++i2)
+        for (uint i2 = 1; i2 <= N2; ++i2)
         {
             (*this)(i1,i2) -= other(i1,i2);
         }
@@ -116,12 +116,12 @@ public:
     }
     inline ScalarField& operator-= (const T& value)
     {
-        for (int i1 = 1; i1 <= N1; ++i1)
+        for (uint i1 = 1; i1 <= N1; ++i1)
 #ifdef __INTEL_COMPILER
 #pragma vector aligned
 #pragma ivdep
 #endif
-        for (int i2 = 1; i2 <= N2; ++i2)
+        for (uint i2 = 1; i2 <= N2; ++i2)
         {
             (*this)(i1,i2) -= value;
         }
@@ -130,12 +130,12 @@ public:
     /* Multiply with */
     inline ScalarField& operator*= (const ScalarField& other)
     {
-        for (int i1 = 1; i1 <= N1; ++i1)
+        for (uint i1 = 1; i1 <= N1; ++i1)
 #ifdef __INTEL_COMPILER
 #pragma vector aligned
 #pragma ivdep
 #endif
-        for (int i2 = 1; i2 <= N2; ++i2)
+        for (uint i2 = 1; i2 <= N2; ++i2)
         {
             (*this)(i1,i2) *= other(i1,i2);
         }
@@ -143,12 +143,12 @@ public:
     }
     inline ScalarField& operator*= (const T& value)
     {
-        for (int i1 = 1; i1 <= N1; ++i1)
+        for (uint i1 = 1; i1 <= N1; ++i1)
 #ifdef __INTEL_COMPILER
 #pragma vector aligned
 #pragma ivdep
 #endif
-        for (int i2 = 1; i2 <= N2; ++i2)
+        for (uint i2 = 1; i2 <= N2; ++i2)
         {
             (*this)(i1,i2) *= value;
         }
@@ -157,12 +157,12 @@ public:
     /* Divide by */
     inline ScalarField& operator/= (const ScalarField& other)
     {
-        for (int i1 = 1; i1 <= N1; ++i1)
+        for (uint i1 = 1; i1 <= N1; ++i1)
 #ifdef __INTEL_COMPILER
 #pragma vector aligned
 #pragma ivdep
 #endif
-        for (int i2 = 1; i2 <= N2; ++i2)
+        for (uint i2 = 1; i2 <= N2; ++i2)
         {
             (*this)(i1,i2) /= other(i1,i2);
         }
@@ -170,12 +170,12 @@ public:
     }
     inline ScalarField& operator/= (const T& value)
     {
-        for (int i1 = 1; i1 <= N1; ++i1)
+        for (uint i1 = 1; i1 <= N1; ++i1)
 #ifdef __INTEL_COMPILER
 #pragma vector aligned
 #pragma ivdep
 #endif
-        for (int i2 = 1; i2 <= N2; ++i2)
+        for (uint i2 = 1; i2 <= N2; ++i2)
         {
             (*this)(i1,i2) /= value;
         }
@@ -188,12 +188,12 @@ public:
     real variance () const
     {
         real sum = 0.0;
-        for (int i1 = 1; i1 <= N1; ++i1)
+        for (uint i1 = 1; i1 <= N1; ++i1)
 #ifdef __INTEL_COMPILER
 #pragma vector aligned
 #pragma ivdep
 #endif
-        for (int i2 = 1; i2 <= N2; ++i2)
+        for (uint i2 = 1; i2 <= N2; ++i2)
         {
             real element = (*this) (i1,i2);
             sum += element*element;
@@ -281,14 +281,14 @@ template <typename T, uint N1, uint N2>
 struct ScalarFieldView: public ScalarField<T,N1,N2>
 {
     template <uint M1, uint M2>
-    ScalarFieldView (ScalarField<T,M1,M2>& global, const int ithread):
+    ScalarFieldView (ScalarField<T,M1,M2>& global, const uint ithread):
     ScalarField<T,N1,N2> (&global(ithread*N1,0))
     {
         using vfpic::nthreads;
         static_assert (M1 == nthreads*N1 && M2 == N2, "");
     }
     template <uint M1, uint M2>
-    ScalarFieldView (const ScalarField<T,M1,M2>& global, const int ithread):
+    ScalarFieldView (const ScalarField<T,M1,M2>& global, const uint ithread):
     ScalarField<T,N1,N2> (const_cast<T*> (&global(ithread*N1,0)))
     {
         static_assert (M1 == vfpic::nthreads*N1 && M2 == N2, "");

@@ -43,7 +43,7 @@ void BoundaryConditions::operator() (GlobalVectorField<real>& vector)
 
 // Implementation of class BoundaryConditionsThreaded
 BoundaryConditionsThreaded::BoundaryConditionsThreaded
-(Barrier& barrier, const int ithread): barrier (barrier), ithread (ithread) {}
+(Barrier& barrier, const uint ithread): barrier (barrier), ithread (ithread) {}
 
 void BoundaryConditionsThreaded::operator() (GlobalScalarField<real>& global)
 {
