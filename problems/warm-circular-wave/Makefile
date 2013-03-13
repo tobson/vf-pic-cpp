@@ -1,5 +1,6 @@
-CXXFLAGS += -stdlib=libc++
-LDFLAGS += -stdlib=libc++
+CXX = icpc
+CXXFLAGS = -fast -vec-report2 -fno-alias -ansi-alias -opt-subscript-in-range
+LDFLAGS = $(CXXFLAGS)
 
 -include local.mk
 
