@@ -22,6 +22,8 @@ const int npc = 64;
 const int nthreads = 4;
 
 const int alignment = 16;
+
+    const uint nghost = 2;
 }
 
 #endif
