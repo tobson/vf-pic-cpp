@@ -12,7 +12,7 @@
 
 using namespace vfpic;
 
-template <int Nz>
+template <uint Nz>
 void ProblemSpecificBoundaryConditions::X (ScalarField<real,Nz,nx>& scalar)
 {
     for (int k = 1; k <= Nz; ++k)
@@ -33,7 +33,7 @@ void ProblemSpecificBoundaryConditions::Z (GlobalScalarField<real>& scalar)
     }
 }
 
-template <int N>
+template <uint N>
 void ProblemSpecificBoundaryConditions::operator() (Particles<N>& particles)
 {
     using namespace config;
