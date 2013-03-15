@@ -15,10 +15,14 @@ using namespace vfpic;
 template <uint Nz>
 void ProblemSpecificBoundaryConditions::X (ScalarField<real,Nz,nx>& scalar)
 {
-    for (uint k = 1; k <= Nz; ++k)
+    const int i1 = ScalarField<real,Nz,nx>::i1;
+    const int i2 = ScalarField<real,Nz,nx>::i2;
+    const int k1 = ScalarField<real,Nz,nx>::k1;
+    const int k2 = ScalarField<real,Nz,nx>::k2;
+    for (uint k = k1; k < k2; ++k)
     {
-        scalar (k,0   ) = scalar (k,nx);
-        scalar (k,nx+1) = scalar (k,1 );
+        scalar (k,i1-1) = scalar (k,i2-1);
+        scalar (k,i2  ) = scalar (k,i1  );
     }
 }
 template void ProblemSpecificBoundaryConditions::X (GlobalScalarField<real>&);
@@ -26,10 +30,14 @@ template void ProblemSpecificBoundaryConditions::X (std::conditional<nz==mz,Scal
 
 void ProblemSpecificBoundaryConditions::Z (GlobalScalarField<real>& scalar)
 {
-    for (uint i = 0; i < nx+2; ++i)
+    const int i1 = GlobalScalarField<real>::i1;
+    const int i2 = GlobalScalarField<real>::i2;
+    const int k1 = GlobalScalarField<real>::k1;
+    const int k2 = GlobalScalarField<real>::k2;
+    for (uint i = i1-1; i < i2+1; ++i)
     {
-        scalar (0   ,i) = scalar (nz,i);
-        scalar (nz+1,i) = scalar (1 ,i);
+        scalar (k1-1,i) = scalar (k2-1,i);
+        scalar (k2  ,i) = scalar (k1  ,i);
     }
 }
 

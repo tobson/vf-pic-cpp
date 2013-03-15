@@ -15,11 +15,11 @@ Grid::Grid ()
     using namespace config;
     using namespace vfpic;
     
-    for (uint k = 0; k < nz + 2; ++k)
-    for (uint i = 0; i < nx + 2; ++i)
+    for (uint k = 0; k < nz + 2*nghost; ++k)
+    for (uint i = 0; i < nx + 2*nghost; ++i)
     {
-        x(k,i) = x0 + (real (i) - 0.5)*dx;
-        z(k,i) = z0 + (real (k) - 0.5)*dz;
+        x(k,i) = x0 + (real (i) - nghost + 0.5)*dx;
+        z(k,i) = z0 + (real (k) - nghost + 0.5)*dz;
     }
 }
 

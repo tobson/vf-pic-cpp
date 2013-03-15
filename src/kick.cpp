@@ -19,11 +19,12 @@ void kick (const GlobalVectorField<real>& E,
 {
     using namespace config;
     
-    const real half = 0.5;
     const real one = 1.0;
     const real two = 2.0;
 
-    const real emdt2 = half*em*dt;
+    const real emdt2 = 0.5*em*dt;
+
+    const real offset = nghost - 0.5;
 
     Particle *p = particles->begin ();
 
@@ -32,8 +33,8 @@ void kick (const GlobalVectorField<real>& E,
 #endif
     for (int dummy = 0; dummy < Np; ++dummy)
     {
-        const real xdx = (p->x - x0)/dx + half;
-        const real zdz = (p->z - z0)/dz + half;
+        const real xdx = (p->x - x0)/dx + offset;
+        const real zdz = (p->z - z0)/dz + offset;
         
         const uint i0 (xdx);
         const uint k0 (zdz);

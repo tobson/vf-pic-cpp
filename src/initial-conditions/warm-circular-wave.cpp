@@ -150,8 +150,10 @@ void initialCondition (GlobalVariables *global)
     
     removeMeanMomentum (particles);
 
-    for (uint k = 1; k <= nz; ++k)
-    for (uint i = 1; i <= nx; ++i)
+    for (uint k = GlobalScalarField<real>::k1;
+              k < GlobalScalarField<real>::k2; ++k)
+    for (uint i = GlobalScalarField<real>::i1;
+              i < GlobalScalarField<real>::i2; ++i)
     {
         const real phi = kx*grid.x (k,i) + kz*grid.z (k,i);
 

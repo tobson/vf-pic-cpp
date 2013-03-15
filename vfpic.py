@@ -65,7 +65,8 @@ class ScalarField (ndarray):
 
     def __new__ (cls, cfg = None):
         if not isinstance (cfg, Config): cfg = Config ()
-        shape = (cfg.nz + 2, cfg.nx + 2)
+        cls.nghost = cfg.nghost
+        shape = (cfg.nz + 2*cfg.nghost, cfg.nx + 2*cfg.nghost)
         obj = ndarray.__new__ (cls, shape = shape, dtype = cfg.rtype)
         return obj
 
@@ -78,7 +79,7 @@ class ScalarField (ndarray):
         return self.size*self.itemsize
 
     def trim (self):
-        return self[1:-1,1:-1]
+        return self[self.nghost:-self.nghost,self.nghost:-self.nghost]
 
 class Grid ():
 
@@ -92,8 +93,8 @@ class Grid ():
         self.z = ScalarField (cfg)
 
         self.x[...], self.z[...] = \
-            meshgrid (cfg.x0 + (arange (cfg.nx + 2) - 0.5)*cfg.Lx/cfg.nx,
-                      cfg.z0 + (arange (cfg.nz + 2) - 0.5)*cfg.Lz/cfg.nz)
+            meshgrid (cfg.x0 + (arange (cfg.nx + 2*nghost) - 0.5)*cfg.Lx/cfg.nx,
+                      cfg.z0 + (arange (cfg.nz + 2*nghost) - 0.5)*cfg.Lz/cfg.nz)
 
 class State (OrderedDict):
 

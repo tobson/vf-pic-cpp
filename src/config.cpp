@@ -371,6 +371,7 @@ std::istream& operator>> (std::istream& is, Config& cfg)
     parser.set ("vfpic", "npc", vfpic::npc);
     parser.set ("vfpic", "nthreads", vfpic::nthreads);
     parser.set ("vfpic", "alignment", vfpic::alignment);
+    parser.set ("vfpic", "nghost", vfpic::nghost);
 
     /* Also append global constants */
     parser.set ("vfpic", "mx", vfpic::mx);

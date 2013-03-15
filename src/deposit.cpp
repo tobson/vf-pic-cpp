@@ -26,8 +26,9 @@ void Deposit<Np>::operator() (const Particles<Np>& particles,
 
     const real zero = 0.0;
     const real one = 1.0;
-    const real half = 0.5;
-    
+
+    const real offset = nghost - 0.5;
+
     static_assert (std::is_pod<FourMomentum>::value, "");
     const FourMomentum fourzero = {zero, zero, zero, zero};
     sources.fill (fourzero);
@@ -39,8 +40,8 @@ void Deposit<Np>::operator() (const Particles<Np>& particles,
 #endif
     for (int dummy = 0; dummy < Np; ++dummy)
     {
-        const real xdx = (p->x - x0)/dx + half;
-        const real zdz = (p->z - z0)/dz + half;
+        const real xdx = (p->x - x0)/dx + offset;
+        const real zdz = (p->z - z0)/dz + offset;
         
         const uint i0 (xdx);
         const uint k0 (zdz);
@@ -69,18 +70,25 @@ void Deposit<Np>::operator() (const Particles<Np>& particles,
 #ifdef __INTEL_COMPILER
 #pragma ivdep
 #endif
-    for (uint i = 0; i < nx+2; ++i)
     {
-        sources (nz,i) += sources (0   ,i);
-        sources (1 ,i) += sources (nz+1,i);
-    }
+        static const int i1 = GlobalScalarField<real>::i1;
+        static const int i2 = GlobalScalarField<real>::i2;
+        static const int k1 = GlobalScalarField<real>::k1;
+        static const int k2 = GlobalScalarField<real>::k2;
+
+        for (uint i = i1-1; i < i2+1; ++i)
+        {
+            sources (k2-1,i) += sources (k1-1,i);
+            sources (k1  ,i) += sources (k2  ,i);
+        }
 #ifdef __INTEL_COMPILER
 #pragma ivdep
 #endif
-    for (uint k = 1; k <= nz; ++k)
-    {
-        sources (k,nx) += sources (k,0   );
-        sources (k,1 ) += sources (k,nx+1);
+        for (uint k = k1; k < k2; ++k)
+        {
+            sources (k,i2-1) += sources (k,i1-1);
+            sources (k,i1  ) += sources (k,i2  );
+        }
     }
     convert (rho, ruu);
 }
@@ -98,11 +106,13 @@ void Deposit<Np>::convert (GlobalScalarField<real> *rho, GlobalVectorField<real>
         LocalScalarFieldView<real>& ruy1 = ruu1.y;
         LocalScalarFieldView<real>& ruz1 = ruu1.z;
 
-        for (uint k = 1; k <= mz; ++k)
+        for (uint k = LocalScalarField<real>::k1;
+                  k < LocalScalarField<real>::k2; ++k)
 #ifdef __INTEL_COMPILER
 #pragma ivdep
 #endif
-        for (uint i = 1; i <= mx; ++i)
+        for (uint i = LocalScalarField<real>::i1;
+                  i < LocalScalarField<real>::i2; ++i)
         {
             rho1 (k,i) = sources1 (k,i).rho;
             rux1 (k,i) = sources1 (k,i).rux;
@@ -125,11 +135,13 @@ void Deposit<Np>::convert (GlobalScalarField<real> *rho, GlobalVectorField<real>
         LocalScalarFieldView<real>& ruy1 = ruu1.y;
         LocalScalarFieldView<real>& ruz1 = ruu1.z;
 
-        for (uint k = 1; k <= mz; ++k)
+        for (uint k = LocalScalarField<real>::k1;
+                  k < LocalScalarField<real>::k2; ++k)
 #ifdef __INTEL_COMPILER
 #pragma ivdep
 #endif
-        for (uint i = 1; i <= mx; ++i)
+        for (uint i = LocalScalarField<real>::i1;
+                  i < LocalScalarField<real>::i2; ++i)
         {
             rho1 (k,i) += sources1 (k,i).rho;
             rux1 (k,i) += sources1 (k,i).rux;

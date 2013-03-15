@@ -22,6 +22,8 @@ namespace vfpic
     const uint nthreads = 1;
 
     const uint alignment = 16;
+
+    const uint nghost = 2;
 }
 
 #endif

@@ -81,15 +81,16 @@ void Diagnostics::operator() (const GlobalVariables& global,
     map["mvz"] *= pnorm;
     map["ekin"] *= 0.5*pnorm;
     
-    
     for (uint j = 0; j < 3; ++j)
     {
-        for (uint k = 1; k <= mz; ++k)
+        for (uint k = LocalScalarField<real>::k1;
+                  k < LocalScalarField<real>::k2; ++k)
 #ifdef __INTEL_COMPILER
 #pragma vector aligned
 #pragma ivdep
 #endif
-        for (uint i = 1; i <= mx; ++i)
+        for (uint i = LocalScalarField<real>::i1;
+                  i < LocalScalarField<real>::i2; ++i)
         {
             map["eth"] += pow (ruu[j] (k,i), 2)/rho (k,i);
             map["emag"] += pow (H[j] (k,i), 2);

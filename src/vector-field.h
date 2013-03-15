@@ -17,11 +17,11 @@
 
 /* Decleration */
 
-template <typename T, uint N1, uint N2>
+template <typename T, uint Nz, uint Nx>
 class VectorField
 {
 private:
-    using Scalar = ScalarField<T,N1,N2>;
+    using Scalar = ScalarField<T,Nz,Nx>;
 public:
     Scalar& x;
     Scalar& y;
@@ -136,12 +136,12 @@ public:
     }
 };
 
-template <template <typename, uint, uint> class S, typename T, uint N1, uint N2>
-class VectorTemplate: public VectorField<T,N1,N2>
+template <template <typename, uint, uint> class S, typename T, uint Nz, uint Nx>
+class VectorTemplate: public VectorField<T,Nz,Nx>
 {
 private:
-    using Scalar = S<T,N1,N2>;
-    using Base = VectorField<T,N1,N2>;
+    using Scalar = S<T,Nz,Nx>;
+    using Base = VectorField<T,Nz,Nx>;
 public:
     Scalar& x;
     Scalar& y;
@@ -176,12 +176,12 @@ public:
     using Base::operator=;
 };
 
-template <typename T, uint N1, uint N2>
-class NewVectorField: public VectorTemplate<NewScalarField,T,N1,N2>
+template <typename T, uint Nz, uint Nx>
+class NewVectorField: public VectorTemplate<NewScalarField,T,Nz,Nx>
 {
 private:
-    using Scalar = NewScalarField<T,N1,N2>;
-    using Base = VectorTemplate<NewScalarField,T,N1,N2>;
+    using Scalar = NewScalarField<T,Nz,Nx>;
+    using Base = VectorTemplate<NewScalarField,T,Nz,Nx>;
 public:
     NewVectorField ():
     Base (new Scalar, new Scalar, new Scalar)
@@ -211,22 +211,22 @@ public:
     using Base::operator=;
 };
 
-template <typename T, uint N1, uint N2>
-class VectorFieldView: public VectorTemplate<ScalarFieldView,T,N1,N2>
+template <typename T, uint Nz, uint Nx>
+class VectorFieldView: public VectorTemplate<ScalarFieldView,T,Nz,Nx>
 {
 private:
-    using Scalar = ScalarFieldView<T,N1,N2>;
-    using Base = VectorTemplate<ScalarFieldView,T,N1,N2>;
+    using Scalar = ScalarFieldView<T,Nz,Nx>;
+    using Base = VectorTemplate<ScalarFieldView,T,Nz,Nx>;
 public:
-    template <uint M1, uint M2>
-    VectorFieldView (VectorField<T,M1,M2>& global, uint ithread):
+    template <uint Mz, uint Mx>
+    VectorFieldView (VectorField<T,Mz,Mx>& global, uint ithread):
     Base (new Scalar (global.x, ithread),
           new Scalar (global.y, ithread),
           new Scalar (global.z, ithread))
     {
     }
-    template <uint M1, uint M2>
-    VectorFieldView (const VectorField<T,M1,M2>& global, uint ithread):
+    template <uint Mz, uint Mx>
+    VectorFieldView (const VectorField<T,Mz,Mx>& global, uint ithread):
     Base (new Scalar (global.x, ithread),
           new Scalar (global.y, ithread),
           new Scalar (global.z, ithread))
