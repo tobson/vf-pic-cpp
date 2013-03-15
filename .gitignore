@@ -2,10 +2,12 @@ vf-pic.xcodeproj/project.xcworkspace
 vf-pic.xcodeproj/xcuserdata
 
 local.mk
+diag.txt
 output.cfg
 build
 
 *.d
+*.s
 *.o
 *.pyc
 *.dat
