@@ -18,7 +18,7 @@ vf-pic: $(objects)
 
 -include $(deps)
 
-%.s: %.cc
+%.s: %.cpp
 	$(CXX) -S $(CXXFLAGS) $<
 
 clean:
