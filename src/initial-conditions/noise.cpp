@@ -57,8 +57,8 @@ void initialCondition (GlobalVariables *global)
         p->vz = 0.0;
     }
     
-    for (int k = 1; k <= nz; ++k)
-    for (int i = 1; i <= nx; ++i)
+    for (int k = GlobalScalarField<real>::k1; k < GlobalScalarField<real>::k2; ++k)
+    for (int i = GlobalScalarField<real>::i1; i < GlobalScalarField<real>::i2; ++i)
     {
         A.x (k,i) = ampl*normal (gen);
         A.y (k,i) = ampl*normal (gen);
