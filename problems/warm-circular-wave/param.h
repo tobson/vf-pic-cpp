@@ -14,14 +14,14 @@ typedef unsigned int uint;
 
 namespace vfpic
 {
-const int nx = 64;
-const int nz = 1;
+    const uint nx = 64;
+    const uint nz = 1;
 
-const int npc = 16384;
+    const uint npc = 16384;
 
-const int nthreads = 1;
+    const uint nthreads = 1;
 
-const int alignment = 16;
+    const uint alignment = 16;
 }
 
 #endif
