@@ -1,9 +1,31 @@
 #!/bin/bash
 
-VFPIC=${HOME}/projects/vf-pic
-BUILD=${PWD}/build
+set -e
+
+RUN=${PWD}
+
+if [[ -d ${VFPIC} ]]
+then
+  echo "vf-pic base directory is '${VFPIC}'"
+else
+  echo "Please specify VF-PIC base directory. Exiting..."
+  exit 1
+fi
+
+if [[ ! "${RUN}" == ${VFPIC}* ]]
+then
+  echo "Warning: Run directory doesn't seem to be below base directory."
+  echo "Are you sure about this?"
+fi
+
+BUILD=${RUN}/build
 
 SRC=${VFPIC}/src
+
+if [[ ! -d ${SRC} ]]
+then
+  echo "No build directory found. Exiting..."
+fi
 
 mkdir -p ${BUILD}
 
@@ -16,4 +38,4 @@ for file in $(find ${SRC} -name "*.cpp" -or -name "*.h" -or -name "*.hh" -or -na
 done
 
 ln -sf ${SRC}/Makefile ${BUILD}/Makefile
-ln -sf ${PWD}/param.h ${BUILD}/param.h
+ln -sf ${RUN}/param.h ${BUILD}/param.h
