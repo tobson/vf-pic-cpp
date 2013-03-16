@@ -167,8 +167,8 @@ void initialCondition (GlobalVariables *global)
 
     GlobalVectorField<real>& A = global->A;
 
-    for (int k = 1; k <= nz; ++k)
-    for (int i = 1; i <= nx; ++i)
+    for (int k = GlobalScalarField<real>::k1; k < GlobalScalarField<real>::k2; ++k)
+    for (int i = GlobalScalarField<real>::i1; i < GlobalScalarField<real>::i2; ++i)
     {
         const std::complex<real> phase = I*kz*grid.z (k,i);
 
