@@ -60,4 +60,4 @@ void ProblemSpecificBoundaryConditions::operator() (Particles<N>& particles)
     }
 }
 template void ProblemSpecificBoundaryConditions::operator() (GlobalParticles&);
-template void ProblemSpecificBoundaryConditions::operator() (std::conditional<nz==mz,Particles<0>,LocalParticles>::type&);
+template void ProblemSpecificBoundaryConditions::operator() (std::conditional<nz==mz,Particles<1>,LocalParticles>::type&);
