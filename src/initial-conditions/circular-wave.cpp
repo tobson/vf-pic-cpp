@@ -78,8 +78,8 @@ void initialCondition (GlobalVariables *global)
         p->vz = +ampl*fac*sin (phi)*sin (angle);
     }
 
-    for (int k = 1; k <= nz; ++k)
-    for (int i = 1; i <= nx; ++i)
+    for (int k = GlobalScalarField<real>::k1; k < GlobalScalarField<real>::k2; ++k)
+    for (int i = GlobalScalarField<real>::i1; i < GlobalScalarField<real>::i2; ++i)
     {
         const real phi = kx*grid.x (k,i) + kz*grid.z (k,i);
 
