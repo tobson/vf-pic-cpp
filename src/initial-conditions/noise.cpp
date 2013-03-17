@@ -52,6 +52,13 @@ void initialCondition (GlobalVariables *global)
     
     for (auto p = particles.begin (); p != particles.end (); ++p)
     {
+        p->vx = cs0*normal (gen);
+        p->vy = cs0*normal (gen);
+        p->vz = cs0*normal (gen);
+    }
+
+    for (auto p = particles.begin (); p != particles.end (); ++p)
+    {
         p->vx = 0.0;
         p->vy = Sshear*p->x;
         p->vz = 0.0;
