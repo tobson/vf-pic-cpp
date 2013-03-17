@@ -59,9 +59,7 @@ void initialCondition (GlobalVariables *global)
 
     for (auto p = particles.begin (); p != particles.end (); ++p)
     {
-        p->vx = 0.0;
-        p->vy = Sshear*p->x;
-        p->vz = 0.0;
+        p->vy += Sshear*p->x;
     }
     
     for (int k = GlobalScalarField<real>::k1; k < GlobalScalarField<real>::k2; ++k)
