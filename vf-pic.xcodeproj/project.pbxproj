@@ -43,6 +43,23 @@
 		D257D92816EC2EC50023E828 /* misc.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D257D92616EC2EC50023E828 /* misc.cpp */; };
 		D257D92D16ED33520023E828 /* diagnostics.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D257D92B16ED33520023E828 /* diagnostics.cpp */; };
 		D257D92E16ED4D5E0023E828 /* diagnostics.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D257D92B16ED33520023E828 /* diagnostics.cpp */; };
+		D26FAB9D16F54703008318A0 /* diagnostics.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D257D92B16ED33520023E828 /* diagnostics.cpp */; };
+		D26FAB9E16F56B14008318A0 /* diagnostics.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D257D92B16ED33520023E828 /* diagnostics.cpp */; };
+		D26FABA116F56BDC008318A0 /* diagnostics.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D257D92B16ED33520023E828 /* diagnostics.cpp */; };
+		D26FABA216F56BDC008318A0 /* noise.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D20AF12A16E15ADE00D0B031 /* noise.cpp */; };
+		D26FABA316F56BDC008318A0 /* shearing-periodic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2AF715116DFED5700F34A67 /* shearing-periodic.cpp */; };
+		D26FABA416F56BDC008318A0 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2915FC816B5F7FE0084A612 /* main.cpp */; };
+		D26FABA516F56BDC008318A0 /* global.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D28BAEFD16B5FD0200578956 /* global.cpp */; };
+		D26FABA616F56BDC008318A0 /* config.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D28BAF0016B5FDDA00578956 /* config.cpp */; };
+		D26FABA716F56BDC008318A0 /* barrier.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D28BAF1816B60B3800578956 /* barrier.cpp */; };
+		D26FABA816F56BDC008318A0 /* grid.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D25C8DB216B89B6600B0A607 /* grid.cpp */; };
+		D26FABA916F56BDC008318A0 /* boundaries.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2C6828016BB7EB30023FB36 /* boundaries.cpp */; };
+		D26FABAA16F56BDC008318A0 /* kick.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2C6828816BB9CAC0023FB36 /* kick.cpp */; };
+		D26FABAB16F56BDC008318A0 /* deposit.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D20381BC16BE0195008755DC /* deposit.cpp */; };
+		D26FABAC16F56BDC008318A0 /* ohm.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D206FBFB16C1C31C008BD080 /* ohm.cpp */; };
+		D26FABAD16F56BDC008318A0 /* faraday.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D206FC0316C62E3D008BD080 /* faraday.cpp */; };
+		D26FABAE16F56BDC008318A0 /* drift.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D206FC1016CA14D1008BD080 /* drift.cpp */; };
+		D26FABAF16F56BDC008318A0 /* output.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D270B39C16CEDC1B00DFCE2F /* output.cpp */; };
 		D2ABD94716DEEFC4000D369B /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2915FC816B5F7FE0084A612 /* main.cpp */; };
 		D2ABD94816DEEFC4000D369B /* global.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D28BAEFD16B5FD0200578956 /* global.cpp */; };
 		D2ABD94916DEEFC4000D369B /* config.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D28BAF0016B5FDDA00578956 /* config.cpp */; };
@@ -97,6 +114,15 @@
 			runOnlyForDeploymentPostprocessing = 1;
 		};
 		D24BC37316B64B1A006C64A3 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+		D26FABB116F56BDC008318A0 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = /usr/share/man/man1/;
@@ -170,6 +196,9 @@
 		D25C8DB316B89B6600B0A607 /* grid.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = grid.h; path = src/grid.h; sourceTree = SOURCE_ROOT; };
 		D25D22B916DFE028001A44F4 /* periodic.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = periodic.cpp; sourceTree = "<group>"; };
 		D26FAB9C16F54120008318A0 /* vfpic.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = vfpic.py; sourceTree = "<group>"; };
+		D26FABB516F56BDC008318A0 /* warm-mri */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "warm-mri"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D26FABB716F56CBC008318A0 /* param.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = param.h; sourceTree = "<group>"; };
+		D26FABB816F56CBC008318A0 /* problem.cfg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = problem.cfg; sourceTree = "<group>"; };
 		D270B39716CCCE8A00DFCE2F /* variables.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; name = variables.h; path = src/variables.h; sourceTree = SOURCE_ROOT; };
 		D270B39816CDE6AD00DFCE2F /* three-vector.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; name = "three-vector.h"; path = "src/three-vector.h"; sourceTree = SOURCE_ROOT; };
 		D270B39C16CEDC1B00DFCE2F /* output.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = output.cpp; path = src/output.cpp; sourceTree = SOURCE_ROOT; };
@@ -225,6 +254,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		D24BC37116B64B1A006C64A3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D26FABB016F56BDC008318A0 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -303,6 +339,15 @@
 			path = python;
 			sourceTree = "<group>";
 		};
+		D26FABB616F56C98008318A0 /* warm-mri */ = {
+			isa = PBXGroup;
+			children = (
+				D26FABB716F56CBC008318A0 /* param.h */,
+				D26FABB816F56CBC008318A0 /* problem.cfg */,
+			);
+			path = "warm-mri";
+			sourceTree = "<group>";
+		};
 		D2915FA416B5F56A0084A612 = {
 			isa = PBXGroup;
 			children = (
@@ -326,6 +371,7 @@
 				D2AF716816E0645700F34A67 /* test */,
 				D20AF14416E15E6300D0B031 /* cold-mri-noise */,
 				D218894516E6E1B1006800C5 /* warm-circular-wave */,
+				D26FABB516F56BDC008318A0 /* warm-mri */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -408,6 +454,7 @@
 		D2F7CF6816DEE1B400F064CF /* problems */ = {
 			isa = PBXGroup;
 			children = (
+				D26FABB616F56C98008318A0 /* warm-mri */,
 				D218894616E6E1F7006800C5 /* warm-circular-wave */,
 				D20AF12C16E15DE900D0B031 /* cold-mri-noise */,
 				D2AF715F16E0528E00F34A67 /* jacobi */,
@@ -491,6 +538,23 @@
 			productReference = D24BC37716B64B1A006C64A3 /* jacobi */;
 			productType = "com.apple.product-type.tool";
 		};
+		D26FAB9F16F56BDC008318A0 /* warm-mri */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D26FABB216F56BDC008318A0 /* Build configuration list for PBXNativeTarget "warm-mri" */;
+			buildPhases = (
+				D26FABA016F56BDC008318A0 /* Sources */,
+				D26FABB016F56BDC008318A0 /* Frameworks */,
+				D26FABB116F56BDC008318A0 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "warm-mri";
+			productName = "vf-pic";
+			productReference = D26FABB516F56BDC008318A0 /* warm-mri */;
+			productType = "com.apple.product-type.tool";
+		};
 		D2ABD94416DEEFC4000D369B /* circular-wave */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = D2ABD95516DEEFC4000D369B /* Build configuration list for PBXNativeTarget "circular-wave" */;
@@ -569,6 +633,7 @@
 				D2AF716716E0645700F34A67 /* test */,
 				D20AF12F16E15E6300D0B031 /* cold-mri-noise */,
 				D218893016E6E1B1006800C5 /* warm-circular-wave */,
+				D26FAB9F16F56BDC008318A0 /* warm-mri */,
 			);
 		};
 /* End PBXProject section */
@@ -578,6 +643,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D26FAB9E16F56B14008318A0 /* diagnostics.cpp in Sources */,
 				D20AF14516E15E8200D0B031 /* noise.cpp in Sources */,
 				D20AF13216E15E6300D0B031 /* shearing-periodic.cpp in Sources */,
 				D20AF13316E15E6300D0B031 /* main.cpp in Sources */,
@@ -633,6 +699,28 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		D26FABA016F56BDC008318A0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D26FABA116F56BDC008318A0 /* diagnostics.cpp in Sources */,
+				D26FABA216F56BDC008318A0 /* noise.cpp in Sources */,
+				D26FABA316F56BDC008318A0 /* shearing-periodic.cpp in Sources */,
+				D26FABA416F56BDC008318A0 /* main.cpp in Sources */,
+				D26FABA516F56BDC008318A0 /* global.cpp in Sources */,
+				D26FABA616F56BDC008318A0 /* config.cpp in Sources */,
+				D26FABA716F56BDC008318A0 /* barrier.cpp in Sources */,
+				D26FABA816F56BDC008318A0 /* grid.cpp in Sources */,
+				D26FABA916F56BDC008318A0 /* boundaries.cpp in Sources */,
+				D26FABAA16F56BDC008318A0 /* kick.cpp in Sources */,
+				D26FABAB16F56BDC008318A0 /* deposit.cpp in Sources */,
+				D26FABAC16F56BDC008318A0 /* ohm.cpp in Sources */,
+				D26FABAD16F56BDC008318A0 /* faraday.cpp in Sources */,
+				D26FABAE16F56BDC008318A0 /* drift.cpp in Sources */,
+				D26FABAF16F56BDC008318A0 /* output.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D2ABD94516DEEFC4000D369B /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -667,6 +755,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D26FAB9D16F54703008318A0 /* diagnostics.cpp in Sources */,
 				D2AF715B16E02F4A00F34A67 /* cold-mri.cpp in Sources */,
 				D2AF715316DFF2B600F34A67 /* shearing-periodic.cpp in Sources */,
 				D2F7CF7016DEE31500F064CF /* main.cpp in Sources */,
@@ -708,6 +797,7 @@
 		D218894316E6E1B1006800C5 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				GCC_FAST_MATH = YES;
 				PRODUCT_NAME = "warm-circular-wave";
 				USER_HEADER_SEARCH_PATHS = "src problems/warm-circular-wave";
 			};
@@ -716,6 +806,7 @@
 		D218894416E6E1B1006800C5 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				GCC_FAST_MATH = YES;
 				PRODUCT_NAME = "warm-circular-wave";
 				USER_HEADER_SEARCH_PATHS = "src problems/warm-circular-wave";
 			};
@@ -734,6 +825,24 @@
 			buildSettings = {
 				PRODUCT_NAME = jacobi;
 				USER_HEADER_SEARCH_PATHS = "src problems/jacobi";
+			};
+			name = Release;
+		};
+		D26FABB316F56BDC008318A0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				HEADER_SEARCH_PATHS = /Users/tobi/macports/include;
+				PRODUCT_NAME = "warm-mri";
+				USER_HEADER_SEARCH_PATHS = "src problems/warm-mri";
+			};
+			name = Debug;
+		};
+		D26FABB416F56BDC008318A0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				HEADER_SEARCH_PATHS = /Users/tobi/macports/include;
+				PRODUCT_NAME = "warm-mri";
+				USER_HEADER_SEARCH_PATHS = "src problems/warm-mri";
 			};
 			name = Release;
 		};
@@ -883,6 +992,15 @@
 			buildConfigurations = (
 				D24BC37516B64B1A006C64A3 /* Debug */,
 				D24BC37616B64B1A006C64A3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D26FABB216F56BDC008318A0 /* Build configuration list for PBXNativeTarget "warm-mri" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D26FABB316F56BDC008318A0 /* Debug */,
+				D26FABB416F56BDC008318A0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
