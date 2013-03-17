@@ -831,7 +831,6 @@
 		D26FABB316F56BDC008318A0 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				HEADER_SEARCH_PATHS = /Users/tobi/macports/include;
 				PRODUCT_NAME = "warm-mri";
 				USER_HEADER_SEARCH_PATHS = "src problems/warm-mri";
 			};
@@ -840,7 +839,6 @@
 		D26FABB416F56BDC008318A0 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				HEADER_SEARCH_PATHS = /Users/tobi/macports/include;
 				PRODUCT_NAME = "warm-mri";
 				USER_HEADER_SEARCH_PATHS = "src problems/warm-mri";
 			};
