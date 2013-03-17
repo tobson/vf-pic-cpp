@@ -8,8 +8,8 @@
 
 #include <random>
 
-#include "boundaries.h"
-#include "variables.h"
+#include "../boundaries.h"
+#include "../variables.h"
 
 void initialCondition (GlobalVariables *global)
 {
@@ -62,8 +62,10 @@ void initialCondition (GlobalVariables *global)
         p->vy += Sshear*p->x;
     }
     
-    for (int k = GlobalScalarField<real>::k1; k < GlobalScalarField<real>::k2; ++k)
-    for (int i = GlobalScalarField<real>::i1; i < GlobalScalarField<real>::i2; ++i)
+    for (int k = GlobalScalarField<real>::k1;
+             k < GlobalScalarField<real>::k2; ++k)
+    for (int i = GlobalScalarField<real>::i1;
+             i < GlobalScalarField<real>::i2; ++i)
     {
         A.x (k,i) = ampl*normal (gen);
         A.y (k,i) = ampl*normal (gen);
