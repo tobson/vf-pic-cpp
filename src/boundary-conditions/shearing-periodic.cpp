@@ -6,9 +6,9 @@
 //  Copyright (c) 2013 Tobias Heinemann. All rights reserved.
 //
 
-#include "boundaries.h"
-#include "particles.h"
-#include "scalar-field.h"
+#include "../boundaries.h"
+#include "../particles.h"
+#include "../scalar-field.h"
 
 using namespace vfpic;
 
