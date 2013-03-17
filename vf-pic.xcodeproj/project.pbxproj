@@ -169,6 +169,7 @@
 		D25C8DB216B89B6600B0A607 /* grid.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = grid.cpp; path = src/grid.cpp; sourceTree = SOURCE_ROOT; };
 		D25C8DB316B89B6600B0A607 /* grid.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = grid.h; path = src/grid.h; sourceTree = SOURCE_ROOT; };
 		D25D22B916DFE028001A44F4 /* periodic.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = periodic.cpp; sourceTree = "<group>"; };
+		D26FAB9C16F54120008318A0 /* vfpic.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = vfpic.py; sourceTree = "<group>"; };
 		D270B39716CCCE8A00DFCE2F /* variables.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; name = variables.h; path = src/variables.h; sourceTree = SOURCE_ROOT; };
 		D270B39816CDE6AD00DFCE2F /* three-vector.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; name = "three-vector.h"; path = "src/three-vector.h"; sourceTree = SOURCE_ROOT; };
 		D270B39C16CEDC1B00DFCE2F /* output.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = output.cpp; path = src/output.cpp; sourceTree = SOURCE_ROOT; };
@@ -205,7 +206,6 @@
 		D2F7CF8516DEECD000F064CF /* problem.cfg */ = {isa = PBXFileReference; lastKnownFileType = text; path = problem.cfg; sourceTree = "<group>"; };
 		D2F7CF8916DEEF2900F064CF /* problem.cfg */ = {isa = PBXFileReference; lastKnownFileType = text; path = problem.cfg; sourceTree = "<group>"; };
 		D2F90E4816B734C700ABDA86 /* jacobi.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = jacobi.py; sourceTree = "<group>"; };
-		D2F90E4A16B7375900ABDA86 /* vfpic.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = vfpic.py; sourceTree = "<group>"; };
 		D2F90E5216B748E900ABDA86 /* particles.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = particles.h; path = src/particles.h; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
@@ -295,13 +295,21 @@
 			path = "boundary-conditions";
 			sourceTree = "<group>";
 		};
+		D26FAB9B16F540E6008318A0 /* python */ = {
+			isa = PBXGroup;
+			children = (
+				D26FAB9C16F54120008318A0 /* vfpic.py */,
+			);
+			path = python;
+			sourceTree = "<group>";
+		};
 		D2915FA416B5F56A0084A612 = {
 			isa = PBXGroup;
 			children = (
+				D26FAB9B16F540E6008318A0 /* python */,
 				D29BD8F716D35951000BD507 /* TODO */,
 				D29BF20C16D97E0B000BD507 /* cold-mri.py */,
 				D2F90E4816B734C700ABDA86 /* jacobi.py */,
-				D2F90E4A16B7375900ABDA86 /* vfpic.py */,
 				D2F7CF6816DEE1B400F064CF /* problems */,
 				D2915FB016B5F56A0084A612 /* Products */,
 				D2DD55E816DD91380003D699 /* src */,
