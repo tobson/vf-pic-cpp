@@ -227,8 +227,10 @@ int main (int argc, const char * argv[])
 
     global.datafile.open (srcdir + "/var.dat", std::ios::binary);
     
-    std::cout << "# of hardware threads: " << std::thread::hardware_concurrency()
-              << std::endl;
+    std::cout << "# of hardware threads: "
+              << std::thread::hardware_concurrency() << std::endl;
+    std::cout << "Larmor radius: " << config::cs0/(config::em*config::B0) << std::endl;
+    std::cout << "Skin depth: " << 1.0/(config::em*sqrt (config::rho0)) << std::endl;
     
     // Initialize
     initialCondition (&global);
