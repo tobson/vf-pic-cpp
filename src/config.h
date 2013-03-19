@@ -45,6 +45,7 @@ namespace config
     extern real B0;
     extern real brms;
     extern real ampl;
+    extern real theta;
     extern bool randomizeSeed;
     extern bool randomizePositions;
     extern std::string initcond;

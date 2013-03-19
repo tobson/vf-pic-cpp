@@ -44,6 +44,7 @@ namespace config
     real B0 = 0.0;
     real brms = 0.0;
     real ampl = 0.0;
+    real theta = 0.0;
     bool randomizeSeed = false;
     bool randomizePositions = true;
     std::string initcond;
@@ -337,6 +338,7 @@ std::istream& operator>> (std::istream& is, Config& cfg)
     parser.get ("vfpic", "B0", B0);
     parser.get ("vfpic", "brms", brms);
     parser.get ("vfpic", "ampl", ampl);
+    parser.get ("vfpic", "theta", theta);
     parser.get ("vfpic", "randomizeSeed", randomizeSeed);
     parser.get ("vfpic", "randomizePositions", randomizePositions);
     parser.get ("vfpic", "initcond", initcond);

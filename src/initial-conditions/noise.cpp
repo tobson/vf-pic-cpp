@@ -74,6 +74,6 @@ void initialCondition (GlobalVariables *global)
     boundCond (A);
     
     global->B0.x = 0.0;
-    global->B0.y = 0.0;
-    global->B0.z = B0;
+    global->B0.y = B0*sin (theta);
+    global->B0.z = B0*cos (theta);
 }
