@@ -218,7 +218,6 @@ int main (int argc, const char * argv[])
     Config cfg;
     cfg.read (srcdir + "/problem.cfg");
     cfg.write (srcdir + "/output.cfg");
-    cfg.print ();
 
     vfpic::computeVariables();
 
