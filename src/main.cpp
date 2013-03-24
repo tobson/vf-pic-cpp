@@ -66,6 +66,7 @@ void iteration (GlobalVariables& global, Diagnostics& diagnostics,
     Ohm<mz,mx> ohm;
     
     curl (A, &H2); H2 += global.B0;
+    barrier.wait ();
 
     for (int it = 0; it < nt; ++it)
     {
@@ -86,11 +87,6 @@ void iteration (GlobalVariables& global, Diagnostics& diagnostics,
 
         // Compute magnetic field at n
         average (H2, H, &B);
-
-        /* It would be nice if boundCond::operator()
-           would be a variadic function */
-        // Set boundary condition, needed for faraday() and kick()
-        boundCond (global.E);
         boundCond (global.B);
 
         // Advance particle velocities from n-1/2 to n+1/2
@@ -114,6 +110,7 @@ void iteration (GlobalVariables& global, Diagnostics& diagnostics,
 
         // Use trapezoidal rule to estimate electric field at n+1
         extrapolate (E, D, &E);
+        boundCond (global.E);
         
         /* Save magnetic field at n+1/2 for the next time step */
         H2 = H;
@@ -136,9 +133,6 @@ void iteration (GlobalVariables& global, Diagnostics& diagnostics,
 
         // Compute magnetic field at n+1
         average (H2, H, &B);
-
-        // Set boundary condition, needed for faraday() and kick()
-        boundCond (global.E);
         boundCond (global.B);
 
         // Advance particle velocities from n+1/2 to n+3/2
@@ -155,6 +149,7 @@ void iteration (GlobalVariables& global, Diagnostics& diagnostics,
 
         // Average to get electric field at n+1
         average (D, D2, &E);
+        boundCond (global.E);
     }
 
     /* Write out final data */
