@@ -6,6 +6,10 @@ diag.txt
 output.cfg
 build
 
+doc/*.aux
+doc/*.log
+doc/*.pdf
+
 *.d
 *.s
 *.o
