@@ -11,107 +11,173 @@
 
 Magnetic field:
 \begin{align}
-  B^x_{j,k} &= \frac{\mathcal{B}^x_{j-1/2,k} + \mathcal{B}^x_{j+1/2,k}}{2} \\
-  B^y_{j,k} &= \frac{\mathcal{B}^y_{j,k-1/2} + \mathcal{B}^y_{j,k+1/2}}{2} \\
-  B^z_{j,k} &= \mathcal{B}^z_{j,k}
+  B^x_{i,j} &= \frac{\mathcal{B}^x_{i-1/2,j} + \mathcal{B}^x_{i+1/2,j}}{2} \\
+  B^y_{i,j} &= \frac{\mathcal{B}^y_{i,j-1/2} + \mathcal{B}^y_{i,j+1/2}}{2} \\
+  B^z_{i,j} &= \mathcal{B}^z_{i,j}
 \end{align}
-%\begin{align}
-%  \mathcal{B}^x_{j+1/2,k} &= \frac{B^x_{j,k} + B^x_{j+1,k}}{2} \\
-%  \mathcal{B}^y_{j,k+1/2} &= \frac{B^y_{j,k} + B^y_{j,k+1}}{2} \\
-%  \mathcal{B}^z_{j,k} &= B^z_{j,k}
-%\end{align}
 Electric field:
 \begin{align}
-  E^x_{j,k} &= \frac{\mathcal{E}^x_{j,k-1/2} + \mathcal{E}^x_{j,k+1/2}}{2} \\
-  E^y_{j,k} &= \frac{\mathcal{E}^y_{j-1/2,k} + \mathcal{E}^y_{j+1/2,k}}{2} \\
-  E^z_{j,k} &= \frac{\mathcal{E}^z_{j-1/2,k-1/2}
-                   + \mathcal{E}^z_{j-1/2,k+1/2}
-                   + \mathcal{E}^z_{j+1/2,k-1/2}
-                   + \mathcal{E}^z_{j+1/2,k+1/2}}{4}
+  E^x_{i,j} &= \frac{\mathcal{E}^x_{i,j-1/2} + \mathcal{E}^x_{i,j+1/2}}{2} \\
+  E^y_{i,j} &= \frac{\mathcal{E}^y_{i-1/2,j} + \mathcal{E}^y_{i+1/2,j}}{2} \\
+  E^z_{i,j} &= \frac{\mathcal{E}^z_{i-1/2,j-1/2}
+                   + \mathcal{E}^z_{i-1/2,j+1/2}
+                   + \mathcal{E}^z_{i+1/2,j-1/2}
+                   + \mathcal{E}^z_{i+1/2,j+1/2}}{4}
 \end{align}
-%\begin{align}
-%  \mathcal{E}^x_{j,k+1/2} &= \frac{E^x_{j,k} + E^x_{j,k+1}}{2} \\
-%  \mathcal{E}^y_{j+1/2,k} &= \frac{E^y_{j,k} + E^y_{j+1,k}}{2} \\
-%  \mathcal{E}^z_{j+1/2,k+1/2} &= \frac{E^z_{j,k}
-%                                     + E^z_{j,k+1}
-%                                     + E^z_{j+1,k}
-%                                     + E^z_{j+1,k+1}}{4}
-%\end{align}
 Current (same as electric field):
 \begin{align}
-  J^x_{j,k} &= \frac{\mathcal{J}^x_{j,k-1/2} + \mathcal{J}^x_{j,k+1/2}}{2} \\
-  J^y_{j,k} &= \frac{\mathcal{J}^y_{j-1/2,k} + \mathcal{J}^y_{j+1/2,k}}{2} \\
-  J^z_{j,k} &= \frac{\mathcal{J}^z_{j-1/2,k-1/2}
-                   + \mathcal{J}^z_{j-1/2,k+1/2}
-                   + \mathcal{J}^z_{j+1/2,k-1/2}
-                   + \mathcal{J}^z_{j+1/2,k+1/2}}{4}
+  J^x_{i,j} &= \frac{\mathcal{J}^x_{i,j-1/2} + \mathcal{J}^x_{i,j+1/2}}{2} \\
+  J^y_{i,j} &= \frac{\mathcal{J}^y_{i-1/2,j} + \mathcal{J}^y_{i+1/2,j}}{2} \\
+  J^z_{i,j} &= \frac{\mathcal{J}^z_{i-1/2,j-1/2}
+                   + \mathcal{J}^z_{i-1/2,j+1/2}
+                   + \mathcal{J}^z_{i+1/2,j-1/2}
+                   + \mathcal{J}^z_{i+1/2,j+1/2}}{4}
 \end{align}
-%\begin{align}
-%  \mathcal{J}^x_{j,k+1/2} &= \frac{J^x_{j,k} + J^x_{j,k+1}}{2} \\
-%  \mathcal{J}^y_{j+1/2,k} &= \frac{J^y_{j,k} + J^y_{j+1,k}}{2} \\
-%  \mathcal{J}^z_{j+1/2,k+1/2} &= \frac{J^z_{j,k}
-%                                     + J^z_{j,k+1}
-%                                     + J^z_{j+1,k}
-%                                     + J^z_{j+1,k+1}}{4}
-%\end{align}
 
 \subsection{Discrete form of Amp\`ere's law}
 
 Curly variables:
 \begin{align}
-  \mathcal{J}^x_{j,k+1/2} &=
-  +\frac{\mathcal{B}^z_{j,k+1} - \mathcal{B}^z_{j,k}}{\Delta y} \\
-  \mathcal{J}^y_{j+1/2,k} &=
-  -\frac{\mathcal{B}^z_{j+1,k} - \mathcal{B}^z_{j,k}}{\Delta x} \\
-  \mathcal{J}^z_{j+1/2,k+1/2} &=
-  \frac{\mathcal{B}^y_{j+1,k+1/2} - \mathcal{B}^y_{j,k+1/2}}{\Delta x} -
-  \frac{\mathcal{B}^x_{j+1/2,k+1} - \mathcal{B}^x_{j+1/2,k}}{\Delta y}
+  \mathcal{J}^x_{i,j+1/2} &=
+  +\frac{\mathcal{B}^z_{i,j+1} - \mathcal{B}^z_{i,j}}{\Delta y} \\
+  \mathcal{J}^y_{i+1/2,j} &=
+  -\frac{\mathcal{B}^z_{i+1,j} - \mathcal{B}^z_{i,j}}{\Delta x} \\
+  \mathcal{J}^z_{i+1/2,j+1/2} &=
+  \frac{\mathcal{B}^y_{i+1,j+1/2} - \mathcal{B}^y_{i,j+1/2}}{\Delta x} -
+  \frac{\mathcal{B}^x_{i+1/2,j+1} - \mathcal{B}^x_{i+1/2,j}}{\Delta y}
 \end{align}
 Cell-centered variables:
 \begin{align}
-  J^x_{j,k} &= +\frac{B^z_{j,k+1} - B^z_{j,k-1}}{2\Delta y} \\
-  J^y_{j,k} &= -\frac{B^z_{j+1,k} - B^z_{j-1,k}}{2\Delta x} \\
-  J^z_{j,k} &=
-  \frac{(B^y_{j+1,k-1} + 2 B^y_{j+1,k} + B^y_{j+1,k+1})
-      - (B^y_{j-1,k-1} + 2 B^y_{j-1,k} + B^y_{j-1,k+1})}{8\Delta x}
+  J^x_{i,j} &= +\frac{B^z_{i,j+1} - B^z_{i,j-1}}{2\Delta y} \\
+  J^y_{i,j} &= -\frac{B^z_{i+1,j} - B^z_{i-1,j}}{2\Delta x} \\
+  J^z_{i,j} &=
+  \frac{(B^y_{i+1,j-1} + 2 B^y_{i+1,j} + B^y_{i+1,j+1})
+      - (B^y_{i-1,j-1} + 2 B^y_{i-1,j} + B^y_{i-1,j+1})}{8\Delta x}
       \nonumber\\ &-
-  \frac{(B^x_{j-1,k+1} + 2 B^x_{j,k+1} + B^x_{j+1,k+1})
-      - (B^x_{j-1,k-1} + 2 B^x_{j,k-1} + B^x_{j+1,k-1})}{8\Delta z}
-  %\frac{\mathcal{B}^y_{j+1,k+1/2} - \mathcal{B}^y_{j,k+1/2}}{\Delta x} -
-  %\frac{\mathcal{B}^x_{j+1/2,k+1} - \mathcal{B}^x_{j+1/2,k}}{\Delta y}
+  \frac{(B^x_{i-1,j+1} + 2 B^x_{i,j+1} + B^x_{i+1,j+1})
+      - (B^x_{i-1,j-1} + 2 B^x_{i,j-1} + B^x_{i+1,j-1})}{8\Delta y}
 \end{align}
 
 \subsection{Discrete form of Faraday's law}
 Curly variables:
 \begin{align}
-  \frac{\mathcal{B}^{x,n+1}_{j+1/2,k}
-      - \mathcal{B}^{x,n  }_{j+1/2,k}}{\Delta t} &= -
-  \frac{\mathcal{E}^{z,n+1/2}_{j+1/2,k+1/2}
-      - \mathcal{E}^{z,n+1/2}_{j+1/2,k-1/2}}{\Delta y} \\
-  \frac{\mathcal{B}^{y,n+1}_{j,k+1/2}
-      - \mathcal{B}^{y,n  }_{j,k+1/2}}{\Delta t} &= +
-  \frac{\mathcal{E}^{z,n+1/2}_{j+1/2,k+1/2}
-      - \mathcal{E}^{z,n+1/2}_{j-1/2,k+1/2}}{\Delta x} \\
-  \frac{\mathcal{B}^{z,n+1}_{j,k}
-      - \mathcal{B}^{z,n  }_{j,k}}{\Delta t} &=
-  \frac{\mathcal{E}^x_{j,k+1/2} - \mathcal{E}^x_{j,k-1/2}}{\Delta y} -
-  \frac{\mathcal{E}^y_{j+1/2,k} - \mathcal{E}^y_{j-1/2,k}}{\Delta x}
+  \frac{\mathcal{B}^{x,n+1}_{i+1/2,j}
+      - \mathcal{B}^{x,n  }_{i+1/2,j}}{\Delta t} &= -
+  \frac{\mathcal{E}^{z,n+1/2}_{i+1/2,j+1/2}
+      - \mathcal{E}^{z,n+1/2}_{i+1/2,j-1/2}}{\Delta y} \\
+  \frac{\mathcal{B}^{y,n+1}_{i,j+1/2}
+      - \mathcal{B}^{y,n  }_{i,j+1/2}}{\Delta t} &= +
+  \frac{\mathcal{E}^{z,n+1/2}_{i+1/2,j+1/2}
+      - \mathcal{E}^{z,n+1/2}_{i-1/2,j+1/2}}{\Delta x} \\
+  \frac{\mathcal{B}^{z,n+1}_{i,j}
+      - \mathcal{B}^{z,n  }_{i,j}}{\Delta t} &=
+  \frac{\mathcal{E}^x_{i,j+1/2} - \mathcal{E}^x_{i,j-1/2}}{\Delta y} -
+  \frac{\mathcal{E}^y_{i+1/2,j} - \mathcal{E}^y_{i-1/2,j}}{\Delta x}
 \end{align}
 Cell-centered variables:
 \begin{align}
-  \frac{B^{x,n+1}_{j,k} - B^{x,n}_{j,k}}{\Delta t} &=
+  \frac{B^{x,n+1}_{i,j} - B^{x,n}_{i,j}}{\Delta t} &=
   -\frac{
-    (E^{z,n+1/2}_{j-1,k+1} + 2 E^{z,n+1/2}_{j,k+1} + E^{z,n+1/2}_{j+1,k+1}) -
-    (E^{z,n+1/2}_{j-1,k-1} + 2 E^{z,n+1/2}_{j,k-1} + E^{z,n+1/2}_{j+1,k-1})}
+    (E^{z,n+1/2}_{i-1,j+1} + 2 E^{z,n+1/2}_{i,j+1} + E^{z,n+1/2}_{i+1,j+1}) -
+    (E^{z,n+1/2}_{i-1,j-1} + 2 E^{z,n+1/2}_{i,j-1} + E^{z,n+1/2}_{i+1,j-1})}
     {8\Delta y} \\
-  \frac{B^{y,n+1}_{j,k} - B^{y,n}_{j,k}}{\Delta t} &=
+  \frac{B^{y,n+1}_{i,j} - B^{y,n}_{i,j}}{\Delta t} &=
   +\frac{
-    (E^{z,n+1/2}_{j+1,k-1} + 2 E^{z,n+1/2}_{j+1,k} + E^{z,n+1/2}_{j+1,k+1}) -
-    (E^{z,n+1/2}_{j-1,k-1} + 2 E^{z,n+1/2}_{j-1,k} + E^{z,n+1/2}_{j-1,k+1})}
+    (E^{z,n+1/2}_{i+1,j-1} + 2 E^{z,n+1/2}_{i+1,j} + E^{z,n+1/2}_{i+1,j+1}) -
+    (E^{z,n+1/2}_{i-1,j-1} + 2 E^{z,n+1/2}_{i-1,j} + E^{z,n+1/2}_{i-1,j+1})}
     {8\Delta x} \\
-  \frac{B^{z,n+1}_{j,k} - B^{z,n}_{j,k}}{\Delta t} &=
-  \frac{E^{x,n+1/2}_{j,k+1} - E^{x,n+1/2}_{j,k-1}}{2\Delta y} -
-  \frac{E^{y+1/2,n}_{j+1,k} - E^{y+1/2,n}_{j-1,k}}{2\Delta x}
+  \frac{B^{z,n+1}_{i,j} - B^{z,n}_{i,j}}{\Delta t} &=
+  \frac{E^{x,n+1/2}_{i,j+1} - E^{x,n+1/2}_{i,j-1}}{2\Delta y} -
+  \frac{E^{y+1/2,n}_{i+1,j} - E^{y+1/2,n}_{i-1,j}}{2\Delta x}
+\end{align}
+
+\section{Code implementation ($\partial_y=0$)}
+
+This is obtained by permuting the expressions of the previous section in a way
+that $(x,y,z)\to(z,x,y)$ and $(i,j)\to(k,i)$.
+
+\subsection{Centering and interpolation}
+
+Magnetic field:
+\begin{align}
+  B^x_{k,i} &= \frac{\mathcal{B}^x_{k,i-1/2} + \mathcal{B}^x_{k,i+1/2}}{2} \\
+  B^y_{k,i} &= \mathcal{B}^y_{k,i} \\
+  B^z_{k,i} &= \frac{\mathcal{B}^z_{k-1/2,i} + \mathcal{B}^z_{k+1/2,i}}{2}
+\end{align}
+Electric field:
+\begin{align}
+  E^x_{k,i} &= \frac{\mathcal{E}^x_{k-1/2,i} + \mathcal{E}^x_{k+1/2,i}}{2} \\
+  E^y_{k,i} &= \frac{\mathcal{E}^y_{k-1/2,i-1/2}
+                   + \mathcal{E}^y_{k-1/2,i+1/2}
+                   + \mathcal{E}^y_{k+1/2,i-1/2}
+                   + \mathcal{E}^y_{k+1/2,i+1/2}}{4} \\
+  E^z_{k,i} &= \frac{\mathcal{E}^z_{k,i-1/2} + \mathcal{E}^z_{k,i+1/2}}{2}
+\end{align}
+Current (same as electric field):
+\begin{align}
+  J^x_{k,i} &= \frac{\mathcal{J}^x_{k-1/2,i} + \mathcal{J}^x_{k+1/2,i}}{2} \\
+  J^y_{k,i} &= \frac{\mathcal{J}^y_{k-1/2,i-1/2}
+                   + \mathcal{J}^y_{k-1/2,i+1/2}
+                   + \mathcal{J}^y_{k+1/2,i-1/2}
+                   + \mathcal{J}^y_{k+1/2,i+1/2}}{4} \\
+  J^z_{k,i} &= \frac{\mathcal{J}^z_{k,i-1/2} + \mathcal{J}^z_{k,i+1/2}}{2}
+\end{align}
+
+\subsection{Discrete form of Amp\`ere's law}
+
+Curly variables:
+\begin{align}
+  \mathcal{J}^x_{k+1/2,i} &=
+  -\frac{\mathcal{B}^y_{k+1,i} - \mathcal{B}^y_{k,i}}{\Delta z} \\
+  \mathcal{J}^y_{k+1/2,i+1/2} &=
+  \frac{\mathcal{B}^x_{k+1,i+1/2} - \mathcal{B}^x_{k,i+1/2}}{\Delta z} -
+  \frac{\mathcal{B}^z_{k+1/2,i+1} - \mathcal{B}^z_{k+1/2,i}}{\Delta x} \\
+  \mathcal{J}^z_{k,i+1/2} &=
+  +\frac{\mathcal{B}^y_{k,i+1} - \mathcal{B}^y_{k,i}}{\Delta x}
+\end{align}
+Cell-centered variables:
+\begin{align}
+  J^x_{k,i} &= -\frac{B^y_{k+1,i} - B^y_{k-1,i}}{2\Delta z} \\
+  J^y_{k,i} &=
+  \frac{(B^x_{k+1,i-1} + 2 B^x_{k+1,i} + B^x_{k+1,i+1})
+      - (B^x_{k-1,i-1} + 2 B^x_{k-1,i} + B^x_{k-1,i+1})}{8\Delta z}
+      \nonumber\\ &-
+  \frac{(B^z_{k-1,i+1} + 2 B^z_{k,i+1} + B^z_{k+1,i+1})
+      - (B^z_{k-1,i-1} + 2 B^z_{k,i-1} + B^z_{k+1,i-1})}{8\Delta x} \\
+  J^z_{k,i} &= +\frac{B^y_{k,i+1} - B^y_{k,i-1}}{2\Delta x}
+\end{align}
+
+\subsection{Discrete form of Faraday's law}
+Curly variables:
+\begin{align}
+  \frac{\mathcal{B}^{x,n+1}_{k,i+1/2}
+      - \mathcal{B}^{x,n  }_{k,i+1/2}}{\Delta t} &= +
+  \frac{\mathcal{E}^{y,n+1/2}_{k+1/2,i+1/2}
+      - \mathcal{E}^{y,n+1/2}_{k-1/2,i+1/2}}{\Delta z} \\
+  \frac{\mathcal{B}^{y,n+1}_{k,i}
+      - \mathcal{B}^{y,n  }_{k,i}}{\Delta t} &=
+  \frac{\mathcal{E}^z_{k,i+1/2} - \mathcal{E}^z_{k,i-1/2}}{\Delta x} -
+  \frac{\mathcal{E}^x_{k+1/2,i} - \mathcal{E}^x_{k-1/2,i}}{\Delta z} \\
+  \frac{\mathcal{B}^{z,n+1}_{k+1/2,i}
+      - \mathcal{B}^{z,n  }_{k+1/2,i}}{\Delta t} &= -
+  \frac{\mathcal{E}^{y,n+1/2}_{k+1/2,i+1/2}
+      - \mathcal{E}^{y,n+1/2}_{k+1/2,i-1/2}}{\Delta x}
+\end{align}
+Cell-centered variables:
+\begin{align}
+  \frac{B^{x,n+1}_{k,i} - B^{x,n}_{k,i}}{\Delta t} &=
+  +\frac{
+    (E^{y,n+1/2}_{k+1,i-1} + 2 E^{y,n+1/2}_{k+1,i} + E^{y,n+1/2}_{k+1,i+1}) -
+    (E^{y,n+1/2}_{k-1,i-1} + 2 E^{y,n+1/2}_{k-1,i} + E^{y,n+1/2}_{k-1,i+1})}
+    {8\Delta z} \\
+  \frac{B^{y,n+1}_{k,i} - B^{y,n}_{k,i}}{\Delta t} &=
+  \frac{E^{z,n+1/2}_{k,i+1} - E^{z,n+1/2}_{k,i-1}}{2\Delta x} -
+  \frac{E^{x+1/2,n}_{k+1,i} - E^{x+1/2,n}_{k-1,i}}{2\Delta z} \\
+  \frac{B^{z,n+1}_{k,i} - B^{z,n}_{k,i}}{\Delta t} &=
+  -\frac{
+    (E^{y,n+1/2}_{k-1,i+1} + 2 E^{y,n+1/2}_{k,i+1} + E^{y,n+1/2}_{k+1,i+1}) -
+    (E^{y,n+1/2}_{k-1,i-1} + 2 E^{y,n+1/2}_{k,i-1} + E^{y,n+1/2}_{k+1,i-1})}
+    {8\Delta x}
 \end{align}
 
 \end{document}
