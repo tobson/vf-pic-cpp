@@ -12,7 +12,7 @@ using namespace vfpic;
 
 template <int Np>
 Deposit<Np>::Deposit (Barrier& barrier, const uint ithread):
-barrier (barrier), ithread (ithread),
+boundCond (barrier, ithread), barrier (barrier), ithread (ithread),
 norm (config::rho0/real (vfpic::npc))
 {
 }
@@ -90,17 +90,17 @@ void Deposit<Np>::operator() (const Particles<Np>& particles,
             sources (k,i1  ) += sources (k,i2  );
         }
     }
-    convert (rho, ruu);
+    convert (*rho, *ruu);
 }
 
 template <int Np>
-void Deposit<Np>::convert (GlobalScalarField<real> *rho, GlobalVectorField<real> *ruu)
+void Deposit<Np>::convert (GlobalScalarField<real>& rho, GlobalVectorField<real>& ruu)
 {
     {
         LocalScalarFieldView<FourMomentum> sources1 (sources, ithread);
 
-        LocalScalarFieldView<real> rho1 (*rho, ithread);
-        LocalVectorFieldView<real> ruu1 (*ruu, ithread);
+        LocalScalarFieldView<real> rho1 (rho, ithread);
+        LocalVectorFieldView<real> ruu1 (ruu, ithread);
 
         LocalScalarFieldView<real>& rux1 = ruu1.x;
         LocalScalarFieldView<real>& ruy1 = ruu1.y;
@@ -128,8 +128,8 @@ void Deposit<Np>::convert (GlobalScalarField<real> *rho, GlobalVectorField<real>
 
         LocalScalarFieldView<FourMomentum> sources1 (sources, kthread);
 
-        LocalScalarFieldView<real> rho1 (*rho, kthread);
-        LocalVectorFieldView<real> ruu1 (*ruu, kthread);
+        LocalScalarFieldView<real> rho1 (rho, kthread);
+        LocalVectorFieldView<real> ruu1 (ruu, kthread);
 
         LocalScalarFieldView<real>& rux1 = ruu1.x;
         LocalScalarFieldView<real>& ruy1 = ruu1.y;
@@ -152,12 +152,44 @@ void Deposit<Np>::convert (GlobalScalarField<real> *rho, GlobalVectorField<real>
     }
     // Normalize
     {
-        LocalScalarFieldView<real> rho1 (*rho, ithread);
-        LocalVectorFieldView<real> ruu1 (*ruu, ithread);
+        LocalScalarFieldView<real> rho1 (rho, ithread);
+        LocalVectorFieldView<real> ruu1 (ruu, ithread);
         
         rho1 *= norm;
         ruu1 *= norm;
     }
+    
+    if (config::smoothSources)
+    {
+        boundCond (rho);
+        boundCond (ruu);
+        smooth (rho);
+        smooth (ruu);
+    }
+}
+
+template <int Np>
+void Deposit<Np>::smooth (GlobalVectorField<real>& vector)
+{
+    for (uint j = 0; j < 3; ++j) smooth (vector[j]);
+}
+
+template <int Np>
+void Deposit<Np>::smooth (GlobalScalarField<real>& scalar)
+{
+    for (uint k = GlobalScalarField<real>::k1;
+              k < GlobalScalarField<real>::k2; ++k)
+#ifdef __INTEL_COMPILER
+#pragma ivdep
+#endif
+    for (uint i = GlobalScalarField<real>::i1;
+              i < GlobalScalarField<real>::i2; ++i)
+    {
+        buffer (k,i) = 0.0625*(scalar (k-1,i-1) + scalar (k-1,i+1) + scalar (k+1,i-1) + scalar (k+1,i+1))
+                      + 0.125*(scalar (k-1,i  ) + scalar (k  ,i-1) + scalar (k,  i+1) + scalar (k+1,i  ))
+                       + 0.25*scalar (k,i);
+    }
+    scalar = buffer;
 }
 
 template class Deposit<vfpic::mpar>;

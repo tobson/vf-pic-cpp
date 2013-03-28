@@ -47,6 +47,7 @@ namespace config
     real theta = 0.0;
     bool randomizeSeed = false;
     bool randomizePositions = true;
+    bool smoothSources = false;
     std::string initcond;
 
     /* Diagnostics and data I/O */
@@ -341,6 +342,7 @@ std::istream& operator>> (std::istream& is, Config& cfg)
     parser.get ("vfpic", "theta", theta);
     parser.get ("vfpic", "randomizeSeed", randomizeSeed);
     parser.get ("vfpic", "randomizePositions", randomizePositions);
+    parser.get ("vfpic", "smoothSources", smoothSources);
     parser.get ("vfpic", "initcond", initcond);
 
     /* Diagnostics and data I/O */

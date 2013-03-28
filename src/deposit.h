@@ -10,6 +10,7 @@
 #define __vf_pic__deposit__
 
 #include "barrier.h"
+#include "boundaries.h"
 #include "particles.h"
 #include "scalar-field.h"
 #include "vector-field.h"
@@ -23,18 +24,22 @@ public:
                      GlobalScalarField<real>*,
                      GlobalVectorField<real>*);
 private:
-    void convert (GlobalScalarField<real>*,
-                  GlobalVectorField<real>*);
+    void convert (GlobalScalarField<real>&,
+                  GlobalVectorField<real>&);
+    void smooth (GlobalScalarField<real>&);
+    void smooth (GlobalVectorField<real>&);
     struct FourMomentum
     {
         real rho, rux, ruy, ruz;
         void accumulate (const real&, real&&, real&&, real&&);
         void operator+= (const FourMomentum&);
     };
+    BoundaryConditionsThreaded boundCond;
     Barrier& barrier;
     const uint ithread;
     const real norm;
     NewGlobalScalarField<FourMomentum> sources;
+    NewGlobalScalarField<real> buffer;
 };
 
 template <int Np>

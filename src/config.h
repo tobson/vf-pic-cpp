@@ -48,6 +48,7 @@ namespace config
     extern real theta;
     extern bool randomizeSeed;
     extern bool randomizePositions;
+    extern bool smoothSources;
     extern std::string initcond;
 
     /* Diagnostics and data I/O */
