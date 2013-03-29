@@ -109,7 +109,23 @@ void iteration (GlobalVariables& global, Diagnostics& diagnostics,
         ohm (H, J, rho, ruu, &D);
 
         // Use trapezoidal rule to estimate electric field at n+1
-        extrapolate (E, D, &E);
+        extrapolate (E, D, &D2);
+        if (lshear)
+        {
+            const real Sdt = Sshear*dt;
+            for (uint k = LocalScalarField<real>::k1;
+                      k < LocalScalarField<real>::k2; ++k)
+#ifdef __INTEL_COMPILER
+#pragma vector aligned
+#pragma ivdep
+#endif
+            for (uint i = LocalScalarField<real>::i1;
+                      i < LocalScalarField<real>::i2; ++i)
+            {
+                D2.x (k,i) += Sdt*(E.y (k,i) - D.y (k,i));
+            }
+        }
+        E = D2;
         boundCond (global.E);
         
         /* Save magnetic field at n+1/2 for the next time step */
@@ -149,6 +165,21 @@ void iteration (GlobalVariables& global, Diagnostics& diagnostics,
 
         // Average to get electric field at n+1
         average (D, D2, &E);
+        if (lshear)
+        {
+            const real Sdt4 = 0.25*Sshear*dt;
+            for (uint k = LocalScalarField<real>::k1;
+                      k < LocalScalarField<real>::k2; ++k)
+#ifdef __INTEL_COMPILER
+#pragma vector aligned
+#pragma ivdep
+#endif
+            for (uint i = LocalScalarField<real>::i1;
+                      i < LocalScalarField<real>::i2; ++i)
+            {
+                E.x (k,i) += Sdt4*(D2.y (k,i) - D.y (k,i));
+            }
+        }
         boundCond (global.E);
     }
 
