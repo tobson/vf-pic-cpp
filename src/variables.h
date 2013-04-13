@@ -21,7 +21,8 @@ struct GlobalVariables
 {
     NewGlobalVectorField<real> A, A2;
     NewGlobalParticles particles, particles2;
-    NewGlobalVectorField<real> E, B;
+    NewGlobalVectorField<real> E, E2;
+    NewGlobalVectorField<real> B, B2;
     NewGlobalScalarField<real> rho; NewGlobalVectorField<real> ruu;
     Vector<real> B0;
     Grid grid;
