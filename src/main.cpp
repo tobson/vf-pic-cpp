@@ -217,9 +217,9 @@ void computeSelfConsistentElectricField (GlobalVariables& global, Barrier& barri
     ohm (B, J, rho, ruu, &E);
 
     // Evolve vector potential back in time by a half step
-    LOOP(LocalField, k,i) A.x (k,i) -= half*dt*(E.x (k,i) + Sshear*A.y (k,i));
-    LOOP(LocalField, k,i) A.y (k,i) -= half*dt* E.y (k,i);
-    LOOP(LocalField, k,i) A.z (k,i) -= half*dt* E.z (k,i);
+    LOOP(LocalField, k,i) A.x (k,i) += half*dt*(E.x (k,i) + Sshear*A.y (k,i));
+    LOOP(LocalField, k,i) A.y (k,i) += half*dt* E.y (k,i);
+    LOOP(LocalField, k,i) A.z (k,i) += half*dt* E.z (k,i);
 
     // Set boundary conditions
     boundCond (global.A);
