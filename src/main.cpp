@@ -251,7 +251,12 @@ int main (int argc, const char * argv[])
               << std::thread::hardware_concurrency() << std::endl;
     std::cout << "Larmor radius: " << config::cs0/(config::em*config::B0) << std::endl;
     std::cout << "Skin depth: " << 1.0/(config::em*sqrt (config::rho0)) << std::endl;
-    
+#ifdef DEBUG
+    std::cout << "This is a DEBUG build" << std::endl;
+#else
+    std::cout << "This is a RELEASE build" << std::endl;
+#endif
+
     // Initialize
     initialCondition (&global);
 
