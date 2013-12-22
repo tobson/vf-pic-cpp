@@ -35,14 +35,14 @@ public:
     inline T& operator() (uint k, uint i)
     {
 #ifdef DEBUG
-        assert (0 <= k < Nz + 2*nghost && 0 <= i < Nx + 2*nghost);
+        assert (0 <= k && k < Nz + 2*nghost && 0 <= i && i < Nx + 2*nghost);
 #endif
         return data[k*stride + i];
     }
     inline const T& operator() (uint k, uint i) const
     {
 #ifdef DEBUG
-        assert (0 <= k < Nz + 2*nghost && 0 <= i < Nx + 2*nghost);
+        assert (0 <= k && k < Nz + 2*nghost && 0 <= i && i < Nx + 2*nghost);
 #endif
         return data[k*stride + i];
     }

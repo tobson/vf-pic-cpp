@@ -48,14 +48,14 @@ public:
     inline Particle& operator[] (uint index)
     {
 #ifdef DEBUG
-        assert (0 <= index < N);
+        assert (0 <= index && index < N);
 #endif
         return array[index];
     }
     inline const Particle& operator[] (uint index) const
     {
 #ifdef DEBUG
-        assert (0 <= index < N);
+        assert (0 <= index && index < N);
 #endif
         return array[index];
     }
