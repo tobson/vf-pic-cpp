@@ -28,8 +28,8 @@ fac = np.sqrt (k2)*cfg.ampl/omega
 phi = kx*x + kz*z + 0.5*omega*cfg.dt
 
 plt.clf()
-plots = plt.plot (x, np.zeros (cfg.nx), 'r',
-                  x, np.zeros (cfg.nx), 'k')
+plots = plt.plot (x, np.zeros (cfg.nx), 'k',
+                  x, np.zeros (cfg.nx), 'r')
 plt.xlim (cfg.x0, cfg.x0 + cfg.Lx)
 #plots = plt.plot (z, np.zeros (cfg.nz), 'k',
 #                  z, np.zeros (cfg.nz), 'r')
@@ -41,8 +41,8 @@ for state in vfpic.DataFile (filename = "var.dat"):
   phi = kx*state.x + kz*state.z - (state.it - 0.5)*omega*cfg.dt
   Ay = (cfg.ampl/omega)*np.cos (phi)
   By = np.sqrt (k2)*Ay
-  plots[0].set_ydata (By[64,1:-1])
-  plots[1].set_ydata (state.By[64,1:-1])
+  plots[0].set_ydata (state.By.trim ().squeeze ())
+  plots[1].set_ydata (By.trim ().squeeze ())
   plt.draw()
   print state.it
   #break
