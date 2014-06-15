@@ -14,7 +14,7 @@ typedef unsigned int uint;
 
 namespace vfpic
 {
-    const uint nx = 64;
+    const uint nx = 256;
     const uint nz = 1;
 
     const uint npc = 64;
