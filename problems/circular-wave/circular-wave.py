@@ -1,10 +1,14 @@
 import vfpic
 import numpy as np
+
+interactive = True
+from sys import argv
+if len (argv) > 1:
+  if argv[1] == 'video':
+    interactive = False
+    from matplotlib import use
+    use ('agg')
 from matplotlib import pyplot as plt
-
-plt.rcParams['image.origin'] = 'lower'
-
-plt.ion()
 
 cfg = vfpic.Config()
 
@@ -29,6 +33,15 @@ A_hat = cfg.ampl*cfg.B0/kx
 
 phi = kx*x + 0.5*omega*cfg.dt
 
+if interactive:
+  plt.ion ()
+else:
+  import matplotlib.animation
+  FFMpegWriter = matplotlib.animation.writers['ffmpeg']
+  writer = FFMpegWriter (fps = 12, codec = 'libx264',
+      extra_args = ['-preset','veryslow','-pix_fmt','yuv420p',
+        '-crf','18','-refs','4'])
+
 plt.clf()
 fig, axes = plt.subplots (ncols = 2, nrows = 2, num = 1,
     sharex = True, sharey = "row")
@@ -45,7 +58,7 @@ axes[1,1].set_title ('uz')
 plt.tight_layout ()
 for ax in axes.flatten (): ax.title.set_y (1.02)
 
-for state in vfpic.DataFile (filename = "var.dat"):
+def update ():
 
   x = state.x.trim ().squeeze ()
   phi = kx*x - (state.it - 0.5)*omega*cfg.dt
@@ -70,5 +83,22 @@ for state in vfpic.DataFile (filename = "var.dat"):
   lines[1,1][0].set_ydata (state_uz)
   lines[1,1][1].set_ydata (      uz)
 
-  plt.draw()
   print state.it
+
+if interactive:
+
+  for state in vfpic.DataFile (filename = "var.dat"):
+
+    update ()
+    plt.draw()
+
+else:
+
+  with writer.saving (fig, "video-%d.mp4" % x.size, 100):
+
+    for state in vfpic.DataFile (filename = "var.dat"):
+
+      update ()
+      writer.grab_frame ()
+
+if interactive: plt.ioff ()
