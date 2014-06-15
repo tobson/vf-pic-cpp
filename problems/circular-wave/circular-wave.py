@@ -14,36 +14,32 @@ z = cfg.z0 + (np.arange(cfg.nz) + 0.5)*cfg.dz
 vA2 = cfg.B0**2/cfg.rho0
 
 kx = 2*np.pi*cfg.ikx/cfg.Lx
-kz = 2*np.pi*cfg.ikz/cfg.Lz
 
-k2 = kx**2 + kz**2
+k2 = kx**2
 
-kvA2 = k2*vA2
+kvA = np.sqrt (k2*vA2)
 
-Omegac = cfg.em*cfg.B0
+oc = cfg.em*cfg.B0
 
-omega = (0.5*kvA2/Omegac)*(np.sqrt(1.0 + 4.0*Omegac*Omegac/kvA2) + 1.0);
-fac = np.sqrt (k2)*cfg.ampl/omega
+hel = 1.0
+omega = kvA*np.sqrt (1.0 + 0.25*kvA*kvA/(oc*oc)) + 0.5*kvA*kvA/(hel*oc)
 
-phi = kx*x + kz*z + 0.5*omega*cfg.dt
+u_hat = -cfg.ampl*np.sqrt (vA2)*kvA/omega
+A_hat = cfg.ampl*cfg.B0/kx
+
+phi = kx*x + 0.5*omega*cfg.dt
 
 plt.clf()
 plots = plt.plot (x, np.zeros (cfg.nx), 'k',
                   x, np.zeros (cfg.nx), 'r')
 plt.xlim (cfg.x0, cfg.x0 + cfg.Lx)
-#plots = plt.plot (z, np.zeros (cfg.nz), 'k',
-#                  z, np.zeros (cfg.nz), 'r')
-#plt.xlim (cfg.z0, cfg.z0 + cfg.Lz)
-plt.ylim (-1.1*fac, 1.1*fac)
 
 for state in vfpic.DataFile (filename = "var.dat"):
-  #t = state.it*cfg.dt
-  phi = kx*state.x + kz*state.z - (state.it - 0.5)*omega*cfg.dt
-  Ay = (cfg.ampl/omega)*np.cos (phi)
+  phi = kx*state.x - (state.it - 0.5)*omega*cfg.dt
+  Ay = A_hat*np.cos (phi)
   By = np.sqrt (k2)*Ay
   plots[0].set_ydata (state.By.trim ().squeeze ())
   plots[1].set_ydata (By.trim ().squeeze ())
   plt.draw()
   print state.it
-  #break
 

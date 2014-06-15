@@ -30,17 +30,15 @@ void initialCondition (GlobalVariables *global)
     const real vA2 = B0*B0/rho0;
 
     const real kx = 2.0*pi*real (ikx)/Lx;
-    const real kz = 2.0*pi*real (ikz)/Lz;
 
-    const real k2 = kx*kx + kz*kz;
+    const real k2 = kx*kx;
 
-    const real angle = atan2 (kx, kz);
+    const real oc = em*B0;
 
-    const real Omegac = em*B0;
+    const real kvA = sqrt (k2*vA2);
 
-    const real kvA2 = k2*vA2;
-
-    const real omega = (0.5*kvA2/Omegac)*(sqrt(1.0 + 4.0*Omegac*Omegac/kvA2) + 1.0);
+    const real hel = 1.0;
+    const real omega = kvA*sqrt (1.0 + 0.25*kvA*kvA/(oc*oc)) + 0.5*kvA*kvA/(hel*oc);
 
     if (randomizePositions)
     {
@@ -67,29 +65,30 @@ void initialCondition (GlobalVariables *global)
         }
     }
 
-    const real fac = kvA2/(omega*omega*B0);
+    const real u_hat = -ampl*sqrt (vA2)*kvA/omega;
+    const real A_hat = ampl*B0/kx;
 
     for (auto p = particles.begin (); p != particles.end (); ++p)
     {
-        const real phi = kx*p->x + kz*p->z;
+        const real phi = kx*p->x;
 
-        p->vx = -ampl*fac*sin (phi)*cos (angle);
-        p->vy = -ampl*fac*cos (phi);
-        p->vz = +ampl*fac*sin (phi)*sin (angle);
+        p->vx = 0.0;
+        p->vy =  u_hat*cos (phi);
+        p->vz = -u_hat*sin (phi);
     }
 
     for (int k = GlobalScalarField<real>::k1; k < GlobalScalarField<real>::k2; ++k)
     for (int i = GlobalScalarField<real>::i1; i < GlobalScalarField<real>::i2; ++i)
     {
-        const real phi = kx*grid.x (k,i) + kz*grid.z (k,i);
+        const real phi = kx*grid.x (k,i);
 
-        A.x (k,i) = +(ampl/omega)*sin (phi)*cos (angle);
-        A.y (k,i) = +(ampl/omega)*cos (phi);
-        A.z (k,i) = -(ampl/omega)*sin (phi)*sin (angle);
+        A.x (k,i) = 0.0;
+        A.y (k,i) =  A_hat*cos (phi);
+        A.z (k,i) = -A_hat*sin (phi);
     }
     boundCond (A);
 
-    global->B0.x = B0*sin (angle);
+    global->B0.x = 1.0;
     global->B0.y = 0.0;
-    global->B0.z = B0*cos (angle);
+    global->B0.z = 0.0;
 }
