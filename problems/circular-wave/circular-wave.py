@@ -30,16 +30,45 @@ A_hat = cfg.ampl*cfg.B0/kx
 phi = kx*x + 0.5*omega*cfg.dt
 
 plt.clf()
-plots = plt.plot (x, np.zeros (cfg.nx), 'k',
-                  x, np.zeros (cfg.nx), 'r')
+fig, axes = plt.subplots (ncols = 2, nrows = 2, num = 1,
+    sharex = True, sharey = "row")
+lines = np.empty (axes.shape, dtype = object)
+for i in range (2):
+  for j in range (2):
+    lines[i,j] = axes[i,j].plot (x, np.zeros (cfg.nx), 'k',
+                                 x, np.zeros (cfg.nx), 'r')
 plt.xlim (cfg.x0, cfg.x0 + cfg.Lx)
+axes[0,0].set_title ('By')
+axes[0,1].set_title ('Bz')
+axes[1,0].set_title ('uy')
+axes[1,1].set_title ('uz')
+plt.tight_layout ()
+for ax in axes.flatten (): ax.title.set_y (1.02)
 
 for state in vfpic.DataFile (filename = "var.dat"):
-  phi = kx*state.x - (state.it - 0.5)*omega*cfg.dt
-  Ay = A_hat*np.cos (phi)
-  By = np.sqrt (k2)*Ay
-  plots[0].set_ydata (state.By.trim ().squeeze ())
-  plots[1].set_ydata (By.trim ().squeeze ())
+
+  x = state.x.trim ().squeeze ()
+  phi = kx*x - (state.it - 0.5)*omega*cfg.dt
+
+  uy =  u_hat*np.cos (phi)
+  uz = -u_hat*np.sin (phi)
+  By =  kx*A_hat*np.cos (phi)
+  Bz = -kx*A_hat*np.sin (phi)
+
+  rho = state.rho.trim ().squeeze ()
+  state_uy = state.ruy.trim ().squeeze ()/rho
+  state_uz = state.ruz.trim ().squeeze ()/rho
+  state_By = state.By.trim ().squeeze ()
+  state_Bz = state.Bz.trim ().squeeze ()
+
+  lines[0,0][0].set_ydata (state_By)
+  lines[0,0][1].set_ydata (      By)
+  lines[0,1][0].set_ydata (state_Bz)
+  lines[0,1][1].set_ydata (      Bz)
+  lines[1,0][0].set_ydata (state_uy)
+  lines[1,0][1].set_ydata (      uy)
+  lines[1,1][0].set_ydata (state_uz)
+  lines[1,1][1].set_ydata (      uz)
+
   plt.draw()
   print state.it
-
