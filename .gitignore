@@ -6,6 +6,8 @@ diag.txt
 output.cfg
 build
 
+.DS_Store
+
 doc/*.aux
 doc/*.log
 doc/*.pdf
