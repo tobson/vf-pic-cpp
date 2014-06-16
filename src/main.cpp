@@ -7,8 +7,8 @@
 //
 
 #include <array>
+#include <chrono>
 #include <cstdio>
-#include <ctime>
 #include <fstream>
 #include <iomanip>
 #include <iostream>
@@ -274,6 +274,9 @@ int main (int argc, const char * argv[])
             thread->join ();
         }
     }
+    
+    std::chrono::time_point<std::chrono::system_clock> start, end;
+    start = std::chrono::system_clock::now();
 
     // Evolve in time
     std::vector<std::thread> threads;
@@ -286,6 +289,10 @@ int main (int argc, const char * argv[])
     {
         thread->join ();
     }
+    
+    end = std::chrono::system_clock::now();
+    std::chrono::duration<double> elapsed_seconds = end - start;
+    std::cout << "Elapsed seconds: " << elapsed_seconds.count () << std::endl;
 
     global.datafile.close ();
 
