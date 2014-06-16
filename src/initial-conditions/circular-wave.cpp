@@ -71,8 +71,8 @@ void initialCondition (GlobalVariables *global)
         const real phi = kx*p->x;
 
         p->vx = 0.;
-        p->vy =  u_hat*cos (phi);
-        p->vz = -u_hat*sin (phi);
+        p->vy = u_hat*sin (phi);
+        p->vz = u_hat*cos (phi);
     }
 
     for (int k = GlobalScalarField<real>::k1; k < GlobalScalarField<real>::k2; ++k)
@@ -81,8 +81,8 @@ void initialCondition (GlobalVariables *global)
         const real phi = kx*grid.x (k,i);
 
         A.x (k,i) = 0.;
-        A.y (k,i) =  A_hat*cos (phi);
-        A.z (k,i) = -A_hat*sin (phi);
+        A.y (k,i) = A_hat*sin (phi);
+        A.z (k,i) = A_hat*cos (phi);
     }
     boundCond (A);
     

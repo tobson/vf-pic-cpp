@@ -57,10 +57,10 @@ for state in vfpic.DataFile (filename = "var.dat"):
   x = state.x.trim ().squeeze ()
   phi = lambda p1: kx*x - (state.it - 0.5)*omega*cfg.dt + p1
 
-  By = lambda p:  p[0]*kx*A_hat*np.cos (phi (p[1]))
-  Bz = lambda p: -p[0]*kx*A_hat*np.sin (phi (p[1]))
-  uy = lambda p:  p[0]*u_hat*np.cos (phi (p[1]))
-  uz = lambda p: -p[0]*u_hat*np.sin (phi (p[1]))
+  By = lambda p: p[0]*kx*A_hat*np.sin (phi (p[1]))
+  Bz = lambda p: p[0]*kx*A_hat*np.cos (phi (p[1]))
+  uy = lambda p: p[0]*u_hat*np.sin (phi (p[1]))
+  uz = lambda p: p[0]*u_hat*np.cos (phi (p[1]))
 
   rho = state.rho.trim ().squeeze ()
   state_uy = state.ruy.trim ().squeeze ()/rho
